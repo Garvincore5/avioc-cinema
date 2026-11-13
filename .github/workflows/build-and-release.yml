@@ -44,8 +44,10 @@ jobs:
         run: |
           & ./scripts/generate-avioc-keystore.ps1 -KeystorePass "avioc2026cinema" -OutputDir "./scripts"
 
-      - name: Build Windows Executables (32-bit & 64-bit for Windows 7+)
-        run: npx electron-builder --win --ia32 --x64 --publish never
+      - name: Build Windows Executables (Avioc Cinema & Avioc Apps Store for Windows 7+)
+        run: |
+          npx electron-builder --config electron-builder.json --win --ia32 --x64 --publish never
+          npx electron-builder --config electron-builder-apps.json --win --ia32 --x64 --publish never
 
       - name: Sign Windows Executables with Avioc Signature
         shell: pwsh

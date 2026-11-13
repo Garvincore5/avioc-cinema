@@ -1,0 +1,43 @@
+{
+  "appId": "com.avioc.apps",
+  "productName": "Avioc Apps",
+  "copyright": "Copyright © 2026 Avioc",
+  "directories": {
+    "output": "dist-desktop"
+  },
+  "files": [
+    "firebase-public/**/*",
+    "electron/**/*",
+    "assets/**/*",
+    "package.json"
+  ],
+  "extraMetadata": {
+    "main": "electron/apps-main.js"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64", "ia32"]
+      },
+      {
+        "target": "portable",
+        "arch": ["x64", "ia32"]
+      }
+    ],
+    "icon": "assets/icons/app-icon-512.png",
+    "publisherName": "Avioc",
+    "legalTrademarks": "Avioc Apps"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "Avioc Apps",
+    "artifactName": "Avioc-Apps-Setup-${arch}.${ext}"
+  },
+  "portable": {
+    "artifactName": "Avioc-Apps-Portable-${arch}.${ext}"
+  }
+}

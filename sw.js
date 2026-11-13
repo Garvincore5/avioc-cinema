@@ -1,5 +1,5 @@
 // Avioc Apps - PWA Service Worker | Avioc App Store + Cinema Player
-const CACHE_NAME = 'avioc-apps-v20';
+const CACHE_NAME = 'avioc-apps-v21';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
@@ -8,7 +8,9 @@ const PRECACHE_ASSETS = [
   '/favicon.svg?v=2',
   '/icon-192.png?v=2',
   '/icon-512.png?v=2',
-  '/assets/hls.min.js'
+  '/assets/hls.min.js',
+  '/assets/cinema-preview.png',
+  '/assets/icons/Avioc%20original.jpg'
 ];
 
 self.addEventListener('install', (event) => {
@@ -36,25 +38,31 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (!url.protocol.startsWith('http')) return;
 
-  // Never cache large streaming media, video fragments, or live feeds
-  if (
+  // Never cache large streaming media, large APKs/binaries, video fragments, or live feeds
+  const isLargeMediaOrApi = 
     url.pathname.endsWith('.m3u8') ||
     url.pathname.endsWith('.ts') ||
     url.pathname.endsWith('.mp4') ||
     url.pathname.endsWith('.webm') ||
+    url.pathname.endsWith('.apk') ||
+    url.pathname.endsWith('.exe') ||
+    url.pathname.endsWith('.dmg') ||
+    url.pathname.endsWith('.ipa') ||
+    url.pathname.includes('/movies/') ||
+    url.pathname.includes('/avioc app/') ||
     url.pathname.includes('/api/') ||
     url.pathname.startsWith('/admin') ||
-    url.hostname.includes('b-cdn.net') ||
-    url.hostname.includes('live')
-  ) {
+    url.pathname.includes('live');
+
+  if (isLargeMediaOrApi) {
     return;
   }
 
-  // Network-first for dynamic and HTML content; cache fallback for core shell
+  // Stale-While-Revalidate / Network-First with Cache Fallback for offline access
   event.respondWith(
     fetch(event.request)
       .then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+        if (networkResponse && networkResponse.status === 200) {
           const resClone = networkResponse.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, resClone));
         }
@@ -64,6 +72,9 @@ self.addEventListener('fetch', (event) => {
         return caches.match(event.request).then((cachedResponse) => {
           if (cachedResponse) return cachedResponse;
           if (event.request.headers.get('accept')?.includes('text/html')) {
+            if (url.pathname.includes('cinema')) {
+              return caches.match('/cinema.html');
+            }
             return caches.match('/index.html') || caches.match('/');
           }
         });
