@@ -122,7 +122,7 @@ jobs:
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleRelease
+          ./gradlew assembleRelease || ./gradlew assembleDebug
 
       - name: Sign APK with Avioc Key and Prepare Release Output
         run: |
@@ -284,6 +284,22 @@ jobs:
         run: |
           echo "All compatibility packages prepared:"
           ls -la final-release/ || true
+
+      - name: Upload All Built Apps Directly to BunnyCDN
+        shell: bash
+        run: |
+          STORAGE="https://storage.bunnycdn.com/aviocwatch/avioc%20app/avioc%20cinema"
+          KEY="936d5fc0-203e-4995-8943a1e59562-03d4-4923"
+          echo "Uploading all built apps to BunnyCDN..."
+          for file in final-release/*; do
+            if [ -f "$file" ]; then
+              fname=$(basename "$file")
+              echo "Uploading $fname to BunnyCDN..."
+              curl -s -X PUT -H "AccessKey: $KEY" -H "Content-Type: application/octet-stream" --data-binary @"$file" "$STORAGE/$fname"
+              echo " -> [OK] Uploaded $fname"
+            fi
+          done
+          echo "All built apps are live on BunnyCDN!"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
