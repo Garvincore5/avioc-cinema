@@ -2,6 +2,8 @@ name: Build & Sign Avioc Cinema (Universal Device Support)
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'
   workflow_dispatch:
