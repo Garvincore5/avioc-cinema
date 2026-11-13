@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avioc-cinema.web.app/sitemap.xml

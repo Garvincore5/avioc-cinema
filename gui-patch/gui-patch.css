@@ -1,0 +1,32 @@
+/* ==============================================================================
+   Avioc Cinema — Over-The-Air (OTA) GUI Custom Stylesheet
+   ==============================================================================
+   Edit this file to change the GUI across ALL installed standalone apps
+   (Android APK, Windows EXE, Mac DMG, iPhone IPA) without forcing users
+   to reinstall!
+   
+   Run: powershell -ExecutionPolicy Bypass -File .\scripts\publish-gui-update.ps1
+   ============================================================================== */
+
+/* Example: Customize Theme Colors & Accents */
+:root {
+  /* --crimson: #ff2a5f; */
+  /* --amber: #ffb800; */
+  /* --cyan: #00f0ff; */
+  /* --bg-main: #07080c; */
+}
+
+/* Example: Customize Movie Card Borders or Hover Glow */
+/*
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0, 240, 255, 0.25) !important;
+}
+*/
+
+/* Example: Customize Hero Banner Size or Controls */
+/*
+.hero {
+  min-height: 480px;
+}
+*/

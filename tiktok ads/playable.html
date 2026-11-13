@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0c0a10"><meta property="og:site_name" content="Avioc Cinema"><meta property="og:type" content="video.other"><meta property="og:image" content="https://aviocwatch.b-cdn.net/assets/social/default.jpg"><meta property="og:image:secure_url" content="https://aviocwatch.b-cdn.net/assets/social/default.jpg"><meta property="og:image:alt" content="Avioc Cinema">
+  <meta property="og:title" content="Watch on Avioc Cinema"><meta property="og:description" content="Play this clip and discover more on Avioc Cinema."><title>Watch on Avioc Cinema</title>
+  <style>
+    :root{color-scheme:dark;font:16px/1.5 Inter,Segoe UI,Arial,sans-serif;background:#0c0a10;color:#f8f4fa}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(800px 460px at 50% -15%,#38243f 0,transparent 65%),#0c0a10}.wrap{width:min(100% - 28px,600px);margin:0 auto;padding:28px 0 50px}.brand{font-weight:950;font-size:22px;letter-spacing:.04em;margin:0 0 25px}.brand i{font-style:normal;color:#ff9f24}.card{background:#17141c;border:1px solid #322b39;border-radius:20px;padding:18px;box-shadow:0 20px 60px #0005}h1{font-size:clamp(22px,5vw,30px);line-height:1.2;margin:0 0 6px}.sub{color:#aaa2b2;font-size:13px;margin:0 0 16px}.stage{width:100%;max-height:70vh;aspect-ratio:9/16;background:#050505;border-radius:13px;overflow:hidden}.stage video{width:100%;height:100%;object-fit:cover}.cta{display:flex;align-items:center;justify-content:center;min-height:52px;margin-top:16px;padding:12px 18px;border-radius:12px;background:#ff9f24;color:#211409;text-align:center;text-decoration:none;font-weight:900}.foot{text-align:center;color:#8f8796;font-size:12px;margin-top:15px}.error{display:none;background:#301b22;border:1px solid #74404a;border-radius:12px;padding:14px;color:#ffdce1;font-size:13px;margin-top:14px}.error.visible{display:block}.direct{display:inline-block;color:#ffd18d;margin-top:8px}
+  </style>
+</head><body><main class="wrap">
+  <div class="brand">AVIOC <i>●</i> CINEMA</div>
+  <section class="card"><h1 id="title">Watch this clip</h1><p class="sub">Play the selected moment, then explore Avioc Cinema.</p>
+    <div class="stage" id="stage"><video id="player" controls playsinline webkit-playsinline preload="metadata"></video></div>
+    <a class="cta" id="openSite" href="https://aviocwatch.b-cdn.net/" target="_blank" rel="noopener">Open Avioc Cinema</a>
+    <div class="error" id="error">This video may not be supported by WhatsApp’s browser. Try opening it directly in Chrome, or use an MP4 source.<br><a class="direct" id="directVideo" target="_blank" rel="noopener">Open video directly</a></div>
+  </section><div class="foot">Avioc Cinema · Movies and series to discover</div>
+</main><script>
+(()=>{
+  const params=new URLSearchParams(location.search),clip=params.get('clip'),to=params.get('to')||'https://aviocwatch.b-cdn.net/',title=params.get('title')||'Watch this clip';
+  const safeUrl=value=>{try{const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:''}catch(_){return ''}};
+  const video=safeUrl(clip),destination=safeUrl(to),player=document.getElementById('player'),stage=document.getElementById('stage');
+  const hasRange=params.has('start')||params.has('end');let segmentStart=Math.max(0,Number(params.get('start'))||0),segmentEnd=Math.max(0,Number(params.get('end'))||0);
+  const ratio=(params.get('ratio')||'9:16').split(':').map(n=>Math.max(1,Math.min(100,Number(n)||9)));stage.style.aspectRatio=`${ratio[0]}/${ratio[1]}`;
+  player.style.objectPosition=`${Math.max(0,Math.min(100,Number(params.get('fx'))||50))}% ${Math.max(0,Math.min(100,Number(params.get('fy'))||50))}%`;
+  document.title=`${title} · Avioc Cinema`;document.getElementById('title').textContent=title;
+  if(destination)document.getElementById('openSite').href=destination;
+  if(!video){document.getElementById('error').classList.add('visible');return}
+  document.getElementById('directVideo').href=video;
+  const media=new URL(video);if(segmentEnd>segmentStart)media.hash='t='+segmentStart+','+segmentEnd;player.src=media.href;
+  player.addEventListener('loadedmetadata',()=>{
+    if(!hasRange){segmentStart=0;segmentEnd=Math.min(30,player.duration)}
+    else if(!segmentEnd||segmentEnd>player.duration)segmentEnd=player.duration;
+    if(segmentEnd<=segmentStart){segmentStart=0;segmentEnd=Math.min(30,player.duration)}
+    try{player.currentTime=segmentStart}catch(_){document.getElementById('error').classList.add('visible')}
+  },{once:true});
+  let guarding=false;
+  function guardRange(){
+    if(segmentEnd>segmentStart&&player.currentTime>=segmentEnd){player.pause();try{player.currentTime=segmentEnd}catch(_){}guarding=false;return}
+    if(player.paused){guarding=false;return}
+    requestAnimationFrame(guardRange);
+  }
+  player.addEventListener('play',()=>{
+    if(player.currentTime<segmentStart||player.currentTime>=segmentEnd)player.currentTime=segmentStart;
+    if(!guarding){guarding=true;requestAnimationFrame(guardRange)}
+  });
+  player.addEventListener('timeupdate',()=>{if(segmentEnd>segmentStart&&player.currentTime>=segmentEnd){player.pause();player.currentTime=segmentEnd}});
+  player.addEventListener('seeking',()=>{if(segmentEnd>segmentStart){if(player.currentTime<segmentStart)player.currentTime=segmentStart;else if(player.currentTime>segmentEnd)player.currentTime=segmentEnd}});
+  const showError=()=>document.getElementById('error').classList.add('visible');
+  player.addEventListener('error',showError);player.addEventListener('stalled',()=>{if(player.readyState===0)showError()});
+})();
+</script></body></html>

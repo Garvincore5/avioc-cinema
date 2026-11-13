@@ -1,0 +1,41 @@
+{
+  "name": "avioc-cinema",
+  "version": "1.0.0",
+  "description": "Avioc Cinema - High performance universal streaming app for all devices (Android 5.0+, Windows 7/8/10/11 32/64-bit, macOS 10.13+, iOS)",
+  "main": "electron/main.js",
+  "author": "Avioc Cinema <contact@avioc.com>",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "start:desktop": "electron .",
+    "build:hosting": "node scripts/build-hosting.js",
+    "build:desktop": "electron-builder",
+    "build:windows": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "cap:sync": "cap sync",
+    "cap:android": "cap open android",
+    "cap:ios": "cap open ios",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "avioc",
+    "cinema",
+    "movies",
+    "streaming",
+    "vj-junior",
+    "vj-translated"
+  ],
+  "dependencies": {
+    "@capacitor/android": "^5.7.8",
+    "@capacitor/core": "^5.7.8",
+    "@capacitor/ios": "^5.7.8",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^5.7.8",
+    "electron": "22.3.27",
+    "electron-builder": "^24.13.3"
+  }
+}

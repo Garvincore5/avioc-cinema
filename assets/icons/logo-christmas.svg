@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Dark Squircle Background -->
+    <linearGradient id="xmas-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B162B"/>
+      <stop offset="40%" stop-color="#100C1B"/>
+      <stop offset="100%" stop-color="#08060D"/>
+    </linearGradient>
+
+    <!-- Squircle Border -->
+    <linearGradient id="xmas-squircle-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8BBEE8" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#342B47" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#F3A43B" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <!-- Brushed Gold "A" -->
+    <linearGradient id="gold-a" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0B0"/>
+      <stop offset="25%" stop-color="#EFCE7B"/>
+      <stop offset="60%" stop-color="#CFA14B"/>
+      <stop offset="100%" stop-color="#91651D"/>
+    </linearGradient>
+
+    <!-- Bevel 3D Shadow -->
+    <linearGradient id="gold-bevel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#704D13"/>
+      <stop offset="50%" stop-color="#462F0A"/>
+      <stop offset="100%" stop-color="#241703"/>
+    </linearGradient>
+
+    <!-- Play Button Core Glow -->
+    <linearGradient id="play-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#FFF3C4"/>
+      <stop offset="85%" stop-color="#FFBD4A"/>
+      <stop offset="100%" stop-color="#E57A10"/>
+    </linearGradient>
+
+    <!-- Santa Hat Red Velvet -->
+    <linearGradient id="santa-velvet" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FF4055"/>
+      <stop offset="40%" stop-color="#DE122B"/>
+      <stop offset="80%" stop-color="#9C0517"/>
+      <stop offset="100%" stop-color="#5E000B"/>
+    </linearGradient>
+
+    <!-- Fluffy Snow & Fur -->
+    <linearGradient id="fluffy-white" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="65%" stop-color="#F0F5FC"/>
+      <stop offset="100%" stop-color="#C8DBF2"/>
+    </linearGradient>
+
+    <!-- Lens Flare Horizontal Streak -->
+    <linearGradient id="lens-flare" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#FFF" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#FFF" stop-opacity="0.85"/>
+      <stop offset="65%" stop-color="#FFF" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Soft Drop Shadows -->
+    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000000" flood-opacity="0.8"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#F3A43B" flood-opacity="0.2"/>
+    </filter>
+
+    <filter id="fur-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+
+    <filter id="core-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background Squircle -->
+  <rect width="512" height="512" rx="116" fill="url(#xmas-bg)"/>
+  <rect x="6" y="6" width="500" height="500" rx="110" fill="none" stroke="url(#xmas-squircle-rim)" stroke-width="2.5"/>
+
+  <!-- Frost Ferns in Corners -->
+  <g stroke="#C6E2FF" stroke-width="1.6" stroke-linecap="round" opacity="0.32" fill="none">
+    <!-- Top Left Frost -->
+    <path d="M 40,40 Q 70,60 90,110 M 70,60 Q 95,50 115,70 M 60,80 Q 80,95 85,125"/>
+    <path d="M 30,70 Q 55,90 65,130 M 50,100 Q 75,105 90,120"/>
+    <!-- Top Right Frost -->
+    <path d="M 472,40 Q 442,60 422,110 M 442,60 Q 417,50 397,70 M 452,80 Q 432,95 427,125"/>
+    <path d="M 482,70 Q 457,90 447,130 M 462,100 Q 437,105 422,120"/>
+    <!-- Bottom Left Frost -->
+    <path d="M 40,472 Q 70,452 90,402 M 70,452 Q 95,462 115,442 M 60,432 Q 80,417 85,387"/>
+    <!-- Bottom Right Frost -->
+    <path d="M 472,472 Q 442,452 422,402 M 442,452 Q 417,462 397,442 M 452,432 Q 432,417 427,387"/>
+  </g>
+
+  <!-- Twinkling Christmas Gold Stars and Snow Glitter -->
+  <g fill="#FFE58F">
+    <polygon points="120,180 123,188 131,191 123,194 120,202 117,194 109,191 117,188" opacity="0.8"/>
+    <polygon points="380,260 382,266 388,268 382,270 380,276 378,270 372,268 378,266" opacity="0.75"/>
+    <polygon points="150,330 152,335 157,337 152,339 150,344 148,339 143,337 148,335" opacity="0.65"/>
+    <polygon points="360,190 362,195 367,197 362,199 360,204 358,199 353,197 358,195" opacity="0.8"/>
+    <polygon points="270,395 272,399 276,401 272,403 270,407 268,403 264,401 268,399" opacity="0.7"/>
+    <!-- Sparkle dots -->
+    <circle cx="100" cy="240" r="1.5" fill="#FFF" opacity="0.6"/>
+    <circle cx="140" cy="140" r="2" fill="#FFF" opacity="0.7"/>
+    <circle cx="410" cy="310" r="1.5" fill="#FFF" opacity="0.6"/>
+    <circle cx="390" cy="380" r="2" fill="#FFF" opacity="0.7"/>
+    <circle cx="200" cy="420" r="1.5" fill="#FFF" opacity="0.5"/>
+  </g>
+
+  <!-- Horizontal Lens Flare Streak across the Play Core -->
+  <rect x="70" y="271" width="372" height="3" fill="url(#lens-flare)"/>
+
+  <!-- MAIN 3D GOLDEN "A" FRAME -->
+  <g filter="url(#soft-shadow)">
+    <!-- 3D Extrusion Side / Bevel Shadow -->
+    <path d="M 256,134 
+             L 376,386 
+             L 364,394 
+             L 316,394 
+             L 326,386 
+             L 282,298 
+             L 230,298 
+             L 186,386 
+             L 196,394 
+             L 148,394 
+             L 136,386 
+             Z" 
+          fill="url(#gold-bevel)"/>
+
+    <!-- Front Golden Face of "A" -->
+    <path d="M 256,134 
+             L 370,382 
+             L 318,382 
+             L 278,296 
+             L 234,296 
+             L 194,382 
+             L 142,382 
+             Z
+             M 256,198 
+             L 236,258 
+             L 276,258 
+             Z" 
+          fill="url(#gold-a)" 
+          fill-rule="evenodd"/>
+
+    <!-- Specular Highlight on Left Leg -->
+    <path d="M 256,134 L 142,382 L 164,382 L 256,170 Z" fill="#FFFFFF" opacity="0.28"/>
+
+    <!-- Frosted Snow Dusting on the "A" Surface -->
+    <g fill="#FFFFFF" opacity="0.45">
+      <circle cx="160" cy="360" r="1.8"/>
+      <circle cx="170" cy="340" r="1.2"/>
+      <circle cx="180" cy="315" r="2"/>
+      <circle cx="200" cy="275" r="1.5"/>
+      <circle cx="220" cy="235" r="1.6"/>
+      <circle cx="240" cy="195" r="1.4"/>
+      <circle cx="270" cy="195" r="1.5"/>
+      <circle cx="290" cy="235" r="1.6"/>
+      <circle cx="310" cy="275" r="1.5"/>
+      <circle cx="330" cy="315" r="2"/>
+      <circle cx="345" cy="345" r="1.4"/>
+      <circle cx="355" cy="365" r="1.8"/>
+      <!-- Snow on crossbar -->
+      <circle cx="245" cy="296" r="1.5"/>
+      <circle cx="255" cy="295" r="1.8"/>
+      <circle cx="265" cy="296" r="1.5"/>
+    </g>
+
+    <!-- INNER GLOWING PLAY TRIANGLE -->
+    <g filter="url(#core-glow)">
+      <!-- Outer Play Arrow Bevel -->
+      <path d="M 240,240 
+               C 240,233 248,228 254,232 
+               L 302,266 
+               C 308,270 308,280 302,284 
+               L 254,318 
+               C 248,322 240,317 240,310 
+               Z" 
+            fill="url(#play-glow)"/>
+
+      <!-- Inner White Radiant Core -->
+      <path d="M 245,248 
+               L 290,275 
+               L 245,302 
+               Z" 
+            fill="#FFFFFF" 
+            opacity="0.8"/>
+    </g>
+  </g>
+
+  <!-- PLUSH RED VELVET SANTA HAT (From chrismas.jpeg) -->
+  <g filter="url(#fur-shadow)">
+    <!-- Red Velvet Hat Body with realistic folds -->
+    <!-- Starts above the apex, curves over to the right and drops down -->
+    <path d="M 224,148 
+             C 220,86 264,48 314,54 
+             C 346,58 372,82 376,112 
+             C 380,140 366,168 344,178 
+             C 334,182 328,172 334,162 
+             C 346,142 352,120 342,98 
+             C 330,72 296,64 266,74 
+             C 242,82 230,108 232,148 
+             Z" 
+          fill="url(#santa-velvet)"/>
+
+    <!-- Velvet Crease Shadows & Depth -->
+    <path d="M 276,66 C 308,64 336,78 350,102 C 340,90 318,78 288,78 C 266,78 248,88 238,108 C 244,90 258,74 276,66 Z" fill="#3D0006" opacity="0.45"/>
+    <path d="M 346,120 C 354,136 348,154 336,168 C 342,154 346,138 342,124 Z" fill="#3D0006" opacity="0.4"/>
+
+    <!-- Thick Fluffy White Fur Brim resting across the apex of the "A" -->
+    <g filter="url(#fur-shadow)">
+      <path d="M 204,152 
+               C 204,136 220,128 236,134 
+               C 248,126 266,126 278,133 
+               C 290,125 308,127 318,136 
+               C 330,126 348,132 354,146 
+               C 360,160 350,174 336,176 
+               C 324,184 306,182 294,174 
+               C 282,184 262,184 250,175 
+               C 238,184 220,182 212,172 
+               C 204,164 204,152 204,152 
+               Z" 
+            fill="url(#fluffy-white)"/>
+
+      <!-- Texture / Fluff details -->
+      <circle cx="225" cy="150" r="9" fill="#FFF" opacity="0.8"/>
+      <circle cx="255" cy="148" r="11" fill="#FFF" opacity="0.85"/>
+      <circle cx="288" cy="150" r="10" fill="#FFF" opacity="0.85"/>
+      <circle cx="320" cy="152" r="9" fill="#FFF" opacity="0.8"/>
+      <circle cx="340" cy="156" r="8" fill="#FFF" opacity="0.75"/>
+    </g>
+
+    <!-- Fluffy White Fur Pom-Pom Ball (Hanging down on the right) -->
+    <g filter="url(#fur-shadow)">
+      <circle cx="355" cy="192" r="26" fill="url(#fluffy-white)"/>
+      <circle cx="350" cy="186" r="16" fill="#FFFFFF"/>
+      <circle cx="362" cy="198" r="8" fill="#D3E2F4" opacity="0.5"/>
+    </g>
+  </g>
+</svg>

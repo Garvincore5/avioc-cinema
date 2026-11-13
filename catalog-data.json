@@ -1,0 +1,4941 @@
+[
+  {
+    "id": "coyote-vs-acme",
+    "title": "Coyote vs. Acme",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 9.3,
+    "len": 104,
+    "genres": [
+      "Animation",
+      "Comedy",
+      "Adventure",
+      "Family"
+    ],
+    "moods": [
+      "laugh",
+      "wired",
+      "cozy"
+    ],
+    "vj": "VJ Moscow",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "After all of Acme Corporation's products continually backfire on him during his pursuit of the Road Runner, Wile E. Coyote hires a down-on-his-luck human attorney to sue the Acme Corporation. Starring Will Forte, John Cena, and Lana Condor, hilariously translated in Luganda by VJ Moscow.",
+    "cast": [
+      "Will Forte",
+      "John Cena",
+      "Lana Condor",
+      "VJ Moscow Voiceover"
+    ],
+    "poster": "assets/posters/coyote_vs_acme.jpg",
+    "backdrop": "assets/posters/coyote_vs_acme.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/coyote_vs_acme_vj_moscow.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 0,
+    "stars": "9.3"
+  },
+  {
+    "id": "fall-2-deadpoint",
+    "title": "Fall 2: Deadpoint",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 9.2,
+    "len": 110,
+    "genres": [
+      "Thriller",
+      "Action",
+      "Adventure"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "In the high-stakes, vertigo-inducing sequel to the hit thriller Fall, an elite group of extreme climbers attempts an unprecedented ascent of a sheer, remote cliff face known as Deadpoint, where a sudden collapse leaves them stranded thousands of feet above the abyss. High-tension narration by VJ Soul.",
+    "cast": [
+      "Sophie Cookson",
+      "Grace Caroline Currey",
+      "VJ Soul Voiceover"
+    ],
+    "poster": "assets/posters/fall_2_deadpoint.jpg",
+    "backdrop": "assets/posters/fall_2_deadpoint.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/fall_2_deadpoint_vj_soul.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 1,
+    "stars": "9.2"
+  },
+  {
+    "id": "brewsters-millions",
+    "title": "Brewster's Millions",
+    "type": "film",
+    "year": "1985",
+    "yearNum": 1985,
+    "rating": 9,
+    "len": 102,
+    "genres": [
+      "Comedy"
+    ],
+    "moods": [
+      "laugh",
+      "cozy",
+      "heart"
+    ],
+    "vj": "VJ Mark",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "Minor league baseball player Montgomery Brewster stands to inherit a staggering  million from an eccentric great-uncle—on one impossible condition: he must spend  million in 30 days without owning any assets or telling anyone why. The comedy classic starring Richard Pryor and John Candy, translated in Luganda by VJ Mark.",
+    "cast": [
+      "Richard Pryor",
+      "John Candy",
+      "Lonette McKee",
+      "Stephen Collins",
+      "VJ Mark Voiceover"
+    ],
+    "poster": "assets/posters/brewsters_millions.jpg",
+    "backdrop": "assets/posters/brewsters_millions.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/brewsters_millions_vj_mark.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 2,
+    "stars": "9.0"
+  },
+  {
+    "id": "the-shape-of-water",
+    "title": "The Shape of Water",
+    "type": "film",
+    "year": "2017",
+    "yearNum": 2017,
+    "rating": 9.2,
+    "len": 123,
+    "genres": [
+      "Drama",
+      "Fantasy",
+      "Romance",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "heart",
+      "mind",
+      "cozy"
+    ],
+    "vj": "VJ Kevin",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "In a high-security government research facility during the Cold War, a lonely mute cleaning woman discovers a mysterious, amphibious creature held in captivity and forms an extraordinary, unspoken bond with him. Guillermo del Toro's Academy Award-winning masterpiece, translated with emotional depth by VJ Kevin.",
+    "cast": [
+      "Sally Hawkins",
+      "Michael Shannon",
+      "Richard Jenkins",
+      "Octavia Spencer",
+      "Doug Jones",
+      "VJ Kevin Voiceover"
+    ],
+    "poster": "assets/posters/the_shape_of_water.jpg",
+    "backdrop": "assets/posters/the_shape_of_water.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_shape_of_water_vj_kevin.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 3,
+    "stars": "9.2"
+  },
+  {
+    "id": "we-bury-the-dead",
+    "title": "We Bury the Dead",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 9.1,
+    "len": 98,
+    "genres": [
+      "Horror",
+      "Thriller",
+      "Drama"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "Following a catastrophic military experiment that devastates Tasmania, a grieving woman joins a body retrieval unit in desperate hope of finding her missing husband alive. However, the mission takes a terrifying turn when the corpses begin showing signs of reanimation. Starring Daisy Ridley, translated in explosive Luganda by VJ Junior The Incredible.",
+    "cast": [
+      "Daisy Ridley",
+      "Mark Coles Smith",
+      "Brenton Thwaites",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "assets/posters/we_bury_the_dead.jpg",
+    "backdrop": "assets/posters/we_bury_the_dead.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/we_bury_the_dead_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 4,
+    "stars": "9.1"
+  },
+  {
+    "id": "black-adam-2022",
+    "title": "Black Adam (2022)",
+    "type": "film",
+    "year": "2022",
+    "yearNum": 2022,
+    "rating": 9.1,
+    "len": 117,
+    "genres": [
+      "Action",
+      "Sci-Fi",
+      "Fantasy"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "Nearly 5,000 years after he was bestowed with the almighty powers of ancient gods and imprisoned, Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world. Directed by Jaume Collet-Serra, starring Dwayne Johnson, and translated in Luganda by VJ Junior The Incredible.",
+    "cast": [
+      "Dwayne Johnson",
+      "Aldis Hodge",
+      "Pierce Brosnan",
+      "Noah Centineo",
+      "Sarah Shahi",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "assets/posters/black_adam.jpg",
+    "backdrop": "assets/posters/black_adam.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/black_adam_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 5,
+    "stars": "9.1"
+  },
+  {
+    "id": "the-four-1",
+    "title": "The Four (Part 1)",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 9.2,
+    "len": 112,
+    "genres": [
+      "Action",
+      "Martial Arts",
+      "Fantasy",
+      "Mystery"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "Four elite Imperial constables—Emotionless, Iron Hands, Life Snatcher, and Cold Blood—unite to uncover a massive counterfeit currency conspiracy and dark sorcery threatening the capital. Narrated by VJ Junior.",
+    "cast": [
+      "Deng Chao",
+      "Liu Yifei",
+      "Collin Chou",
+      "Ronald Cheng",
+      "Anthony Wong"
+    ],
+    "poster": "assets/posters/the_four_1.jpg",
+    "backdrop": "assets/posters/the_four_1.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_four_vj_junior.mp4",
+    "parts": 3,
+    "partTitles": [
+      "The Four (Part 1 - VJ Junior)",
+      "The Four 2: Lawless Kingdom (Part 2 - VJ Musa)",
+      "The Four 3: Final Battle (Part 3 - VJ Musa)"
+    ],
+    "partUrls": [
+      "https://aviocwatch.b-cdn.net/movies/the_four_vj_junior.mp4",
+      "https://aviocwatch.b-cdn.net/movies/the_four_2_vj_musa.mp4",
+      "https://aviocwatch.b-cdn.net/movies/the_four_3_vj_musa.mp4"
+    ],
+    "seasons": [],
+    "order": 6,
+    "stars": "9.2"
+  },
+  {
+    "id": "the-four-2",
+    "title": "The Four 2: Lawless Kingdom",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 9.1,
+    "len": 117,
+    "genres": [
+      "Action",
+      "Martial Arts",
+      "Fantasy",
+      "Mystery"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Musa",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "While investigating a murder on the outskirts of the capital, the Four Constables uncover the dark truth behind the fifteen-year-old massacre of Emotionless's family. Translated by VJ Musa.",
+    "cast": [
+      "Deng Chao",
+      "Liu Yifei",
+      "Collin Chou",
+      "Ronald Cheng",
+      "Anthony Wong"
+    ],
+    "poster": "assets/posters/the_four_2.jpg",
+    "backdrop": "assets/posters/the_four_2.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_four_2_vj_musa.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 7,
+    "stars": "9.1"
+  },
+  {
+    "id": "the-four-3",
+    "title": "The Four 3: Final Battle",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 9.1,
+    "len": 107,
+    "genres": [
+      "Action",
+      "Martial Arts",
+      "Fantasy"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Musa",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "In the explosive grand finale of The Four trilogy, the four legendary constables reunite with Master Zhuge to stop a treacherous plot to overthrow the Emperor. Translated by VJ Musa.",
+    "cast": [
+      "Deng Chao",
+      "Liu Yifei",
+      "Collin Chou",
+      "Ronald Cheng",
+      "Anthony Wong"
+    ],
+    "poster": "assets/posters/the_four_3.jpg",
+    "backdrop": "assets/posters/the_four_3.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_four_3_vj_musa.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 8,
+    "stars": "9.1"
+  },
+  {
+    "id": "hope-2026",
+    "title": "Hope (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 9.2,
+    "len": 157,
+    "genres": [
+      "Sci-Fi",
+      "Thriller",
+      "Mystery"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Emmy",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "Residents of Hopo Port discover a mysterious entity on the outskirts of their remote harbor town, sparking a desperate fight for survival. Directed by Na Hong-jin and translated by VJ Emmy.",
+    "cast": [
+      "Hwang Jung-min",
+      "Zo In-sung",
+      "Hoyeon",
+      "Michael Fassbender",
+      "Alicia Vikander"
+    ],
+    "poster": "assets/posters/hope_2026.jpg",
+    "backdrop": "assets/posters/hope_2026.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/hope_vj_emmy.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 9,
+    "stars": "9.2"
+  },
+  {
+    "id": "masterplan-2026",
+    "title": "Masterplan (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 9.1,
+    "len": 109,
+    "genres": [
+      "Action",
+      "Crime",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "A legendary master thief recruits two young specialists for an impossible heist in Paris, where family secrets and high-voltage action collide. Translated by VJ Junior.",
+    "cast": [
+      "Stanley Tucci",
+      "Simona Tabasco",
+      "Victor Belmondo"
+    ],
+    "poster": "assets/posters/masterplan.jpg",
+    "backdrop": "assets/posters/masterplan.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/masterplan_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 10,
+    "stars": "9.1"
+  },
+  {
+    "id": "love-of-your-life-2026",
+    "title": "Love of Your Life (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 9,
+    "len": 111,
+    "genres": [
+      "Romance",
+      "Drama"
+    ],
+    "moods": [
+      "cozy",
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "After a life-altering loss, a young woman embarks on a deeply moving journey across the coast to rediscover love, hope, and second chances. Narrated by VJ Junior.",
+    "cast": [
+      "Margaret Qualley",
+      "Aaron Pierre",
+      "Patrick Schwarzenegger"
+    ],
+    "poster": "assets/posters/love_of_your_life.jpg",
+    "backdrop": "assets/posters/love_of_your_life.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/love_of_your_life_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 11,
+    "stars": "9.0"
+  },
+  {
+    "id": "practical-magic-2-2026",
+    "title": "Practical Magic 2 (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8.9,
+    "len": 130,
+    "genres": [
+      "Fantasy",
+      "Romance",
+      "Drama"
+    ],
+    "moods": [
+      "cozy",
+      "heart",
+      "mind"
+    ],
+    "vj": "VJ Emmy",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "Sally and Gillian Owens return as a new supernatural curse threatens the next generation of the Owens family witches. Translated by VJ Emmy.",
+    "cast": [
+      "Sandra Bullock",
+      "Nicole Kidman",
+      "Joey King",
+      "Dianne Wiest"
+    ],
+    "poster": "assets/posters/practical_magic_2.jpg",
+    "backdrop": "assets/posters/practical_magic_2.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/practical_magic_2_vj_emmy.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 12,
+    "stars": "8.9"
+  },
+  {
+    "id": "the-florist-2026",
+    "title": "The Florist (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8.9,
+    "len": 98,
+    "genres": [
+      "Action",
+      "Thriller",
+      "Crime"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Emmy",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "A quiet neighborhood florist with a lethal hidden past is forced back into action when a ruthless syndicate targets someone under his protection. Translated by VJ Emmy.",
+    "cast": [
+      "Dennis Quaid",
+      "Jean Reno"
+    ],
+    "poster": "assets/posters/the_florist.jpg",
+    "backdrop": "assets/posters/the_florist.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_florist_vj_emmy.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 13,
+    "stars": "8.9"
+  },
+  {
+    "id": "pinocchio-unstrung-2026",
+    "title": "Pinocchio: Unstrung (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8.7,
+    "len": 82,
+    "genres": [
+      "Horror",
+      "Thriller",
+      "Fantasy"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Emmy",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "Young James discovers his grandfather Geppetto's deadly secret: a wooden puppet named Pinocchio who will stop at nothing to become a real boy. Translated by VJ Emmy.",
+    "cast": [
+      "Richard Brake",
+      "Robert Englund",
+      "Cameron Bell"
+    ],
+    "poster": "assets/posters/pinocchio_unstrung.jpg",
+    "backdrop": "assets/posters/pinocchio_unstrung.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/pinocchio_unstrung_vj_emmy.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 14,
+    "stars": "8.7"
+  },
+  {
+    "id": "rise-of-the-footsoldier-retribution",
+    "title": "Rise of the Footsoldier: Retribution",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8.8,
+    "len": 112,
+    "genres": [
+      "Action",
+      "Crime",
+      "Thriller"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Emmy",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "Pat Tate goes on a relentless rampage across Essex and London to avenge the brutal betrayal of his closest loyalists. High-action translation by VJ Emmy.",
+    "cast": [
+      "Craig Fairbrass",
+      "Jamie Foreman",
+      "Phil Davis"
+    ],
+    "poster": "assets/posters/rise_of_the_footsoldier_retribution.jpg",
+    "backdrop": "assets/posters/rise_of_the_footsoldier_retribution.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/rise_of_the_footsoldier_retribution_vj_emmy.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 15,
+    "stars": "8.8"
+  },
+  {
+    "id": "neighbors-vj-jovan",
+    "title": "Neighbors",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8.7,
+    "len": 97,
+    "genres": [
+      "Comedy"
+    ],
+    "moods": [
+      "cozy",
+      "laugh"
+    ],
+    "vj": "VJ Jovan",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "New parents Mac and Kelly are forced into an all-out pranking war when a rowdy fraternity moves in next door. Hilariously translated by VJ Jovan.",
+    "cast": [
+      "Seth Rogen",
+      "Zac Efron",
+      "Rose Byrne",
+      "Dave Franco"
+    ],
+    "poster": "assets/posters/neighbors.jpg",
+    "backdrop": "assets/posters/neighbors.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/neighbors_vj_jovan.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 16,
+    "stars": "8.7"
+  },
+  {
+    "id": "mutiny-2026",
+    "title": "Mutiny (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8.6,
+    "len": 108,
+    "genres": [
+      "Action",
+      "Thriller",
+      "Crime"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "synopsis": "Cole Reed (Jason Statham) watches his billionaire industrialist boss get murdered in front of him. Framed for the crime, Reed embarks on a relentless quest across the globe to uncover an international conspiracy.",
+    "cast": [
+      "Jason Statham",
+      "Annabelle Wallis",
+      "Roland Møller"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/1790621761880_Mutiny__Jason_Statham_s_New_Action_Thriller_Coming_in_2026.jpeg",
+    "backdrop": "https://aviocwatch.b-cdn.net/posters/1790621761880_Mutiny__Jason_Statham_s_New_Action_Thriller_Coming_in_2026.jpeg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/s0_m_mutiny-part-1.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 17,
+    "stars": "8.6"
+  },
+  {
+    "id": "spiderman-far-from-home",
+    "title": "Spider-Man: Far From Home",
+    "type": "film",
+    "year": "2019",
+    "yearNum": 2019,
+    "rating": 9.1,
+    "len": 129,
+    "genres": [
+      "Action",
+      "Sci-Fi",
+      "Adventure"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "synopsis": "Peter Parker's relaxing European vacation is upended when Nick Fury recruits him to team up with Quentin Beck (Mysterio) against elemental entities. Translated with explosive energy by Uganda's favorite VJ Junior.",
+    "cast": [
+      "Tom Holland",
+      "Jake Gyllenhaal",
+      "Zendaya",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/spiderman_far_from_home.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/spider-man_far_from_home_vj_junior.mp4",
+    "parts": 3,
+    "seasons": [],
+    "order": 18,
+    "stars": "9.1",
+    "partTitles": [
+      "Spider-Man: Far From Home",
+      "Spider-Man: No Way Home",
+      "Spider-Man: Brand New Day"
+    ],
+    "partUrls": [
+      "https://aviocwatch.b-cdn.net/movies/spider-man_far_from_home_vj_junior.mp4",
+      "https://aviocwatch.b-cdn.net/movies/spider_man_no_way_home_vj_junior.mp4",
+      "https://aviocwatch.b-cdn.net/movies/spider_man_brand_new_day_vj_junior.mp4"
+    ]
+  },
+  {
+    "id": "meet-joe-black",
+    "title": "Meet Joe Black",
+    "type": "film",
+    "year": "1998",
+    "yearNum": 1998,
+    "rating": 8.9,
+    "len": 178,
+    "genres": [
+      "Romance",
+      "Drama",
+      "Fantasy"
+    ],
+    "moods": [
+      "cozy",
+      "mind",
+      "heart"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": true,
+    "isFeatured": true,
+    "synopsis": "Death arrives on Earth in the body of a handsome young man named Joe Black. Making a pact with media mogul William Parrish, Joe experiences love, humanity, and peanut butter for the first time.",
+    "cast": [
+      "Brad Pitt",
+      "Anthony Hopkins",
+      "Claire Forlani"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/meet_joe_black.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/meet_joe_black.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 19,
+    "stars": "8.9"
+  },
+  {
+    "id": "affection-2026",
+    "title": "Affection (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8.7,
+    "len": 125,
+    "genres": [
+      "Romance",
+      "Drama",
+      "Thriller"
+    ],
+    "moods": [
+      "cozy",
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "synopsis": "A gripping tale of deep sacrifice, unyielding romantic devotion, and hidden betrayals. Translated with VJ Junior's signature emotional depth and suspenseful voiceover.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "International Stars"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/affection_real.jpg",
+    "backdrop": "https://aviocwatch.b-cdn.net/posters/affection_real.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/affection.mkv",
+    "parts": 1,
+    "seasons": [],
+    "order": 20,
+    "stars": "8.7"
+  },
+  {
+    "id": "drishyam",
+    "title": "Drishyam",
+    "type": "film",
+    "year": "2015",
+    "yearNum": 2015,
+    "rating": 9.4,
+    "len": 163,
+    "genres": [
+      "Crime",
+      "Thriller",
+      "Mystery",
+      "Drama"
+    ],
+    "moods": [
+      "wired",
+      "mind",
+      "heart"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": true,
+    "synopsis": "Vijay Salgaonkar, an ordinary cinema lover, devises an ingenious plan to protect his family after an accidental death puts them in the crosshairs of a ruthless police inspector. Narrated by VJ Ulio in breathtaking suspense.",
+    "cast": [
+      "Ajay Devgn",
+      "Tabu",
+      "Shriya Saran",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/drishyam.jpg",
+    "backdrop": "https://aviocwatch.b-cdn.net/posters/drishyam.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/drishyam_ulio.mp4",
+    "parts": 3,
+    "seasons": [],
+    "order": 21,
+    "stars": "9.4",
+    "partTitles": [
+      "Drishyam",
+      "Drishyam 2",
+      "Drishyam 3"
+    ],
+    "partUrls": [
+      "https://aviocwatch.b-cdn.net/movies/drishyam_ulio.mp4",
+      "https://aviocwatch.b-cdn.net/movies/drishyam_2_vj.mkv",
+      "https://aviocwatch.b-cdn.net/movies/drishyam_3_vj.mkv"
+    ]
+  },
+  {
+    "id": "furious-attack",
+    "title": "Furious Attack",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8.8,
+    "len": 105,
+    "genres": [
+      "Action",
+      "Martial Arts",
+      "Crime"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "Electrifying martial arts and street warfare as a trained protector takes down a corrupt cartel one strike at a time. High-voltage translation by VJ Junior.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "Martial Arts Ensemble"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/furious_attack_theatrical.jpg",
+    "backdrop": "https://aviocwatch.b-cdn.net/posters/drishyam.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/furious_attack.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 22,
+    "stars": "8.8"
+  },
+  {
+    "id": "ice-cream-man",
+    "title": "Ice Cream Man",
+    "type": "film",
+    "year": "2024",
+    "yearNum": 2024,
+    "rating": 8.2,
+    "len": 98,
+    "genres": [
+      "Horror",
+      "Thriller",
+      "Slasher"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A cheerful neighborhood vendor conceals a twisted, terrifying secret inside his refrigerated truck. Dark, thrilling entertainment with VJ Junior.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "Horror Cast"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/ice_cream_man_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1509281373149-e957c6296406?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/ice_cream_man.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 23,
+    "stars": "8.2"
+  },
+  {
+    "id": "one-last-shot",
+    "title": "One Last Shot",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8.6,
+    "len": 112,
+    "genres": [
+      "Action",
+      "Crime",
+      "Thriller"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "An elite marksman undertakes one final job to clear his debts, only to find himself ambushed from all directions. VJ Junior explosive edition.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "Action Ensemble"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/one_last_shot_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/one_last_shot.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 24,
+    "stars": "8.6"
+  },
+  {
+    "id": "tarung-unforgiven",
+    "title": "Tarung: Unforgiven",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8.9,
+    "len": 104,
+    "genres": [
+      "Martial Arts",
+      "Action"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "In an uncompromising underground fighting league, an ex-champion returns to fight for redemption. Raw, kinetic choreography brought to life by VJ Junior.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "Combat Masters"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/tarung_unforgiven_theatrical.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1517849845537-4d257902454a?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/tarung_unforgiven.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 25,
+    "stars": "8.9"
+  },
+  {
+    "id": "the-fix",
+    "title": "The Fix (Part 1)",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8.5,
+    "len": 116,
+    "genres": [
+      "Crime",
+      "Mystery",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A secretive compound unleashes enhanced cognitive and physical abilities in human subjects, triggering a dangerous corporate manhunt.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "Sci-Fi Ensemble"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/the_fix_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_fix.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 26,
+    "stars": "8.5"
+  },
+  {
+    "id": "the-girl-in-the-river",
+    "title": "The Girl in the River (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8.9,
+    "len": 122,
+    "genres": [
+      "Mystery",
+      "Thriller",
+      "Drama"
+    ],
+    "moods": [
+      "wired",
+      "mind",
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "An unidentified body discovered at daybreak leads an investigator down a rabbit hole of high-society greed and dark conspiracies. VJ Junior storytelling at its finest.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "Mystery Cast"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/the_girl_in_the_river_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_girl_in_the_river.mkv",
+    "parts": 1,
+    "seasons": [],
+    "order": 27,
+    "stars": "8.9"
+  },
+  {
+    "id": "sheep-detectives",
+    "title": "Sheep Detectives",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8.1,
+    "len": 95,
+    "genres": [
+      "Comedy",
+      "Mystery",
+      "Crime"
+    ],
+    "moods": [
+      "cozy",
+      "wired",
+      "mind",
+      "laugh"
+    ],
+    "vj": "VJ Emmy",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A riotous comedy where eccentric local investigators stumble onto an international crime ring hidden inside pastoral country estates. Hilarious commentary by VJ Emmy.",
+    "cast": [
+      "VJ Emmy Voiceover",
+      "Comedy Stars"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/sheep_detectives_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/sheep_detectives_emmy.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 28,
+    "stars": "8.1"
+  },
+  {
+    "id": "love-me-love-me-2026",
+    "title": "Love Me Love Me (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8.5,
+    "len": 102,
+    "genres": [
+      "Romance",
+      "Drama",
+      "Comedy"
+    ],
+    "moods": [
+      "cozy",
+      "heart",
+      "laugh"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "An exhilarating modern love story about second chances, missed signals, and undeniable chemistry. Translated with VJ Soul's smoothest romantic voice.",
+    "cast": [
+      "VJ Soul Voiceover",
+      "Romantic Cast"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/love_me_love_me_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/love_me_love_me_vj.soul.2026.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 29,
+    "stars": "8.5"
+  },
+  {
+    "id": "the-pursuit-of-happyness",
+    "title": "The Pursuit of Happyness",
+    "type": "film",
+    "year": "2006",
+    "yearNum": 2006,
+    "rating": 9.3,
+    "len": 117,
+    "genres": [
+      "Drama",
+      "Biography"
+    ],
+    "moods": [
+      "heart"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "Chris Gardner (Will Smith) endures homelessness while caring for his young son and competing in an unpaid internship to build a brighter tomorrow. Deeply moving translation by VJ Ulio.",
+    "cast": [
+      "Will Smith",
+      "Jaden Smith",
+      "Thandiwe Newton",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/pursuit_of_happyness.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_pursuit_of_happyness_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 30,
+    "stars": "9.3"
+  },
+  {
+    "id": "eagle-eye",
+    "title": "Eagle Eye",
+    "type": "film",
+    "year": "2008",
+    "yearNum": 2008,
+    "rating": 8.7,
+    "len": 118,
+    "genres": [
+      "Action",
+      "Sci-Fi",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "Two strangers receive phone commands from an unseen voice controlling everyday technology, framed as terrorists unless they complete an impossible mission. VJ Junior explosive thriller.",
+    "cast": [
+      "Shia LaBeouf",
+      "Michelle Monaghan",
+      "Rosario Dawson",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/eagle_eye.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/eagle_eye_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 31,
+    "stars": "8.7"
+  },
+  {
+    "id": "just-my-luck",
+    "title": "Just My Luck",
+    "type": "film",
+    "year": "2006",
+    "yearNum": 2006,
+    "rating": 8.1,
+    "len": 103,
+    "genres": [
+      "Comedy",
+      "Romance",
+      "Fantasy"
+    ],
+    "moods": [
+      "cozy",
+      "mind",
+      "heart",
+      "laugh"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Ashley, the luckiest girl in New York, suddenly swaps fortunes with the unluckiest guy in town after an accidental kiss at a masquerade ball. Narrated with VJ Soul's trademark comedic charm.",
+    "cast": [
+      "Lindsay Lohan",
+      "Chris Pine",
+      "Samaire Armstrong",
+      "VJ Soul Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/just_my_luck.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/just_my_luck_vj_soul.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 32,
+    "stars": "8.1"
+  },
+  {
+    "id": "after-the-wedding",
+    "title": "After the Wedding",
+    "type": "film",
+    "year": "2019",
+    "yearNum": 2019,
+    "rating": 8.3,
+    "len": 112,
+    "genres": [
+      "Drama"
+    ],
+    "moods": [
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "An orphanage director journeys to New York to secure crucial funding, only to find herself invited to a wedding that turns her entire world upside down.",
+    "cast": [
+      "Julianne Moore",
+      "Michelle Williams",
+      "Billy Crudup",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/after_the_wedding.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/after_the_wedding_by_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 33,
+    "stars": "8.3"
+  },
+  {
+    "id": "weapons-2025",
+    "title": "Weapons (2025)",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8.7,
+    "len": 121,
+    "genres": [
+      "Horror",
+      "Mystery",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "An interrelated horror epic exploring the strange disappearance of high school teenagers in a quiet town. Directed by Zach Cregger with chilling translation by VJ Junior.",
+    "cast": [
+      "Josh Brolin",
+      "Julia Garner",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/weapons_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/weapons_2025_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 34,
+    "stars": "8.7"
+  },
+  {
+    "id": "the-fix-part-2",
+    "title": "The Fix (Part 2 - Finale)",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8.7,
+    "len": 110,
+    "genres": [
+      "Crime",
+      "Mystery",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "The conclusion to the thrilling sci-fi crime saga. With the synthetic enhancer threatening to engulf the city, our heroes make a desperate stand against the syndicate. Translated by VJ Junior.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "Sci-Fi Cast"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/the_fix_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_fix_part_2_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 35,
+    "stars": "8.7"
+  },
+  {
+    "id": "ittefaq",
+    "title": "Ittefaq",
+    "type": "film",
+    "year": "2017",
+    "yearNum": 2017,
+    "rating": 8.6,
+    "len": 107,
+    "genres": [
+      "Mystery",
+      "Thriller",
+      "Crime"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "Two suspects, two witnesses, and two contradictory versions of a double homicide in Mumbai. A sharp police officer has only three days to uncover the truth. Narrated by master of suspense VJ Ulio.",
+    "cast": [
+      "Sidharth Malhotra",
+      "Sonakshi Sinha",
+      "Akshaye Khanna",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/ittefaq_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/ittefaq_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 36,
+    "stars": "8.6"
+  },
+  {
+    "id": "luck-key",
+    "title": "Luck-Key",
+    "type": "film",
+    "year": "2016",
+    "yearNum": 2016,
+    "rating": 8.8,
+    "len": 112,
+    "genres": [
+      "Action",
+      "Comedy",
+      "Crime"
+    ],
+    "moods": [
+      "cozy",
+      "wired",
+      "laugh"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "A lethal assassin slips on a bar of soap in a public bathhouse, losing his memory. A struggling actor swaps locker keys with him and steals his glamorous identity. Laugh-out-loud commentary by VJ Ulio.",
+    "cast": [
+      "Yoo Hae-jin",
+      "Lee Joon",
+      "Jo Yoon-hee",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/luck_key_real.jpg",
+    "backdrop": "https://aviocwatch.b-cdn.net/posters/affection_real.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/luck-key_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 37,
+    "stars": "8.8"
+  },
+  {
+    "id": "a-day",
+    "title": "A Day",
+    "type": "film",
+    "year": "2017",
+    "yearNum": 2017,
+    "rating": 8.9,
+    "len": 90,
+    "genres": [
+      "Mystery",
+      "Thriller",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "A world-renowned thoracic surgeon relives the two hours leading up to his daughter's tragic car accident in an endless time loop. Unrelenting tension narrated by VJ Ulio.",
+    "cast": [
+      "Kim Myung-min",
+      "Byun Yo-han",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/a_day_real.jpg",
+    "backdrop": "https://aviocwatch.b-cdn.net/posters/drishyam.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/a_day_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 38,
+    "stars": "8.9"
+  },
+  {
+    "id": "the-comeback",
+    "title": "The Comeback",
+    "type": "film",
+    "year": "2023",
+    "yearNum": 2023,
+    "rating": 8.6,
+    "len": 106,
+    "genres": [
+      "Action",
+      "Crime",
+      "Thriller"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A former prizefighter rises from the ashes of disgrace to defend his city and train a young prodigy for the fight of their lives. VJ Junior brings thunderous hype.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "Action Stars"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/the_comeback_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_comeback__720_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 39,
+    "stars": "8.6"
+  },
+  {
+    "id": "bikini-model-academy",
+    "title": "Bikini Model Academy",
+    "type": "film",
+    "year": "2015",
+    "yearNum": 2015,
+    "rating": 7.9,
+    "len": 88,
+    "genres": [
+      "Comedy"
+    ],
+    "moods": [
+      "cozy",
+      "laugh"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Two slacker friends open a modeling school in an attempt to earn quick cash, but end up running into comical mayhem and romantic entanglements. Hilarious VJ Soul narration.",
+    "cast": [
+      "Gary Busey",
+      "Morgan Fairchild",
+      "VJ Soul Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/bikini_model_academy_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/bikini_model_academy_vj_soul.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 40,
+    "stars": "7.9"
+  },
+  {
+    "id": "one-night-only",
+    "title": "One Night Only",
+    "type": "film",
+    "year": "2016",
+    "yearNum": 2016,
+    "rating": 8.6,
+    "len": 101,
+    "genres": [
+      "Action",
+      "Crime",
+      "Romance"
+    ],
+    "moods": [
+      "cozy",
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "A compulsive gambler and a mysterious woman become intertwined in a single nocturnal odyssey across the neon underbelly of Bangkok, fleeing gangsters. VJ Junior edge-of-seat thriller.",
+    "cast": [
+      "Aaron Kwok",
+      "Yang Zishan",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/one_night_only_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/one_night_only_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 41,
+    "stars": "8.6"
+  },
+  {
+    "id": "the-love-hypothesis",
+    "title": "The Love Hypothesis",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8.8,
+    "len": 110,
+    "genres": [
+      "Romance",
+      "Comedy"
+    ],
+    "moods": [
+      "cozy",
+      "heart",
+      "laugh"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "A Ph.D. candidate fakes a relationship with a notoriously stern professor, only for theoretical chemistry to spark into undeniable genuine passion. Charming VJ Junior commentary.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "Rom-Com Ensemble"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/the_love_hypothesis_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_love_hypothesis_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 42,
+    "stars": "8.8"
+  },
+  {
+    "id": "avalon-high",
+    "title": "Avalon High",
+    "type": "film",
+    "year": "2010",
+    "yearNum": 2010,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Fantasy",
+      "Family",
+      "Drama"
+    ],
+    "moods": [
+      "cozy",
+      "mind",
+      "heart"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A new student at Avalon High discovers that her classmates may be the reincarnations of King Arthur and his court.",
+    "cast": [],
+    "poster": "assets/posters/avalon_high.jpg",
+    "backdrop": "assets/posters/avalon_high.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/avalon_high_vj_soul.mkv",
+    "parts": 1,
+    "seasons": [],
+    "order": 43,
+    "stars": "8.0"
+  },
+  {
+    "id": "baahubali-epic-part-1",
+    "title": "Baahubali: The Epic (Part 1)",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Fantasy"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "An epic tale of royal heirs, war, and destiny begins in the first part of Baahubali: The Epic.",
+    "cast": [],
+    "poster": "assets/posters/baahubali_the_epic.jpg",
+    "backdrop": "assets/posters/baahubali_the_epic.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/baahubali_the_epic_part_1.mkv",
+    "parts": 1,
+    "seasons": [],
+    "order": 44,
+    "stars": "8.0"
+  },
+  {
+    "id": "baahubali-epic-part-2",
+    "title": "Baahubali: The Epic (Part 2)",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Fantasy"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "The Baahubali saga continues as the kingdom's struggle for power reaches its next chapter.",
+    "cast": [],
+    "poster": "assets/posters/baahubali_the_epic.jpg",
+    "backdrop": "assets/posters/baahubali_the_epic.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/baahubali_the_epic_part_2.mkv",
+    "parts": 1,
+    "seasons": [],
+    "order": 45,
+    "stars": "8.0"
+  },
+  {
+    "id": "baahubali-epic-part-3",
+    "title": "Baahubali: The Epic (Part 3)",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Fantasy"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "The final supplied chapter of the Baahubali epic brings the royal conflict to its conclusion.",
+    "cast": [],
+    "poster": "assets/posters/baahubali_the_epic.jpg",
+    "backdrop": "assets/posters/baahubali_the_epic.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/baahubali_the_epic_part_3.mkv",
+    "parts": 1,
+    "seasons": [],
+    "order": 46,
+    "stars": "8.0"
+  },
+  {
+    "id": "batman-5-6",
+    "title": "Batman 5 & 6",
+    "type": "film",
+    "year": "Collection",
+    "yearNum": 0,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Crime"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A VJ Junior Batman feature from the supplied collection.",
+    "cast": [],
+    "poster": "assets/posters/batman_5_6.jpg",
+    "backdrop": "assets/posters/batman_5_6.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/batman_5_and_6_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 47,
+    "stars": "8.0"
+  },
+  {
+    "id": "best-of-the-best",
+    "title": "Best of the Best",
+    "type": "film",
+    "year": "1989",
+    "yearNum": 1989,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Drama",
+      "Sport"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A team of American martial artists prepare to face South Korea in an international taekwondo tournament.",
+    "cast": [],
+    "poster": "assets/posters/best_of_the_best.jpg",
+    "backdrop": "assets/posters/best_of_the_best.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/best_of_the_best_vj_soul.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 48,
+    "stars": "8.0"
+  },
+  {
+    "id": "blast-part-1",
+    "title": "Blast (Part 1)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Thriller",
+      "Drama"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Ice P",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A family of martial artists is drawn into a dangerous conflict in the first part of Blast.",
+    "cast": [],
+    "poster": "assets/posters/blast.jpg",
+    "backdrop": "assets/posters/blast.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/blast_part_1_vj_ice_p.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 49,
+    "stars": "8.0"
+  },
+  {
+    "id": "blast-part-2",
+    "title": "Blast (Part 2)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Thriller",
+      "Drama"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Ice P",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "The action continues in the second part of Blast.",
+    "cast": [],
+    "poster": "assets/posters/blast.jpg",
+    "backdrop": "assets/posters/blast.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/blast_part_2_vj_ice_p.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 50,
+    "stars": "8.0"
+  },
+  {
+    "id": "children-of-the-corn-revelation",
+    "title": "Children of the Corn: Revelation",
+    "type": "film",
+    "year": "2001",
+    "yearNum": 2001,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Horror",
+      "Thriller"
+    ],
+    "moods": [
+      "wired"
+    ],
+    "vj": "VJ Emmy",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A woman investigating her grandmother's apartment uncovers a sinister presence connected to the Children of the Corn.",
+    "cast": [],
+    "poster": "assets/posters/children_of_the_corn_revelation.jpg",
+    "backdrop": "assets/posters/children_of_the_corn_revelation.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/children_of_the_corn_revelation_vj_emmy.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 51,
+    "stars": "8.0"
+  },
+  {
+    "id": "how-to-be-a-latin-lover",
+    "title": "How to Be a Latin Lover",
+    "type": "film",
+    "year": "2017",
+    "yearNum": 2017,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Comedy",
+      "Romance"
+    ],
+    "moods": [
+      "cozy",
+      "heart",
+      "laugh"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A wealthy older woman's former gigolo is forced to move in with his estranged sister and learn a different way of life.",
+    "cast": [],
+    "poster": "assets/posters/how_to_be_a_latin_lover.jpg",
+    "backdrop": "assets/posters/how_to_be_a_latin_lover.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/how_to_be_a_latin_lover_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 52,
+    "stars": "8.0"
+  },
+  {
+    "id": "korean-kanakaraju",
+    "title": "Korean Kanakaraju (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Comedy",
+      "Horror",
+      "Action"
+    ],
+    "moods": [
+      "cozy",
+      "wired",
+      "laugh"
+    ],
+    "vj": "VJ Shield",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A young man becomes possessed by a Korean spirit and must protect his family while uncovering the spirit's story.",
+    "cast": [],
+    "poster": "assets/posters/korean_kanakaraju.jpg",
+    "backdrop": "assets/posters/korean_kanakaraju.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/korean_kanakaraju_vj_shield.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 53,
+    "stars": "8.0"
+  },
+  {
+    "id": "kung-fu-soccer",
+    "title": "Kung Fu Soccer",
+    "type": "film",
+    "year": "2001",
+    "yearNum": 2001,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Comedy",
+      "Action",
+      "Sport"
+    ],
+    "moods": [
+      "cozy",
+      "wired",
+      "laugh"
+    ],
+    "vj": "VJ Ice P",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A former Shaolin student gathers his brothers to bring their martial arts skills to the soccer field.",
+    "cast": [],
+    "poster": "assets/posters/kung_fu_soccer.jpg",
+    "backdrop": "assets/posters/kung_fu_soccer.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/kung_fu_soccer_vj_ice_p.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 54,
+    "stars": "8.0"
+  },
+  {
+    "id": "matilda-1996",
+    "title": "Matilda",
+    "type": "film",
+    "year": "1996",
+    "yearNum": 1996,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Family",
+      "Comedy",
+      "Fantasy"
+    ],
+    "moods": [
+      "cozy",
+      "mind",
+      "laugh"
+    ],
+    "vj": "VJ Jingo",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A gifted young girl discovers extraordinary powers while finding her place in a difficult family and school.",
+    "cast": [],
+    "poster": "assets/posters/matilda.jpg",
+    "backdrop": "assets/posters/matilda.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/matilda_vj_jingo.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 55,
+    "stars": "8.0"
+  },
+  {
+    "id": "moana-2016",
+    "title": "Moana",
+    "type": "film",
+    "year": "2016",
+    "yearNum": 2016,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Animation",
+      "Adventure",
+      "Family"
+    ],
+    "moods": [
+      "cozy",
+      "laugh"
+    ],
+    "vj": "VJ Ice P",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A spirited island voyager crosses the ocean with the demigod Maui to restore the heart of Te Fiti.",
+    "cast": [],
+    "poster": "assets/posters/moana.jpg",
+    "backdrop": "assets/posters/moana.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/moana_vj_ice_p_hd.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 56,
+    "stars": "8.0"
+  },
+  {
+    "id": "prey-2022",
+    "title": "Prey",
+    "type": "film",
+    "year": "2022",
+    "yearNum": 2022,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Sci-Fi",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Emmy",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A skilled Comanche hunter protects her people when a technologically advanced Predator arrives on Earth.",
+    "cast": [],
+    "poster": "assets/posters/prey.jpg",
+    "backdrop": "assets/posters/prey.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/prey_vj_emmy.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 57,
+    "stars": "8.0"
+  },
+  {
+    "id": "soul-2020",
+    "title": "Soul",
+    "type": "film",
+    "year": "2020",
+    "yearNum": 2020,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Animation",
+      "Adventure",
+      "Drama"
+    ],
+    "moods": [
+      "heart",
+      "laugh"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A jazz musician finds himself on a journey through the Great Before, reconsidering what makes life meaningful.",
+    "cast": [],
+    "poster": "assets/posters/soul.jpg",
+    "backdrop": "assets/posters/soul.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/soul_kevo_2021.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 58,
+    "stars": "8.0"
+  },
+  {
+    "id": "spider-man-brand-new-day",
+    "title": "Spider-Man: Brand New Day",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Peter Parker returns for a new chapter as Spider-Man.",
+    "cast": [],
+    "poster": "assets/posters/spider_man_brand_new_day.jpg",
+    "backdrop": "assets/posters/spider_man_brand_new_day.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/spider_man_brand_new_day_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 59,
+    "stars": "8.0"
+  },
+  {
+    "id": "spider-man-no-way-home",
+    "title": "Spider-Man: No Way Home",
+    "type": "film",
+    "year": "2021",
+    "yearNum": 2021,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Peter Parker asks Doctor Strange for help after his identity is revealed, opening the door to a multiverse crisis.",
+    "cast": [],
+    "poster": "assets/posters/spider_man_no_way_home.jpg",
+    "backdrop": "assets/posters/spider_man_no_way_home.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/spider_man_no_way_home_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 60,
+    "stars": "8.0"
+  },
+  {
+    "id": "tailless-2024",
+    "title": "Tailless",
+    "type": "film",
+    "year": "2024",
+    "yearNum": 2024,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Animation",
+      "Adventure",
+      "Family"
+    ],
+    "moods": [
+      "cozy",
+      "laugh"
+    ],
+    "vj": "VJ Uncle T",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A young lizard born without a tail sets off with his friend to find one.",
+    "cast": [],
+    "poster": "assets/posters/tailless.jpg",
+    "backdrop": "assets/posters/tailless.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/tailless_2026_vj_uncle_t.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 61,
+    "stars": "8.0"
+  },
+  {
+    "id": "the-land-of-sometimes",
+    "title": "The Land of Sometimes",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Animation",
+      "Fantasy",
+      "Family"
+    ],
+    "moods": [
+      "cozy",
+      "mind",
+      "laugh"
+    ],
+    "vj": "VJ Mosco",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Twins discover a magical watch and journey into a fantastical land where wishes have consequences.",
+    "cast": [],
+    "poster": "assets/posters/the_land_of_sometimes.jpg",
+    "backdrop": "assets/posters/the_land_of_sometimes.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_land_of_sometimes_vj_mosco.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 62,
+    "stars": "8.0"
+  },
+  {
+    "id": "the-lorax",
+    "title": "The Lorax",
+    "type": "film",
+    "year": "2012",
+    "yearNum": 2012,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Animation",
+      "Family",
+      "Comedy"
+    ],
+    "moods": [
+      "cozy",
+      "laugh"
+    ],
+    "vj": "VJ Kevo",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A boy searches for the last tree in a town where nature has disappeared, uncovering the story of the Lorax.",
+    "cast": [],
+    "poster": "assets/posters/the_lorax.jpg",
+    "backdrop": "assets/posters/the_lorax.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_lorax_vj_kevo.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 63,
+    "stars": "8.0"
+  },
+  {
+    "id": "we-can-be-heroes",
+    "title": "We Can Be Heroes",
+    "type": "film",
+    "year": "2020",
+    "yearNum": 2020,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Family"
+    ],
+    "moods": [
+      "cozy",
+      "wired"
+    ],
+    "vj": "VJ Arafah",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "The children of captured superheroes discover their own powers and work together to save their parents.",
+    "cast": [],
+    "poster": "assets/posters/we_can_be_heroes.jpg",
+    "backdrop": "assets/posters/we_can_be_heroes.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/we_can_be_heroes_vj_arafah.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 64,
+    "stars": "8.0"
+  },
+  {
+    "id": "2067-vj-soul",
+    "title": "2067",
+    "type": "film",
+    "year": "2020",
+    "yearNum": 2020,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Sci-Fi",
+      "Thriller",
+      "Adventure"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "In a future where oxygen is scarce, a man is sent forward in time to find a way to save humanity.",
+    "cast": [],
+    "poster": "assets/posters/2067.jpg",
+    "backdrop": "assets/posters/2067.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/2067_vj_soul.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 65,
+    "stars": "8.0"
+  },
+  {
+    "id": "alita-battle-angel",
+    "title": "Alita: Battle Angel",
+    "type": "film",
+    "year": "2019",
+    "yearNum": 2019,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Sci-Fi",
+      "Adventure"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A cyborg with no memory of her past discovers extraordinary fighting skills in a dangerous future city.",
+    "cast": [],
+    "poster": "assets/posters/alita_battle_angel.jpg",
+    "backdrop": "assets/posters/alita_battle_angel.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/alita_battle_angel_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 66,
+    "stars": "8.0"
+  },
+  {
+    "id": "antboy",
+    "title": "Antboy",
+    "type": "film",
+    "year": "2013",
+    "yearNum": 2013,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Adventure",
+      "Comedy",
+      "Family"
+    ],
+    "moods": [
+      "cozy",
+      "laugh"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A shy boy gains unusual powers after being bitten by an ant and becomes a young superhero.",
+    "cast": [],
+    "poster": "assets/posters/antboy.jpg",
+    "backdrop": "assets/posters/antboy.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/antboy_vj_soul.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 67,
+    "stars": "8.0"
+  },
+  {
+    "id": "beautiful-disaster",
+    "title": "Beautiful Disaster",
+    "type": "film",
+    "year": "2023",
+    "yearNum": 2023,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Romance",
+      "Drama",
+      "Comedy"
+    ],
+    "moods": [
+      "cozy",
+      "heart",
+      "laugh"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A college freshman tries to avoid a charismatic underground fighter, but a wager draws them closer.",
+    "cast": [],
+    "poster": "assets/posters/beautiful_disaster.jpg",
+    "backdrop": "assets/posters/beautiful_disaster.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/beautiful_disaster_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 68,
+    "stars": "8.0"
+  },
+  {
+    "id": "the-little-mermaid-2023",
+    "title": "The Little Mermaid",
+    "type": "film",
+    "year": "2023",
+    "yearNum": 2023,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Adventure",
+      "Fantasy",
+      "Family"
+    ],
+    "moods": [
+      "cozy",
+      "mind"
+    ],
+    "vj": "VJ Emmy",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Ariel makes a risky bargain to explore life beyond the sea and pursue a world of her own.",
+    "cast": [],
+    "poster": "assets/posters/the_little_mermaid.jpg",
+    "backdrop": "assets/posters/the_little_mermaid.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_little_mermaid_vj_emmy.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 69,
+    "stars": "8.0"
+  },
+  {
+    "id": "pele-2021",
+    "title": "Pelé",
+    "type": "film",
+    "year": "2021",
+    "yearNum": 2021,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Documentary",
+      "Sport"
+    ],
+    "moods": [],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "This documentary follows Pelé's rise from young football prodigy to a three-time World Cup champion.",
+    "cast": [],
+    "poster": "assets/posters/pele.jpg",
+    "backdrop": "assets/posters/pele.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/pele_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 70,
+    "stars": "8.0"
+  },
+  {
+    "id": "black-panther-2018",
+    "title": "Black Panther",
+    "type": "film",
+    "year": "2018",
+    "yearNum": 2018,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Ice P",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "T'Challa returns to Wakanda to claim the throne and defend his nation from a rival with a powerful claim.",
+    "cast": [],
+    "poster": "assets/posters/black_panther.jpg",
+    "backdrop": "assets/posters/black_panther.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/black_panther_vj_ice_p.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 71,
+    "stars": "8.0"
+  },
+  {
+    "id": "incredible-hulk-2008",
+    "title": "The Incredible Hulk",
+    "type": "film",
+    "year": "2008",
+    "yearNum": 2008,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Sci-Fi",
+      "Adventure"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Ice P",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Bruce Banner searches for a cure while evading the military and confronting a new gamma-powered threat.",
+    "cast": [],
+    "poster": "assets/posters/incredible_hulk.jpg",
+    "backdrop": "assets/posters/incredible_hulk.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_incredible_hulk_vj_ice_p.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 72,
+    "stars": "8.0"
+  },
+  {
+    "id": "woman-king-2022",
+    "title": "The Woman King",
+    "type": "film",
+    "year": "2022",
+    "yearNum": 2022,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Action",
+      "Drama",
+      "History"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "In the 1820s, a general trains an elite army of women to protect the Kingdom of Dahomey.",
+    "cast": [],
+    "poster": "assets/posters/woman_king.jpg",
+    "backdrop": "assets/posters/woman_king.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_woman_king_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 73,
+    "stars": "8.0"
+  },
+  {
+    "id": "trust-2025",
+    "title": "Trust",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Thriller",
+      "Drama"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A Hollywood starlet retreats to a remote cabin and finds herself caught in a dangerous game of survival.",
+    "cast": [],
+    "poster": "assets/posters/trust.jpg",
+    "backdrop": "assets/posters/trust.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/trust_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 74,
+    "stars": "8.0"
+  },
+  {
+    "id": "drishyam-2",
+    "title": "Drishyam 2",
+    "type": "film",
+    "year": "2022",
+    "yearNum": 2022,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Crime",
+      "Drama",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Years after a crime shook his family, Georgekutty faces renewed scrutiny as the investigation takes new turns.",
+    "cast": [],
+    "poster": "assets/posters/drishyam_2.jpg",
+    "backdrop": "assets/posters/drishyam_2.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/drishyam_2_vj.mkv",
+    "parts": 1,
+    "seasons": [],
+    "order": 75,
+    "stars": "8.0"
+  },
+  {
+    "id": "drishyam-3",
+    "title": "Drishyam 3",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Crime",
+      "Drama",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Georgekutty's family faces another chapter in the suspenseful Drishyam story.",
+    "cast": [],
+    "poster": "assets/posters/drishyam_3.jpg",
+    "backdrop": "assets/posters/drishyam_3.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/drishyam_3_vj.mkv",
+    "parts": 1,
+    "seasons": [],
+    "order": 76,
+    "stars": "8.0"
+  },
+  {
+    "id": "miss-sloane-2016",
+    "title": "Miss Sloane",
+    "type": "film",
+    "year": "2016",
+    "yearNum": 2016,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Drama",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A formidable lobbyist risks her career and personal life in a high-stakes fight over gun legislation.",
+    "cast": [],
+    "poster": "assets/posters/miss_sloane.jpg",
+    "backdrop": "assets/posters/miss_sloane.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/miss_sloane_vj.mkv",
+    "parts": 1,
+    "seasons": [],
+    "order": 77,
+    "stars": "8.0"
+  },
+  {
+    "id": "palm-springs-2020",
+    "title": "Palm Springs",
+    "type": "film",
+    "year": "2020",
+    "yearNum": 2020,
+    "rating": 8,
+    "len": 110,
+    "genres": [
+      "Comedy",
+      "Romance",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "cozy",
+      "mind",
+      "heart",
+      "laugh"
+    ],
+    "vj": "VJ",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Two wedding guests find themselves trapped in a time loop, reliving the same day in Palm Springs.",
+    "cast": [],
+    "poster": "assets/posters/palm_springs.jpg",
+    "backdrop": "assets/posters/palm_springs.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/palm_springs_vj.mkv",
+    "parts": 1,
+    "seasons": [],
+    "order": 78,
+    "stars": "8.0"
+  },
+  {
+    "id": "special-ops-lioness",
+    "title": "Special Ops: Lioness",
+    "type": "series",
+    "year": "2023 - 2024",
+    "yearNum": 2023,
+    "rating": 8.8,
+    "len": 2,
+    "genres": [
+      "Action",
+      "Spy Thriller",
+      "Drama"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "synopsis": "Created by Taylor Sheridan. Joe (Zoe Saldaña) operates as the point of the CIA's spear in the Lioness Program, training female operatives to dismantle terrorist syndicates and cartel leaders. Featuring Nicole Kidman and Morgan Freeman.",
+    "cast": [
+      "Zoe Saldaña",
+      "Nicole Kidman",
+      "Morgan Freeman",
+      "Laysla De Oliveira",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/special_ops_poster.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 2,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Beware the Old Soldier",
+            "min": 49,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/special_ops_ep1.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 2,
+            "name": "I Love My Country",
+            "min": 48,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/special_ops_2.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 3,
+            "name": "Along Came a Spider",
+            "min": 47,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/special_ops_3.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 4,
+            "name": "Five Hundred Children",
+            "min": 46,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/special_ops_4.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 5,
+            "name": "Shatter the Moon",
+            "min": 45,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/special_ops_5.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 6,
+            "name": "The Compass Points Home",
+            "min": 43,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/special_ops_6.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 7,
+            "name": "The Devil Has a Name",
+            "min": 47,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/special_ops_7.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 8,
+            "name": "Season 2 Finale - End Game",
+            "min": 56,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/special_ops_8.mp4",
+            "vj": "VJ Junior"
+          }
+        ]
+      },
+      {
+        "seasonNumber": 3,
+        "episodes": [
+          {
+            "n": 5,
+            "name": "The Idiot Army",
+            "min": 51,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/lioness_s03e05.mp4",
+            "vj": "Original / VJ JR"
+          },
+          {
+            "n": 6,
+            "name": "Sugar Land",
+            "min": 53,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/lioness_s03e06.mp4",
+            "vj": "Original / VJ JR"
+          },
+          {
+            "n": 7,
+            "name": "Kiss The Girls",
+            "min": 48,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/lioness_s03e07.mp4",
+            "vj": "Original / VJ JR"
+          },
+          {
+            "n": 8,
+            "name": "Season 3 Grand Finale",
+            "min": 58,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/SpecialOps/lioness_s03e08.mp4",
+            "vj": "Original / VJ JR"
+          }
+        ]
+      }
+    ],
+    "order": 79,
+    "stars": "8.8"
+  },
+  {
+    "id": "avatar-film-saga",
+    "title": "Avatar Saga (1 to 4 Complete)",
+    "type": "series",
+    "year": "2009 - 2026",
+    "yearNum": 2009,
+    "rating": 9.3,
+    "len": 1,
+    "genres": [
+      "Sci-Fi",
+      "Adventure",
+      "Action",
+      "Fantasy"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "synopsis": "James Cameron's monumental sci-fi saga on Pandora. Follow Jake Sully and Neytiri through the sacred forests, the Reef clans of the Metkayina, and the newly revealed volcanic Ash tribes. Fully narrated by VJ Junior.",
+    "cast": [
+      "Sam Worthington",
+      "Zoe Saldaña",
+      "Sigourney Weaver",
+      "Kate Winslet",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/JUNIOR/Avatar/posters/avatar_poster_1.jpg",
+    "backdrop": "https://aviocwatch.b-cdn.net/JUNIOR/Avatar/posters/avatar_saga_banner.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Avatar: Part 1 - The Awakening",
+            "min": 162,
+            "streamUrl": "https://aviocwatch.b-cdn.net/JUNIOR/Avatar/avatar%201.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 2,
+            "name": "Avatar 2: The Way of Water (Part 1)",
+            "min": 95,
+            "streamUrl": "https://aviocwatch.b-cdn.net/JUNIOR/Avatar/Avatar%202%20the%20way%20of%20the%20water%20.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 3,
+            "name": "Avatar 3: The Way of Water (Part 2)",
+            "min": 108,
+            "streamUrl": "https://aviocwatch.b-cdn.net/JUNIOR/Avatar/Avatar%203%20the%20way%20of%20the%20water.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 4,
+            "name": "Avatar 4: Fire & Ash (Part 1 - 2026)",
+            "min": 175,
+            "streamUrl": "https://aviocwatch.b-cdn.net/JUNIOR/Avatar/Avatar%204-fire-and-ash-part-1.mp4",
+            "vj": "VJ Junior"
+          }
+        ]
+      }
+    ],
+    "order": 80,
+    "stars": "9.3"
+  },
+  {
+    "id": "i-will-find-you",
+    "title": "I Will Find You (2026)",
+    "type": "series",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8.9,
+    "len": 1,
+    "genres": [
+      "Crime",
+      "Mystery",
+      "Drama"
+    ],
+    "moods": [
+      "wired",
+      "mind",
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "An innocent father serving life in maximum security receives proof that his murdered son is still alive, sparking an unstoppable prison break and a race against relentless federal marshals.",
+    "cast": [
+      "VJ Junior Voiceover",
+      "International Stars"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/i_will_find_you_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Episode 1: The Photograph",
+            "min": 54,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/i_will_find_you_s01e01.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 2,
+            "name": "Episode 2: Behind The Wall",
+            "min": 52,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/i_will_find_you_s01e02.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 3,
+            "name": "Episode 3: The Great Escape",
+            "min": 49,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/i_will_find_you_s01e03.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 4,
+            "name": "Episode 4: Trail of Shadows",
+            "min": 51,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/i_will_find_you_s01e04.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 5,
+            "name": "Episode 5: False Identities",
+            "min": 48,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/i_will_find_you_s01e05.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 6,
+            "name": "Episode 6: The Safehouse",
+            "min": 45,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/i_will_find_you_s01e06.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 7,
+            "name": "Episode 7: Unmasked",
+            "min": 46,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/i_will_find_you_s01e07.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 8,
+            "name": "Episode 8: The Truth Revealed (Grand Finale)",
+            "min": 53,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/i_will_find_you_s01e08.mp4",
+            "vj": "VJ Junior"
+          }
+        ]
+      }
+    ],
+    "order": 81,
+    "stars": "8.9"
+  },
+  {
+    "id": "shaka-zulu",
+    "title": "Shaka Zulu (Remastered)",
+    "type": "series",
+    "year": "1986",
+    "yearNum": 1986,
+    "rating": 9,
+    "len": 1,
+    "genres": [
+      "History",
+      "War",
+      "Drama",
+      "Biography"
+    ],
+    "moods": [
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "The legendary historical epic charting the rise of King Shaka, who unified disparate southern African tribes into an invincible Zulu military empire in the 19th century.",
+    "cast": [
+      "Henry Cele",
+      "Edward Fox",
+      "Robert Powell",
+      "Grace Jones"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/shaka_zulu_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Episode 1: The Prophecy",
+            "min": 50,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/shaka_zulu_ep01.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 2,
+            "name": "Episode 2: Blood and Iron",
+            "min": 51,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/shaka_zulu_ep02.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 3,
+            "name": "Episode 3: Rise of the King",
+            "min": 49,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/shaka_zulu_ep03.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 4,
+            "name": "Episode 4: The Spear of Destiny",
+            "min": 50,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/shaka_zulu_ep04.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 5,
+            "name": "Episode 5: Empire Builders",
+            "min": 52,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/shaka_zulu_ep05.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 6,
+            "name": "Episode 6: White Strangers",
+            "min": 51,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/shaka_zulu_ep06.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 7,
+            "name": "Episode 7: The Crown of Thorn",
+            "min": 53,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/shaka_zulu_ep07.mp4",
+            "vj": "VJ Junior"
+          }
+        ]
+      }
+    ],
+    "order": 82,
+    "stars": "9.0"
+  },
+  {
+    "id": "upload-prime",
+    "title": "Upload",
+    "type": "series",
+    "year": "2020 - 2024",
+    "yearNum": 2020,
+    "rating": 8.6,
+    "len": 4,
+    "genres": [
+      "Comedy",
+      "Sci-Fi",
+      "Mystery"
+    ],
+    "moods": [
+      "cozy",
+      "mind",
+      "laugh"
+    ],
+    "vj": "English",
+    "isTrending": true,
+    "isFeatured": false,
+    "synopsis": "Created by Greg Daniels (The Office). When a young programmer dies unexpectedly, his consciousness is uploaded to the ultra-luxurious virtual afterlife Lakeview, where he uncovers dark corporate conspiracies.",
+    "cast": [
+      "Robbie Amell",
+      "Andy Allo",
+      "Allegra Edwards"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/upload_series_real.jpg",
+    "backdrop": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&auto=format&fit=crop&q=80",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Pilot: Welcome to Lakeview",
+            "min": 46,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s01e01.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 2,
+            "name": "Five Stars",
+            "min": 32,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s01e02.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 3,
+            "name": "The Funeral",
+            "min": 33,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s01e03.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 4,
+            "name": "Sex Suit",
+            "min": 29,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s01e04.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 5,
+            "name": "The Grey Market",
+            "min": 31,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s01e05.mp4",
+            "vj": "English"
+          }
+        ]
+      },
+      {
+        "seasonNumber": 2,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Welcome Home, Baby",
+            "min": 34,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s02e01.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 2,
+            "name": "Dinner Party",
+            "min": 31,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s02e02.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 3,
+            "name": "Robin Hood",
+            "min": 33,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s02e03.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 4,
+            "name": "Family Day",
+            "min": 35,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s02e04.mp4",
+            "vj": "English"
+          }
+        ]
+      },
+      {
+        "seasonNumber": 3,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Ticking Clock",
+            "min": 38,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s03e01.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 2,
+            "name": "Strawberry",
+            "min": 32,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s03e02.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 3,
+            "name": "Cyber Discount Day",
+            "min": 34,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s03e03.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 4,
+            "name": "Download Doctor",
+            "min": 33,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s03e04.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 5,
+            "name": "Rescue Mission",
+            "min": 36,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s03e05.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 6,
+            "name": "Memory Wipe",
+            "min": 35,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s03e06.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 7,
+            "name": "Flesh and Blood",
+            "min": 41,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s03e07.mp4",
+            "vj": "English"
+          }
+        ]
+      },
+      {
+        "seasonNumber": 4,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "A New Life",
+            "min": 39,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s04e01.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 2,
+            "name": "Simulation Error",
+            "min": 36,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s04e02.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 3,
+            "name": "System Override",
+            "min": 38,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s04e03.mp4",
+            "vj": "English"
+          },
+          {
+            "n": 4,
+            "name": "Final Horizon",
+            "min": 44,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/upload_s04e04.mp4",
+            "vj": "English"
+          }
+        ]
+      }
+    ],
+    "order": 83,
+    "stars": "8.6"
+  },
+  {
+    "id": "hyper-knife",
+    "title": "Hyper Knife",
+    "type": "series",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 8,
+    "len": 1,
+    "genres": [
+      "Drama",
+      "Thriller",
+      "Medical"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Ivo",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A gifted surgeon and her former mentor are drawn into a dangerous medical thriller about ambition, betrayal, and revenge.",
+    "cast": [
+      "Park Eun-bin",
+      "Sol Kyung-gu",
+      "VJ Ivo"
+    ],
+    "poster": "assets/posters/hyper_knife.jpg",
+    "backdrop": "assets/posters/hyper_knife.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Hyper Knife",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/hyper_knife_vj_ivo.mp4",
+            "vj": "VJ Ivo"
+          }
+        ]
+      }
+    ],
+    "order": 84,
+    "stars": "8.0"
+  },
+  {
+    "id": "extraordinary-attorney-woo",
+    "title": "Extraordinary Attorney Woo",
+    "type": "series",
+    "year": "2022",
+    "yearNum": 2022,
+    "rating": 8.2,
+    "len": 1,
+    "genres": [
+      "Drama",
+      "Comedy",
+      "Legal"
+    ],
+    "moods": [
+      "cozy",
+      "heart",
+      "laugh"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A brilliant rookie attorney approaches challenging cases and everyday life with an extraordinary memory and a unique perspective.",
+    "cast": [
+      "Park Eun-bin",
+      "Kang Tae-oh",
+      "Kang Ki-young",
+      "VJ Junior"
+    ],
+    "poster": "assets/posters/extraordinary_attorney_woo.jpg",
+    "backdrop": "assets/posters/extraordinary_attorney_woo.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Extraordinary Attorney Woo",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e01.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 2,
+            "name": "The Wedding Dress That Slipped Off",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e02.mkv",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 3,
+            "name": "This Is Pengsoo",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e03.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 4,
+            "name": "The Strife of the Three Brothers",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e04.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 5,
+            "name": "Wild Card VS Tactician",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e05.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 6,
+            "name": "If I Were a Whale",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e06.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 7,
+            "name": "A Tale About Sodeok-dong I",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e07.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 8,
+            "name": "A Tale About Sodeok-dong II",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e08.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 9,
+            "name": "The Pied Piper",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e09.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 10,
+            "name": "Holding Hands Can Wait",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e10.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 11,
+            "name": "Mr. Salt, Ms. Pepper and Attorney Soy Sauce",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e11.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 13,
+            "name": "The Blue Night of Jeju I",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e13.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 14,
+            "name": "The Blue Night of Jeju II",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e14.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 15,
+            "name": "Saying and Doing Things Not Asked",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e15.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 16,
+            "name": "Though Unusual and Peculiar",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/extraordinary_attorney_woo_s01e16.mp4",
+            "vj": "VJ Junior"
+          }
+        ]
+      }
+    ],
+    "order": 85,
+    "stars": "8.2"
+  },
+  {
+    "id": "carrie-2026",
+    "title": "Carrie",
+    "type": "series",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 8,
+    "len": 1,
+    "genres": [
+      "Horror",
+      "Drama",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A modern adaptation of Stephen King's story follows Carrie White as she navigates high school, cruelty, and emerging telekinetic powers.",
+    "cast": [
+      "Summer H. Howell",
+      "Samantha Sloyan",
+      "VJ"
+    ],
+    "poster": "assets/posters/carrie_series.jpg",
+    "backdrop": "assets/posters/carrie_series.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "First Period",
+            "min": 55,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/carrie_s01e01_first_period.mkv",
+            "vj": "VJ"
+          },
+          {
+            "n": 2,
+            "name": "Foreign Language",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/carrie_s01e02_foreign_language.mkv",
+            "vj": "VJ"
+          }
+        ]
+      }
+    ],
+    "order": 86,
+    "stars": "8.0"
+  },
+  {
+    "id": "mobland",
+    "title": "MobLand",
+    "type": "series",
+    "year": "2025 - 2026",
+    "yearNum": 2025,
+    "rating": 8,
+    "len": 2,
+    "genres": [
+      "Crime",
+      "Drama",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "A London crime family's fixer navigates rivalries and shifting loyalties as a fight for power threatens the Harrigan empire.",
+    "cast": [
+      "Tom Hardy",
+      "Pierce Brosnan",
+      "Helen Mirren",
+      "VJ"
+    ],
+    "poster": "assets/posters/mobland.jpg",
+    "backdrop": "assets/posters/mobland.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 2,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "I Wanna Be Your Dog",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/mobland_s02e01_i_wanna_be_your_dog.mkv",
+            "vj": "VJ"
+          },
+          {
+            "n": 2,
+            "name": "Song 2",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/mobland_s02e02_song_2.mkv",
+            "vj": "VJ"
+          },
+          {
+            "n": 3,
+            "name": "Bonzo Goes to Bitburg",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/mobland_s02e03_bonzo_goes_to_bitburg.mkv",
+            "vj": "VJ"
+          },
+          {
+            "n": 4,
+            "name": "Blank Curtain",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/mobland_s02e04_blank_curtain.mkv",
+            "vj": "VJ"
+          }
+        ]
+      }
+    ],
+    "order": 87,
+    "stars": "8.0"
+  },
+  {
+    "id": "the-gentlemen-series",
+    "title": "The Gentlemen",
+    "type": "series",
+    "year": "2024 - 2026",
+    "yearNum": 2024,
+    "rating": 8,
+    "len": 2,
+    "genres": [
+      "Crime",
+      "Comedy",
+      "Drama"
+    ],
+    "moods": [
+      "cozy",
+      "wired",
+      "heart",
+      "laugh"
+    ],
+    "vj": "VJ",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "An aristocrat inherits a country estate tied to a sprawling cannabis empire and becomes entangled with the criminal world around it.",
+    "cast": [
+      "Theo James",
+      "Kaya Scodelario",
+      "Ray Winstone",
+      "VJ"
+    ],
+    "poster": "assets/posters/the_gentlemen.jpg",
+    "backdrop": "assets/posters/the_gentlemen.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Refined Aggression",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_gentlemen_s01e01_refined_aggression.mkv",
+            "vj": "VJ"
+          }
+        ]
+      },
+      {
+        "seasonNumber": 2,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "The Road to Kingdom",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_gentlemen_s02e01_the_road_to_kingdom.mkv",
+            "vj": "VJ"
+          },
+          {
+            "n": 2,
+            "name": "There's a Rat in the Kitchen",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_gentlemen_s02e02_theres_a_rat_in_the_kitchen.mkv",
+            "vj": "VJ"
+          },
+          {
+            "n": 3,
+            "name": "Do You Reject Satan?",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_gentlemen_s02e03_do_you_reject_satan.mkv",
+            "vj": "VJ"
+          },
+          {
+            "n": 4,
+            "name": "The Bigger Picture",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_gentlemen_s02e04_the_bigger_picture.mkv",
+            "vj": "VJ"
+          },
+          {
+            "n": 5,
+            "name": "A Suburban A-Road on the Outskirts of Basingstoke",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_gentlemen_s02e05_suburban_a_road.mkv",
+            "vj": "VJ"
+          },
+          {
+            "n": 6,
+            "name": "The Bells of San Domenico",
+            "min": 0,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_gentlemen_s02e06_bells_of_san_domenico.mkv",
+            "vj": "VJ"
+          }
+        ]
+      }
+    ],
+    "order": 88,
+    "stars": "8.0"
+  },
+  {
+    "id": "pendragon-cycle-2026",
+    "title": "The Pendragon Cycle: Rise of the Merlin (2026)",
+    "type": "series",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 9.1,
+    "len": 1,
+    "genres": [
+      "Fantasy",
+      "Action",
+      "Adventure",
+      "Historical"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Nelly",
+    "isTrending": true,
+    "isFeatured": true,
+    "synopsis": "Based on Stephen R. Lawhead's iconic Arthurian sagas. Set in post-Roman Britain, ancient bards and druids face ruthless invaders as the young Merlin awakens to his monumental destiny. Narrated with heroic power by VJ Nelly.",
+    "cast": [
+      "Tom Sharp",
+      "Rose Reid",
+      "James Cosmo",
+      "VJ Nelly Voiceover"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/pendragon_cycle_official.jpg",
+    "backdrop": "https://aviocwatch.b-cdn.net/posters/pendragon_cycle_official.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Episode 1: The Merlin Awakening",
+            "min": 65,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/pendragon_cycle_s01e01.mp4",
+            "vj": "VJ Nelly"
+          }
+        ]
+      }
+    ],
+    "order": 89,
+    "stars": "9.1"
+  },
+  {
+    "id": "oh-my-baby",
+    "title": "Oh My Baby",
+    "type": "series",
+    "year": "2020",
+    "yearNum": 2020,
+    "rating": 8.5,
+    "len": 1,
+    "genres": [
+      "Romance",
+      "Comedy",
+      "Drama"
+    ],
+    "moods": [
+      "cozy",
+      "heart",
+      "laugh"
+    ],
+    "vj": "VJ Ulio / Original",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Jang Ha-ri (Jang Na-ra), a successful 39-year-old workaholic editor at a parenting magazine, decides to have a baby without marriage—until three handsome men enter her life simultaneously.",
+    "cast": [
+      "Jang Na-ra",
+      "Go Jun",
+      "Park Byung-eun",
+      "Jung Gun-joo"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/oh_my_baby_official.jpg",
+    "backdrop": "https://aviocwatch.b-cdn.net/posters/oh_my_baby_official.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Episode 1: When It's Too Late",
+            "min": 66,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/oh_my_baby_s01e01.mp4",
+            "vj": "Korean / VJ"
+          },
+          {
+            "n": 2,
+            "name": "Episode 2: Ha-Ri's Decision",
+            "min": 64,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/oh_my_baby_s01e02.mp4",
+            "vj": "Korean / VJ"
+          }
+        ]
+      }
+    ],
+    "order": 90,
+    "stars": "8.5"
+  },
+  {
+    "id": "a-different-world",
+    "title": "A Different World",
+    "type": "series",
+    "year": "1987 - 1993",
+    "yearNum": 1987,
+    "rating": 8.6,
+    "len": 1,
+    "genres": [
+      "Comedy"
+    ],
+    "moods": [
+      "cozy",
+      "laugh"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "synopsis": "Students at historically Black Hillman College in Virginia navigate higher education, romance, social awareness, and personal growth in this landmark television comedy.",
+    "cast": [
+      "Lisa Bonet",
+      "Kadeem Hardison",
+      "Jasmine Guy",
+      "Dawnn Lewis"
+    ],
+    "poster": "https://aviocwatch.b-cdn.net/posters/a_different_world_official.jpg",
+    "backdrop": "https://aviocwatch.b-cdn.net/posters/a_different_world_official.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Episode 1: Pilot",
+            "min": 24,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/a_different_world_s01e01.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 2,
+            "name": "Episode 2: Those Who Can't, Tutor",
+            "min": 23,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/a_different_world_s01e02.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 3,
+            "name": "Episode 3: Wild Days",
+            "min": 24,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/a_different_world_s01e03.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 4,
+            "name": "Episode 4: The Give and Take",
+            "min": 23,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/a_different_world_s01e04.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 5,
+            "name": "Episode 5: The War of the Words",
+            "min": 24,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/a_different_world_s01e05.mp4",
+            "vj": "VJ Junior"
+          }
+        ]
+      }
+    ],
+    "order": 91,
+    "stars": "8.6"
+  },
+  {
+    "id": "dark-wolf-junior",
+    "title": "The Terminal List: Dark Wolf (VJ Junior)",
+    "type": "series",
+    "year": "2025 - 2026",
+    "yearNum": 2026,
+    "rating": 9.3,
+    "len": 4,
+    "genres": [
+      "Action",
+      "Military",
+      "Thriller",
+      "Crime"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "Created by Jack Carr and David DiGilio. High-octane prequel following Navy SEAL Ben Edwards (Taylor Kitsch) into the darkest operations of Special Warfare and CIA covert black ops. Co-starring Chris Pratt and Luke Hemsworth. Narrated with blistering firepower by VJ Junior.",
+    "cast": [
+      "Taylor Kitsch",
+      "Chris Pratt",
+      "Luke Hemsworth",
+      "Tom Hopper",
+      "Dar Salim",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "assets/posters/the_terminal_list_dark_wolf.jpg",
+    "backdrop": "assets/posters/the_terminal_list_dark_wolf.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Episode 1: The Outskirts",
+            "min": 62,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_terminal_list_dark_wolf_vj_junior_s01e01.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 2,
+            "name": "Episode 2: Blood on the Sand",
+            "min": 52,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_terminal_list_dark_wolf_vj_junior_s01e02.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 3,
+            "name": "Episode 3: Target Confirmed",
+            "min": 53,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_terminal_list_dark_wolf_vj_junior_s01e03.mp4",
+            "vj": "VJ Junior"
+          },
+          {
+            "n": 4,
+            "name": "Episode 4: Black Ops",
+            "min": 46,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_terminal_list_dark_wolf_vj_junior_s01e04.mp4",
+            "vj": "VJ Junior"
+          }
+        ]
+      }
+    ],
+    "order": 92,
+    "stars": "9.3"
+  },
+  {
+    "id": "dark-wolf-icp",
+    "title": "The Terminal List: Dark Wolf (VJ Ice P)",
+    "type": "series",
+    "year": "2025 - 2026",
+    "yearNum": 2026,
+    "rating": 9.2,
+    "len": 6,
+    "genres": [
+      "Action",
+      "Military",
+      "Thriller",
+      "Crime"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Ice P",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "The explosive Navy SEAL covert ops series The Terminal List: Dark Wolf narrated in full high-octane commentary by VJ Ice P. Follow Ben Edwards and James Reece through deadly combat missions and psychological warfare across 6 full episodes.",
+    "cast": [
+      "Taylor Kitsch",
+      "Chris Pratt",
+      "Luke Hemsworth",
+      "Tom Hopper",
+      "Dar Salim",
+      "VJ Ice P Voiceover"
+    ],
+    "poster": "assets/posters/the_terminal_list_dark_wolf.jpg",
+    "backdrop": "assets/posters/the_terminal_list_dark_wolf.jpg",
+    "streamUrl": "",
+    "parts": 1,
+    "seasons": [
+      {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "n": 1,
+            "name": "Episode 1: The Awakening",
+            "min": 68,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_terminal_list_dark_wolf_vj_icp_s01e01.mp4",
+            "vj": "VJ Ice P"
+          },
+          {
+            "n": 2,
+            "name": "Episode 2: Deep Extraction",
+            "min": 56,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_terminal_list_dark_wolf_vj_icp_s01e02.mp4",
+            "vj": "VJ Ice P"
+          },
+          {
+            "n": 3,
+            "name": "Episode 3: Iron Cross",
+            "min": 56,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_terminal_list_dark_wolf_vj_icp_s01e03.mp4",
+            "vj": "VJ Ice P"
+          },
+          {
+            "n": 4,
+            "name": "Episode 4: Infiltration",
+            "min": 49,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_terminal_list_dark_wolf_vj_icp_s01e04.mp4",
+            "vj": "VJ Ice P"
+          },
+          {
+            "n": 5,
+            "name": "Episode 5: Red Line",
+            "min": 55,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_terminal_list_dark_wolf_vj_icp_s01e05.mp4",
+            "vj": "VJ Ice P"
+          },
+          {
+            "n": 6,
+            "name": "Episode 6: Final Stand",
+            "min": 57,
+            "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_terminal_list_dark_wolf_vj_icp_s01e06.mp4",
+            "vj": "VJ Ice P"
+          }
+        ]
+      }
+    ],
+    "order": 93,
+    "stars": "9.2"
+  },
+  {
+    "id": "coma-2020",
+    "title": "Coma (2020)",
+    "type": "film",
+    "year": "2020",
+    "yearNum": 2020,
+    "rating": 8.9,
+    "len": 111,
+    "genres": [
+      "Sci-Fi",
+      "Action",
+      "Fantasy",
+      "Mystery"
+    ],
+    "moods": [
+      "mind",
+      "wired"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "After a colossal and mysterious accident, a gifted young architect awakens in an extraordinary, fragmented world constructed from the memories and subconscious dreams of people suspended in deep comas. Translated with gripping suspense by VJ Ulio.",
+    "cast": [
+      "Rinal Mukhametov",
+      "Lyubov Aksyonova",
+      "Anton Pampushnyy",
+      "Milos Bikovic",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "assets/posters/coma.jpg",
+    "backdrop": "assets/posters/coma.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/coma_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 94,
+    "stars": "8.9"
+  },
+  {
+    "id": "enola-holmes",
+    "title": "Enola Holmes (Parts 1 to 3 Complete)",
+    "type": "film",
+    "year": "2020 - 2024",
+    "yearNum": 2024,
+    "rating": 9.1,
+    "len": 124,
+    "genres": [
+      "Mystery",
+      "Adventure",
+      "Comedy",
+      "Crime"
+    ],
+    "moods": [
+      "mind",
+      "laugh",
+      "heart"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "The sensational detective saga following Sherlock Holmes' rebellious teenage sister Enola (Millie Bobby Brown) as she solves breathtaking conspiracies and outwits masterminds across Victorian London. Complete 3-part saga translated by VJ Ulio.",
+    "cast": [
+      "Millie Bobby Brown",
+      "Henry Cavill",
+      "Sam Claflin",
+      "Helena Bonham Carter",
+      "Louis Partridge",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "assets/posters/enola_holmes.jpg",
+    "backdrop": "assets/posters/enola_holmes.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/enola_holmes_part1_vj_ulio.mp4",
+    "parts": 3,
+    "partTitles": [
+      "Enola Holmes: The Disappearing Mother (Part 1 - VJ Ulio)",
+      "Enola Holmes: The Match Factory Mystery (Part 2 - VJ Ulio)",
+      "Enola Holmes: The Royal Conspiracy (Part 3 - VJ Ulio)"
+    ],
+    "partUrls": [
+      "https://aviocwatch.b-cdn.net/movies/enola_holmes_part1_vj_ulio.mp4",
+      "https://aviocwatch.b-cdn.net/movies/enola_holmes_part2_vj_ulio.mp4",
+      "https://aviocwatch.b-cdn.net/movies/enola_holmes_part3_vj_ulio.mp4"
+    ],
+    "seasons": [],
+    "order": 95,
+    "stars": "9.1"
+  },
+  {
+    "id": "husbands-in-action",
+    "title": "Husbands in Action (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 9,
+    "len": 109,
+    "genres": [
+      "Action",
+      "Comedy",
+      "Crime"
+    ],
+    "moods": [
+      "laugh",
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "When a fierce drug syndicate kidnaps their family, a grizzled narcotics detective ex-husband and a gentle veterinarian current husband are forced into a chaotic, hilarious, and action-packed rescue mission. Hilariously translated by VJ Ulio.",
+    "cast": [
+      "Jin Seon-kyu",
+      "Gong Myung",
+      "Kim Ji-seok",
+      "Yoon Kyung-ho",
+      "Kang Han-na",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "assets/posters/husbands_in_action.jpg",
+    "backdrop": "assets/posters/husbands_in_action.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/husbands_in_action_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 96,
+    "stars": "9.0"
+  },
+  {
+    "id": "the-kings-warden",
+    "title": "The King's Warden (2026)",
+    "type": "film",
+    "year": "2026",
+    "yearNum": 2026,
+    "rating": 9.3,
+    "len": 117,
+    "genres": [
+      "Historical",
+      "Drama",
+      "Action"
+    ],
+    "moods": [
+      "heart",
+      "mind"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "In 1457 Joseon, a poor mountain village chief hosts an exiled royal guest to bring fortune to his people, discovering his guest is actually the deposed young King Danjong. An extraordinary, deep bond of protection and destiny forms between them. Masterfully translated by VJ Ulio.",
+    "cast": [
+      "Yoo Hae-jin",
+      "Park Ji-hoon",
+      "Yoo Ji-tae",
+      "Jeon Mi-do",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "assets/posters/the_kings_warden.jpg",
+    "backdrop": "assets/posters/the_kings_warden.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_kings_warden_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 97,
+    "stars": "9.3"
+  },
+  {
+    "id": "the-uprising",
+    "title": "The Uprising (2024)",
+    "type": "film",
+    "year": "2024",
+    "yearNum": 2024,
+    "rating": 9.2,
+    "len": 128,
+    "genres": [
+      "Action",
+      "Martial Arts",
+      "Historical",
+      "Drama"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "Set in the tumultuous Joseon dynasty during wartime chaos, two childhood friends who grew up on opposite sides of class divide—a slave with unparalleled martial prowess and his high-born master—reunite on opposing battle lines. Translated with legendary power by VJ Ulio.",
+    "cast": [
+      "Gang Dong-won",
+      "Park Jeong-min",
+      "Cha Seung-won",
+      "Kim Shin-rok",
+      "Jin Seon-kyu",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "assets/posters/the_uprising.jpg",
+    "backdrop": "assets/posters/the_uprising.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_uprising_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 98,
+    "stars": "9.2"
+  },
+  {
+    "id": "wheelman",
+    "title": "Wheelman (2017)",
+    "type": "film",
+    "year": "2017",
+    "yearNum": 2017,
+    "rating": 8.8,
+    "len": 82,
+    "genres": [
+      "Action",
+      "Crime",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": false,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "A getaway driver is thrust into a high-stakes race to survive after a bank robbery goes horribly wrong. With a car full of money and his family on the line, he must find who betrayed him before time runs out. High-adrenaline commentary by VJ Ulio.",
+    "cast": [
+      "Frank Grillo",
+      "Garret Dillahunt",
+      "Caitlin Carmichael",
+      "Wendy Moniz",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "assets/posters/wheelman.jpg",
+    "backdrop": "assets/posters/wheelman.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/wheelman_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 99,
+    "stars": "8.8"
+  },
+  {
+    "id": "alvin-and-the-chipmunks-road-chip",
+    "title": "Alvin and the Chipmunks: The Road Chip",
+    "type": "film",
+    "year": "2015",
+    "yearNum": 2015,
+    "rating": 8.8,
+    "len": 92,
+    "genres": [
+      "Animation",
+      "Comedy",
+      "Family",
+      "Adventure",
+      "Music"
+    ],
+    "moods": [
+      "laugh",
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "Through a series of misunderstandings, Alvin, Simon and Theodore believe Dave is going to propose to his new girlfriend in Miami—and dump them. They embark on a wild cross-country road trip to stop the proposal. Narrated with non-stop laughter and energy by VJ Junior.",
+    "cast": [
+      "Jason Lee",
+      "Justin Long",
+      "Matthew Gray Gubler",
+      "Jesse McCartney",
+      "Tony Hale",
+      "Kimberly Williams-Paisley",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "assets/posters/alvin_the_road_chip.jpg",
+    "backdrop": "assets/posters/alvin_the_road_chip.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/alvin_and_the_chipmunks_the_road_chip_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 100,
+    "stars": "8.8"
+  },
+  {
+    "id": "a-company-man",
+    "title": "A Company Man (2012)",
+    "type": "film",
+    "year": "2012",
+    "yearNum": 2012,
+    "rating": 9.1,
+    "len": 96,
+    "genres": [
+      "Action",
+      "Crime",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "Hyeong-do appears to be an ordinary office worker at a metal fabrication company, but in reality, it's a front for a ruthless contract killing syndicate. When he spares a target's life out of remorse, his own employers turn on him in a brutal war of survival. Narrated with intense grit by VJ Ulio.",
+    "cast": [
+      "So Ji-sub",
+      "Lee Mi-yeon",
+      "Kwak Do-won",
+      "Kim Dong-jun",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "assets/posters/a_company_man.jpg",
+    "backdrop": "assets/posters/a_company_man.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/a_company_man_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 101,
+    "stars": "9.1"
+  },
+  {
+    "id": "born-of-hope",
+    "title": "Born of Hope (Lord of the Rings Saga)",
+    "type": "film",
+    "year": "2009",
+    "yearNum": 2009,
+    "rating": 8.9,
+    "len": 64,
+    "genres": [
+      "Fantasy",
+      "Action",
+      "Adventure"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Emmy",
+    "isTrending": false,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "The gripping untold story of the Dúnedain Rangers of the North during the dark days of Middle-earth before the War of the Ring. Follows Arathorn and Gilraen, the parents of Aragorn, as they defend their people from Sauron's invading orcs. Translated with epic fantasy passion by VJ Emmy.",
+    "cast": [
+      "Christopher Dane",
+      "Beth Aynsley",
+      "Kate Madison",
+      "Danny George",
+      "VJ Emmy Voiceover"
+    ],
+    "poster": "assets/posters/born_of_hope.jpg",
+    "backdrop": "assets/posters/born_of_hope.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/born_of_hope_vj_emmy.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 102,
+    "stars": "8.9"
+  },
+  {
+    "id": "confession-2022",
+    "title": "Confession (2022)",
+    "type": "film",
+    "year": "2022",
+    "yearNum": 2022,
+    "rating": 9.3,
+    "len": 105,
+    "genres": [
+      "Mystery",
+      "Thriller",
+      "Crime",
+      "Drama"
+    ],
+    "moods": [
+      "mind",
+      "wired"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "A tech CEO is implicated in a locked-room murder case where his mistress was found dead and he was discovered knocked unconscious inside. In a desperate race to prove his innocence, he hires an undefeated defense attorney, leading to a maze of deception and unexpected confessions. Translated with razor-sharp suspense by VJ Ulio.",
+    "cast": [
+      "So Ji-sub",
+      "Kim Yun-jin",
+      "Nana",
+      "Choi Kwang-il",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "assets/posters/confession_2022.jpg",
+    "backdrop": "assets/posters/confession_2022.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/confession_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 103,
+    "stars": "9.3"
+  },
+  {
+    "id": "dolittle-2020",
+    "title": "Dolittle (2020)",
+    "type": "film",
+    "year": "2020",
+    "yearNum": 2020,
+    "rating": 8.7,
+    "len": 101,
+    "genres": [
+      "Adventure",
+      "Comedy",
+      "Family",
+      "Fantasy"
+    ],
+    "moods": [
+      "laugh",
+      "heart"
+    ],
+    "vj": "VJ Kevo",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "A physician who can talk to animals embarks on an epic adventure to a mythical island in search of a legendary cure for Queen Victoria, joined by a lively menagerie of animal companions including a gorilla, a duck, and a cynical ostrich. Translated with riotous humor by VJ Kevo.",
+    "cast": [
+      "Robert Downey Jr.",
+      "Antonio Banderas",
+      "Michael Sheen",
+      "Tom Holland",
+      "Rami Malek",
+      "Emma Thompson",
+      "VJ Kevo Voiceover"
+    ],
+    "poster": "assets/posters/dolittle.jpg",
+    "backdrop": "assets/posters/dolittle.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/dolittle_vj_kevo.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 104,
+    "stars": "8.7"
+  },
+  {
+    "id": "exquisite-bodyguard",
+    "title": "Exquisite Bodyguard (2024)",
+    "type": "film",
+    "year": "2024",
+    "yearNum": 2024,
+    "rating": 9,
+    "len": 70,
+    "genres": [
+      "Action",
+      "Martial Arts",
+      "Adventure"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Musa",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "Elite female bodyguards are recruited on an undercover mission to shield high-value targets amidst a deadly conspiracy involving rival underworld syndicates, secret formulas, and ruthless mercenaries. High-voltage martial arts commentary by VJ Musa.",
+    "cast": [
+      "Gan Tingting",
+      "Liu Sasa",
+      "Li Yingzhi",
+      "Ke Bolun",
+      "VJ Musa Voiceover"
+    ],
+    "poster": "assets/posters/exquisite_bodyguard.jpg",
+    "backdrop": "assets/posters/exquisite_bodyguard.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/exquisite_bodyguard_vj_musa.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 105,
+    "stars": "9.0"
+  },
+  {
+    "id": "family-2024",
+    "title": "Family (2024)",
+    "type": "film",
+    "year": "2024",
+    "yearNum": 2024,
+    "rating": 8.9,
+    "len": 92,
+    "genres": [
+      "Horror",
+      "Mystery",
+      "Thriller",
+      "Psychological"
+    ],
+    "moods": [
+      "chill",
+      "mind"
+    ],
+    "vj": "VJ Ulio",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "A young girl moves with her parents back to her mother's eerie childhood home. Desperate to heal her sick father, she hangs a mysterious birdhouse outside his window, only to trigger sinister supernatural horrors that turn the family's sanity inside out. Translated with bone-chilling mastery by VJ Ulio.",
+    "cast": [
+      "Ruth Wilson",
+      "Ben Chaplin",
+      "Cameron Dawson Gray",
+      "Allan Corduner",
+      "VJ Ulio Voiceover"
+    ],
+    "poster": "assets/posters/family_2024.jpg",
+    "backdrop": "assets/posters/family_2024.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/family_vj_ulio.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 106,
+    "stars": "8.9"
+  },
+  {
+    "id": "k-pops-2024",
+    "title": "K-Pops! (2024)",
+    "type": "film",
+    "year": "2024",
+    "yearNum": 2024,
+    "rating": 9,
+    "len": 117,
+    "genres": [
+      "Comedy",
+      "Music",
+      "Family",
+      "Drama"
+    ],
+    "moods": [
+      "laugh",
+      "heart"
+    ],
+    "vj": "VJ Bonny",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "A washed-up American musician travels to South Korea to revive his career by writing for a K-Pop reality show, only to discover that his long-lost son is the country's biggest rising idol. Directed by and starring Anderson .Paak, narrated with irresistible humor and beats by VJ Bonny.",
+    "cast": [
+      "Anderson .Paak",
+      "Soul Rasheed",
+      "Jee Young Han",
+      "Jonnie Park",
+      "Yvette Nicole Brown",
+      "VJ Bonny Voiceover"
+    ],
+    "poster": "assets/posters/k_pops.jpg",
+    "backdrop": "assets/posters/k_pops.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/k_pops_vj_bonny.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 107,
+    "stars": "9.0"
+  },
+  {
+    "id": "main-ladega",
+    "title": "Main Ladega (Parts 1 & 2 Complete)",
+    "type": "film",
+    "year": "2024",
+    "yearNum": 2024,
+    "rating": 9.1,
+    "len": 148,
+    "genres": [
+      "Action",
+      "Drama",
+      "Sport"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Shield",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "Haunted by domestic violence in his youth, a young man enters the grueling world of competitive boxing, determined to channel his pain into championship glory and protect his mother from despair. Both hard-hitting parts translated with fiery passion by VJ Shield.",
+    "cast": [
+      "Prashant Narayanan",
+      "Madhukar Shrikant",
+      "Rahul Sahu",
+      "VJ Shield Voiceover"
+    ],
+    "poster": "assets/posters/main_ladega.jpg",
+    "backdrop": "assets/posters/main_ladega.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/main_ladega_vj_shield.mp4",
+    "parts": 2,
+    "partTitles": [
+      "Main Ladega (Part 1 - VJ Shield)",
+      "Main Ladega (Part 2 - VJ Shield)"
+    ],
+    "partUrls": [
+      "https://aviocwatch.b-cdn.net/movies/main_ladega_vj_shield.mp4",
+      "https://aviocwatch.b-cdn.net/movies/main_ladega_2_vj_shield.mp4"
+    ],
+    "seasons": [],
+    "order": 108,
+    "stars": "9.1"
+  },
+  {
+    "id": "never-talk-to-strangers",
+    "title": "Never Talk to Strangers (1995)",
+    "type": "film",
+    "year": "1995",
+    "yearNum": 1995,
+    "rating": 8.7,
+    "len": 86,
+    "genres": [
+      "Thriller",
+      "Crime",
+      "Mystery",
+      "Romance"
+    ],
+    "moods": [
+      "mind",
+      "wired"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": false,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "A brilliant criminal psychologist working with serial killers begins a whirlwind romance with a seductive stranger. But when a series of threatening pranks escalate into deadly attacks, she finds herself trapped in a deadly psychological labyrinth. Translated by VJ Junior.",
+    "cast": [
+      "Rebecca De Mornay",
+      "Antonio Banderas",
+      "Dennis Miller",
+      "Len Cariou",
+      "Harry Dean Stanton",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "assets/posters/never_talk_to_strangers.jpg",
+    "backdrop": "assets/posters/never_talk_to_strangers.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/never_talk_to_strangers_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 109,
+    "stars": "8.7"
+  },
+  {
+    "id": "passengers-2016",
+    "title": "Passengers (2016)",
+    "type": "film",
+    "year": "2016",
+    "yearNum": 2016,
+    "rating": 9.3,
+    "len": 116,
+    "genres": [
+      "Sci-Fi",
+      "Romance",
+      "Adventure",
+      "Drama"
+    ],
+    "moods": [
+      "mind",
+      "heart",
+      "wired"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "A routine space voyage to a new colony turns catastrophic when two passengers are awakened 90 years too early from induced hibernation. As their interstellar ship faces critical failure, they uncover dangerous secrets about their premature wake-up call. Translated with captivating emotion by VJ Junior.",
+    "cast": [
+      "Jennifer Lawrence",
+      "Chris Pratt",
+      "Michael Sheen",
+      "Laurence Fishburne",
+      "Andy García",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "assets/posters/passengers.jpg",
+    "backdrop": "assets/posters/passengers.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/passengers_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 110,
+    "stars": "9.3"
+  },
+  {
+    "id": "masters-of-the-universe-part-1",
+    "title": "Masters of the Universe: Revelation (Part 1)",
+    "type": "film",
+    "year": "2024",
+    "yearNum": 2024,
+    "rating": 9,
+    "len": 65,
+    "genres": [
+      "Animation",
+      "Action",
+      "Fantasy",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "The war for Eternia reaches a climax as He-Man and Skeletor clash in an apocalyptic battle for the power of Grayskull and the secrets of Castle Grayskull. Powerful voice translation and storytelling by VJ Junior.",
+    "cast": [
+      "Chris Wood",
+      "Mark Hamill",
+      "Liam Cunningham",
+      "Sarah Michelle Gellar",
+      "Lena Headey",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "assets/posters/masters_of_the_universe.jpg",
+    "backdrop": "assets/posters/masters_of_the_universe.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/masters_of_the_universe_part_1_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 111,
+    "stars": "9.0"
+  },
+  {
+    "id": "drawn-together-movie",
+    "title": "The Drawn Together Movie: The Movie!",
+    "type": "film",
+    "year": "2010",
+    "yearNum": 2010,
+    "rating": 8.6,
+    "len": 97,
+    "genres": [
+      "Animation",
+      "Comedy",
+      "Adult Animation"
+    ],
+    "moods": [
+      "laugh"
+    ],
+    "vj": "VJ Jovan",
+    "isTrending": false,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "The raunchy, cartoon-parody reality stars discover that their TV show has been cancelled and that an evil network executive is trying to permanently erase them from existence. Translated with wild comedy by VJ Jovan.",
+    "cast": [
+      "Jess Harnell",
+      "Abbey McBride",
+      "Jack Plotnick",
+      "Tara Strong",
+      "Cree Summer",
+      "James Arnold Taylor",
+      "VJ Jovan Voiceover"
+    ],
+    "poster": "assets/posters/drawn_together_movie.jpg",
+    "backdrop": "assets/posters/drawn_together_movie.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_drawn_together_movie_vj_jovan.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 112,
+    "stars": "8.6"
+  },
+  {
+    "id": "bad-influence-2025",
+    "title": "Bad Influence (Mala Influencia 2025)",
+    "type": "film",
+    "year": "2025",
+    "yearNum": 2025,
+    "rating": 9.2,
+    "len": 108,
+    "genres": [
+      "Romance",
+      "Drama",
+      "Thriller"
+    ],
+    "moods": [
+      "wired",
+      "heart"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "Reese is a rebellious young woman living under the watchful eye of a wealthy father who hires a dangerous bodyguard with a criminal past named Eros to protect her from threats. Their intense attraction sparks a forbidden and high-stakes romantic thriller. Translated with fiery drama by VJ Junior.",
+    "cast": [
+      "Alberto Olmo",
+      "Eléa Rochera",
+      "Sara Rivero",
+      "Enrique Arce",
+      "Mirela Balic",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "assets/posters/bad_influence.jpg",
+    "backdrop": "assets/posters/bad_influence.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/bad_influence_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 113,
+    "stars": "9.2"
+  },
+  {
+    "id": "species-1995",
+    "title": "Species (1995)",
+    "type": "film",
+    "year": "1995",
+    "yearNum": 1995,
+    "rating": 8.8,
+    "len": 93,
+    "genres": [
+      "Sci-Fi",
+      "Horror",
+      "Action",
+      "Thriller"
+    ],
+    "moods": [
+      "chill",
+      "wired"
+    ],
+    "vj": "VJ Jingo",
+    "isTrending": false,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "A team of specialized scientists track down a lethal, seductive alien-human hybrid known as Sil before she successfully mates with human males to spawn an extraterrestrial takeover. Narrated with legendary horror mastery by VJ Jingo.",
+    "cast": [
+      "Natasha Henstridge",
+      "Ben Kingsley",
+      "Michael Madsen",
+      "Forest Whitaker",
+      "Marg Helgenberger",
+      "Alfred Molina",
+      "VJ Jingo Voiceover"
+    ],
+    "poster": "assets/posters/species.jpg",
+    "backdrop": "assets/posters/species.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/species_vj_jingo.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 114,
+    "stars": "8.8"
+  },
+  {
+    "id": "spl-kill-zone",
+    "title": "SPL: Kill Zone (Saat Po Long)",
+    "type": "film",
+    "year": "2005",
+    "yearNum": 2005,
+    "rating": 9.3,
+    "len": 120,
+    "genres": [
+      "Action",
+      "Crime",
+      "Martial Arts",
+      "Drama"
+    ],
+    "moods": [
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "An uncompromising cop nearing retirement engages in a violent, bloody showdown against a ruthless triad crime boss. Featuring Donnie Yen, Sammo Hung, and Wu Jing in one of the greatest martial arts combat films ever made. Spectacular play-by-play commentary by VJ Junior.",
+    "cast": [
+      "Donnie Yen",
+      "Sammo Hung",
+      "Simon Yam",
+      "Wu Jing",
+      "Kai Chi Liu",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "assets/posters/spl_kill_zone.jpg",
+    "backdrop": "assets/posters/spl_kill_zone.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/spl_kill_zone_vj_junior.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 115,
+    "stars": "9.3"
+  },
+  {
+    "id": "sweet-tooth-s01",
+    "title": "Sweet Tooth (Season 1 Complete)",
+    "type": "film",
+    "year": "2021",
+    "yearNum": 2021,
+    "rating": 9.2,
+    "len": 8,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama",
+      "Fantasy",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "heart",
+      "wired",
+      "mind"
+    ],
+    "vj": "VJ Junior",
+    "isTrending": true,
+    "isFeatured": true,
+    "isJustAdded": true,
+    "synopsis": "In a post-apocalyptic world where a mysterious virus wiped out civilization and hybrid animal-human children emerged, a deer-boy named Gus befriends a wandering loner and embarks on an extraordinary journey across a dangerous America. All 8 episodes narrated by VJ Junior.",
+    "cast": [
+      "Christian Convery",
+      "Nonso Anozie",
+      "Stefania LaVie Owen",
+      "Adeel Akhtar",
+      "James Brolin",
+      "VJ Junior Voiceover"
+    ],
+    "poster": "assets/posters/sweet_tooth.jpg",
+    "backdrop": "assets/posters/sweet_tooth.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/sweet_tooth_s01e01.mp4",
+    "parts": 8,
+    "order": 116,
+    "stars": "9.2",
+    "partTitles": [
+      "Sweet Tooth: Season 1 - Episode 1: Out of the Deep Woods (VJ Junior)",
+      "Sweet Tooth: Season 1 - Episode 2: Sorry About All the Dead People (VJ Junior)",
+      "Sweet Tooth: Season 1 - Episode 3: Weird Deer S**t (VJ Junior)",
+      "Sweet Tooth: Season 1 - Episode 4: Secret Sauce (VJ Junior)",
+      "Sweet Tooth: Season 1 - Episode 5: What's in the Freezer? (VJ Junior)",
+      "Sweet Tooth: Season 1 - Episode 6: Stranger Danger on a Train (VJ Junior)",
+      "Sweet Tooth: Season 1 - Episode 7: When Pubba Met Birdie (VJ Junior)",
+      "Sweet Tooth: Season 1 - Episode 8: Big Man (VJ Junior)"
+    ],
+    "partUrls": [
+      "https://aviocwatch.b-cdn.net/movies/sweet_tooth_s01e01.mp4",
+      "https://aviocwatch.b-cdn.net/movies/sweet_tooth_s01e02.mp4",
+      "https://aviocwatch.b-cdn.net/movies/sweet_tooth_s01e03.mp4",
+      "https://aviocwatch.b-cdn.net/movies/sweet_tooth_s01e04.mp4",
+      "https://aviocwatch.b-cdn.net/movies/sweet_tooth_s01e05.mp4",
+      "https://aviocwatch.b-cdn.net/movies/sweet_tooth_s01e06.mp4",
+      "https://aviocwatch.b-cdn.net/movies/sweet_tooth_s01e07.mp4",
+      "https://aviocwatch.b-cdn.net/movies/sweet_tooth_s01e08.mp4"
+    ],
+    "seasons": []
+  },
+  {
+    "id": "the-corpse-of-anna-fritz",
+    "title": "The Corpse of Anna Fritz (2015)",
+    "type": "film",
+    "year": "2015",
+    "yearNum": 2015,
+    "rating": 8.8,
+    "len": 74,
+    "genres": [
+      "Drama",
+      "Thriller",
+      "Mystery"
+    ],
+    "moods": [
+      "chill",
+      "mind"
+    ],
+    "vj": "VJ Bonny",
+    "isTrending": false,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "When the body of Anna Fritz, a famous and beautiful movie star, is brought to a hospital morgue, an orderly invites two friends to see her corpse. What begins as an illicit intrusion turns into a horrifying, claustrophobic nightmare when she unexpectedly wakes up. Translated with suspense by VJ Bonny.",
+    "cast": [
+      "Alba Ribas",
+      "Cristian Valencia",
+      "Albert Carbó",
+      "Bernat Saumell",
+      "VJ Bonny Voiceover"
+    ],
+    "poster": "assets/posters/the_corpse_of_anna_fritz.jpg",
+    "backdrop": "assets/posters/the_corpse_of_anna_fritz.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/the_corpse_of_anna_fritz_vj_bonny.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 117,
+    "stars": "8.8"
+  },
+  {
+    "id": "zero-2018",
+    "title": "Zero (2018)",
+    "type": "film",
+    "year": "2018",
+    "yearNum": 2018,
+    "rating": 9.1,
+    "len": 88,
+    "genres": [
+      "Comedy",
+      "Drama",
+      "Romance",
+      "Sci-Fi"
+    ],
+    "moods": [
+      "laugh",
+      "heart"
+    ],
+    "vj": "VJ Soul",
+    "isTrending": true,
+    "isFeatured": false,
+    "isJustAdded": true,
+    "synopsis": "Bauua Singh, a charming and witty vertically challenged man, finds love with Aafia, a brilliant NASA scientist with cerebral palsy. When he gets entangled with a superstar actress, he sets out on an unbelievable journey of self-discovery that takes him from Meerut all the way to Mars. Translated with immense warmth and charisma by VJ Soul.",
+    "cast": [
+      "Shah Rukh Khan",
+      "Anushka Sharma",
+      "Katrina Kaif",
+      "Mohammed Zeeshan Ayyub",
+      "Tigmanshu Dhulia",
+      "VJ Soul Voiceover"
+    ],
+    "poster": "assets/posters/zero_2018.jpg",
+    "backdrop": "assets/posters/zero_2018.jpg",
+    "streamUrl": "https://aviocwatch.b-cdn.net/movies/zero_vj_soul.mp4",
+    "parts": 1,
+    "seasons": [],
+    "order": 118,
+    "stars": "9.1"
+  }
+]

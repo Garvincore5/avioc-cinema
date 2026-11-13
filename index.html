@@ -1,0 +1,945 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Avioc Apps — Official App Store & Standalone Downloads</title>
+  <meta name="description" content="Official Avioc App Store. Download standalone native apps for Android, Windows 7/8/10/11, iPhone, and Mac. Stream Avioc Cinema and access the Avioc Admin Center.">
+  <meta name="theme-color" content="#07080c">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Avioc Apps — Official App Store">
+  <meta property="og:description" content="Discover and download official Avioc applications for Android, Windows, Mac, and iPhone.">
+  <meta property="og:image" content="https://aviocwatch.b-cdn.net/assets/icons/app-icon-512.png">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo-avioc-apps.svg">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
+  <script>
+    // Only redirect if running inside a true native container (Electron or Capacitor APK/IPA)
+    // PWA users, standalone browser users, and regular visitors all stay here (the Apps Store)
+    (function() {
+      var isElectron = window.AviocNative && window.AviocNative.isElectron;
+      var isCapacitor = !!window.Capacitor;
+      if (isElectron || isCapacitor) {
+        window.location.replace('cinema.html' + window.location.search + window.location.hash);
+      }
+      // PWA installed users (display-mode: standalone, ?source=pwa, etc.) stay on the Apps Store
+    })();
+  </script>
+
+  <style>
+    :root {
+      --bg: #07080c;
+      --card-bg: rgba(15, 18, 28, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(255, 255, 255, 0.12);
+      --crimson: #ff2a5f;
+      --crimson-glow: rgba(255, 42, 95, 0.4);
+      --amber: #ffb800;
+      --amber-glow: rgba(255, 184, 0, 0.35);
+      --cyan: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --purple: #a855f7;
+      --text: #f0f2fa;
+      --text-muted: #8e95aa;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+      background-image: 
+        radial-gradient(circle at 12% 15%, rgba(255, 42, 95, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 88% 25%, rgba(0, 240, 255, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 50% 75%, rgba(255, 184, 0, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Animated Glow Bar */
+    .top-glow-line {
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--crimson), var(--amber), var(--cyan), var(--purple), var(--crimson));
+      background-size: 300% 100%;
+      animation: gradientMove 6s linear infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 5%;
+      border-bottom: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 8, 12, 0.88);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.5px;
+    }
+    .brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px var(--crimson-glow);
+    }
+    .brand span {
+      background: linear-gradient(135deg, #fff 40%, var(--crimson));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .btn-nav {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      transition: all 0.2s ease;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-nav:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+    .btn-nav.primary {
+      background: linear-gradient(135deg, var(--crimson), #c90b39);
+      border: none;
+      color: #fff;
+      box-shadow: 0 4px 14px var(--crimson-glow);
+    }
+    .btn-nav.primary:hover {
+      background: linear-gradient(135deg, #ff477e, var(--crimson));
+      box-shadow: 0 6px 20px rgba(255, 42, 95, 0.6);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 30px 0 45px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 30px;
+      background: rgba(255, 42, 95, 0.12);
+      border: 1px solid rgba(255, 42, 95, 0.35);
+      color: var(--crimson);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 22px;
+      box-shadow: 0 0 20px rgba(255, 42, 95, 0.2);
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .hero h1 span.crimson {
+      background: linear-gradient(135deg, var(--crimson) 20%, var(--amber) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      max-width: 720px;
+      margin: 0 auto 30px;
+    }
+
+    /* Smart Install Banner */
+    .smart-banner {
+      background: linear-gradient(135deg, rgba(255, 42, 95, 0.16) 0%, rgba(255, 184, 0, 0.1) 50%, rgba(0, 240, 255, 0.12) 100%);
+      border: 1px solid rgba(255, 42, 95, 0.4);
+      border-radius: 20px;
+      padding: 24px 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 50px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(15px);
+    }
+    .smart-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .smart-emoji {
+      font-size: 2.8rem;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+    }
+    .smart-heading {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .smart-device-badge {
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .smart-subtext {
+      color: #ffb8c6;
+      font-size: 0.92rem;
+      margin-top: 3px;
+    }
+    .btn-smart-install {
+      background: linear-gradient(135deg, var(--crimson), #c90b39);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.15rem;
+      padding: 14px 34px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 26px var(--crimson-glow);
+      transition: all 0.25s ease;
+      animation: pulseGlow 2.5s infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 6px 20px var(--crimson-glow); }
+      50% { box-shadow: 0 8px 32px rgba(255, 42, 95, 0.75); }
+    }
+    .btn-smart-install:hover {
+      transform: translateY(-2px) scale(1.02);
+      background: linear-gradient(135deg, #ff477e, var(--crimson));
+    }
+
+    /* Section Header */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    /* App Store Cards Grid */
+    .app-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+
+    /* App Card */
+    .app-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
+    }
+    .app-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--card-hover);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+    .app-card.featured::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--crimson), var(--amber));
+    }
+    .app-card.admin::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--amber), var(--cyan));
+    }
+    .app-card.tool::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+    }
+    .app-card.upcoming::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--purple), var(--crimson));
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .card-icon {
+      width: 76px;
+      height: 76px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      flex-shrink: 0;
+    }
+    .card-title-group h3 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .card-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-featured { background: rgba(255, 42, 95, 0.15); color: var(--crimson); border: 1px solid rgba(255, 42, 95, 0.3); }
+    .badge-admin { background: rgba(255, 184, 0, 0.15); color: var(--amber); border: 1px solid rgba(255, 184, 0, 0.3); }
+    .badge-tool { background: rgba(0, 240, 255, 0.15); color: var(--cyan); border: 1px solid rgba(0, 240, 255, 0.3); }
+    .badge-upcoming { background: rgba(168, 85, 247, 0.15); color: var(--purple); border: 1px solid rgba(168, 85, 247, 0.3); }
+
+    .card-desc {
+      color: #a6afc3;
+      font-size: 0.95rem;
+      margin-bottom: 22px;
+      flex-grow: 1;
+      line-height: 1.55;
+    }
+
+    .card-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-action {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      color: #fff;
+    }
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: translateY(-2px);
+    }
+    .btn-action.primary {
+      background: linear-gradient(135deg, var(--crimson), #c90b39);
+      border: none;
+      box-shadow: 0 4px 16px var(--crimson-glow);
+    }
+    .btn-action.primary:hover {
+      background: linear-gradient(135deg, #ff477e, var(--crimson));
+      box-shadow: 0 6px 24px rgba(255, 42, 95, 0.6);
+    }
+    .btn-action.gold {
+      background: linear-gradient(135deg, var(--amber), #cc8a00);
+      color: #100c02;
+      border: none;
+      box-shadow: 0 4px 16px var(--amber-glow);
+    }
+    .btn-action.gold:hover {
+      background: linear-gradient(135deg, #ffd043, var(--amber));
+    }
+    .btn-action.cyan {
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      border: none;
+      box-shadow: 0 4px 16px var(--cyan-glow);
+    }
+
+    /* Expandable Platform Options */
+    .toggle-all-platforms {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      cursor: pointer;
+      padding: 6px;
+      transition: color 0.2s;
+    }
+    .toggle-all-platforms:hover {
+      color: #fff;
+    }
+    .platform-drawer {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--card-border);
+    }
+    .platform-drawer.open {
+      display: flex;
+    }
+    .btn-sub-dl {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #d1d5db;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .btn-sub-dl:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    /* Features Section */
+    .features-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 36px;
+      margin-bottom: 60px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .feature-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .feature-box h4 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .feature-box p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 40px 5%;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      background: rgba(7, 8, 12, 0.95);
+    }
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <div class="top-glow-line"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <img src="assets/icons/logo-avioc-apps.svg" alt="Avioc Apps Logo">
+      <span>Avioc Apps</span>
+    </div>
+    <div class="nav-links">
+      <a href="#apps" class="btn-nav">📦 All Apps</a>
+      <a href="admin/index.html" class="btn-nav" title="Admin Center">🛡️ Admin</a>
+      <a href="cinema.html" class="btn-nav primary">🌐 Watch in Browser</a>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-badge">Official Avioc App Ecosystem</div>
+      <h1>Official Standalone Apps for <span class="crimson">Every Device</span></h1>
+      <p>High-performance software engineered to run natively on budget phones, older Windows 7 PCs, and the latest hardware with zero buffering.</p>
+      <!-- CTA row for existing users who just want to stream -->
+      <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+        <a href="cinema.html" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#ff2a5f,#c2185b);color:#fff;text-decoration:none;font-size:15px;font-weight:700;padding:13px 28px;border-radius:30px;box-shadow:0 4px 24px rgba(255,42,95,0.45);letter-spacing:0.3px;">&#127902;&#65039; Stream Movies Now</a>
+        <a href="#apps" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#f0f2fa;text-decoration:none;font-size:15px;font-weight:600;padding:13px 24px;border-radius:30px;letter-spacing:0.3px;">&#11015;&#65039; Download App</a>
+      </div>
+    </div>
+
+    <!-- Smart Auto-Detected Install Banner -->
+    <div class="smart-banner" id="smartBanner">
+      <div class="smart-left">
+        <div class="smart-emoji" id="smartEmoji">📱</div>
+        <div>
+          <div class="smart-heading">
+            <span id="smartDeviceName">Avioc Cinema for Your Device</span>
+            <span class="smart-device-badge" id="smartDeviceBadge">Detected</span>
+          </div>
+          <div class="smart-subtext" id="smartSubtext">1-Click Direct Download • Verified & Signed by Avioc</div>
+        </div>
+      </div>
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk" class="btn-smart-install" id="smartInstallBtn">
+        ⬇ Install Avioc Cinema
+      </a>
+    </div>
+
+    <!-- App Store Grid -->
+    <div class="section-header" id="apps">
+      <div class="section-title">
+        <span>🚀 Featured Applications</span>
+      </div>
+      <div style="color:var(--text-muted);font-size:0.9rem;">
+        Direct edge delivery hosted on BunnyCDN
+      </div>
+    </div>
+
+    <div class="app-cards-grid">
+
+      <!-- CARD 1: Avioc Cinema -->
+      <div class="app-card featured">
+        <div>
+          <div class="card-top">
+            <img src="icon-512.png" alt="Avioc Cinema" class="card-icon">
+            <div class="card-title-group">
+              <h3>Avioc Cinema</h3>
+              <span class="card-badge badge-featured">★ Flagship Streaming</span>
+            </div>
+          </div>
+          <p class="card-desc">
+            Uganda's #1 cinema streaming experience. Hollywood blockbusters with commentary by 
+            <strong>VJ Junior, VJ Ulio, VJ Soul, VJ Emmy</strong>, English originals, and complete TV series. 
+            Runs 100% offline-ready with local storage caching.
+          </p>
+          <div class="card-chips">
+            <span class="chip">Android 5.0+</span>
+            <span class="chip">Windows 7/8/10/11</span>
+            <span class="chip">iOS (All iPhones)</span>
+            <span class="chip">macOS</span>
+            <span class="chip">Low RAM Friendly</span>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk" class="btn-action primary" id="cinemaPrimaryAction">
+            ⬇ Download for Android (Universal APK)
+          </a>
+          <a href="cinema.html" class="btn-action" style="font-size:0.88rem;">
+            🌐 Stream Directly in Web Browser
+          </a>
+
+          <div class="toggle-all-platforms" onclick="toggleDrawer('cinemaDrawer', this)">
+            ▾ Show all platforms (Windows, iPhone, Mac, Portable)
+          </div>
+
+          <div class="platform-drawer" id="cinemaDrawer">
+            <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk" class="btn-sub-dl" download>
+              <span>🤖 Android Universal APK</span>
+              <small>Android 5.0 to 15</small>
+            </a>
+            <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-Setup-x64.exe" class="btn-sub-dl" download>
+              <span>🪟 Windows Setup (64-bit)</span>
+              <small>Win 10/11</small>
+            </a>
+            <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-Setup-ia32.exe" class="btn-sub-dl" download>
+              <span>🪟 Windows Setup (32-bit)</span>
+              <small>Win 7/8/10</small>
+            </a>
+            <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-Portable-x64.exe" class="btn-sub-dl" download>
+              <span>⚡ Windows Portable (64-bit)</span>
+              <small>No install</small>
+            </a>
+            <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-Portable-ia32.exe" class="btn-sub-dl" download>
+              <span>⚡ Windows Portable (32-bit)</span>
+              <small>Win 7 USB</small>
+            </a>
+            <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.mobileconfig" class="btn-sub-dl">
+              <span>📱 iPhone 1-Tap Profile</span>
+              <small>All iOS (No PC)</small>
+            </a>
+            <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.ipa" class="btn-sub-dl" download>
+              <span>📱 iPhone Sideloading IPA</span>
+              <small>AltStore/TrollStore</small>
+            </a>
+            <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-Mac.dmg" class="btn-sub-dl" download>
+              <span>🍎 macOS Universal DMG</span>
+              <small>Intel & M1-M4</small>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: Avioc Admin Center -->
+      <div class="app-card admin">
+        <div>
+          <div class="card-top">
+            <img src="assets/icons/logo-admin.svg" alt="Avioc Admin" class="card-icon" style="background:#0a0c12;padding:4px;">
+            <div class="card-title-group">
+              <h3>Avioc Admin Center</h3>
+              <span class="card-badge badge-admin">🛡️ Staff & Operations</span>
+            </div>
+          </div>
+          <p class="card-desc">
+            Complete management application for Avioc network operations. Send real-time broadcast notifications, 
+            monitor live viewer telemetry, issue VIP unlimited passes, and manage content catalogs.
+          </p>
+          <div class="card-chips">
+            <span class="chip">Live Telemetry</span>
+            <span class="chip">Broadcast Notifications</span>
+            <span class="chip">VIP Pass Granting</span>
+            <span class="chip">Staff Protected</span>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-Admin.apk" class="btn-action gold" download>
+            ⬇ Download Android Admin APK
+          </a>
+          <a href="admin/index.html" class="btn-action" target="_blank">
+            🛡️ Open Web Control Center →
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 3: Avioc Video Downloader -->
+      <div class="app-card tool">
+        <div>
+          <div class="card-top">
+            <img src="assets/icons/logo-downloader.svg" alt="Avioc Downloader" class="card-icon">
+            <div class="card-title-group">
+              <h3>Avioc Downloader</h3>
+              <span class="card-badge badge-tool">⚡ Acceleration Tool</span>
+            </div>
+          </div>
+          <p class="card-desc">
+            High-speed multi-part downloader engine. Save blockbusters and multi-episode series directly 
+            to your device storage for offline playback with zero buffering.
+          </p>
+          <div class="card-chips">
+            <span class="chip">Range Request Acceleration</span>
+            <span class="chip">Background Downloads</span>
+            <span class="chip">BunnyCDN Edge Direct</span>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="downloader/index.html" class="btn-action cyan">
+            🚀 Launch Downloader Utility →
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 4: Avioc Live TV -->
+      <div class="app-card upcoming">
+        <div>
+          <div class="card-top">
+            <img src="assets/icons/logo-live-tv.svg" alt="Avioc Live TV" class="card-icon">
+            <div class="card-title-group">
+              <h3>Avioc Live TV</h3>
+              <span class="card-badge badge-upcoming">📺 In Development</span>
+            </div>
+          </div>
+          <p class="card-desc">
+            Next-generation live television streaming. Access Ugandan broadcast channels, sports commentary, 
+            and breaking news directly in high definition with ultra-low latency.
+          </p>
+          <div class="card-chips">
+            <span class="chip">Live Broadcasts</span>
+            <span class="chip">Ugandan Channels</span>
+            <span class="chip">Sports & News</span>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="btn-action" style="opacity:0.6;cursor:not-allowed;" disabled>
+            ⏳ Coming Soon to Avioc Apps
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Ecosystem Features -->
+    <div class="features-container">
+      <div class="section-title">
+        <span>✨ The Avioc Architecture</span>
+      </div>
+      <div class="features-grid">
+        <div class="feature-box">
+          <h4>⚡ Zero-Server Standalone</h4>
+          <p>Every app bundles its player, controls, and catalog locally. It boots in milliseconds and never goes down even if websites are offline.</p>
+        </div>
+        <div class="feature-box">
+          <h4>🔄 Over-The-Air (OTA) Updates</h4>
+          <p>New movies, VJ commentators, and visual designs push directly to installed apps through BunnyCDN edge sync without reinstalling.</p>
+        </div>
+        <div class="feature-box">
+          <h4>📱 True Universal Compatibility</h4>
+          <p>Built for the real world: runs smoothly on 1GB RAM budget phones, Windows 7 32-bit laptops, and modern 4K retina displays.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="cinema.html">Avioc Cinema</a>
+      <span>•</span>
+      <a href="admin/index.html">Admin Control Center</a>
+      <span>•</span>
+      <a href="downloader/index.html">Avioc Downloader</a>
+      <span>•</span>
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/">BunnyCDN Repository</a>
+    </div>
+    <p>© 2026 Avioc Apps. Engineered & Authenticated by <strong style="color:#fff;">Avioc</strong>.</p>
+    <p style="margin-top:6px;font-size:0.8rem;color:#6b7280;">High-speed Global Content Delivery Network powered by BunnyCDN Edge.</p>
+  </footer>
+
+  <script>
+    function toggleDrawer(id, trigger) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.toggle('open');
+        trigger.textContent = el.classList.contains('open') 
+          ? '▴ Hide other platform downloads' 
+          : '▾ Show all platforms (Windows, iPhone, Mac, Portable)';
+      }
+    }
+
+    // Smart OS & Device Detector with live 404 guard
+    (function detectAndAdaptDevice() {
+      var ua = navigator.userAgent || '';
+      var platform = navigator.platform || '';
+
+      var smartEmoji    = document.getElementById('smartEmoji');
+      var smartHeading  = document.getElementById('smartDeviceName');
+      var smartBadge    = document.getElementById('smartDeviceBadge');
+      var smartSub      = document.getElementById('smartSubtext');
+      var smartBtn      = document.getElementById('smartInstallBtn');
+      var cinemaPrimary = document.getElementById('cinemaPrimaryAction');
+
+      var cdn = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema';
+
+      // Fallback: file not built yet -- show stream in browser button
+      function setFallback() {
+        if (smartBtn) {
+          smartBtn.href = 'cinema.html';
+          smartBtn.textContent = '\uD83C\uDFAC Stream Free in Browser';
+          smartBtn.style.background = 'linear-gradient(135deg,#ff2a5f,#c2185b)';
+        }
+        if (cinemaPrimary) {
+          cinemaPrimary.href = 'cinema.html';
+          cinemaPrimary.textContent = '\uD83C\uDFAC Watch Free in Browser (App coming soon)';
+        }
+        if (smartSub) {
+          smartSub.innerHTML = '\u26A0\uFE0F Native app build in progress -- stream free while you wait!';
+          smartSub.style.color = '#ffb800';
+        }
+      }
+
+      // Probe CDN before setting link (avoids 404 on user click)
+      function setLinkIfExists(url, btnText, primaryText) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('HEAD', url, true);
+        xhr.timeout = 6000;
+        xhr.onload = function() {
+          if (xhr.status < 400) {
+            if (smartBtn)      { smartBtn.href = url;      smartBtn.textContent = btnText; }
+            if (cinemaPrimary) { cinemaPrimary.href = url; cinemaPrimary.textContent = primaryText; }
+          } else { setFallback(); }
+        };
+        xhr.onerror = xhr.ontimeout = setFallback;
+        xhr.send();
+      }
+
+      if (/Android/i.test(ua)) {
+        if (smartEmoji)   smartEmoji.textContent   = '\uD83D\uDCF1';
+        if (smartHeading) smartHeading.textContent = 'Avioc Cinema for Android';
+        if (smartBadge)   smartBadge.textContent   = 'Android 5.0+';
+        if (smartSub)     smartSub.textContent     = 'Universal APK -- all phones, tablets & TV boxes (Low-RAM friendly)';
+        setLinkIfExists(cdn + '/Avioc-Cinema.apk',
+          '\u2B07 Install Android APK',
+          '\u2B07 Download Android APK (Universal)');
+
+      } else if (/iPhone|iPad|iPod/i.test(ua)) {
+        if (smartEmoji)   smartEmoji.textContent   = '\uD83D\uDCF2';
+        if (smartHeading) smartHeading.textContent = 'Avioc Cinema for iPhone & iPad';
+        if (smartBadge)   smartBadge.textContent   = 'All iOS Devices';
+        if (smartSub)     smartSub.textContent     = '1-Tap Home Screen Profile (no PC or jailbreak needed)';
+        setLinkIfExists(cdn + '/Avioc-Cinema.mobileconfig',
+          '\uD83D\uDCF2 1-Tap Install Profile',
+          '\uD83D\uDCF2 1-Tap iOS Profile Install');
+
+      } else if (/Macintosh|MacIntel/i.test(platform)) {
+        if (smartEmoji)   smartEmoji.textContent   = '\uD83D\uDCBB';
+        if (smartHeading) smartHeading.textContent = 'Avioc Cinema for Mac';
+        if (smartBadge)   smartBadge.textContent   = 'macOS 10.13+';
+        if (smartSub)     smartSub.textContent     = 'Universal DMG for Apple Silicon (M1-M4) & Intel Macs';
+        setLinkIfExists(cdn + '/Avioc-Cinema-Mac.dmg',
+          '\u2B07 Download Mac DMG',
+          '\u2B07 Download Mac DMG');
+
+      } else if (/Win/i.test(platform) || /Windows/i.test(ua)) {
+        var is64 = /x86_64|Win64|x64|WOW64/i.test(ua);
+        var file = is64 ? 'Avioc-Cinema-Setup-x64.exe' : 'Avioc-Cinema-Setup-ia32.exe';
+        if (smartEmoji)   smartEmoji.textContent   = '\uD83D\uDDA5';
+        if (smartHeading) smartHeading.textContent = 'Avioc Cinema for Windows (' + (is64 ? '64-bit' : '32-bit') + ')';
+        if (smartBadge)   smartBadge.textContent   = 'Win 7/8/10/11';
+        if (smartSub)     smartSub.textContent     = 'High-performance desktop player with 4K/1080p hardware acceleration';
+        setLinkIfExists(cdn + '/' + file,
+          '\u2B07 Download Windows Setup (' + (is64 ? '64-bit' : '32-bit') + ')',
+          '\u2B07 Download Windows Setup (' + (is64 ? '64-bit' : '32-bit') + ')');
+
+      } else {
+        // Unknown device
+        setFallback();
+      }
+    })();
+  </script>
+<script>
+// Probe all platform drawer links and mark 404s as "Coming Soon"
+(function() {
+  function probeDlLinks() {
+    var links = document.querySelectorAll('.btn-sub-dl[href], #cinemaPrimaryAction[href]');
+    links.forEach(function(a) {
+      var url = a.href;
+      if (!url || url.indexOf('b-cdn.net') < 0) return; // skip non-cdn links
+      var xhr = new XMLHttpRequest();
+      xhr.open('HEAD', url, true);
+      xhr.timeout = 7000;
+      xhr.onload = function() {
+        if (xhr.status >= 400) markComingSoon(a);
+      };
+      xhr.onerror = xhr.ontimeout = function() { markComingSoon(a); };
+      xhr.send();
+    });
+  }
+
+  function markComingSoon(a) {
+    // Redirect click to cinema.html instead of broken link
+    a.href = 'cinema.html';
+    a.removeAttribute('download');
+    // Add a "Coming Soon" visual badge
+    var badge = a.querySelector('.soon-badge');
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = 'soon-badge';
+      badge.textContent = 'Build in progress';
+      badge.style.cssText = 'display:block;font-size:10px;color:#ffb800;font-weight:600;margin-top:2px;';
+      var small = a.querySelector('small');
+      if (small) { small.textContent = 'Stream in browser'; small.style.color = '#ffb800'; }
+      var span = a.querySelector('span');
+      if (span) {
+        var orig = span.textContent.trim();
+        span.textContent = orig;
+        a.style.opacity = '0.65';
+        a.style.border = '1px solid rgba(255,184,0,0.35)';
+        a.title = 'App not yet built - click to stream in browser';
+      }
+    }
+  }
+
+  // Run after DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', probeDlLinks);
+  } else {
+    probeDlLinks();
+  }
+})();
+</script>
+</body>
+</html>

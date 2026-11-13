@@ -1,0 +1,44 @@
+{
+  "hosting": {
+    "public": "firebase-public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "type": 302,
+        "destination": "https://aviocwatch.b-cdn.net/",
+        "source": "/"
+      },
+      {
+        "type": 302,
+        "destination": "https://aviocwatch.b-cdn.net/",
+        "source": "/index.html"
+      },
+      {
+        "type": 302,
+        "destination": "https://aviocwatch.b-cdn.net/admin/panel.html",
+        "source": "/admin"
+      },
+      {
+        "type": 302,
+        "destination": "https://aviocwatch.b-cdn.net/admin/panel.html",
+        "source": "/admin/**"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(html|js|json)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      }
+    ],
+    "site": "avioc-cinema"
+  }
+}

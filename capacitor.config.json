@@ -1,0 +1,22 @@
+{
+  "appId": "com.avioc.cinema",
+  "appName": "Avioc Cinema",
+  "webDir": "firebase-public",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "backgroundColor": "#07080c",
+      "showSpinner": false
+    }
+  }
+}

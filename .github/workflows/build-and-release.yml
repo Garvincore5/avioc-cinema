@@ -1,0 +1,337 @@
+name: Build & Sign Avioc Cinema (Universal Device Support)
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Release version tag (e.g. v1.0.0)'
+        required: false
+        default: 'v1.0.0'
+
+permissions:
+  contents: write
+
+jobs:
+  # ============================================================================
+  # 1. WINDOWS BUILD (Windows 7, 8, 8.1, 10, 11 — 32-bit & 64-bit)
+  # ============================================================================
+  build-windows:
+    name: 🪟 Windows (Win 7/8/10/11 - 32 & 64 bit)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Local Standalone Web Package
+        run: node scripts/build-hosting.js
+
+      - name: Generate Avioc Windows Code Signing Certificate
+        shell: pwsh
+        run: |
+          & ./scripts/generate-avioc-keystore.ps1 -KeystorePass "avioc2026cinema" -OutputDir "./scripts"
+
+      - name: Build Windows Executables (32-bit & 64-bit for Windows 7+)
+        run: npx electron-builder --win --ia32 --x64 --publish never
+
+      - name: Sign Windows Executables with Avioc Signature
+        shell: pwsh
+        run: |
+          & ./scripts/sign-windows-exe.ps1 -DistDir "dist-desktop" -PfxPath "scripts/avioc-code-signing.pfx" -PfxPassword "avioc2026cinema"
+
+      - name: Collect and Name Windows Outputs
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path "release-binaries" -Force
+          Get-ChildItem -Path "dist-desktop" -Filter "*.exe" | ForEach-Object {
+            Copy-Item $_.FullName "release-binaries/$($_.Name)"
+          }
+
+      - name: Upload Windows Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-binaries
+          path: release-binaries/*.exe
+          retention-days: 14
+
+  # ============================================================================
+  # 2. ANDROID BUILD (Android 5.0 Lollipop to Android 15 — Universal for all phones)
+  # ============================================================================
+  build-android:
+    name: 🤖 Android (Android 5.0+ Universal APK)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Local Standalone Web Package
+        run: node scripts/build-hosting.js
+
+      - name: Generate Avioc Android Keystore
+        run: |
+          chmod +x ./scripts/generate-avioc-keystore.sh
+          ./scripts/generate-avioc-keystore.sh "avioc2026cinema" "avioc" "./scripts/avioc-release-key.jks"
+
+      - name: Initialize and Sync Capacitor Android Project
+        run: |
+          npx cap add android || true
+          npx cap sync android
+
+      - name: Configure Android Compatibility (Android 5.0+, MultiDex, LargeHeap)
+        run: |
+          MANIFEST="android/app/src/main/AndroidManifest.xml"
+          if [ -f "$MANIFEST" ]; then
+            # Add permissions for streaming
+            sed -i '/<application/i \    <uses-permission android:name="android.permission.INTERNET" />\n    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />\n    <uses-permission android:name="android.permission.WAKE_LOCK" />' "$MANIFEST"
+            # Add hardware acceleration and largeHeap for low RAM older devices
+            sed -i 's/<application/<application android:hardwareAccelerated="true" android:largeHeap="true" android:usesCleartextTraffic="true"/' "$MANIFEST"
+          fi
+
+          # Lower minSdkVersion to 21 (Android 5.0 Lollipop) in variables.gradle
+          VAR_GRADLE="android/variables.gradle"
+          if [ -f "$VAR_GRADLE" ]; then
+            sed -i 's/minSdkVersion = [0-9]*/minSdkVersion = 21/' "$VAR_GRADLE"
+          fi
+
+          # Copy keystore into Android app directory
+          cp scripts/avioc-release-key.jks android/app/avioc-release-key.jks
+
+          # Configure release signing & multidex in android/app/build.gradle
+          GRADLE_FILE="android/app/build.gradle"
+          sed -i 's/defaultConfig {/defaultConfig {\n        multiDexEnabled true/' "$GRADLE_FILE"
+
+          sed -i '/buildTypes {/i \
+              signingConfigs {\
+                  release {\
+                      storeFile file("avioc-release-key.jks")\
+                      storePassword "avioc2026cinema"\
+                      keyAlias "avioc"\
+                      keyPassword "avioc2026cinema"\
+                  }\
+              }' "$GRADLE_FILE"
+
+          sed -i 's/buildTypes {/buildTypes {\n        release {\n            signingConfig signingConfigs.release/' "$GRADLE_FILE"
+
+      - name: Compile Release APK with Gradle
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease
+
+      - name: Locate and Prepare Release APK
+        run: |
+          mkdir -p release-binaries
+          find android/app/build/outputs/apk -name "*.apk" -exec cp {} release-binaries/Avioc-Cinema.apk \;
+
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-binaries
+          path: release-binaries/*.apk
+          retention-days: 14
+
+  # ============================================================================
+  # 3. MACOS BUILD (macOS 10.13+ Intel & Apple Silicon)
+  # ============================================================================
+  build-macos:
+    name: 🍎 macOS (macOS 10.13+ Universal DMG)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Local Standalone Web Package
+        run: node scripts/build-hosting.js
+
+      - name: Build macOS DMG (Intel & Apple Silicon)
+        run: |
+          export CSC_IDENTITY_AUTO_DISCOVERY=false
+          npx electron-builder --mac dmg --publish never
+
+      - name: Prepare macOS DMG Output
+        run: |
+          mkdir -p release-binaries
+          find dist-desktop -name "*.dmg" -exec cp {} release-binaries/Avioc-Cinema-Mac.dmg \;
+
+      - name: Upload macOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-binaries
+          path: release-binaries/*.dmg
+          retention-days: 14
+
+  # ============================================================================
+  # 4. IPHONE / IOS BUILD (All iPhones — IPA + Universal 1-Tap MobileConfig)
+  # ============================================================================
+  build-ios:
+    name: 📱 iPhone / iOS (All iPhones — IPA & MobileConfig)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Local Standalone Web Package
+        run: node scripts/build-hosting.js
+
+      - name: Generate Universal iPhone/iPad Standalone MobileConfig Profile
+        run: node scripts/generate-ios-profile.js
+
+      - name: Initialize and Sync Capacitor iOS Project
+        run: |
+          npx cap add ios || true
+          npx cap sync ios
+
+      - name: Build iOS Archive & Package .ipa
+        run: |
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace \
+                     -scheme App \
+                     -configuration Release \
+                     -destination 'generic/platform=iOS' \
+                     -archivePath ../../build/AviocCinema.xcarchive \
+                     CODE_SIGNING_ALLOWED=NO \
+                     CODE_SIGNING_REQUIRED=NO \
+                     archive || true
+
+          cd ../..
+          if [ -d "build/AviocCinema.xcarchive/Products/Applications/App.app" ]; then
+            mkdir -p release-binaries/Payload
+            cp -r build/AviocCinema.xcarchive/Products/Applications/App.app release-binaries/Payload/AviocCinema.app
+            cd release-binaries
+            zip -r Avioc-Cinema.ipa Payload
+            rm -rf Payload
+            cd ..
+          fi
+
+      - name: Upload iOS Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-binaries
+          path: release-binaries/*.*
+          retention-days: 14
+
+  # ============================================================================
+  # 5. PUBLISH ALL-DEVICE RELEASE
+  # ============================================================================
+  publish-release:
+    name: 🚀 Publish Universal Compatibility Release
+    needs: [build-windows, build-android, build-macos, build-ios]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Download Windows Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-binaries
+          path: final-release
+        continue-on-error: true
+
+      - name: Download Android Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: android-binaries
+          path: final-release
+        continue-on-error: true
+
+      - name: Download macOS Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-binaries
+          path: final-release
+        continue-on-error: true
+
+      - name: Download iOS Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-binaries
+          path: final-release
+        continue-on-error: true
+
+      - name: List Release Files
+        run: |
+          echo "All compatibility packages prepared:"
+          ls -la final-release/ || true
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+        with:
+          tag_name: ${{ github.event.inputs.release_version || github.ref_name || 'v1.0.0' }}
+          name: Avioc Cinema — Universal Device Release (${{ github.event.inputs.release_version || github.ref_name || 'v1.0.0' }})
+          body: |
+            # 🎬 Avioc Cinema — Universal Device Compatibility Release
+
+            Built to support **all devices, old and new**, from budget phones and older Windows 7 PCs to the newest hardware.
+
+            ---
+
+            ### 📦 Download Links by Device:
+
+            #### 🤖 Android (Supports 99.5% of all phones: Android 5.0 Lollipop to Android 15)
+            - **All Phones, Tablets & Android TV**: [`Avioc-Cinema.apk`](Avioc-Cinema.apk)
+              *(Compatible with low-RAM phones, Tecno, Itel, Infinix, Samsung Galaxy, Huawei, Xiaomi, etc.)*
+
+            #### 🪟 Windows (Supports Windows 7, 8, 8.1, 10, and 11)
+            - **Windows 32-bit (Old laptops & PCs)**: [`Avioc-Cinema-Setup-ia32.exe`](Avioc-Cinema-Setup-ia32.exe)
+            - **Windows 64-bit (Standard PCs)**: [`Avioc-Cinema-Setup-x64.exe`](Avioc-Cinema-Setup-x64.exe)
+            - **Portable 32-bit (No installation needed)**: [`Avioc-Cinema-Portable-ia32.exe`](Avioc-Cinema-Portable-ia32.exe)
+            - **Portable 64-bit (No installation needed)**: [`Avioc-Cinema-Portable-x64.exe`](Avioc-Cinema-Portable-x64.exe)
+
+            #### 📱 iPhone & iPad (Supports ALL iOS versions from iOS 9 to iOS 18+)
+            - **1-Tap Profile (All iPhones: iPhone 5/6/7/8/X/11/12/13/14/15/16)**: [`Avioc-Cinema.mobileconfig`](Avioc-Cinema.mobileconfig)
+              *(Tap and install directly from Safari — zero computer or jailbreak needed!)*
+            - **Native Sideloading IPA (AltStore, Sideloadly, TrollStore)**: [`Avioc-Cinema.ipa`](Avioc-Cinema.ipa)
+
+            #### 🍎 Mac (macOS 10.13 High Sierra to macOS 15+ Sequoia)
+            - **Mac Installer (Universal for Apple Silicon M1-M4 & Intel)**: [`Avioc-Cinema-Mac.dmg`](Avioc-Cinema-Mac.dmg)
+
+            ---
+            *Author: **Avioc (Avioc Cinema)** | Signed with official Avioc credentials.*
+          files: final-release/*

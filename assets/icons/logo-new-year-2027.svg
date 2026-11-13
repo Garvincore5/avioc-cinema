@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background -->
+    <radialGradient id="ny-bg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#1B1427"/>
+      <stop offset="60%" stop-color="#0F0C17"/>
+      <stop offset="100%" stop-color="#07050A"/>
+    </radialGradient>
+
+    <!-- Neon Crimson Outer Rim -->
+    <linearGradient id="ny-crimson-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF385C"/>
+      <stop offset="40%" stop-color="#E51E44"/>
+      <stop offset="70%" stop-color="#9C0A23"/>
+      <stop offset="100%" stop-color="#FF5277"/>
+    </linearGradient>
+
+    <!-- Premium 24K Gold -->
+    <linearGradient id="ny-gold" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FFF5C2"/>
+      <stop offset="25%" stop-color="#FFD666"/>
+      <stop offset="60%" stop-color="#E5A632"/>
+      <stop offset="100%" stop-color="#A6680A"/>
+    </linearGradient>
+
+    <linearGradient id="ny-gold-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A6680A"/>
+      <stop offset="100%" stop-color="#4F3003"/>
+    </linearGradient>
+
+    <!-- Play Triangle Glow -->
+    <linearGradient id="ny-play-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#FFF2BA"/>
+      <stop offset="85%" stop-color="#FFC84A"/>
+      <stop offset="100%" stop-color="#F29C1B"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="ny-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity="0.85"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#FFD666" flood-opacity="0.25"/>
+    </filter>
+
+    <filter id="rim-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#FF385C" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect width="512" height="512" rx="116" fill="url(#ny-bg)"/>
+  <!-- Glowing Neon Crimson Rim -->
+  <rect x="6" y="6" width="500" height="500" rx="110" fill="none" stroke="url(#ny-crimson-rim)" stroke-width="3" filter="url(#rim-glow)"/>
+
+  <!-- CELEBRATORY CONFETTI & SPARKS BURST BEHIND "A" -->
+  <!-- Golden & Silver Confetti Flakes -->
+  <g opacity="0.85">
+    <!-- Center Explosion Cloud -->
+    <circle cx="256" cy="270" r="130" fill="#FFD666" opacity="0.08"/>
+    <!-- Confetti Rectangles & Polygons -->
+    <rect x="210" y="160" width="8" height="14" rx="2" transform="rotate(25 210 160)" fill="#FFD666"/>
+    <rect x="290" y="170" width="10" height="6" rx="2" transform="rotate(-35 290 170)" fill="#E0E6ED"/>
+    <rect x="180" y="210" width="7" height="12" rx="2" transform="rotate(45 180 210)" fill="#FFF"/>
+    <rect x="330" y="220" width="9" height="15" rx="2" transform="rotate(15 330 220)" fill="#FFD666"/>
+    <rect x="195" y="270" width="6" height="10" rx="1" transform="rotate(-20 195 270)" fill="#FFC043"/>
+    <rect x="320" y="280" width="11" height="7" rx="2" transform="rotate(50 320 280)" fill="#E0E6ED"/>
+    <rect x="230" y="340" width="8" height="14" rx="2" transform="rotate(-15 230 340)" fill="#FFD666"/>
+    <rect x="285" y="345" width="12" height="6" rx="2" transform="rotate(30 285 345)" fill="#FFF"/>
+    <rect x="170" y="320" width="10" height="8" rx="2" transform="rotate(-40 170 320)" fill="#FFD666"/>
+    <rect x="340" y="325" width="7" height="13" rx="2" transform="rotate(65 340 325)" fill="#FFB72B"/>
+    <!-- Confetti Starlets -->
+    <polygon points="200,185 202,189 207,190 202,192 200,197 198,192 193,190 198,189" fill="#FFF"/>
+    <polygon points="315,195 317,199 322,200 317,202 315,207 313,202 308,200 313,199" fill="#FFD666"/>
+    <polygon points="175,250 177,254 182,255 177,257 175,262 173,257 168,255 173,254" fill="#FFF"/>
+    <polygon points="340,250 342,254 347,255 342,257 340,262 338,257 333,255 338,254" fill="#FFD666"/>
+    <polygon points="190,300 192,304 197,305 192,307 190,312 188,307 183,305 188,304" fill="#E0E6ED"/>
+    <polygon points="325,305 327,309 332,310 327,312 325,317 323,312 318,310 323,309" fill="#FFD666"/>
+    <!-- Golden Glitter Sparkle Dots -->
+    <circle cx="215" cy="180" r="2.5" fill="#FFD666"/>
+    <circle cx="300" cy="185" r="3" fill="#FFF"/>
+    <circle cx="185" cy="230" r="2" fill="#FFD666"/>
+    <circle cx="330" cy="240" r="2.5" fill="#FFF"/>
+    <circle cx="180" cy="285" r="3" fill="#FFD666"/>
+    <circle cx="335" cy="290" r="2" fill="#E0E6ED"/>
+    <circle cx="210" cy="330" r="2.5" fill="#FFD666"/>
+    <circle cx="305" cy="335" r="3" fill="#FFF"/>
+  </g>
+
+  <!-- METALLIC "2027" HEADER (From Happy new year.jpg) -->
+  <g filter="url(#ny-shadow)" font-family="'Archivo', 'Cinzel', 'Georgia', serif" font-weight="900" font-size="44" letter-spacing="3" text-anchor="middle">
+    <!-- Dark Underglow / Bevel -->
+    <text x="256" y="112" fill="url(#ny-gold-dark)">2027</text>
+    <text x="256" y="110" fill="url(#ny-gold)">2027</text>
+  </g>
+  <!-- Sparkles on the 2027 text -->
+  <polygon points="214,84 216,90 222,92 216,94 214,100 212,94 206,92 212,90" fill="#FFF" opacity="0.9"/>
+  <polygon points="296,86 298,91 303,92 298,94 296,99 294,94 289,92 294,91" fill="#FFF" opacity="0.9"/>
+
+  <!-- THE GOLDEN 3D "A" WITH PLAY BUTTON -->
+  <g filter="url(#ny-shadow)">
+    <!-- 3D Bevel Underside -->
+    <path d="M 256,154 
+             L 364,386 
+             L 352,394 
+             L 308,394 
+             L 316,386 
+             L 278,304 
+             L 234,304 
+             L 196,386 
+             L 204,394 
+             L 160,394 
+             L 148,386 
+             Z" 
+          fill="url(#ny-gold-dark)"/>
+
+    <!-- Front Face of "A" -->
+    <path d="M 256,154 
+             L 364,386 
+             L 314,386 
+             L 276,302 
+             L 236,302 
+             L 198,386 
+             L 148,386 
+             Z
+             M 256,214 
+             L 238,266 
+             L 274,266 
+             Z" 
+          fill="url(#ny-gold)" 
+          fill-rule="evenodd"/>
+
+    <!-- Specular Highlight Sheen along Left Edge -->
+    <path d="M 256,154 L 148,386 L 168,386 L 256,186 Z" fill="#FFFFFF" opacity="0.32"/>
+
+    <!-- The Play Triangle Emblem inside the "A" -->
+    <g filter="url(#ny-shadow)">
+      <path d="M 242,246 
+               C 242,240 248,236 254,239 
+               L 294,263 
+               C 300,266 300,274 294,277 
+               L 254,301 
+               C 248,304 242,300 242,294 
+               Z" 
+            fill="url(#ny-play-glow)"/>
+
+      <!-- Inner Crisp Highlight -->
+      <path d="M 246,252 L 284,270 L 246,288 Z" fill="#FFFFFF" opacity="0.6"/>
+    </g>
+  </g>
+
+  <!-- Bottom Scattered Star Glitter on the Table -->
+  <g fill="#FFD666" opacity="0.65">
+    <polygon points="170,430 172,434 176,435 172,436 170,440 168,436 164,435 168,434"/>
+    <polygon points="220,442 222,445 226,446 222,447 220,450 218,447 214,446 218,445"/>
+    <polygon points="310,438 312,441 316,442 312,443 310,446 308,443 304,442 308,441"/>
+    <polygon points="360,448 362,451 366,452 362,453 360,456 358,453 354,452 358,451"/>
+    <polygon points="265,456 267,459 270,460 267,461 265,464 263,461 260,460 263,459"/>
+  </g>
+</svg>

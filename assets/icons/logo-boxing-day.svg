@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background -->
+    <radialGradient id="bx-bg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#1D172B"/>
+      <stop offset="55%" stop-color="#100C1B"/>
+      <stop offset="100%" stop-color="#08060E"/>
+    </radialGradient>
+
+    <!-- Gold Foil -->
+    <linearGradient id="bx-gold" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FFF2B2"/>
+      <stop offset="30%" stop-color="#FFD666"/>
+      <stop offset="60%" stop-color="#D99B26"/>
+      <stop offset="100%" stop-color="#8C5C08"/>
+    </linearGradient>
+
+    <!-- Gift Box Velvet -->
+    <linearGradient id="bx-velvet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8C1832"/>
+      <stop offset="60%" stop-color="#4F0A1B"/>
+      <stop offset="100%" stop-color="#2B030D"/>
+    </linearGradient>
+
+    <!-- Silver Bell -->
+    <linearGradient id="bx-silver" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#CBD5E1"/>
+      <stop offset="80%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+
+    <filter id="bx-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000" flood-opacity="0.85"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#FFD666" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect width="512" height="512" rx="116" fill="url(#bx-bg)"/>
+  <rect x="6" y="6" width="500" height="500" rx="110" fill="none" stroke="#684D7A" stroke-width="2.5" opacity="0.4"/>
+
+  <!-- Frosted Snow Border on Top Rim -->
+  <path d="M 60,30 Q 150,15 256,15 Q 362,15 452,30 Q 420,50 360,40 Q 256,48 150,40 Q 90,50 60,30 Z" fill="#E2EDFC" opacity="0.45"/>
+
+  <!-- HEADER TEXT: "BOXING DAY EDITION" (From Boxing day.jpg) -->
+  <g font-family="'Cinzel', 'Georgia', serif" font-weight="900" font-size="28" letter-spacing="2" fill="url(#bx-gold)" text-anchor="middle" filter="url(#bx-shadow)">
+    <text x="256" y="85">BOXING DAY EDITION</text>
+  </g>
+
+  <!-- Exploding Golden Confetti Flakes Behind "A" -->
+  <g fill="#FFD666" opacity="0.75">
+    <rect x="210" y="150" width="8" height="12" rx="2" transform="rotate(25 210 150)"/>
+    <rect x="290" y="155" width="10" height="6" rx="2" transform="rotate(-35 290 155)" fill="#FFF"/>
+    <rect x="180" y="200" width="7" height="12" rx="2" transform="rotate(45 180 200)"/>
+    <rect x="330" y="210" width="9" height="15" rx="2" transform="rotate(15 330 210)" fill="#CBD5E1"/>
+    <polygon points="190,260 192,264 197,265 192,267 190,272 188,267 183,265 188,264" fill="#FFF"/>
+    <polygon points="325,265 327,269 332,270 327,272 325,277 323,272 318,270 323,269"/>
+  </g>
+
+  <!-- THE GOLDEN 3D "A" EMBLEM WITH PLAY BUTTON -->
+  <g filter="url(#bx-shadow)">
+    <path d="M 256,135 
+             L 364,375 
+             L 316,375 
+             L 280,296 
+             L 232,296 
+             L 196,375 
+             L 148,375 
+             Z
+             M 256,195 
+             L 238,255 
+             L 274,255 
+             Z" 
+          fill="url(#bx-gold)" 
+          fill-rule="evenodd"/>
+
+    <!-- Specular Highlight -->
+    <path d="M 256,135 L 148,375 L 168,375 L 256,170 Z" fill="#FFFFFF" opacity="0.3"/>
+
+    <!-- Inner Golden Play Triangle -->
+    <path d="M 242,238 
+             C 242,232 248,228 254,231 
+             L 294,255 
+             C 300,258 300,266 294,269 
+             L 254,293 
+             C 248,296 242,292 242,286 
+             Z" 
+          fill="url(#bx-gold)"/>
+    <path d="M 246,244 L 284,262 L 246,280 Z" fill="#FFFFFF" opacity="0.7"/>
+  </g>
+
+  <!-- HOLIDAY GIFT BOX (Left side from Boxing day.jpg) -->
+  <g filter="url(#bx-shadow)">
+    <rect x="75" y="320" width="70" height="70" rx="6" fill="url(#bx-velvet)" stroke="#F3A43B" stroke-width="1.5"/>
+    <!-- Gold Ribbon Bands -->
+    <rect x="105" y="320" width="10" height="70" fill="url(#bx-gold)"/>
+    <rect x="75" y="350" width="70" height="10" fill="url(#bx-gold)"/>
+    <!-- Box Lid / Bow -->
+    <ellipse cx="110" cy="318" rx="16" ry="7" fill="url(#bx-gold)"/>
+    <circle cx="110" cy="318" r="5" fill="#FFEAA8"/>
+  </g>
+
+  <!-- SILVER HOLIDAY BELL (Right side from Boxing day.jpg) -->
+  <g filter="url(#bx-shadow)">
+    <!-- Bell Handle -->
+    <rect x="390" y="300" width="8" height="30" rx="3" fill="#4B382A"/>
+    <!-- Bell Body -->
+    <path d="M 374,330 C 374,320 414,320 414,330 C 414,350 434,375 434,385 L 354,385 C 354,375 374,350 374,330 Z" fill="url(#bx-silver)"/>
+    <!-- Bell Lip -->
+    <ellipse cx="394" cy="385" rx="40" ry="7" fill="url(#bx-silver)"/>
+    <!-- Clapper -->
+    <circle cx="394" cy="392" r="7" fill="#64748B"/>
+  </g>
+
+  <!-- ROUND "BOXING SALES" BADGE (Bottom Center from Boxing day.jpg) -->
+  <g filter="url(#bx-shadow)">
+    <circle cx="265" cy="410" r="34" fill="#141824" stroke="url(#bx-gold)" stroke-width="3"/>
+    <circle cx="265" cy="410" r="30" fill="none" stroke="url(#bx-gold)" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="265" y="406" font-family="'Archivo', sans-serif" font-weight="900" font-size="9" letter-spacing="1" fill="#FFF" text-anchor="middle">BOXING</text>
+    <text x="265" y="420" font-family="'Archivo', sans-serif" font-weight="900" font-size="9" letter-spacing="1" fill="url(#bx-gold)" text-anchor="middle">SALES</text>
+  </g>
+</svg>

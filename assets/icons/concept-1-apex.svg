@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="c1-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B1429"/>
+      <stop offset="45%" stop-color="#0F0C17"/>
+      <stop offset="100%" stop-color="#07050B"/>
+    </linearGradient>
+
+    <radialGradient id="c1-ambient" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#F3A43B" stop-opacity="0.18"/>
+      <stop offset="55%" stop-color="#7A0C1E" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#0F0C17" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Metallic Gold Gradients -->
+    <linearGradient id="c1-gold-light" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FFF2B2"/>
+      <stop offset="35%" stop-color="#FFD15C"/>
+      <stop offset="70%" stop-color="#F3A43B"/>
+      <stop offset="100%" stop-color="#C97412"/>
+    </linearGradient>
+
+    <linearGradient id="c1-gold-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EAA236"/>
+      <stop offset="50%" stop-color="#B2630E"/>
+      <stop offset="100%" stop-color="#6F3905"/>
+    </linearGradient>
+
+    <linearGradient id="c1-play-glow" x1="0%" y1="30%" x2="100%" y2="70%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="25%" stop-color="#FFE885"/>
+      <stop offset="70%" stop-color="#FF9E1B"/>
+      <stop offset="100%" stop-color="#E5484D"/>
+    </linearGradient>
+
+    <!-- Border Gradient -->
+    <linearGradient id="c1-border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD15C" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#F3A43B" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FF3B56" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <!-- Shadow filter -->
+    <filter id="c1-drop-shadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.7"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#F3A43B" flood-opacity="0.25"/>
+    </filter>
+
+    <filter id="c1-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect width="512" height="512" rx="116" fill="url(#c1-bg)"/>
+  <rect width="512" height="512" rx="116" fill="url(#c1-ambient)"/>
+  <rect x="5" y="5" width="502" height="502" rx="111" fill="none" stroke="url(#c1-border)" stroke-width="2.5"/>
+
+  <!-- Logo Group -->
+  <g filter="url(#c1-drop-shadow)">
+    <!-- Left Stem of 'A' -->
+    <path d="M 256,92 
+             L 142,382 
+             L 196,382 
+             L 229,292 
+             L 303,292 
+             L 280,240 
+             L 248,240 
+             L 256,214 
+             Z" 
+          fill="url(#c1-gold-dark)"/>
+
+    <!-- Left Facet Highlight -->
+    <path d="M 256,92 
+             L 142,382 
+             L 182,382 
+             L 268,142 
+             Z" 
+          fill="url(#c1-gold-light)" 
+          opacity="0.95"/>
+
+    <!-- Right Wing of 'A' (Sweeping forward with cinematic momentum) -->
+    <path d="M 256,92 
+             L 282,156 
+             L 366,382 
+             L 310,382 
+             L 287,318 
+             L 256,318 
+             L 248,292 
+             L 297,292 
+             Z" 
+          fill="url(#c1-gold-light)"/>
+
+    <!-- Glowing Forward Cinema Play Prism (Nested in A's crossbar heart) -->
+    <path d="M 232,238 
+             C 232,230 240,225 247,229 
+             L 326,275 
+             C 334,279 334,291 326,295 
+             L 247,341 
+             C 240,345 232,340 232,332 
+             Z" 
+          fill="url(#c1-play-glow)" 
+          filter="url(#c1-glow)"/>
+
+    <!-- Inner Core Play Cutout / Highlight line -->
+    <path d="M 242,250 
+             L 306,285 
+             L 242,320 
+             Z" 
+          fill="#FFFFFF" 
+          opacity="0.35"/>
+
+    <!-- Live Ruby Broadcast Beacon -->
+    <circle cx="366" cy="148" r="14" fill="#FF2E4D" filter="url(#c1-glow)"/>
+    <circle cx="366" cy="148" r="8" fill="#FFF0F2"/>
+    <circle cx="366" cy="148" r="24" fill="none" stroke="#FF2E4D" stroke-width="2" opacity="0.4"/>
+  </g>
+</svg>

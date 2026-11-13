@@ -1,0 +1,77 @@
+{
+  "appId": "com.avioc.cinema",
+  "productName": "Avioc Cinema",
+  "copyright": "Copyright © 2026 Avioc Cinema",
+  "directories": {
+    "output": "dist-desktop"
+  },
+  "files": [
+    "firebase-public/**/*",
+    "electron/**/*",
+    "assets/icons/**/*",
+    "package.json"
+  ],
+  "extraMetadata": {
+    "main": "electron/main.js"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64", "ia32"]
+      },
+      {
+        "target": "portable",
+        "arch": ["x64", "ia32"]
+      }
+    ],
+    "icon": "assets/icons/app-icon-512.png",
+    "publisherName": "Avioc Cinema",
+    "legalTrademarks": "Avioc"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "Avioc Cinema",
+    "artifactName": "Avioc-Cinema-Setup-${arch}.${ext}"
+  },
+  "portable": {
+    "artifactName": "Avioc-Cinema-Portable-${arch}.${ext}"
+  },
+  "mac": {
+    "target": [
+      {
+        "target": "dmg",
+        "arch": ["universal", "x64", "arm64"]
+      },
+      {
+        "target": "zip",
+        "arch": ["universal", "x64", "arm64"]
+      }
+    ],
+    "icon": "assets/icons/app-icon-512.png",
+    "category": "public.app-category.entertainment",
+    "identity": null,
+    "hardenedRuntime": false,
+    "gatekeeperAssess": false,
+    "artifactName": "Avioc-Cinema-Mac-${arch}.${ext}"
+  },
+  "dmg": {
+    "title": "Avioc Cinema",
+    "artifactName": "Avioc-Cinema-Mac-${arch}.${ext}",
+    "contents": [
+      {
+        "x": 130,
+        "y": 220
+      },
+      {
+        "x": 410,
+        "y": 220,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ]
+  }
+}

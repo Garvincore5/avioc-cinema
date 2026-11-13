@@ -1,0 +1,15 @@
+firebase-public/
+node_modules/
+dist-desktop/
+release-binaries/
+build/
+*.pfx
+*.jks
+.DS_Store
+Thumbs.db
+
+# Downloaded videos (local only)
+downloader/downloads/
+*.mp4
+*.mp4.part
+*.webm

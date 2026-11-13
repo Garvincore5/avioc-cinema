@@ -1,0 +1,20 @@
+Avioc Cinema - edits from 25 Oct 2026
+
+Only index.html changed. Already copied to root index.html and new body/avioc-cinema.html.
+Deploy to Firebase with: npm run build:hosting
+
+Changes (24 Oct):
+1. Fixed the empty bar under the search box.
+2. Install popup: never on laptops/desktops, never over the player, better TV detection.
+3. Removed ratings and star badges everywhere.
+4. VJ filter row under the hero banner.
+5. Data saver button (player bar and Genre > Settings). Videos stay HD.
+6. "Plans from UGX 1,000" button in the header; prices show even when signed out.
+
+Changes (25 Oct):
+7. Spark TV removed (was already not in LOCAL_TV; confirmed gone from all shelves).
+8. Offer/promo plans hidden from the Plans dialog — only regular plans from UGX 1,000 show. Offers only appear when the admin sends them via broadcast or to a single user.
+9. Install popup: if the app is already installed on the device, shows "Open App" instead of "Install App". Never shows inside the standalone app itself.
+10. Admin messages expire after 1 hour — if a user doesn't see the message within 1 hour of it being sent, it's considered missed and won't pop up later.
+11. Removed the automatic 5-minute install nag timer.
+12. Fixed duplicate hasAppInstalledOnDevice function from script overlap.

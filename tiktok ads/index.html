@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c0a10">
+  <title>Avioc TikTok Clip Maker</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0c0a10;--panel:#15121b;--panel2:#1d1924;--line:#302a38;--ink:#f6f1fb;--muted:#a8a1b2;--orange:#ff9f24;--blue:#1686d9;--green:#60d394;--red:#fb7185;font:15px/1.45 Inter,Segoe UI,Arial,sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 500px at 75% -10%,#30203c 0%,transparent 60%),var(--bg);color:var(--ink);min-height:100vh}
+    header{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,4vw,56px);background:#0c0a10e8;position:sticky;top:0;z-index:2;backdrop-filter:blur(14px)}
+    .brand{font-size:21px;font-weight:900;letter-spacing:.04em}.brand span{color:var(--orange)}.header-note{font-size:12px;color:var(--muted)}
+    main{max-width:1320px;margin:0 auto;padding:38px clamp(16px,4vw,48px) 64px}.eyebrow{color:var(--orange);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}h1{font-size:clamp(28px,4vw,42px);line-height:1.08;margin:9px 0}.lede{color:var(--muted);max-width:670px;margin:0 0 28px}
+    .layout{display:grid;grid-template-columns:minmax(320px,470px) minmax(300px,1fr);gap:22px;align-items:start}.panel{background:linear-gradient(160deg,#191620,#121017 72%);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 18px 45px #0003}.panel h2{font-size:16px;margin:0 0 16px}.step{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:12px;margin-bottom:18px}.step b{color:#151017;background:var(--orange);border-radius:50%;display:grid;place-items:center;width:23px;height:23px;font-size:12px}
+    .field{margin:17px 0}.field label,.label-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;font-weight:700;margin-bottom:8px}.hint{font-size:11px;color:var(--muted);font-weight:400}.input,select{width:100%;background:var(--panel2);border:1px solid #41384b;color:var(--ink);border-radius:10px;padding:11px 12px;font:inherit;outline:none}.input:focus,select:focus{border-color:var(--orange);box-shadow:0 0 0 3px #ff9f2420}.filebox{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px dashed #665973;background:#191520;border-radius:14px;padding:13px}.filename{font-size:12px;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.filebox input{display:none}.btn{border:0;border-radius:10px;padding:11px 15px;font:700 13px inherit;cursor:pointer;color:white;background:var(--blue);transition:transform .15s,filter .15s}.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.btn.secondary{background:#2b2533;border:1px solid #473e51}.btn.gold{background:var(--orange);color:#211409}.btn.ghost{padding:8px 10px;background:transparent;border:1px solid #44394e;color:#ded7e8}.file-button{white-space:nowrap}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.unit-input{position:relative}.unit-input input{padding-right:47px}.unit-input span{position:absolute;right:12px;top:11px;color:var(--muted);font-size:12px}.range-line{display:flex;align-items:center;gap:11px}.range-line input{width:100%;accent-color:var(--orange)}.range-line output{width:45px;text-align:right;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+    .checks{display:grid;gap:10px}.check{display:flex;align-items:flex-start;gap:9px;color:#d8d1df;font-size:12px}.check input{accent-color:var(--orange);margin-top:3px}.clip-summary{background:#201b28;border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;gap:12px;font-size:12px}.clip-summary span{color:var(--muted)}.export-row{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:18px}.status{min-height:20px;color:var(--muted);font-size:12px;margin-top:11px}.status.error{color:var(--red)}.status.good{color:var(--green)}.progress{height:5px;background:#302a38;border-radius:99px;overflow:hidden;margin-top:8px}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),#ffd48a);transition:width .15s}
+    .preview-panel{display:flex;flex-direction:column;align-items:center}.preview-top{width:100%;display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px}.preview-top h2{margin:0}.ratio-pill{font-size:11px;color:var(--orange);border:1px solid #7b5427;border-radius:99px;padding:5px 9px}.stage{width:min(100%,390px);aspect-ratio:9/16;max-height:72vh;background:#070609;border:1px solid #3d3544;border-radius:19px;overflow:hidden;box-shadow:0 20px 60px #0007;position:relative;display:grid;place-items:center}.stage canvas{display:block;width:100%;height:100%;object-fit:contain}.empty-preview{position:absolute;text-align:center;padding:24px;color:var(--muted);max-width:290px;pointer-events:none}.empty-icon{font-size:40px;color:var(--orange);margin-bottom:12px}.empty-preview b{display:block;color:var(--ink);margin-bottom:6px}.preview-controls{width:min(100%,390px);display:flex;align-items:center;gap:10px;margin-top:14px}.preview-controls .btn{flex:1}.seek-wrap{width:min(100%,390px);margin-top:14px;background:#1d1924;border:1px solid var(--line);border-radius:12px;padding:11px 13px}.seek-label{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}.seek-wrap input{width:100%;margin:9px 0 2px;accent-color:var(--orange)}.seek-range{height:3px;background:#403747;border-radius:10px;position:relative;margin:1px 0 4px}.seek-range i{display:block;height:100%;background:var(--orange);border-radius:10px;width:0}.preview-caption{width:min(100%,390px);font-size:11px;color:var(--muted);margin:12px 0 0}.share-maker{border-top:1px solid var(--line);margin-top:18px;padding-top:16px}.share-maker h3{font-size:14px;margin:0 0 7px}.share-maker p{font-size:11px;color:var(--muted);margin:0 0 12px}.share-output{display:none;margin-top:10px;word-break:break-all;font-size:11px;color:#9bd9b2}.share-output.visible{display:block}.note{border-top:1px solid var(--line);padding-top:15px;margin-top:20px;color:var(--muted);font-size:11px}.note strong{color:#f1eaf8}.result{display:none;margin-top:17px;border:1px solid #335844;background:#102219;border-radius:13px;padding:14px}.result.visible{display:block}.result-title{color:var(--green);font-size:13px;font-weight:800;margin-bottom:5px}.result a{color:#9bd9b2;word-break:break-all;font-size:12px}.result-actions{display:flex;gap:8px;margin-top:11px;flex-wrap:wrap}
+    .trust-line{margin-top:20px;color:#867e90;font-size:11px}.media-hidden{position:fixed;left:-10000px;top:-10000px;width:2px;height:2px;opacity:0;pointer-events:none}
+    @media(max-width:850px){.layout{grid-template-columns:1fr}.preview-panel{grid-row:1}.stage{max-height:66vh}.panel{padding:18px}header{height:62px}.header-note{display:none}}
+    @media(max-width:430px){main{padding-top:26px}.row{gap:8px}.panel{border-radius:16px}.export-row{grid-template-columns:1fr}.stage{width:min(100%,330px)}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">AVIOC <span>●</span> CLIP MAKER</div>
+    <div class="header-note">Private editing · your source video stays on this device</div>
+  </header>
+  <main>
+    <div class="eyebrow">Social video studio</div>
+    <h1>Make a clip that brings them back.</h1>
+    <p class="lede">Trim and scrub to the exact moment, choose a crop ratio, add Avioc Cinema branding, then export the finished clip to your device.</p>
+    <div class="layout">
+      <section class="panel" aria-label="Clip settings">
+        <div class="step"><b>1</b> Choose a video and set the moment</div>
+        <div class="field"><label for="catalogSearch">Choose from Avioc Cinema</label><input class="input" id="catalogSearch" type="search" placeholder="Search movies and series"><select id="catalogPicker" class="input" style="margin-top:8px"><option value="">Loading Avioc library…</option></select><button class="btn secondary" id="loadCatalogVideo" type="button" style="width:100%;margin-top:8px">Use selected movie or episode</button><div class="hint" style="margin-top:7px">The app streams the selected video for preview; it does not download the full file.</div></div>
+        <div class="step" style="margin:18px 0 12px"><b>or</b> Use a video stored on this device</div>
+        <label class="filebox" for="file">
+          <span class="filename" id="filename">Choose a video from this device</span>
+          <span class="btn secondary file-button">Choose file</span>
+          <input id="file" type="file" accept="video/mp4,video/webm,video/quicktime,video/x-matroska,.mp4,.webm,.mov,.mkv">
+        </label>
+        <div class="row field">
+          <div><label for="start">Clip starts</label><div class="unit-input"><input class="input" type="number" id="start" min="0" step="0.1" value="0"><span>sec</span></div></div>
+          <div><label for="end">Clip ends</label><div class="unit-input"><input class="input" type="number" id="end" min="0" step="0.1" value="30"><span>sec</span></div></div>
+        </div>
+        <div class="field"><div class="label-row"><label for="startRange">Find the moment</label><span class="hint" id="durationLabel">Load a video first</span></div><div class="range-line"><input id="startRange" type="range" min="0" max="30" step="0.1" value="0" aria-label="Clip start"><output id="startOutput">0:00</output></div><div class="range-line" style="margin-top:5px"><input id="endRange" type="range" min="0" max="30" step="0.1" value="30" aria-label="Clip end"><output id="endOutput">0:30</output></div></div>
+        <div class="clip-summary"><span>Selected clip</span><strong id="clipLength">0 seconds + end card</strong></div>
+        <div class="step" style="margin:24px 0 16px"><b>2</b> Frame it and add your link</div>
+        <div class="field"><div class="label-row"><label for="focusX">Horizontal crop</label><span class="hint">Move the frame toward the subject</span></div><div class="range-line"><input id="focusX" type="range" min="0" max="100" value="50"><output id="focusXOut">50%</output></div></div>
+        <div class="field"><div class="label-row"><label for="focusY">Vertical crop</label><span class="hint">Move the frame up or down</span></div><div class="range-line"><input id="focusY" type="range" min="0" max="100" value="50"><output id="focusYOut">50%</output></div></div>
+        <div class="row field">
+          <div><label for="ratio">Video ratio</label><select id="ratio" class="input"><option value="9:16">Portrait · 9:16</option><option value="4:5">Portrait · 4:5</option><option value="1:1">Square · 1:1</option><option value="16:9">Landscape · 16:9</option><option value="custom">Custom</option></select></div>
+          <div><label for="resolution">Output width</label><select id="resolution" class="input"><option value="720">720 px</option><option value="1080">1080 px</option></select></div>
+        </div>
+        <div class="row field" id="customRatio" style="display:none">
+          <div><label for="ratioWidth">Custom width ratio</label><input class="input" id="ratioWidth" type="number" min="1" max="100" value="9"></div>
+          <div><label for="ratioHeight">Custom height ratio</label><input class="input" id="ratioHeight" type="number" min="1" max="100" value="16"></div>
+        </div>
+        <div class="row field">
+          <div><label for="endCardSeconds">End card</label><select id="endCardSeconds" class="input"><option value="2">2 seconds</option><option value="3" selected>3 seconds</option><option value="4">4 seconds</option></select></div>
+        </div>
+        <div class="field"><label class="check"><input id="showUrl" type="checkbox" checked><span>Show <strong>aviocwatch.b-cdn.net</strong> on the clip and end card</span></label></div>
+        <div class="field"><label for="cta">End card message</label><input class="input" id="cta" maxlength="46" value="Watch more on Avioc Cinema"></div>
+        <div class="step" style="margin:24px 0 16px"><b>3</b> Create and download</div>
+        <div class="row field">
+          <div><label for="format">Video format</label><select id="format" class="input"><option value="auto">Best format for this browser</option></select></div>
+          <div><label for="caption">Caption style</label><select id="caption" class="input"><option value="short">Short and clear</option><option value="hype">Hype</option></select></div>
+        </div>
+        <div class="export-row"><button class="btn gold" id="export" disabled>Make my TikTok clip</button><button class="btn secondary" id="copyCaption" disabled>Copy caption</button></div>
+        <div class="status" id="status" role="status">Choose a video to get started.</div>
+        <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+        <div class="result" id="result"><div class="result-title">Your clip is ready</div><a id="resultLink" href="#" download>Download clip</a><div class="result-actions"><button class="btn secondary" id="downloadAgain">Download again</button><button class="btn ghost" id="copyLink">Copy Avioc website link</button><button class="btn ghost" id="shareWhatsApp">Share video + link on WhatsApp</button></div></div>
+        <div class="share-maker">
+          <h3>Make a playable WhatsApp link</h3>
+          <p>For an Avioc library video, the share page opens this exact segment and crop directly. For a local video, upload your exported clip to public hosting and paste its link first.</p>
+          <div class="field"><label for="hostedClip">Public link to your exported clip</label><input class="input" id="hostedClip" type="url" placeholder="https://…/my-clip.mp4"></div>
+          <div class="field"><label for="destination">Avioc page to open</label><input class="input" id="destination" type="url" value="https://aviocwatch.b-cdn.net/"></div>
+          <button class="btn secondary" id="makePlayable" type="button">Create playable WhatsApp link</button>
+          <div class="share-output" id="playableOutput"></div>
+          <button class="btn ghost" id="copyPlayable" type="button" style="display:none;margin-top:8px">Copy playable link</button>
+          <button class="btn ghost" id="sharePlayable" type="button" style="display:none;margin-top:8px">Share playable page on WhatsApp</button>
+        </div>
+        <div class="note"><strong>For WhatsApp:</strong> a video file cannot contain a tappable button. Upload the exported clip to public video hosting, paste its link above, then share the playable page. People can play the clip on that page and tap its Avioc Cinema button.</div>
+        <div class="trust-line">Use clips you have permission to share. The video is processed in your browser and is never uploaded by this tool.</div>
+      </section>
+      <section class="panel preview-panel" aria-label="Clip preview">
+        <div class="preview-top"><h2>Clip preview</h2><span class="ratio-pill" id="ratioPill">9:16 · TikTok ready</span></div>
+        <div class="stage" id="stage"><canvas id="preview" width="720" height="1280" aria-label="Clip preview"></canvas><div class="empty-preview" id="empty"><div class="empty-icon">▣</div><b>Your clip preview appears here</b>Choose a video and we’ll frame it with Avioc branding.</div></div>
+        <div class="preview-controls"><button class="btn secondary" id="previewButton" disabled>▶ Preview selected clip</button></div>
+        <div class="seek-wrap"><div class="seek-label"><span id="seekCurrent">0:00</span><span>Scrub selected clip</span><span id="seekEnd">0:30</span></div><input id="seekBar" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek within selected clip" disabled><div class="seek-range"><i id="seekProgress"></i></div></div>
+        <p class="preview-caption">Keep the subject near the centre so TikTok’s buttons and captions don’t cover the action.</p>
+      </section>
+    </div>
+  </main>
+  <video class="media-hidden" id="sourceVideo" playsinline preload="metadata"></video>
+
+  <script src="catalog.js"></script>
+  <script>
+  (()=>{
+    const $=(id)=>document.getElementById(id);
+    const SITE='https://aviocwatch.b-cdn.net/';
+    const file=$('file'),video=$('sourceVideo'),canvas=$('preview'),ctx=canvas.getContext('2d',{alpha:false});
+    const status=$('status'),progress=$('progressBar'),result=$('result'),exportBtn=$('export'),previewBtn=$('previewButton');
+    const state={url:null,file:null,duration:0,mode:'idle',raf:0,chunks:[],blob:null,downloadUrl:null,clipStart:0,clipEnd:0,endCardUntil:0,recordStart:0,mediaRecorder:null,playableUrl:'',sourceUrl:'',isRemote:false,sourceTitle:'',sourceShareId:'',sourcePoster:'',sourceType:'film'};
+    const pretty=(s)=>{s=Math.max(0,Number(s)||0);const m=Math.floor(s/60),ss=Math.floor(s%60),d=Math.floor((s%1)*10);return `${m}:${String(ss).padStart(2,'0')}${d?'.'+d:''}`};
+    const setStatus=(message,type='')=>{status.textContent=message;status.className='status'+(type?' '+type:'')};
+    const escName=(name)=>name.replace(/\.[^.]+$/,'').replace(/[^\w -]+/g,'').trim().slice(0,60)||'avioc-clip';
+
+    function formatSupport(){
+      const options=[['video/mp4;codecs=avc1.42E01E,mp4a.40.2','MP4'],['video/mp4','MP4'],['video/webm;codecs=vp9,opus','WebM'],['video/webm;codecs=vp8,opus','WebM'],['video/webm','WebM']];
+      const chosen=options.find(([type])=>window.MediaRecorder&&MediaRecorder.isTypeSupported(type));
+      if(!chosen)return null;
+      $('format').innerHTML=`<option value="${chosen[0]}">${chosen[1]}${chosen[1]==='MP4'?' · upload-ready':' · convert before posting'}</option>`;
+      return chosen;
+    }
+    const encoder=formatSupport();
+
+    function drawBrand(){
+      const w=canvas.width,h=canvas.height,scale=w/720;
+      ctx.save();ctx.textBaseline='middle';
+      ctx.fillStyle='rgba(10,8,13,.72)';roundRect(ctx,28*scale,35*scale,270*scale,53*scale,26*scale);ctx.fill();
+      ctx.fillStyle='#ff9f24';ctx.beginPath();ctx.arc(55*scale,61.5*scale,11*scale,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#fff';ctx.font=`900 ${18*scale}px Arial`;ctx.fillText('AVIOC CINEMA',76*scale,61*scale);
+      if($('showUrl').checked){
+        ctx.font=`700 ${15*scale}px Arial`;const text='aviocwatch.b-cdn.net',tw=ctx.measureText(text).width;
+        ctx.fillStyle='rgba(10,8,13,.78)';roundRect(ctx,(w/scale-40-tw/scale)*scale,35*scale,(tw/scale+24)*scale,47*scale,23*scale);ctx.fill();
+        ctx.fillStyle='#fff';ctx.fillText(text,(w/scale-28-tw/scale)*scale,58.5*scale);
+      }
+      ctx.restore();
+    }
+    function roundRect(c,x,y,w,h,r){c.beginPath();c.roundRect(x,y,w,h,r)}
+    function drawEndCard(){
+      const w=canvas.width,h=canvas.height;
+      const g=ctx.createLinearGradient(0,0,w,h);g.addColorStop(0,'#17101d');g.addColorStop(.52,'#261625');g.addColorStop(1,'#09080c');
+      ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+      ctx.fillStyle='#ff9f24';ctx.beginPath();ctx.arc(w/2,h*.35,42*w/720,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#17101d';ctx.font=`900 ${48*w/720}px Arial`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('A',w/2,h*.35+2*w/720);
+      ctx.fillStyle='#fff';ctx.font=`900 ${42*w/720}px Arial`;ctx.fillText('AVIOC CINEMA',w/2,h*.45);
+      ctx.fillStyle='#c9c0d0';ctx.font=`600 ${23*w/720}px Arial`;fitText($('cta').value||'Watch more on Avioc Cinema',w*.82, h*.515,23*w/720);
+      if($('showUrl').checked){
+        const label='aviocwatch.b-cdn.net';ctx.font=`800 ${25*w/720}px Arial`;const tw=ctx.measureText(label).width;
+        ctx.fillStyle='rgba(255,159,36,.15)';roundRect(ctx,(w-tw-58*w/720)/2,h*.565,tw+58*w/720,64*w/720,32*w/720);ctx.fill();
+        ctx.strokeStyle='rgba(255,159,36,.8)';ctx.lineWidth=2*w/720;ctx.stroke();ctx.fillStyle='#ffbd68';ctx.fillText(label,w/2,h*.565+32*w/720);
+      }
+      ctx.fillStyle='#a89eaf';ctx.font=`500 ${18*w/720}px Arial`;ctx.fillText('Find the full movie or series on our website',w/2,h*.665);
+      ctx.textAlign='left';drawBrand();
+    }
+    function fitText(text,maxWidth,y,fontSize){let size=fontSize;ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`600 ${size}px Arial`;while(ctx.measureText(text).width>maxWidth&&size>12){size-=1;ctx.font=`600 ${size}px Arial`}ctx.fillText(text,canvas.width/2,y)}
+    function drawVideo(){
+      const w=canvas.width,h=canvas.height,vw=video.videoWidth,vh=video.videoHeight;
+      ctx.fillStyle='#08070a';ctx.fillRect(0,0,w,h);
+      if(!vw||!vh)return;
+      const target=w/h,source=vw/vh;let sx=0,sy=0,sw=vw,sh=vh;
+      const fx=Number($('focusX').value)/100,fy=Number($('focusY').value)/100;
+      if(source>target){sw=vh*target;sx=(vw-sw)*fx}else{sh=vw/target;sy=(vh-sh)*fy}
+      ctx.drawImage(video,sx,sy,sw,sh,0,0,w,h);drawBrand();
+    }
+    function renderPreview(){if(state.mode==='endcard'){drawEndCard();return}drawVideo()}
+    function ratioValue(){
+      if($('ratio').value==='custom')return [Math.max(1,Math.min(100,Number($('ratioWidth').value)||9)),Math.max(1,Math.min(100,Number($('ratioHeight').value)||16))];
+      return $('ratio').value.split(':').map(Number);
+    }
+    function setResolution(){
+      const size=Number($('resolution').value),[rw,rh]=ratioValue(),h=Math.max(1,Math.round(size*rh/rw));
+      canvas.width=size;canvas.height=h;$('stage').style.aspectRatio=`${rw}/${rh}`;
+      $('ratioPill').textContent=$('ratio').value==='9:16'?'9:16 · TikTok ready':`${rw}:${rh} · Custom crop`;
+      $('customRatio').style.display=$('ratio').value==='custom'?'grid':'none';
+      renderPreview();
+    }
+    function updateSeek(){
+      const a=state.clipStart,b=Math.max(a+.01,state.clipEnd),t=Math.max(a,Math.min(video.currentTime||a,b));
+      $('seekBar').value=String(Math.round((t-a)/(b-a)*1000));$('seekCurrent').textContent=pretty(t);$('seekEnd').textContent=pretty(b);
+      $('seekProgress').style.width=`${((t-a)/(b-a))*100}%`;
+    }
+    function updateTimes(fromRange=false){
+      let s=fromRange?Number($('startRange').value):Number($('start').value)||0;
+      let e=fromRange?Number($('endRange').value):Number($('end').value)||0;
+      s=Math.max(0,Math.min(s,state.duration||999999));e=Math.max(0,Math.min(e,state.duration||999999));
+      if(e<=s){if(fromRange&&document.activeElement===$('startRange'))e=Math.min(state.duration,s+1);else s=Math.max(0,e-1)}
+      $('start').value=s.toFixed(1);$('end').value=e.toFixed(1);
+      $('startRange').value=s;$('endRange').value=e;
+      $('startOutput').value=pretty(s);$('endOutput').value=pretty(e);
+      state.clipStart=s;state.clipEnd=e;
+      const n=e-s;$('clipLength').textContent=`${n.toFixed(1)} seconds + ${$('endCardSeconds').value}s end card`;
+      $('seekBar').disabled=!state.file;$('seekBar').value='0';$('seekCurrent').textContent=pretty(s);$('seekEnd').textContent=pretty(e);$('seekProgress').style.width='0%';
+      if(state.mode==='idle'&&video.readyState>=2){if(Math.abs(video.currentTime-s)>.15)video.currentTime=s;renderPreview()}
+      $('copyCaption').disabled=!state.file;
+    }
+    function seekVideo(time){
+      if(Math.abs(video.currentTime-time)<.05)return Promise.resolve();
+      return new Promise((resolve)=>{
+        const done=()=>{clearTimeout(timer);video.removeEventListener('seeked',done);resolve()};
+        const timer=setTimeout(done,5000);
+        video.addEventListener('seeked',done,{once:true});
+        video.currentTime=time;
+      });
+    }
+    function loadVideoSource(url,name,fileMeta,{remote=false}={}){
+      state.file=fileMeta;state.sourceUrl=url;state.isRemote=remote;state.sourceTitle=name;if(!remote){state.sourceShareId='';state.sourcePoster='';state.sourceType='film'}
+      if(state.url&&state.url!==url)URL.revokeObjectURL(state.url);state.url=remote?null:url;
+      video.pause();video.removeAttribute('src');video.removeAttribute('crossorigin');video.load();if(remote)video.crossOrigin='anonymous';video.src=url;video.load();
+      $('filename').textContent=name;$('empty').style.display='none';result.classList.remove('visible');$('hostedClip').value='';
+      setStatus(remote?'Opening the selected Avioc video…':'Loading video details…');
+    }
+    function handleFile(f){
+      if(!f)return;
+      if(!f.type.startsWith('video/')&&!/\.(mp4|webm|mov|mkv)$/i.test(f.name)){setStatus('Choose a video file such as MP4, MOV, or WebM.','error');return}
+      const url=URL.createObjectURL(f);state.url=url;loadVideoSource(url,f.name,f,{remote:false});
+    }
+    const catalog=Array.isArray(window.AVIOC_CLIP_CATALOG)?window.AVIOC_CLIP_CATALOG:[];
+    function catalogEntries(){
+      const entries=[];
+      for(const item of catalog){
+        if(item.type==='series'){
+          for(const season of item.seasons||[])for(const ep of season.episodes||[])if(ep.streamUrl)entries.push({id:`${item.id}|s${season.seasonNumber}e${ep.n}`,shareId:item.id,type:'series',poster:item.poster,title:`${item.title} · S${season.seasonNumber} E${ep.n}${ep.name?` · ${ep.name}`:''}`,url:ep.streamUrl});
+        }else if((item.partUrls||[]).length>1){item.partUrls.forEach((url,index)=>entries.push({id:`${item.id}|p${index+1}`,shareId:item.id,type:'film',poster:item.poster,title:`${item.title} · ${item.partTitles?.[index]||`Part ${index+1}`}`,url}));}
+        else if(item.streamUrl)entries.push({id:item.id,shareId:item.id,type:'film',poster:item.poster,title:item.title,url:item.streamUrl});
+      }
+      return entries;
+    }
+    const catalogItems=catalogEntries();
+    function fillCatalog(filter=''){
+      const select=$('catalogPicker'),prior=select.value,q=filter.trim().toLowerCase();
+      const visible=catalogItems.filter(item=>item.title.toLowerCase().includes(q));
+      select.innerHTML=visible.length?visible.map(item=>`<option value="${encodeURIComponent(item.id)}">${item.title.replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}</option>`).join(''):'<option value="">No matching videos</option>';
+      if(visible.some(item=>encodeURIComponent(item.id)===prior))select.value=prior;
+    }
+    fillCatalog();
+    $('catalogSearch').addEventListener('input',()=>fillCatalog($('catalogSearch').value));
+    $('loadCatalogVideo').addEventListener('click',()=>{
+      const id=decodeURIComponent($('catalogPicker').value||'');const item=catalogItems.find(x=>x.id===id);
+      if(!item){setStatus('Choose a movie or episode from the Avioc library.','error');return}
+      if(!/^https:\/\/aviocwatch\.b-cdn\.net\//i.test(item.url)){setStatus('This catalog video is not on the Avioc video host.','error');return}
+      state.sourceShareId=item.shareId;state.sourcePoster=item.poster;state.sourceType=item.type;
+      const moviePage=new URL('/',SITE);moviePage.searchParams.set('m',item.shareId);moviePage.searchParams.set('play','1');$('destination').value=moviePage.href;
+      loadVideoSource(item.url,item.title,{name:item.title,size:0,type:'video/mp4'},{remote:true});
+    });
+    video.addEventListener('loadedmetadata',()=>{
+      state.duration=Number.isFinite(video.duration)?video.duration:0;
+      if(!state.duration){setStatus('This video does not report a usable duration. Try an MP4 or MOV file.','error');return}
+      $('durationLabel').textContent=`Full video: ${pretty(state.duration)}`;
+      for(const id of ['startRange','endRange'])$(id).max=state.duration;
+      $('end').max=state.duration;$('start').max=state.duration;
+      $('start').value='0';$('startRange').value=0;
+      const initial=Math.min(30,state.duration);$('end').value=initial.toFixed(1);$('endRange').value=initial;
+      state.clipStart=0;state.clipEnd=initial;video.currentTime=0;
+      updateTimes();exportBtn.disabled=false;previewBtn.disabled=false;$('copyCaption').disabled=false;
+      setStatus(state.isRemote?'Ready · Streaming directly from Avioc Cinema.':`Ready · ${(fSize(state.file.size))} loaded locally.`,'good');renderPreview();
+    });
+    function fSize(n){return n>1024**3?(n/1024**3).toFixed(2)+' GB':(n/1024**2).toFixed(0)+' MB'}
+    video.addEventListener('error',()=>setStatus('This video format could not be opened in this browser. Try MP4 or MOV.','error'));
+    file.addEventListener('change',()=>handleFile(file.files?.[0]));
+    $('start').addEventListener('input',()=>updateTimes());$('end').addEventListener('input',()=>updateTimes());
+    $('startRange').addEventListener('input',()=>updateTimes(true));$('endRange').addEventListener('input',()=>updateTimes(true));
+    $('focusX').addEventListener('input',()=>{$('focusXOut').value=$('focusX').value+'%';renderPreview()});
+    $('focusY').addEventListener('input',()=>{$('focusYOut').value=$('focusY').value+'%';renderPreview()});
+    $('resolution').addEventListener('change',setResolution);$('ratio').addEventListener('change',setResolution);$('ratioWidth').addEventListener('input',setResolution);$('ratioHeight').addEventListener('input',setResolution);$('showUrl').addEventListener('change',renderPreview);$('cta').addEventListener('input',renderPreview);
+    $('seekBar').addEventListener('input',async()=>{
+      const t=state.clipStart+(Number($('seekBar').value)/1000)*(state.clipEnd-state.clipStart);
+      $('seekCurrent').textContent=pretty(t);$('seekProgress').style.width=`${$('seekBar').value/10}%`;
+      await seekVideo(t);if(state.mode==='idle'||state.mode==='preview')drawVideo();
+    });
+    $('endCardSeconds').addEventListener('change',()=>updateTimes());
+    $('previewButton').addEventListener('click',async()=>{
+      if(state.mode==='preview'||state.mode==='endcard'){video.pause();cancelAnimationFrame(state.raf);state.mode='idle';previewBtn.textContent='▶ Preview selected clip';renderPreview();return}
+      if(!state.file)return;
+      updateTimes();state.mode='preview';state.clipStart=Number($('start').value);state.clipEnd=Number($('end').value);state.endCardUntil=0;
+      previewBtn.textContent='■ Stop preview';status.className='status';setStatus('Playing your selected moment…');
+      video.pause();await seekVideo(state.clipStart);try{await video.play()}catch(e){setStatus('Could not play this file in the browser.','error');state.mode='idle';return}
+      function step(){
+        if(state.mode!=='preview'&&state.mode!=='endcard')return;
+        if(video.currentTime>=state.clipEnd&&!state.endCardUntil){video.pause();state.mode='endcard';state.endCardUntil=performance.now()+Number($('endCardSeconds').value)*1000}
+        if(state.mode==='endcard'){drawEndCard();if(performance.now()>=state.endCardUntil){state.mode='idle';previewBtn.textContent='▶ Preview selected clip';video.currentTime=state.clipStart;renderPreview();setStatus('Preview finished. Adjust the crop or create your clip.','good');return}}
+        else drawVideo();
+        updateSeek();
+        state.raf=requestAnimationFrame(step);
+      }
+      state.raf=requestAnimationFrame(step);
+    });
+
+    function chosenType(){return encoder?.[0]||''}
+    function captionText(){
+      const core=$('caption').value==='hype'?'That moment had me locked in 👀 Watch more on Avioc Cinema:':'Caught this one? Find the full movie on Avioc Cinema:';
+      return `${core} ${SITE}\n#AviocCinema #Movies #Series #TikTokMovies`;
+    }
+    $('copyCaption').addEventListener('click',async()=>copyText(captionText(),'Caption copied — paste it into TikTok.'));
+    async function copyText(value,success){try{await navigator.clipboard.writeText(value);setStatus(success,'good')}catch(_){const t=document.createElement('textarea');t.value=value;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();setStatus(success,'good')}}
+    $('copyLink').addEventListener('click',()=>copyText(SITE,'Website link copied.'));
+    $('makePlayable').addEventListener('click',()=>{
+      const clip=state.isRemote?state.sourceUrl:$('hostedClip').value.trim(),destination=$('destination').value.trim()||SITE;
+      let clipUrl,destUrl;
+      try{clipUrl=new URL(clip);destUrl=new URL(destination)}catch(_){setStatus('Paste a complete public video URL and Avioc website link.','error');return}
+      if(!['https:','http:'].includes(clipUrl.protocol)||!['https:','http:'].includes(destUrl.protocol)){setStatus('Use a public link starting with https:// or http://.','error');return}
+      const landing=new URL(state.isRemote&&state.sourceShareId?`/m/clip-v4-${encodeURIComponent(state.sourceShareId)}.html`:'/tiktok-ads/playable-v4.html',SITE);
+      const [rw,rh]=ratioValue();
+      landing.searchParams.set('clip',clipUrl.href);landing.searchParams.set('to',destUrl.href);landing.searchParams.set('title',state.sourceTitle|| (state.file?escName(state.file.name):'Avioc Cinema'));
+      landing.searchParams.set('ratio',`${rw}:${rh}`);landing.searchParams.set('fx',$('focusX').value);landing.searchParams.set('fy',$('focusY').value);
+      const posterUrl=state.sourcePoster?(state.sourcePoster.startsWith('http')?state.sourcePoster:new URL(state.sourcePoster,SITE).href):new URL('assets/social/default.jpg',SITE).href;
+      landing.searchParams.set('poster',posterUrl);landing.searchParams.set('kind',state.sourceType||'film');
+      if(state.isRemote){landing.searchParams.set('start',String(state.clipStart));landing.searchParams.set('end',String(state.clipEnd));landing.searchParams.set('clip_share','1')}
+      state.playableUrl=landing.href;$('playableOutput').textContent=state.playableUrl;$('playableOutput').classList.add('visible');$('copyPlayable').style.display='inline-block';$('sharePlayable').style.display='inline-block';
+      setStatus('Playable share page created. Send this link in WhatsApp.','good');
+    });
+    $('copyPlayable').addEventListener('click',()=>state.playableUrl&&copyText(state.playableUrl,'Playable page link copied.'));
+    $('sharePlayable').addEventListener('click',()=>{if(!state.playableUrl)return;const message=`🎬 Watch this clip, then open Avioc Cinema:\n${state.playableUrl}`;window.open(`https://wa.me/?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer')});
+    $('shareWhatsApp').addEventListener('click',async()=>{
+      const message=`🎬 Watch more on Avioc Cinema:\n${SITE}`;
+      if(state.blob&&navigator.share&&navigator.canShare){
+        try{
+          const clip=new File([state.blob],state.filename,{type:state.blob.type||'video/mp4'});
+          if(navigator.canShare({files:[clip]})){
+            await navigator.share({files:[clip],text:message,title:'Avioc Cinema clip'});
+            setStatus('Share sheet opened with your clip and clickable Avioc link.','good');return;
+          }
+        }catch(err){if(err.name==='AbortError')return}
+      }
+      window.open(`https://wa.me/?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');
+      setStatus('WhatsApp opened with the clickable link. Attach the downloaded clip before sending.','good');
+    });
+    $('downloadAgain').addEventListener('click',downloadBlob);
+    function downloadBlob(){if(!state.blob)return;const a=document.createElement('a');a.href=state.downloadUrl;a.download=state.filename;document.body.appendChild(a);a.click();a.remove()}
+    function finishExport(){
+      const ext=chosenType().includes('mp4')?'mp4':'webm';state.blob=new Blob(state.chunks,{type:chosenType()||'video/webm'});
+      state.filename=`${escName(state.file.name)}-avioc-tiktok.${ext}`;
+      if(state.downloadUrl)URL.revokeObjectURL(state.downloadUrl);state.downloadUrl=URL.createObjectURL(state.blob);
+      $('resultLink').href=state.downloadUrl;$('resultLink').download=state.filename;$('resultLink').textContent=`Download ${state.filename} · ${fSize(state.blob.size)}`;
+      result.classList.add('visible');state.mode='idle';exportBtn.disabled=false;exportBtn.textContent='Make my TikTok clip';previewBtn.disabled=false;previewBtn.textContent='▶ Preview selected clip';progress.style.width='100%';
+      const isMp4=ext==='mp4';setStatus(isMp4?'MP4 ready to upload to TikTok.':'Clip ready as WebM. Convert to MP4 in CapCut if TikTok rejects the file.','good');
+      video.currentTime=state.clipStart;renderPreview();
+    }
+    exportBtn.addEventListener('click',async()=>{
+      if(!state.file)return;
+      if(!window.MediaRecorder||!canvas.captureStream||!encoder){setStatus('This browser cannot export video. Open this page in the latest Chrome or Edge.','error');return}
+      updateTimes();state.clipStart=Number($('start').value);state.clipEnd=Number($('end').value);
+      if(state.clipEnd-state.clipStart<1){setStatus('Choose at least one second of video.','error');return}
+      video.pause();await seekVideo(state.clipStart);
+      setResolution();state.mode='export';state.chunks=[];state.blob=null;result.classList.remove('visible');progress.style.width='0%';
+      const canvasStream=canvas.captureStream(30);let sourceStream=null;
+      try{sourceStream=video.captureStream?.()||video.mozCaptureStream?.()}catch(_){}
+      let audio=false;if(sourceStream?.getAudioTracks().length){for(const t of sourceStream.getAudioTracks())canvasStream.addTrack(t);audio=true}
+      try{state.mediaRecorder=new MediaRecorder(canvasStream,{mimeType:chosenType(),videoBitsPerSecond:Number($('resolution').value)==='1080'?8000000:4500000,audioBitsPerSecond:128000})}
+      catch(e){canvasStream.getTracks().forEach(t=>t.stop());state.mode='idle';setStatus('Could not start the browser video encoder. Try Chrome or Edge.','error');return}
+      state.mediaRecorder.ondataavailable=(e)=>{if(e.data?.size)state.chunks.push(e.data)};
+      state.mediaRecorder.onerror=(e)=>{state.mode='idle';exportBtn.disabled=false;exportBtn.textContent='Make my TikTok clip';setStatus('The browser encoder stopped unexpectedly. Try a shorter clip.','error')};
+      state.mediaRecorder.onstop=()=>{canvasStream.getTracks().forEach(t=>t.stop());if(sourceStream)sourceStream.getTracks().forEach(t=>t.stop());finishExport()};
+      exportBtn.disabled=true;previewBtn.disabled=true;exportBtn.textContent='Creating clip…';setStatus(audio?'Rendering video and source audio locally…':'Rendering video locally · source audio is unavailable in this browser.');
+      state.recordStart=performance.now();state.endCardUntil=0;state.mediaRecorder.start(1000);
+      try{await video.play()}catch(e){state.mediaRecorder.stop();setStatus('Could not play this file in the browser.','error');return}
+      function step(){
+        if(state.mode!=='export'&&state.mode!=='export-endcard')return;
+        const clipSeconds=state.clipEnd-state.clipStart,endSeconds=Number($('endCardSeconds').value);
+        if(video.currentTime>=state.clipEnd&&!state.endCardUntil){video.pause();state.mode='export-endcard';state.endCardUntil=performance.now()+endSeconds*1000}
+        if(state.mode==='export-endcard'){
+          drawEndCard();const passed=endSeconds-(state.endCardUntil-performance.now())/1000;
+          progress.style.width=`${Math.min(100,Math.max(0,(clipSeconds+passed)/(clipSeconds+endSeconds)*100))}%`;
+          if(performance.now()>=state.endCardUntil){state.mediaRecorder.stop();return}
+        }else{
+          drawVideo();const passed=Math.max(0,video.currentTime-state.clipStart);updateSeek();
+          progress.style.width=`${Math.min(99,passed/(clipSeconds+endSeconds)*100)}%`;
+        }
+        state.raf=requestAnimationFrame(step);
+      }
+      state.mode='export';state.raf=requestAnimationFrame(step);
+    });
+    document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.mode==='preview'){video.pause();state.mode='idle';cancelAnimationFrame(state.raf);previewBtn.textContent='▶ Preview selected clip'}});
+    window.addEventListener('beforeunload',()=>{if(state.url)URL.revokeObjectURL(state.url);if(state.downloadUrl)URL.revokeObjectURL(state.downloadUrl)});
+    setResolution();
+  })();
+  </script>
+</body>
+</html>
