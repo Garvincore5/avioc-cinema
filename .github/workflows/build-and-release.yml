@@ -109,36 +109,14 @@ jobs:
         run: |
           MANIFEST="android/app/src/main/AndroidManifest.xml"
           if [ -f "$MANIFEST" ]; then
-            # Add permissions for streaming
             sed -i '/<application/i \    <uses-permission android:name="android.permission.INTERNET" />\n    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />\n    <uses-permission android:name="android.permission.WAKE_LOCK" />' "$MANIFEST"
-            # Add hardware acceleration and largeHeap for low RAM older devices
             sed -i 's/<application/<application android:hardwareAccelerated="true" android:largeHeap="true" android:usesCleartextTraffic="true"/' "$MANIFEST"
           fi
 
-          # Lower minSdkVersion to 21 (Android 5.0 Lollipop) in variables.gradle
           VAR_GRADLE="android/variables.gradle"
           if [ -f "$VAR_GRADLE" ]; then
             sed -i 's/minSdkVersion = [0-9]*/minSdkVersion = 21/' "$VAR_GRADLE"
           fi
-
-          # Copy keystore into Android app directory
-          cp scripts/avioc-release-key.jks android/app/avioc-release-key.jks
-
-          # Configure release signing & multidex in android/app/build.gradle
-          GRADLE_FILE="android/app/build.gradle"
-          sed -i 's/defaultConfig {/defaultConfig {\n        multiDexEnabled true/' "$GRADLE_FILE"
-
-          sed -i '/buildTypes {/i \
-              signingConfigs {\
-                  release {\
-                      storeFile file("avioc-release-key.jks")\
-                      storePassword "avioc2026cinema"\
-                      keyAlias "avioc"\
-                      keyPassword "avioc2026cinema"\
-                  }\
-              }' "$GRADLE_FILE"
-
-          sed -i 's/buildTypes {/buildTypes {\n        release {\n            signingConfig signingConfigs.release/' "$GRADLE_FILE"
 
       - name: Compile Release APK with Gradle
         run: |
@@ -146,10 +124,19 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleRelease
 
-      - name: Locate and Prepare Release APK
+      - name: Sign APK with Avioc Key and Prepare Release Output
         run: |
           mkdir -p release-binaries
-          find android/app/build/outputs/apk -name "*.apk" -exec cp {} release-binaries/Avioc-Cinema.apk \;
+          RAW_APK=$(find android/app/build/outputs/apk -name "*.apk" | head -n 1)
+          if [ -f "$RAW_APK" ]; then
+            echo "Signing $RAW_APK with Avioc certificate..."
+            jarsigner -sigalg SHA256withRSA -digestalg SHA-256 -keystore scripts/avioc-release-key.jks -storepass "avioc2026cinema" -keypass "avioc2026cinema" "$RAW_APK" avioc
+            cp "$RAW_APK" release-binaries/Avioc-Cinema.apk
+            echo "Successfully prepared release-binaries/Avioc-Cinema.apk"
+          else
+            echo "No APK found in build outputs!"
+            exit 1
+          fi
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v4
