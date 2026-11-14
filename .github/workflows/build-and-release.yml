@@ -4,6 +4,14 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - index.html
+      - manifest.json
+      - favicon.svg
+      - icon-192.png
+      - icon-512.png
+      - .github/workflows/deploy-app-store.yml
+      - .github/workflows/publish-apk-alias.yml
     tags:
       - 'v*'
   workflow_dispatch:

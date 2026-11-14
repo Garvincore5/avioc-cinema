@@ -1,0 +1,48 @@
+name: Publish Versioned Avioc Cinema APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: Release tag used in the APK filename (for example v1.0.5)
+        required: true
+        type: string
+      source_run_id:
+        description: Successful build workflow run that contains the signed Android artifact
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  publish-apk:
+    name: Publish versioned signed APK to BunnyCDN
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download signed Android artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: android-binaries
+          path: release-binaries
+          run-id: ${{ inputs.source_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload versioned APK to BunnyCDN
+        shell: bash
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+          RELEASE_VERSION: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          [[ "$RELEASE_VERSION" =~ ^v[0-9]+([.][0-9]+)*$ ]] || { echo "Invalid release version"; exit 1; }
+          test -s release-binaries/Avioc-Cinema.apk || { echo "Signed Android APK was not found in the build artifact"; exit 1; }
+          FILE="Avioc-Cinema-${RELEASE_VERSION}.apk"
+          curl --fail --show-error --silent -X PUT \
+            -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+            -H "Content-Type: application/vnd.android.package-archive" \
+            --data-binary @release-binaries/Avioc-Cinema.apk \
+            "https://storage.bunnycdn.com/aviocwatch/avioc%20app/avioc%20cinema/$FILE"
+          echo "Published $FILE to BunnyCDN."

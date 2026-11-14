@@ -858,7 +858,7 @@
       </a>
 
       <!-- Android -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk" class="platform-row" download data-track-download data-android-install>
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-v1.0.5.apk" class="platform-row" download data-track-download data-android-install>
         <div class="platform-info">
           <div class="platform-name">&#129302; Avioc Cinema Android Universal APK</div>
           <div class="platform-detail">Download the signed APK. Android will install it or update Avioc Cinema while keeping your data.</div>
@@ -889,6 +889,8 @@
   </div>
 
   <script>
+    var latestAndroidApkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-v1.0.5.apk';
+
     // Smart Device Detection
     (function detectAndAdaptDevice() {
       var ua = navigator.userAgent || '';
@@ -920,7 +922,7 @@
 
       if (/Android/i.test(ua)) {
         applyLink(
-          cdn + '/Avioc-Cinema.apk',
+          latestAndroidApkUrl,
           'Avioc Cinema for Android',
           'Download the signed APK, then approve Android’s install or update prompt.',
           'INSTALL / UPDATE'
@@ -997,7 +999,7 @@
     }
 
     function downloadTitle(fileName) {
-      if (/Avioc-Cinema\.apk$/i.test(fileName)) return 'Avioc Cinema for Android';
+      if (/Avioc-Cinema(?:-v[\w.-]+)?\.apk$/i.test(fileName)) return 'Avioc Cinema for Android';
       if (/Avioc-Apps-Setup.*\.exe$/i.test(fileName)) return 'Avioc Apps Store for Windows';
       if (/Avioc-Cinema-Setup.*\.exe$/i.test(fileName)) return 'Avioc Cinema for Windows';
       if (/Avioc-Cinema-Mac.*\.dmg$/i.test(fileName)) return 'Avioc Cinema for Mac';
@@ -1057,8 +1059,9 @@
         info.append(title, detail);
         var again = document.createElement('a');
         again.className = 'btn-sheet-get';
-        again.href = item.url;
-        again.download = item.fileName;
+        var isCinemaApk = /Avioc-Cinema(?:-v[\w.-]+)?\.apk$/i.test(item.fileName);
+        again.href = isCinemaApk ? latestAndroidApkUrl : item.url;
+        again.download = isCinemaApk ? 'Avioc-Cinema-v1.0.5.apk' : item.fileName;
         again.dataset.trackDownload = 'true';
         again.textContent = /\.apk$/i.test(item.fileName)
           ? (androidCinemaInstalled ? 'UPDATE' : 'INSTALL / UPDATE')
