@@ -38,7 +38,7 @@ const mobileconfig = `<?xml version="1.0" encoding="UTF-8"?>
             <key>Precomposed</key>
             <true/>
             <key>URL</key>
-            <string>https://aviocwatch.b-cdn.net/?standalone=1</string>
+            <string>https://aviocwatch.b-cdn.net/cinema.html?standalone=1</string>
         </dict>
     </array>
     <key>PayloadDescription</key>
