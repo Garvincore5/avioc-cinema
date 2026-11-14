@@ -50,4 +50,39 @@ if (fs.existsSync(stringsPath)) {
   fs.writeFileSync(stringsPath, `<?xml version="1.0" encoding="utf-8"?>\n<resources>\n  <string name="asset_statements">${statement}</string>\n</resources>\n`);
 }
 
+const launcherIconSources = {
+  mdpi: 'ic_launcher_mdpi.png',
+  hdpi: 'ic_launcher_hdpi.png',
+  xhdpi: 'ic_launcher_xhdpi.png',
+  xxhdpi: 'ic_launcher_xxhdpi.png',
+  xxxhdpi: 'ic_launcher_xxxhdpi.png',
+};
+for (const [density, file] of Object.entries(launcherIconSources)) {
+  const source = path.join(root, 'assets', 'icons', 'launcher', file);
+  const targetDir = path.join(appDir, 'src', 'main', 'res', `mipmap-${density}`);
+  if (!fs.existsSync(source) || !fs.existsSync(targetDir)) {
+    throw new Error(`Android launcher icon resources are missing for ${density}.`);
+  }
+  for (const name of ['ic_launcher.png', 'ic_launcher_round.png']) {
+    fs.copyFileSync(source, path.join(targetDir, name));
+  }
+}
+
+const drawableDir = path.join(appDir, 'src', 'main', 'res', 'drawable');
+const adaptiveDir = path.join(appDir, 'src', 'main', 'res', 'mipmap-anydpi-v26');
+fs.mkdirSync(drawableDir, { recursive: true });
+fs.mkdirSync(adaptiveDir, { recursive: true });
+fs.writeFileSync(path.join(valuesDir, 'ic_launcher_background.xml'), `<?xml version="1.0" encoding="utf-8"?>\n<resources><color name="ic_launcher_background">#0F0C17</color></resources>\n`);
+fs.writeFileSync(path.join(drawableDir, 'ic_avioc_launcher_foreground.xml'), `<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+  <path android:fillColor="#00000000" android:pathData="M27,82 L48,31 C51,23 57,23 60,31 L81,82" android:strokeColor="#F4C36A" android:strokeWidth="8" android:strokeLineCap="round" android:strokeLineJoin="round"/>
+  <path android:fillColor="#00000000" android:pathData="M38,63 L70,63" android:strokeColor="#F4C36A" android:strokeWidth="8" android:strokeLineCap="round"/>
+  <path android:fillColor="#FFF0C9" android:pathData="M50,46 L67,55 L50,64 Z"/>
+</vector>\n`);
+const adaptiveIcon = `<?xml version="1.0" encoding="utf-8"?>\n<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android"><background android:drawable="@color/ic_launcher_background"/><foreground android:drawable="@drawable/ic_avioc_launcher_foreground"/></adaptive-icon>\n`;
+for (const file of ['ic_launcher.xml', 'ic_launcher_round.xml']) {
+  fs.writeFileSync(path.join(adaptiveDir, file), adaptiveIcon);
+}
+
 console.log(`Configured Avioc Cinema Android version ${versionName} (${versionCode}) and store install detection.`);
+console.log('Applied Avioc Cinema launcher icons for legacy and adaptive Android launchers.');

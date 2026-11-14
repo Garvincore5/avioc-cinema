@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - index.html
+      - manifest.json
+      - favicon.svg
+      - icon-192.png
+      - icon-512.png
       - .github/workflows/deploy-app-store.yml
   workflow_dispatch:
 
@@ -34,3 +38,26 @@ jobs:
             --data-binary @index.html \
             "https://storage.bunnycdn.com/aviocwatch/index.html"
           echo "Avioc Apps Store page published to BunnyCDN."
+
+      - name: Upload store icons and manifest
+        shell: bash
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          for file in manifest.json favicon.svg icon-192.png icon-512.png; do
+            test -f "$file" || { echo "$file is missing"; exit 1; }
+            case "$file" in
+              manifest.json) content_type="application/manifest+json; charset=utf-8" ;;
+              favicon.svg) content_type="image/svg+xml" ;;
+              *.png) content_type="image/png" ;;
+            esac
+            curl --fail --show-error --silent -X PUT \
+              -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+              -H "Content-Type: $content_type" \
+              -H "Cache-Control: no-cache, no-store, must-revalidate" \
+              --data-binary @"$file" \
+              "https://storage.bunnycdn.com/aviocwatch/$file"
+          done
+          echo "Avioc Apps Store icons and manifest published."
