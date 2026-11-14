@@ -111,7 +111,7 @@ jobs:
       - name: Set Android update version and store verification
         run: node scripts/prepare-android-release.js
         env:
-          ANDROID_VERSION_CODE: ${{ 1000 + github.run_number }}
+          ANDROID_VERSION_CODE: ${{ github.run_number }}
           ANDROID_VERSION_NAME: 1.0.${{ github.run_number }}
 
       - name: Build signed Android release APK
