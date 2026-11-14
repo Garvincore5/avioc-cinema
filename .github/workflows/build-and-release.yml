@@ -63,7 +63,7 @@ jobs:
   # 2. ANDROID RELEASE APK
   # ============================================================================
   build-android:
-    name: 🤖 Android APK
+    name: 🤖 Avioc Cinema Android APK
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -86,6 +86,9 @@ jobs:
 
       - name: Build Local Standalone Web Package
         run: node scripts/build-hosting.js
+
+      - name: Set Android app entry to Avioc Cinema
+        run: node scripts/prepare-android-cinema.js
 
       - name: Prepare persistent Android signing key
         run: |
@@ -305,23 +308,24 @@ jobs:
 
             ---
 
-            ### 📦 Download Links by Device:
+            ### 🎬 Avioc Cinema
 
             #### 🤖 Android
             - **All Phones, Tablets & Android TV**: [`Avioc-Cinema.apk`](Avioc-Cinema.apk)
-              *(Compatible with low-RAM phones, Tecno, Itel, Infinix, Samsung Galaxy, Huawei, Xiaomi, etc.)*
 
-            #### 🪟 Windows (unsigned; Windows may show a publisher warning)
-            - **Windows 32-bit (Old laptops & PCs)**: [`Avioc-Cinema-Setup-ia32.exe`](Avioc-Cinema-Setup-ia32.exe)
-            - **Windows 64-bit (Standard PCs)**: [`Avioc-Cinema-Setup-x64.exe`](Avioc-Cinema-Setup-x64.exe)
+            - **Windows 32-bit**: [`Avioc-Cinema-Setup-ia32.exe`](Avioc-Cinema-Setup-ia32.exe) *(unsigned)*
+            - **Windows 64-bit**: [`Avioc-Cinema-Setup-x64.exe`](Avioc-Cinema-Setup-x64.exe) *(unsigned)*
+            - **Mac**: [`Avioc-Cinema-Mac.dmg`](Avioc-Cinema-Mac.dmg) *(unsigned)*
 
             #### 📱 iPhone & iPad
             - **Home-screen website shortcut profile**: [`Avioc-Cinema.mobileconfig`](Avioc-Cinema.mobileconfig)
               *(This adds a shortcut to the hosted website; it is not a native iOS app or IPA.)*
 
-            #### 🍎 Mac (unsigned; macOS may show an unidentified developer warning)
-            - **Mac Installer (Universal for Apple Silicon M1-M4 & Intel)**: [`Avioc-Cinema-Mac.dmg`](Avioc-Cinema-Mac.dmg)
+            ### 🛍️ Avioc Apps Store (Windows)
+
+            - **Windows 32-bit**: [`Avioc-Apps-Setup-ia32.exe`](Avioc-Apps-Setup-ia32.exe) *(unsigned)*
+            - **Windows 64-bit**: [`Avioc-Apps-Setup-x64.exe`](Avioc-Apps-Setup-x64.exe) *(unsigned)*
 
             ---
-            *Windows and Mac builds are unsigned. Android builds use the persistent signing key configured in GitHub Actions Secrets.*
+            *Avioc Cinema's Android APK uses its persistent signing key. Windows installers and the Mac DMG are unsigned.*
           files: final-release/*
