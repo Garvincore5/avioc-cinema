@@ -6,6 +6,7 @@
   <title>Avioc Apps</title>
   <meta name="description" content="Avioc Apps - Official App Store. Download standalone native apps for Windows, Android, Mac, and iPhone.">
   <meta name="theme-color" content="#ffffff">
+  <link rel="manifest" href="/manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
@@ -806,7 +807,7 @@
       <div class="sheet-title" id="downloadsTitle">Your downloads</div>
       <div class="sheet-sub">Downloads you requested from this store on this device. Your browser manages the actual files.</div>
       <div class="download-help" id="androidInstallHelp" hidden>
-        After Avioc Cinema finishes downloading, tap the download notification or open your Downloads folder. Tap the APK and approve Android’s install prompt. Android may ask you to allow installs from this browser.
+        After Avioc Cinema finishes downloading, tap the download notification or open your Downloads folder. Tap the APK and approve Android’s install or update prompt. Android may ask you to allow installs from this browser.
       </div>
       <div id="downloadsList"></div>
       <button class="btn-close-sheet" type="button" onclick="closeDownloadsModal()">Done</button>
@@ -857,12 +858,12 @@
       </a>
 
       <!-- Android -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk" class="platform-row" download data-track-download>
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk" class="platform-row" download data-track-download data-android-install>
         <div class="platform-info">
           <div class="platform-name">&#129302; Avioc Cinema Android Universal APK</div>
-          <div class="platform-detail">Tap Install to download, then approve Android's install prompt.</div>
+          <div class="platform-detail">Download the signed APK. Android will install it or update Avioc Cinema while keeping your data.</div>
         </div>
-        <span class="btn-sheet-get">INSTALL</span>
+        <span class="btn-sheet-get" data-android-install-label>INSTALL / UPDATE</span>
       </a>
 
       <!-- iPhone 1-Tap Profile -->
@@ -921,9 +922,12 @@
         applyLink(
           cdn + '/Avioc-Cinema.apk',
           'Avioc Cinema for Android',
-          'Tap Install to download the app, then approve Android’s install prompt.',
-          'INSTALL'
+          'Download the signed APK, then approve Android’s install or update prompt.',
+          'INSTALL / UPDATE'
         );
+        [heroBtm, gridGet].forEach(function (link) {
+          if (link) link.dataset.androidInstall = 'true';
+        });
       } else if (/iPhone|iPad|iPod/i.test(ua)) {
         applyLink(
           cdn + '/Avioc-Cinema.mobileconfig',
@@ -962,6 +966,26 @@
     }
 
     var downloadHistoryKey = 'avioc_store_download_history_v1';
+    var androidCinemaInstalled = false;
+
+    async function detectAndroidCinemaInstall() {
+      if (!/Android/i.test(navigator.userAgent || '') || !navigator.getInstalledRelatedApps) return;
+      try {
+        var apps = await navigator.getInstalledRelatedApps();
+        androidCinemaInstalled = apps.some(function (app) { return app.id === 'com.avioc.cinema'; });
+        if (!androidCinemaInstalled) return;
+        document.querySelectorAll('[data-android-install]').forEach(function (link) {
+          if (link.tagName === 'A') link.setAttribute('aria-label', 'Update Avioc Cinema');
+        });
+        document.querySelectorAll('[data-android-install-label]').forEach(function (label) {
+          label.textContent = 'UPDATE';
+        });
+        [document.getElementById('heroBottomGetBtn'), document.getElementById('gridCinemaGetBtn')].forEach(function (link) {
+          if (link && link.dataset.androidInstall === 'true') link.textContent = 'UPDATE';
+        });
+        renderDownloads();
+      } catch (_) {}
+    }
 
     function getDownloadHistory() {
       try {
@@ -1036,7 +1060,9 @@
         again.href = item.url;
         again.download = item.fileName;
         again.dataset.trackDownload = 'true';
-        again.textContent = /\.apk$/i.test(item.fileName) ? 'INSTALL AGAIN' : 'DOWNLOAD AGAIN';
+        again.textContent = /\.apk$/i.test(item.fileName)
+          ? (androidCinemaInstalled ? 'UPDATE' : 'INSTALL / UPDATE')
+          : 'DOWNLOAD AGAIN';
         row.append(info, again);
         list.appendChild(row);
       });
@@ -1059,6 +1085,7 @@
     });
 
     updateDownloadsCount();
+    detectAndroidCinemaInstall();
   </script>
 </body>
 </html>

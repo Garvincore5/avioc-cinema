@@ -3773,12 +3773,7 @@ const LOCAL_TV=[
   {id:"bukedde-1",name:"Bukedde 1",group:"Vision Group",mark:"BUKEDDE 1",logo:"assets/posters/bukedde_1.png",poster:"assets/posters/bukedde_1.png",streamUrl:"https://stream.hydeinnovations.com:443/bukedde1flussonic/index.m3u8",url:"https://www.newvision.co.ug/tv/1",live:true},
   {id:"bukedde-2",name:"Bukedde 2",group:"Vision Group",mark:"BUKEDDE 2",logo:"assets/posters/bukedde_2.png",poster:"assets/posters/bukedde_2.png",streamUrl:"https://stream.hydeinnovations.com:443/bukedde2flussonic/index.m3u8",url:"https://www.newvision.co.ug/tv/2",live:true},
   {id:"wan-luo-tv",name:"Wan Luo TV",group:"Vision Group",mark:"WAN LUO",logo:"assets/posters/wan_luo.png",poster:"assets/posters/wan_luo.png",streamUrl:"https://stream.hydeinnovations.com:443/luotv-flussonic/index.m3u8",url:"https://www.newvision.co.ug/tv/5",live:true},
-  {id:"galaxy-tv",name:"Galaxy TV",group:"Uganda & Regional TV",mark:"GALAXY TV",logo:"assets/posters/galaxy_tv.png",poster:"assets/posters/galaxy_tv.png",streamUrl:"https://galaxytvonline.com/hls/smil:galaxytv.smil/playlist.m3u8",url:"https://www.galaxytvonline.com/live",live:true},
-  {id:"kbs-tv",name:"KBS TV",group:"Uganda & Regional TV",mark:"KBS TV",logo:"assets/posters/kbs_tv.png",poster:"assets/posters/kbs_tv.png",streamUrl:"https://www.kbstv.co.ug/live/abr/master.m3u8",url:"https://www.kbstv.co.ug/#live",live:true},
-  {id:"kstv-uganda",name:"KSTV Uganda",group:"Uganda & Regional TV",mark:"KSTV",logo:"assets/posters/kstv_uganda.png",poster:"assets/posters/kstv_uganda.png",streamUrl:"https://live.esteem.africa/live/kstv-uganda-a3023c.m3u8",url:"",live:true},
-  {id:"btn-tv",name:"BTN TV",group:"BTN Network",mark:"BTN",logo:"assets/posters/btn_tv.png",poster:"assets/posters/btn_tv.png",streamUrl:"https://tv.btnrwanda.com:3973/live/btnv2live.m3u8",url:"https://tv.btnrwanda.com/hybrid-stream-video-widget/btnv2",live:true},
-  {id:"bplus-tv",name:"B+ TV",group:"BTN Network",mark:"B+",logo:"assets/posters/bplus_tv.png",poster:"assets/posters/bplus_tv.png",streamUrl:"https://tv.btnrwanda.com:3432/live/bpluslive.m3u8",url:"https://tv.btnrwanda.com/hybrid-stream-video-widget/bplus",live:true},
-  {id:"rt",name:"RT",group:"International News",mark:"RT",logo:"assets/posters/rt_logo.png",poster:"assets/posters/rt_logo.png",streamUrl:"https://rt-glb.rttv.com/dvr/rtnews/playlist.m3u8",url:"https://www.newvision.co.ug/tv/4",live:true},
+  {id:"galaxy-tv",name:"Galaxy TV",group:"Uganda & Regional TV",mark:"GALAXY TV",logo:"assets/posters/galaxy_tv.png",poster:"assets/posters/galaxy_tv.png",streamUrl:"https://livestream.galaxytv.ug/jikonkone/playlist.m3u8",url:"https://galaxytv.ug/",live:true},
   {id:"ntv-uganda",name:"NTV Uganda",group:"Nation Media Group",mark:"NTV",logo:"assets/posters/ntv_uganda.png",poster:"assets/posters/ntv_uganda.png",streamUrl:"https://ams-2629.antmedia.cloud/LiveApp/streams/abul2026.m3u8",url:"https://ams-2629.antmedia.cloud/LiveApp/play.html?id=abul2026&autoplay=true",live:true},
 ];
 function tvView(){
@@ -5715,7 +5710,7 @@ function loadTvChannel(channel){
         if(data.type===Hls.ErrorTypes.MEDIA_ERROR&&!P.retriedMedia){P.retriedMedia=true;hls.recoverMediaError();return}
         if(!fallbackToEmbed()){$("#tv-live").innerHTML="STREAM UNAVAILABLE";toast(channel.name+" stream could not be loaded")}
       });
-    }else if(video.canPlayType("application/vnd.apple.mpegurl")){video.src=channel.streamUrl;autoPlayMedia(video,syncTvControls)}
+    }else if(video.canPlayType("application/vnd.apple.mpegurl")||video.canPlayType("application/x-mpegURL")){video.src=channel.streamUrl;autoPlayMedia(video,syncTvControls)}
     else{$("#tv-live").innerHTML="HLS NOT SUPPORTED";toast("Live streams are not supported in this browser")}
     if(channel.url)P.startTimer=setTimeout(()=>{if(P?.video===video&&video.readyState<2)fallbackToEmbed()},12000);
   }else{

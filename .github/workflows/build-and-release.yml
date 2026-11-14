@@ -108,6 +108,12 @@ jobs:
           npx cap add android
           npx cap sync android
 
+      - name: Set Android update version and store verification
+        run: node scripts/prepare-android-release.js
+        env:
+          ANDROID_VERSION_CODE: ${{ 1000 + github.run_number }}
+          ANDROID_VERSION_NAME: 1.0.${{ github.run_number }}
+
       - name: Build signed Android release APK
         run: |
           cd android
@@ -138,11 +144,29 @@ jobs:
             exit 1
           fi
 
+      - name: Generate Android app link verification file
+        shell: bash
+        run: |
+          set -euo pipefail
+          FINGERPRINT=$(keytool -list -v \
+            -keystore "$RUNNER_TEMP/avioc-release-key.jks" \
+            -storepass "$ANDROID_KEYSTORE_PASSWORD" \
+            -alias "$ANDROID_KEY_ALIAS" \
+            | sed -n 's/^[[:space:]]*SHA256: //p' | head -n 1)
+          test -n "$FINGERPRINT" || { echo "Could not read Android signing certificate fingerprint"; exit 1; }
+          mkdir -p release-binaries
+          cat > release-binaries/assetlinks.json <<EOF
+          [{"relation":["delegate_permission/common.handle_all_urls"],"target":{"namespace":"android_app","package_name":"com.avioc.cinema","sha256_cert_fingerprints":["$FINGERPRINT"]}}]
+          EOF
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v4
         with:
           name: android-binaries
-          path: release-binaries/*.apk
+          path: release-binaries/*
           retention-days: 14
 
   # ============================================================================
@@ -270,12 +294,35 @@ jobs:
           for file in final-release/*; do
             if [ -f "$file" ]; then
               fname=$(basename "$file")
+              if [ "$fname" = "assetlinks.json" ]; then
+                continue
+              fi
+              content_type="application/octet-stream"
+              if [ "$fname" = "Avioc-Cinema.apk" ]; then
+                content_type="application/vnd.android.package-archive"
+              fi
               echo "Uploading $fname to BunnyCDN..."
-              curl --fail --show-error --silent -X PUT -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" -H "Content-Type: application/octet-stream" --data-binary @"$file" "$STORAGE/$fname"
+              curl --fail --show-error --silent -X PUT -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" -H "Content-Type: $content_type" --data-binary @"$file" "$STORAGE/$fname"
               echo " -> [OK] Uploaded $fname"
             fi
           done
           echo "All built apps are live on BunnyCDN!"
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+
+      - name: Publish Android store verification file
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          test -f final-release/assetlinks.json || { echo "Android assetlinks file is missing"; exit 1; }
+          curl --fail --show-error --silent -X PUT \
+            -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            --data-binary @final-release/assetlinks.json \
+            "https://storage.bunnycdn.com/aviocwatch/.well-known/assetlinks.json"
+          echo "Android store install detection is now verified."
         env:
           BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
 
@@ -308,6 +355,22 @@ jobs:
             --data-binary @index.html \
             "https://storage.bunnycdn.com/aviocwatch/index.html"
           echo "Avioc Apps store page published to BunnyCDN."
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+
+      - name: Publish store install-detection manifest to BunnyCDN
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          test -f manifest.json || { echo "manifest.json is missing"; exit 1; }
+          curl --fail --show-error --silent -X PUT \
+            -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+            -H "Content-Type: application/manifest+json; charset=utf-8" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            --data-binary @manifest.json \
+            "https://storage.bunnycdn.com/aviocwatch/manifest.json"
+          echo "Store manifest published."
         env:
           BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
 

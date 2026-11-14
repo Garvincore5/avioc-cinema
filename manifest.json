@@ -5,6 +5,13 @@
   "start_url": "/?source=pwa",
   "scope": "/",
   "id": "/",
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.avioc.cinema"
+    }
+  ],
+  "prefer_related_applications": false,
   "display": "standalone",
   "display_override": ["standalone", "window-controls-overlay"],
   "orientation": "any",
