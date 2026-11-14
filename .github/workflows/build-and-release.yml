@@ -224,6 +224,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout source for live cinema page
+        uses: actions/checkout@v4
+
       - name: Download Windows Artifacts
         uses: actions/download-artifact@v4
         with:
@@ -270,6 +273,22 @@ jobs:
             fi
           done
           echo "All built apps are live on BunnyCDN!"
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+
+      - name: Publish customer cinema page to BunnyCDN
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          test -f cinema.html || { echo "cinema.html is missing"; exit 1; }
+          curl --fail --show-error --silent -X PUT \
+            -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+            -H "Content-Type: text/html; charset=utf-8" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            --data-binary @cinema.html \
+            "https://storage.bunnycdn.com/aviocwatch/cinema.html"
+          echo "Customer cinema page published to BunnyCDN."
         env:
           BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
 
