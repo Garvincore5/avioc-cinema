@@ -1,24 +1,24 @@
 # ==============================================================================
-# Avioc Cinema — Official Code Signing & Keystore Generator (PowerShell)
+# Avioc Cinema — Android release keystore generator (PowerShell)
 # ==============================================================================
 param(
-    [string]$KeystorePass = "avioc2026cinema",
+    [Parameter(Mandatory = $true)]
+    [string]$KeystorePass,
     [string]$Alias = "avioc",
     [string]$OutputDir = $PSScriptRoot
 )
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "=== Avioc Cinema Code Signing Setup ===" -ForegroundColor Cyan
+Write-Host "=== Avioc Cinema Android Signing Key Setup ===" -ForegroundColor Cyan
 
-# 1. Android Keystore (.jks)
 $keystorePath = Join-Path $OutputDir "avioc-release-key.jks"
 $keytool = Get-Command keytool -ErrorAction SilentlyContinue
 
 if ($keytool) {
-    Write-Host "[1/2] Generating Android Keystore: $keystorePath" -ForegroundColor Green
+    Write-Host "Generating Android Keystore: $keystorePath" -ForegroundColor Green
     if (Test-Path $keystorePath) {
-        Remove-Item $keystorePath -Force
+        throw "Keystore already exists. It may be the key used for published app updates; do not overwrite it."
     }
     
     $dname = "CN=Avioc, OU=Avioc Cinema Media, O=Avioc Cinema, L=Kampala, ST=Central, C=UG"
@@ -39,15 +39,4 @@ if ($keytool) {
     Write-Host "[INFO] keytool not installed locally. GitHub Actions will generate it automatically during build." -ForegroundColor Yellow
 }
 
-# 2. Windows Code Signing Certificate (.pfx)
-$pfxPath = Join-Path $OutputDir "avioc-code-signing.pfx"
-Write-Host "[2/2] Generating Windows Code Signing Certificate: $pfxPath" -ForegroundColor Green
-
-$secPass = ConvertTo-SecureString $KeystorePass -AsPlainText -Force
-$cert = New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=Avioc, O=Avioc Cinema, OU=Avioc Media, C=UG" -CertStoreLocation "Cert:\CurrentUser\My" -NotAfter (Get-Date).AddYears(10)
-
-Export-PfxCertificate -Cert $cert -FilePath $pfxPath -Password $secPass | Out-Null
-
-Write-Host "[OK] Windows Code Signing Certificate created: $pfxPath" -ForegroundColor Green
-Write-Host "Thumbprint: $($cert.Thumbprint)" -ForegroundColor DarkCyan
-Write-Host "Author: Avioc (Avioc Cinema)" -ForegroundColor Green
+Write-Host "Keep this keystore backed up securely. Use the same key for all updates to this Android app." -ForegroundColor Yellow

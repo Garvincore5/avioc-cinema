@@ -29,9 +29,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
-      sandbox: false,
-      webSecurity: false, // Allows seamless local poster and media access
-      allowRunningInsecureContent: true
+      sandbox: true
     }
   });
 

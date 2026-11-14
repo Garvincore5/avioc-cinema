@@ -4,7 +4,7 @@
 # ==============================================================================
 set -euo pipefail
 
-KEYSTORE_PASS="${1:-avioc2026cinema}"
+KEYSTORE_PASS="${1:?Pass the keystore password as the first argument}"
 ALIAS="${2:-avioc}"
 OUTPUT_PATH="${3:-./scripts/avioc-release-key.jks}"
 
@@ -13,6 +13,11 @@ echo "  Avioc Cinema — Generating Keystore     "
 echo "========================================="
 
 mkdir -p "$(dirname "$OUTPUT_PATH")"
+
+if [ -e "$OUTPUT_PATH" ]; then
+  echo "Refusing to overwrite an existing keystore; it may be required for app updates." >&2
+  exit 1
+fi
 
 DNAME="CN=Avioc, OU=Avioc Cinema Media, O=Avioc Cinema, L=Kampala, ST=Central, C=UG"
 

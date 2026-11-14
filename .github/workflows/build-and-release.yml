@@ -1,4 +1,4 @@
-name: Build & Sign Avioc Cinema (Universal Device Support)
+name: Build Avioc Cinema Apps
 
 on:
   push:
@@ -14,14 +14,14 @@ on:
         default: 'v1.0.0'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   # ============================================================================
-  # 1. WINDOWS BUILD (Windows 7, 8, 8.1, 10, 11 — 32-bit & 64-bit)
+  # 1. WINDOWS DESKTOP BUILD (32-bit & 64-bit)
   # ============================================================================
   build-windows:
-    name: 🪟 Windows (Win 7/8/10/11 - 32 & 64 bit)
+    name: 🪟 Windows desktop (32-bit & 64-bit)
     runs-on: windows-latest
     steps:
       - name: Checkout Code
@@ -39,20 +39,10 @@ jobs:
       - name: Build Local Standalone Web Package
         run: node scripts/build-hosting.js
 
-      - name: Generate Avioc Windows Code Signing Certificate
-        shell: pwsh
-        run: |
-          & ./scripts/generate-avioc-keystore.ps1 -KeystorePass "avioc2026cinema" -OutputDir "./scripts"
-
-      - name: Build Windows Executables (Avioc Cinema & Avioc Apps Store for Windows 7+)
+      - name: Build Windows executables (Avioc Cinema & Avioc Apps)
         run: |
           npx electron-builder --config electron-builder.json --win --ia32 --x64 --publish never
           npx electron-builder --config electron-builder-apps.json --win --ia32 --x64 --publish never
-
-      - name: Sign Windows Executables with Avioc Signature
-        shell: pwsh
-        run: |
-          & ./scripts/sign-windows-exe.ps1 -DistDir "dist-desktop" -PfxPath "scripts/avioc-code-signing.pfx" -PfxPassword "avioc2026cinema"
 
       - name: Collect and Name Windows Outputs
         shell: pwsh
@@ -70,10 +60,10 @@ jobs:
           retention-days: 14
 
   # ============================================================================
-  # 2. ANDROID BUILD (Android 5.0 Lollipop to Android 15 — Universal for all phones)
+  # 2. ANDROID RELEASE APK
   # ============================================================================
   build-android:
-    name: 🤖 Android (Android 5.0+ Universal APK)
+    name: 🤖 Android APK
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -97,42 +87,47 @@ jobs:
       - name: Build Local Standalone Web Package
         run: node scripts/build-hosting.js
 
-      - name: Generate Avioc Android Keystore
+      - name: Prepare persistent Android signing key
         run: |
-          chmod +x ./scripts/generate-avioc-keystore.sh
-          ./scripts/generate-avioc-keystore.sh "avioc2026cinema" "avioc" "./scripts/avioc-release-key.jks"
+          test -n "$ANDROID_KEYSTORE_BASE64" || { echo "Missing ANDROID_KEYSTORE_BASE64 GitHub secret"; exit 1; }
+          test -n "$ANDROID_KEYSTORE_PASSWORD" || { echo "Missing ANDROID_KEYSTORE_PASSWORD GitHub secret"; exit 1; }
+          test -n "$ANDROID_KEY_ALIAS" || { echo "Missing ANDROID_KEY_ALIAS GitHub secret"; exit 1; }
+          test -n "$ANDROID_KEY_PASSWORD" || { echo "Missing ANDROID_KEY_PASSWORD GitHub secret"; exit 1; }
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/avioc-release-key.jks"
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
-      - name: Initialize and Sync Capacitor Android Project
+      - name: Initialize and sync Capacitor Android project
         run: |
-          npx cap add android || true
+          npx cap add android
           npx cap sync android
 
-      - name: Configure Android Compatibility (Android 5.0+, MultiDex, LargeHeap)
-        run: |
-          MANIFEST="android/app/src/main/AndroidManifest.xml"
-          if [ -f "$MANIFEST" ]; then
-            sed -i '/<application/i \    <uses-permission android:name="android.permission.INTERNET" />\n    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />\n    <uses-permission android:name="android.permission.WAKE_LOCK" />' "$MANIFEST"
-            sed -i 's/<application/<application android:hardwareAccelerated="true" android:largeHeap="true" android:usesCleartextTraffic="true"/' "$MANIFEST"
-          fi
-
-          VAR_GRADLE="android/variables.gradle"
-          if [ -f "$VAR_GRADLE" ]; then
-            sed -i 's/minSdkVersion = [0-9]*/minSdkVersion = 21/' "$VAR_GRADLE"
-          fi
-
-      - name: Compile Release APK with Gradle
+      - name: Build signed Android release APK
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleRelease || ./gradlew assembleDebug
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/avioc-release-key.jks" \
+            -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD"
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
-      - name: Sign APK with Avioc Key and Prepare Release Output
+      - name: Verify signed APK and prepare release output
         run: |
           mkdir -p release-binaries
           RAW_APK=$(find android/app/build/outputs/apk -name "*.apk" | head -n 1)
           if [ -f "$RAW_APK" ]; then
-            echo "Signing $RAW_APK with Avioc certificate..."
-            jarsigner -sigalg SHA256withRSA -digestalg SHA-256 -keystore scripts/avioc-release-key.jks -storepass "avioc2026cinema" -keypass "avioc2026cinema" "$RAW_APK" avioc
+            echo "Verifying the signed release APK..."
+            APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)
+            test -n "$APKSIGNER" || { echo "Android apksigner not found"; exit 1; }
+            "$APKSIGNER" verify --verbose "$RAW_APK"
             cp "$RAW_APK" release-binaries/Avioc-Cinema.apk
             echo "Successfully prepared release-binaries/Avioc-Cinema.apk"
           else
@@ -187,11 +182,11 @@ jobs:
           retention-days: 14
 
   # ============================================================================
-  # 4. IPHONE / IOS BUILD (All iPhones — IPA + Universal 1-Tap MobileConfig)
+  # 4. IPHONE / IPAD HOME-SCREEN WEB CLIP PROFILE (not a native iOS app)
   # ============================================================================
-  build-ios:
-    name: 📱 iPhone / iOS (All iPhones — IPA & MobileConfig)
-    runs-on: macos-latest
+  build-ios-webclip:
+    name: 📱 iPhone / iPad home-screen website shortcut
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -208,41 +203,14 @@ jobs:
       - name: Build Local Standalone Web Package
         run: node scripts/build-hosting.js
 
-      - name: Generate Universal iPhone/iPad Standalone MobileConfig Profile
+      - name: Generate iPhone/iPad website shortcut profile
         run: node scripts/generate-ios-profile.js
 
-      - name: Initialize and Sync Capacitor iOS Project
-        run: |
-          npx cap add ios || true
-          npx cap sync ios
-
-      - name: Build iOS Archive & Package .ipa
-        run: |
-          cd ios/App
-          xcodebuild -workspace App.xcworkspace \
-                     -scheme App \
-                     -configuration Release \
-                     -destination 'generic/platform=iOS' \
-                     -archivePath ../../build/AviocCinema.xcarchive \
-                     CODE_SIGNING_ALLOWED=NO \
-                     CODE_SIGNING_REQUIRED=NO \
-                     archive || true
-
-          cd ../..
-          if [ -d "build/AviocCinema.xcarchive/Products/Applications/App.app" ]; then
-            mkdir -p release-binaries/Payload
-            cp -r build/AviocCinema.xcarchive/Products/Applications/App.app release-binaries/Payload/AviocCinema.app
-            cd release-binaries
-            zip -r Avioc-Cinema.ipa Payload
-            rm -rf Payload
-            cd ..
-          fi
-
-      - name: Upload iOS Artifacts
+      - name: Upload iPhone/iPad Web Clip profile
         uses: actions/upload-artifact@v4
         with:
-          name: ios-binaries
-          path: release-binaries/*.*
+          name: ios-webclip-profile
+          path: release-binaries/Avioc-Cinema.mobileconfig
           retention-days: 14
 
   # ============================================================================
@@ -250,92 +218,91 @@ jobs:
   # ============================================================================
   publish-release:
     name: 🚀 Publish Universal Compatibility Release
-    needs: [build-windows, build-android, build-macos, build-ios]
+    needs: [build-windows, build-android, build-macos, build-ios-webclip]
     runs-on: ubuntu-latest
-    if: always()
+    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success'
+    permissions:
+      contents: write
     steps:
       - name: Download Windows Artifacts
         uses: actions/download-artifact@v4
         with:
           name: windows-binaries
           path: final-release
-        continue-on-error: true
 
       - name: Download Android Artifacts
         uses: actions/download-artifact@v4
         with:
           name: android-binaries
           path: final-release
-        continue-on-error: true
 
       - name: Download macOS Artifacts
         uses: actions/download-artifact@v4
         with:
           name: macos-binaries
           path: final-release
-        continue-on-error: true
 
-      - name: Download iOS Artifacts
+      - name: Download iPhone/iPad Web Clip Profile
         uses: actions/download-artifact@v4
         with:
-          name: ios-binaries
+          name: ios-webclip-profile
           path: final-release
-        continue-on-error: true
 
       - name: List Release Files
         run: |
-          echo "All compatibility packages prepared:"
+          echo "All release packages prepared:"
           ls -la final-release/ || true
 
       - name: Upload All Built Apps Directly to BunnyCDN
         shell: bash
         run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          test -n "$(find final-release -maxdepth 1 -type f -print -quit)" || { echo "No release artifacts were downloaded"; exit 1; }
           STORAGE="https://storage.bunnycdn.com/aviocwatch/avioc%20app/avioc%20cinema"
-          KEY="936d5fc0-203e-4995-8943a1e59562-03d4-4923"
           echo "Uploading all built apps to BunnyCDN..."
           for file in final-release/*; do
             if [ -f "$file" ]; then
               fname=$(basename "$file")
               echo "Uploading $fname to BunnyCDN..."
-              curl -s -X PUT -H "AccessKey: $KEY" -H "Content-Type: application/octet-stream" --data-binary @"$file" "$STORAGE/$fname"
+              curl --fail --show-error --silent -X PUT -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" -H "Content-Type: application/octet-stream" --data-binary @"$file" "$STORAGE/$fname"
               echo " -> [OK] Uploaded $fname"
             fi
           done
           echo "All built apps are live on BunnyCDN!"
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
         with:
           tag_name: ${{ github.event.inputs.release_version || github.ref_name || 'v1.0.0' }}
-          name: Avioc Cinema — Universal Device Release (${{ github.event.inputs.release_version || github.ref_name || 'v1.0.0' }})
+          name: Avioc Cinema App Release (${{ github.event.inputs.release_version || github.ref_name || 'v1.0.0' }})
           body: |
-            # 🎬 Avioc Cinema — Universal Device Compatibility Release
+            # 🎬 Avioc Cinema — App Release
 
-            Built to support **all devices, old and new**, from budget phones and older Windows 7 PCs to the newest hardware.
+            Release packages built by the Avioc Cinema workflow. Check each device's compatibility before installing.
 
             ---
 
             ### 📦 Download Links by Device:
 
-            #### 🤖 Android (Supports 99.5% of all phones: Android 5.0 Lollipop to Android 15)
+            #### 🤖 Android
             - **All Phones, Tablets & Android TV**: [`Avioc-Cinema.apk`](Avioc-Cinema.apk)
               *(Compatible with low-RAM phones, Tecno, Itel, Infinix, Samsung Galaxy, Huawei, Xiaomi, etc.)*
 
-            #### 🪟 Windows (Supports Windows 7, 8, 8.1, 10, and 11)
+            #### 🪟 Windows (unsigned; Windows may show a publisher warning)
             - **Windows 32-bit (Old laptops & PCs)**: [`Avioc-Cinema-Setup-ia32.exe`](Avioc-Cinema-Setup-ia32.exe)
             - **Windows 64-bit (Standard PCs)**: [`Avioc-Cinema-Setup-x64.exe`](Avioc-Cinema-Setup-x64.exe)
-            - **Portable 32-bit (No installation needed)**: [`Avioc-Cinema-Portable-ia32.exe`](Avioc-Cinema-Portable-ia32.exe)
-            - **Portable 64-bit (No installation needed)**: [`Avioc-Cinema-Portable-x64.exe`](Avioc-Cinema-Portable-x64.exe)
 
-            #### 📱 iPhone & iPad (Supports ALL iOS versions from iOS 9 to iOS 18+)
-            - **1-Tap Profile (All iPhones: iPhone 5/6/7/8/X/11/12/13/14/15/16)**: [`Avioc-Cinema.mobileconfig`](Avioc-Cinema.mobileconfig)
-              *(Tap and install directly from Safari — zero computer or jailbreak needed!)*
-            - **Native Sideloading IPA (AltStore, Sideloadly, TrollStore)**: [`Avioc-Cinema.ipa`](Avioc-Cinema.ipa)
+            #### 📱 iPhone & iPad
+            - **Home-screen website shortcut profile**: [`Avioc-Cinema.mobileconfig`](Avioc-Cinema.mobileconfig)
+              *(This adds a shortcut to the hosted website; it is not a native iOS app or IPA.)*
 
-            #### 🍎 Mac (macOS 10.13 High Sierra to macOS 15+ Sequoia)
+            #### 🍎 Mac (unsigned; macOS may show an unidentified developer warning)
             - **Mac Installer (Universal for Apple Silicon M1-M4 & Intel)**: [`Avioc-Cinema-Mac.dmg`](Avioc-Cinema-Mac.dmg)
 
             ---
-            *Author: **Avioc (Avioc Cinema)** | Signed with official Avioc credentials.*
+            *Windows and Mac builds are unsigned. Android builds use the persistent signing key configured in GitHub Actions Secrets.*
           files: final-release/*

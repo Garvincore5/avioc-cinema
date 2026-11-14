@@ -2,12 +2,13 @@
 # Avioc Cinema - Publish Over-The-Air (OTA) GUI Update to BunnyCDN
 # ==============================================================================
 param(
-    [string]$AccessKey = "936d5fc0-203e-4995-8943a1e59562-03d4-4923",
+    [string]$AccessKey = $env:BUNNY_STORAGE_ZONE_KEY,
     [string]$StorageBase = "https://storage.bunnycdn.com/aviocwatch",
     [string]$GuiDir = "$PSScriptRoot\..\gui-patch"
 )
 
 $ErrorActionPreference = "Stop"
+if (-not $AccessKey) { throw "Set BUNNY_STORAGE_ZONE_KEY in your environment before uploading." }
 
 Write-Host "Publishing Live GUI Update to BunnyCDN..."
 

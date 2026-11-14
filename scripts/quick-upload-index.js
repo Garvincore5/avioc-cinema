@@ -3,7 +3,8 @@ const path = require('path');
 const https = require('https');
 
 const zone = 'aviocwatch';
-const key = '936d5fc0-203e-4995-8943a1e59562-03d4-4923';
+const key = process.env.BUNNY_STORAGE_ZONE_KEY;
+if (!key) throw new Error('Set BUNNY_STORAGE_ZONE_KEY in your environment before uploading.');
 
 function uploadFile(remotePath, content, contentType) {
   return new Promise((resolve, reject) => {

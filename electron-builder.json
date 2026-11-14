@@ -19,10 +19,6 @@
       {
         "target": "nsis",
         "arch": ["x64", "ia32"]
-      },
-      {
-        "target": "portable",
-        "arch": ["x64", "ia32"]
       }
     ],
     "icon": "assets/icons/app-icon-512.png",
@@ -36,9 +32,6 @@
     "createStartMenuShortcut": true,
     "shortcutName": "Avioc Cinema",
     "artifactName": "Avioc-Cinema-Setup-${arch}.${ext}"
-  },
-  "portable": {
-    "artifactName": "Avioc-Cinema-Portable-${arch}.${ext}"
   },
   "mac": {
     "target": [

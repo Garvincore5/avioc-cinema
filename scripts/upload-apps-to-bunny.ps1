@@ -2,13 +2,14 @@
 # Avioc Cinema - Upload Apps to BunnyCDN (/avioc app/avioc cinema/)
 # ==============================================================================
 param(
-    [string]$AccessKey = "936d5fc0-203e-4995-8943a1e59562-03d4-4923",
+    [string]$AccessKey = $env:BUNNY_STORAGE_ZONE_KEY,
     [string]$StorageBase = "https://storage.bunnycdn.com/aviocwatch/avioc app/avioc cinema",
     [string]$CdnBase = "https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema",
     [string]$SourceDir = "$PSScriptRoot\..\release-binaries"
 )
 
 $ErrorActionPreference = "Continue"
+if (-not $AccessKey) { throw "Set BUNNY_STORAGE_ZONE_KEY in your environment before uploading." }
 
 Write-Host "==========================================================" -ForegroundColor Cyan
 Write-Host "  Avioc Apps - Uploading Binaries to BunnyCDN             " -ForegroundColor Cyan

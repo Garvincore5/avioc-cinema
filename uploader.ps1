@@ -1,5 +1,6 @@
 $ErrorActionPreference = "Continue"
-$accessKey = "936d5fc0-203e-4995-8943a1e59562-03d4-4923"
+$accessKey = $env:BUNNY_STORAGE_ZONE_KEY
+if (-not $accessKey) { throw "Set BUNNY_STORAGE_ZONE_KEY in your environment before uploading." }
 $storageBase = "https://storage.bunnycdn.com/aviocwatch"
 $logFile = "e:\code\avioc cinema\upload_log.txt"
 $statusFile = "e:\code\avioc cinema\upload_status.json"

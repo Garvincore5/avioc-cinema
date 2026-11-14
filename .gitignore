@@ -3,8 +3,16 @@ node_modules/
 dist-desktop/
 release-binaries/
 build/
+android/
+ios/
+.env
+.env.*
+!.env.example
 *.pfx
 *.jks
+*.p12
+*.keystore
+*.mobileprovision
 .DS_Store
 Thumbs.db
 

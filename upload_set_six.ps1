@@ -18,7 +18,8 @@ function Save-UploadStatus($Value) {
 }
 
 try {
-    $accessKey = "936d5fc0-203e-4995-8943a1e59562-03d4-4923"
+    $accessKey = $env:BUNNY_STORAGE_ZONE_KEY
+    if (-not $accessKey) { throw "Set BUNNY_STORAGE_ZONE_KEY in your environment before uploading." }
 
     $manifestJson = Get-Content -LiteralPath $manifestPath -Encoding UTF8 -Raw
     $manifestValue = ConvertFrom-Json -InputObject $manifestJson

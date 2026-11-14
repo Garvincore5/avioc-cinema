@@ -1,7 +1,7 @@
 {
   "name": "avioc-cinema",
   "version": "1.0.0",
-  "description": "Avioc Cinema - High performance universal streaming app for all devices (Android 5.0+, Windows 7/8/10/11 32/64-bit, macOS 10.13+, iOS)",
+  "description": "Avioc Cinema streaming app with a desktop player for Windows",
   "main": "electron/main.js",
   "author": "Avioc Cinema <contact@avioc.com>",
   "license": "UNLICENSED",
@@ -37,5 +37,8 @@
     "@capacitor/cli": "^5.7.8",
     "electron": "22.3.27",
     "electron-builder": "^24.13.3"
+  },
+  "allowScripts": {
+    "electron@22.3.27": true
   }
 }

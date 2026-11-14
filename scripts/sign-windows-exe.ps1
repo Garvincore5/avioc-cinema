@@ -4,7 +4,8 @@
 param(
     [string]$DistDir = "dist-desktop",
     [string]$PfxPath = "scripts/avioc-code-signing.pfx",
-    [string]$PfxPassword = "avioc2026cinema"
+    [Parameter(Mandatory = $true)]
+    [string]$PfxPassword
 )
 
 $ErrorActionPreference = "Continue"

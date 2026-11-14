@@ -24,9 +24,9 @@ const mobileconfig = `<?xml version="1.0" encoding="UTF-8"?>
             <key>Label</key>
             <string>Avioc Cinema</string>
             <key>PayloadDescription</key>
-            <string>Official Avioc Cinema standalone video streaming app for iOS</string>
+            <string>Add Avioc Cinema to the Home Screen as a website shortcut</string>
             <key>PayloadDisplayName</key>
-            <string>Avioc Cinema WebClip</string>
+            <string>Avioc Cinema Website Shortcut</string>
             <key>PayloadIdentifier</key>
             <string>com.avioc.cinema.webclip</string>
             <key>PayloadType</key>
@@ -42,7 +42,7 @@ const mobileconfig = `<?xml version="1.0" encoding="UTF-8"?>
         </dict>
     </array>
     <key>PayloadDescription</key>
-    <string>Official Avioc Cinema app profile for all iPhones and iPads (supports all iOS versions including old iPhones)</string>
+    <string>Installs a removable Home Screen shortcut to the Avioc Cinema website. This is not a native iOS app.</string>
     <key>PayloadDisplayName</key>
     <string>Avioc Cinema</string>
     <key>PayloadIdentifier</key>
