@@ -1,0 +1,42 @@
+plugins { id 'com.android.application' }
+
+def clearviewVersionCode = (System.getenv('CLEARVIEW_VERSION_CODE') ?: '3').toInteger()
+def clearviewVersionName = System.getenv('CLEARVIEW_VERSION_NAME') ?: '1.1.1'
+
+android {
+    namespace 'com.clearview.browser'
+    compileSdk 36
+    buildToolsVersion '36.0.0'
+
+    signingConfigs {
+        release {
+            storeFile file(System.getenv('ANDROID_KEYSTORE_FILE') ?: 'missing-release-key.jks')
+            storePassword System.getenv('ANDROID_KEYSTORE_PASSWORD') ?: ''
+            keyAlias System.getenv('ANDROID_KEY_ALIAS') ?: ''
+            keyPassword System.getenv('ANDROID_KEY_PASSWORD') ?: ''
+        }
+    }
+
+    defaultConfig {
+        applicationId 'com.clearview.browser'
+        minSdk 24
+        targetSdk 35
+        versionCode clearviewVersionCode
+        versionName clearviewVersionName
+        ndk { abiFilters 'arm64-v8a', 'x86_64' }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+    }
+
+    packaging { jniLibs { useLegacyPackaging true } }
+}
+
+dependencies {
+    implementation 'io.github.junkfood02.youtubedl-android:library:0.18.1'
+    implementation 'io.github.junkfood02.youtubedl-android:ffmpeg:0.18.1'
+}

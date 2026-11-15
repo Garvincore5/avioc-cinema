@@ -4,6 +4,8 @@ dist-desktop/
 release-binaries/
 build/
 android/
+!store-apps/clearview/android/
+!store-apps/clearview/android/**
 ios/
 .env
 .env.*

@@ -1,0 +1,3 @@
+FFmpeg LGPL static Windows build
+
+This package includes FFmpeg 9.0 Windows x64 binaries from the LGPL static build published by BtbN/FFmpeg-Builds. The corresponding FFmpeg source is available at https://ffmpeg.org/download.html and the build project is at https://github.com/BtbN/FFmpeg-Builds. The accompanying LICENSE.txt is from that binary distribution.

@@ -12,6 +12,7 @@ on:
       - icon-512.png
       - assets/icons/avioc-apps-192.png
       - assets/icons/avioc-apps-512.png
+      - assets/icons/clearview.svg
       - .github/workflows/deploy-app-store.yml
   workflow_dispatch:
 
@@ -68,12 +69,12 @@ jobs:
         run: |
           set -euo pipefail
           : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
-          for file in manifest.json sw.js favicon.svg icon-192.png icon-512.png assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png; do
+          for file in manifest.json sw.js favicon.svg icon-192.png icon-512.png assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png assets/icons/clearview.svg; do
             test -f "$file" || { echo "$file is missing"; exit 1; }
             case "$file" in
               manifest.json) content_type="application/manifest+json; charset=utf-8" ;;
               sw.js) content_type="application/javascript; charset=utf-8" ;;
-              favicon.svg) content_type="image/svg+xml" ;;
+              *.svg) content_type="image/svg+xml" ;;
               *.png) content_type="image/png" ;;
             esac
             curl --fail --show-error --silent -X PUT \

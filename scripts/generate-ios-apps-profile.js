@@ -20,7 +20,7 @@ const mobileconfig = `<?xml version="1.0" encoding="UTF-8"?>
     <key>PayloadUUID</key><string>C610C001-C710-4C10-8A10-C710C10E0A01</string>
     <key>PayloadVersion</key><integer>1</integer>
     <key>Precomposed</key><true/>
-    <key>URL</key><string>https://aviocwatch.b-cdn.net/apps-ota-v1.0.16.html?standalone=1</string>
+    <key>URL</key><string>https://aviocwatch.b-cdn.net/apps-ota-v1.0.17.html?standalone=1</string>
   </dict></array>
   <key>PayloadDescription</key><string>Installs a removable Home Screen shortcut to Avioc Apps. This is not a native iOS app.</string>
   <key>PayloadDisplayName</key><string>Avioc Apps</string>

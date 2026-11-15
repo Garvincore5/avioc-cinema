@@ -2,7 +2,7 @@
   "name": "Avioc Apps",
   "short_name": "Avioc Apps",
   "description": "Official Avioc App Store — Download Avioc Cinema, Admin Center & more for Android, Windows, iPhone and Mac.",
-  "start_url": "/apps-ota-v1.0.16.html?source=pwa",
+  "start_url": "/apps-ota-v1.0.17.html?source=pwa",
   "scope": "/",
   "id": "/",
   "related_applications": [

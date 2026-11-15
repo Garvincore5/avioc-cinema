@@ -1,0 +1,11 @@
+plugins {
+    id 'com.android.application' version '8.13.2' apply false
+}
+
+def externalBuildRoot = System.getenv('CLEARVIEW_ANDROID_BUILD_DIR')
+if (externalBuildRoot) {
+    layout.buildDirectory = file(externalBuildRoot)
+    subprojects { project ->
+        project.layout.buildDirectory = file("${externalBuildRoot}/${project.name}")
+    }
+}
