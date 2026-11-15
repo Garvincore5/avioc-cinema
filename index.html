@@ -732,7 +732,7 @@
         <div class="app-card-title">Avioc Apps (Windows)</div>
         <div class="app-card-category">Official Store</div>
         <div class="app-card-badge badge-blue">&#128421; WIN 7/8/10/11</div>
-        <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-x64.exe" class="btn-get-app" id="gridAppsGetBtn" data-app-install="apps">INSTALL</a>
+        <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.10-x64.exe" class="btn-get-app" id="gridAppsGetBtn" data-app-install="apps">INSTALL</a>
       </div>
 
     </div>
@@ -812,7 +812,7 @@
       <div class="sheet-sub">Official downloads for Windows, Android, Mac, and iPhone</div>
 
       <!-- Windows Apps Store Desktop App -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-x64.exe" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.10-x64.exe" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128421; Avioc Apps Store for Windows (64-bit)</div>
           <div class="platform-detail">Native App Store &bull; Fills & Fits All Screens &bull; Win 10/11</div>
@@ -821,7 +821,7 @@
       </a>
 
       <!-- Windows Apps Store 32-bit -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-ia32.exe" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.10-ia32.exe" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128421; Avioc Apps Store for Windows (32-bit)</div>
           <div class="platform-detail">Windows 7 / 8 / 10 &bull; Older PCs & Low RAM</div>
@@ -978,7 +978,7 @@
       var base = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/';
       if (appKey === 'apps') {
         var is64 = /x86_64|Win64|x64|WOW64/i.test(navigator.userAgent || '');
-        return base + (is64 ? 'Avioc-Apps-Setup-x64.exe' : 'Avioc-Apps-Setup-ia32.exe');
+        return base + (is64 ? 'Avioc-Apps-Setup-v1.0.10-x64.exe' : 'Avioc-Apps-Setup-v1.0.10-ia32.exe');
       }
       var platform = currentPlatform();
       if (platform === 'android') return latestAndroidApkUrl;

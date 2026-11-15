@@ -313,6 +313,7 @@ jobs:
           set -euo pipefail
           : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
           test -n "$(find final-release -maxdepth 1 -type f -print -quit)" || { echo "No release artifacts were downloaded"; exit 1; }
+          APP_VERSION=$(node -p "require('./package.json').version")
           STORAGE="https://storage.bunnycdn.com/aviocwatch/avioc%20app/avioc%20cinema"
           echo "Uploading all built apps to BunnyCDN..."
           for file in final-release/*; do
@@ -328,6 +329,17 @@ jobs:
               echo "Uploading $fname to BunnyCDN..."
               curl --fail --show-error --silent -X PUT -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" -H "Content-Type: $content_type" --data-binary @"$file" "$STORAGE/$fname"
               echo " -> [OK] Uploaded $fname"
+              if [[ "$fname" =~ ^Avioc-Apps-Setup-(x64|ia32)\.exe$ ]]; then
+                arch="${BASH_REMATCH[1]}"
+                versioned_name="Avioc-Apps-Setup-v${APP_VERSION}-${arch}.exe"
+                echo "Publishing versioned standalone installer $versioned_name..."
+                curl --fail --show-error --silent -X PUT \
+                  -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+                  -H "Content-Type: application/octet-stream" \
+                  --data-binary @"$file" \
+                  "$STORAGE/$versioned_name"
+                echo " -> [OK] Uploaded $versioned_name"
+              fi
             fi
           done
           echo "All built apps are live on BunnyCDN!"
