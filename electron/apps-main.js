@@ -2,7 +2,7 @@ const { app, BrowserWindow, shell, ipcMain } = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
 
-// Avioc Apps - Official Desktop App Store for Windows (Fills & fits all screens)
+// Avioc Apps - official installable app catalog for desktop and Android builds.
 app.commandLine.appendSwitch('enable-gpu-rasterization');
 app.commandLine.appendSwitch('enable-zero-copy');
 app.commandLine.appendSwitch('ignore-gpu-blocklist');
@@ -34,8 +34,8 @@ if (!hasSingleInstance) {
 }
 
 function createWindow() {
-  const iconPath = path.join(__dirname, '..', 'assets', 'icons', 'Avioc original.jpg');
-  const fallbackIcon = path.join(__dirname, '..', 'assets', 'icons', 'app-icon-512.png');
+  const iconPath = path.join(__dirname, '..', 'assets', 'icons', 'avioc-apps-512.png');
+  const fallbackIcon = path.join(__dirname, '..', 'assets', 'icons', 'logo-avioc-apps.svg');
   const actualIcon = fs.existsSync(iconPath) ? iconPath : fallbackIcon;
 
   mainWindow = new BrowserWindow({
@@ -60,7 +60,7 @@ function createWindow() {
   const indexPath = path.join(__dirname, '..', 'firebase-public', 'index.html');
   const rootIndex = path.join(__dirname, '..', 'index.html');
   const fileToLoad = fs.existsSync(appsPagePath) ? appsPagePath : (fs.existsSync(indexPath) ? indexPath : rootIndex);
-  const otaUrl = 'https://aviocwatch.b-cdn.net/apps.html?v=1.0.10';
+  const otaUrl = 'https://aviocwatch.b-cdn.net/apps.html?v=1.0.11';
   let usedLocalFallback = false;
 
   mainWindow.webContents.on('did-fail-load', (_event, _code, _description, _validatedURL, isMainFrame) => {

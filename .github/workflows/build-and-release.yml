@@ -29,7 +29,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.0'
+        default: 'v1.0.11'
 
 permissions:
   contents: read
@@ -54,6 +54,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Generate Avioc Apps icons
+        run: node scripts/generate-apps-icon.js
+
       - name: Build Local Standalone Web Package
         run: node scripts/build-hosting.js
 
@@ -75,6 +78,157 @@ jobs:
         with:
           name: windows-binaries
           path: release-binaries/*.exe
+          retention-days: 14
+
+  # Avioc Apps has its own signed Android package and is separate from Cinema.
+  build-android-apps:
+    name: 🤖 Signed Avioc Apps Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Install Dependencies
+        run: npm install
+      - name: Generate Avioc Apps icons and configure the Android app
+        run: node scripts/prepare-android-apps.js
+      - name: Build hosted store files
+        run: node scripts/build-hosting.js
+      - name: Add and sync Capacitor Android project
+        run: |
+          npx cap add android
+          npx cap sync android
+      - name: Prepare Android release version
+        run: node scripts/prepare-android-apps-release.js
+        env:
+          ANDROID_VERSION_CODE: ${{ github.run_number }}
+          ANDROID_VERSION_NAME: 1.0.${{ github.run_number }}
+      - name: Restore Android signing key from GitHub secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${ANDROID_KEYSTORE_BASE64:?Missing ANDROID_KEYSTORE_BASE64 GitHub secret}"
+          : "${ANDROID_KEYSTORE_PASSWORD:?Missing ANDROID_KEYSTORE_PASSWORD GitHub secret}"
+          : "${ANDROID_KEY_ALIAS:?Missing ANDROID_KEY_ALIAS GitHub secret}"
+          : "${ANDROID_KEY_PASSWORD:?Missing ANDROID_KEY_PASSWORD GitHub secret}"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/avioc-release-key.jks"
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Build signed Avioc Apps APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/avioc-release-key.jks" \
+            -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD"
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Verify and name signed APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK=$(find android/app/build/outputs/apk -name '*.apk' | head -n 1)
+          test -n "$APK" && test -f "$APK"
+          apksigner=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)
+          test -n "$apksigner"
+          "$apksigner" verify --verbose "$APK"
+          mkdir -p release-binaries
+          version=$(node -p "require('./package.json').version")
+          cp "$APK" "release-binaries/Avioc-Apps-Android-v${version}.apk"
+      - name: Upload signed Avioc Apps APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apps-binary
+          path: release-binaries/*.apk
+          retention-days: 14
+
+  build-macos-apps:
+    name: 🍎 Avioc Apps for macOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm install
+      - run: node scripts/generate-apps-icon.js
+      - run: node scripts/build-hosting.js
+      - name: Build universal Avioc Apps DMG
+        run: |
+          export CSC_IDENTITY_AUTO_DISCOVERY=false
+          npx electron-builder --config electron-builder-apps.json --mac dmg --publish never
+      - name: Name Avioc Apps DMG
+        run: |
+          mkdir -p release-binaries
+          version=$(node -p "require('./package.json').version")
+          cp dist-desktop/*.dmg "release-binaries/Avioc-Apps-Mac-v${version}.dmg"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-apps-binary
+          path: release-binaries/*.dmg
+          retention-days: 14
+
+  build-linux-apps:
+    name: 🐧 Avioc Apps for Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm install
+      - run: node scripts/generate-apps-icon.js
+      - run: node scripts/build-hosting.js
+      - name: Build x64 and ARM64 AppImage packages
+        run: npx electron-builder --config electron-builder-apps.json --linux AppImage --x64 --arm64 --publish never
+      - name: Name Linux packages
+        run: |
+          set -euo pipefail
+          mkdir -p release-binaries
+          version="$(node -p "require('./package.json').version")"
+          find dist-desktop -maxdepth 1 -name '*.AppImage' -print0 | while IFS= read -r -d '' file; do
+            arch=$(basename "$file" | grep -oE '(x64|arm64)' | tail -n 1)
+            test -n "$arch"
+            cp "$file" "release-binaries/Avioc-Apps-Linux-${arch}-v${version}.AppImage"
+          done
+          test -n "$(find release-binaries -name '*.AppImage' -print -quit)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-apps-binaries
+          path: release-binaries/*.AppImage
+          retention-days: 14
+
+  build-ios-apps-profile:
+    name: 📱 Avioc Apps iPhone/iPad Home Screen shortcut
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate Avioc Apps web clip profile
+        run: |
+          node scripts/generate-apps-icon.js
+          node scripts/generate-ios-apps-profile.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios-apps-profile
+          path: release-binaries/Avioc-Apps.mobileconfig
           retention-days: 14
 
   # ============================================================================
@@ -263,9 +417,9 @@ jobs:
   # ============================================================================
   publish-release:
     name: 🚀 Publish Universal Compatibility Release
-    needs: [build-windows, build-android, build-macos, build-ios-webclip]
+    needs: [build-windows, build-android, build-macos, build-ios-webclip, build-android-apps, build-macos-apps, build-linux-apps, build-ios-apps-profile]
     runs-on: ubuntu-latest
-    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success'
+    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
     permissions:
       contents: write
     steps:
@@ -301,6 +455,26 @@ jobs:
         with:
           name: ios-webclip-profile
           path: final-release
+      - name: Download Avioc Apps Android APK
+        uses: actions/download-artifact@v4
+        with:
+          name: android-apps-binary
+          path: final-release
+      - name: Download Avioc Apps Mac DMG
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-apps-binary
+          path: final-release
+      - name: Download Avioc Apps Linux packages
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-apps-binaries
+          path: final-release
+      - name: Download Avioc Apps iPhone/iPad shortcut
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-apps-profile
+          path: final-release
 
       - name: List Release Files
         run: |
@@ -323,8 +497,14 @@ jobs:
                 continue
               fi
               content_type="application/octet-stream"
-              if [ "$fname" = "Avioc-Cinema.apk" ]; then
+              if [[ "$fname" == *.apk ]]; then
                 content_type="application/vnd.android.package-archive"
+              elif [[ "$fname" == *.mobileconfig ]]; then
+                content_type="application/x-apple-aspen-config"
+              elif [[ "$fname" == *.dmg ]]; then
+                content_type="application/x-apple-diskimage"
+              elif [[ "$fname" == *.AppImage ]]; then
+                content_type="application/vnd.appimage"
               fi
               echo "Uploading $fname to BunnyCDN..."
               curl --fail --show-error --silent -X PUT -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" -H "Content-Type: $content_type" --data-binary @"$file" "$STORAGE/$fname"
@@ -417,6 +597,24 @@ jobs:
         env:
           BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
 
+      - name: Publish Avioc Apps PWA icons
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          for file in assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png; do
+            test -s "$file" || { echo "Missing Avioc Apps icon: $file"; exit 1; }
+            curl --fail --show-error --silent -X PUT \
+              -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+              -H "Content-Type: image/png" \
+              -H "Cache-Control: public, max-age=31536000, immutable" \
+              --data-binary @"$file" \
+              "https://storage.bunnycdn.com/aviocwatch/$file"
+          done
+          echo "Avioc Apps PWA icons published."
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+
       - name: Publish store install-detection manifest to BunnyCDN
         shell: bash
         run: |
@@ -459,10 +657,14 @@ jobs:
             - **Home-screen website shortcut profile**: [`Avioc-Cinema.mobileconfig`](Avioc-Cinema.mobileconfig)
               *(This adds a shortcut to the hosted website; it is not a native iOS app or IPA.)*
 
-            ### 🛍️ Avioc Apps Store (Windows)
+            ### 🛍️ Avioc Apps Store
 
+            - **Android**: signed Avioc Apps APK. GitHub Actions signs it using the private repository secrets.
             - **Windows 32-bit**: [`Avioc-Apps-Setup-ia32.exe`](Avioc-Apps-Setup-ia32.exe) *(unsigned)*
             - **Windows 64-bit**: [`Avioc-Apps-Setup-x64.exe`](Avioc-Apps-Setup-x64.exe) *(unsigned)*
+            - **Mac**: versioned Avioc Apps `.dmg` *(unsigned; requires the normal macOS first-open confirmation)*
+            - **Linux x64 / ARM64**: versioned `.AppImage` packages.
+            - **iPhone/iPad**: [`Avioc-Apps.mobileconfig`](Avioc-Apps.mobileconfig), a Home Screen shortcut profile; iOS native IPA signing requires a paid Apple developer account.
 
             ---
             *Avioc Cinema's Android APK uses its persistent signing key. Windows installers and the Mac DMG are unsigned.*

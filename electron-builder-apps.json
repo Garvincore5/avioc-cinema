@@ -28,7 +28,7 @@
         "arch": ["x64", "ia32"]
       }
     ],
-    "icon": "assets/icons/app-icon-512.png",
+    "icon": "assets/icons/avioc-apps-512.png",
     "publisherName": "Avioc",
     "legalTrademarks": "Avioc Apps"
   },
@@ -39,5 +39,35 @@
     "createStartMenuShortcut": true,
     "shortcutName": "Avioc Apps",
     "artifactName": "Avioc-Apps-Setup-${arch}.${ext}"
+  },
+  "mac": {
+    "target": [
+      {
+        "target": "dmg",
+        "arch": ["universal"]
+      }
+    ],
+    "icon": "assets/icons/avioc-apps-512.png",
+    "category": "public.app-category.productivity",
+    "identity": null,
+    "hardenedRuntime": false,
+    "gatekeeperAssess": false,
+    "artifactName": "Avioc-Apps-Mac.${ext}"
+  },
+  "dmg": {
+    "title": "Avioc Apps",
+    "artifactName": "Avioc-Apps-Mac.${ext}",
+    "contents": [
+      { "x": 130, "y": 220 },
+      { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+    ]
+  },
+  "linux": {
+    "target": [
+      { "target": "AppImage", "arch": ["x64", "arm64"] }
+    ],
+    "icon": "assets/icons/avioc-apps-512.png",
+    "category": "Utility",
+    "artifactName": "Avioc-Apps-Linux-${arch}.${ext}"
   }
 }
