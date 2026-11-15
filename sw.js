@@ -1,13 +1,13 @@
 // Avioc Apps - PWA Service Worker | Avioc App Store + Cinema Player
-const CACHE_NAME = 'avioc-apps-v21';
+const CACHE_NAME = 'avioc-apps-v22';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
+  '/apps-ota.html',
   '/cinema.html',
   '/manifest.json',
-  '/favicon.svg?v=2',
-  '/icon-192.png?v=2',
-  '/icon-512.png?v=2',
+  '/assets/icons/avioc-apps-192.png?v=1',
+  '/assets/icons/avioc-apps-512.png?v=1',
   '/assets/hls.min.js',
   '/assets/cinema-preview.png',
   '/assets/icons/Avioc%20original.jpg'

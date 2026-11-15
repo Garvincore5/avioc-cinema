@@ -9,6 +9,10 @@
     {
       "platform": "play",
       "id": "com.avioc.cinema"
+    },
+    {
+      "platform": "play",
+      "id": "com.avioc.apps"
     }
   ],
   "prefer_related_applications": false,

@@ -518,6 +518,39 @@
       display: flex;
     }
 
+    #pwaHandoffModal {
+      align-items: center;
+      padding: 20px;
+      z-index: 2000;
+    }
+
+    .pwa-handoff-card {
+      width: min(100%, 460px);
+      padding: 26px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 24px;
+      background: #171320;
+      color: #fff;
+      box-shadow: 0 24px 90px rgba(0,0,0,.48);
+    }
+
+    .pwa-handoff-card h2 { margin: 0 0 8px; font-size: 23px; }
+    .pwa-handoff-card p { margin: 0 0 20px; color: #bbb5c7; font-size: 14px; line-height: 1.5; }
+    .pwa-handoff-action {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 13px 16px;
+      border: 0;
+      border-radius: 13px;
+      font: inherit;
+      font-weight: 750;
+      cursor: pointer;
+    }
+    .pwa-handoff-primary { background: #f4a535; color: #171018; }
+    .pwa-handoff-secondary { background: #2a2534; color: #fff; }
+    .pwa-handoff-dismiss { background: transparent; color: #c9c3d2; }
+
     .modal-sheet {
       background: #ffffff;
       width: 100%;
@@ -921,9 +954,19 @@
     </div>
   </div>
 
+  <div class="modal-overlay" id="pwaHandoffModal" aria-hidden="true">
+    <section class="pwa-handoff-card" role="dialog" aria-modal="true" aria-labelledby="pwaHandoffTitle">
+      <h2 id="pwaHandoffTitle">Open the Avioc Apps store</h2>
+      <p>This PWA is the web shortcut. Open the standalone Avioc Apps store for the full install experience, or install/update it if you have not installed it yet.</p>
+      <button class="pwa-handoff-action pwa-handoff-primary" id="openStandaloneApps" type="button">Open Avioc Apps</button>
+      <button class="pwa-handoff-action pwa-handoff-secondary" id="installStandaloneApps" type="button">Install/update Avioc Apps</button>
+      <button class="pwa-handoff-action pwa-handoff-dismiss" id="stayInAppsPwa" type="button">Continue in this PWA</button>
+    </section>
+  </div>
+
   <script>
     var latestAndroidApkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk';
-    var latestAndroidAppsApkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Android-v1.0.13.apk';
+    var latestAndroidAppsApkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Android-v1.0.14.apk';
     var androidCinemaAppLink = 'https://aviocwatch.b-cdn.net/cinema-app.html?avioc_install=1';
 
     // Smart Device Detection
@@ -1002,6 +1045,39 @@
     function closePlatformModal(e) {
       var modal = document.getElementById('platformModal');
       if (modal) modal.classList.remove('open');
+    }
+
+    function showPwaStoreHandoff() {
+      var standalone = window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: window-controls-overlay)').matches || window.navigator.standalone === true;
+      var isNativeApps = window.AviocNative && window.AviocNative.appId === 'apps';
+      var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent || '') || (/MacIntel/i.test(navigator.platform || '') && navigator.maxTouchPoints > 1);
+      if (!standalone || isNativeApps || isIOS) return;
+      var modal = document.getElementById('pwaHandoffModal');
+      if (modal) {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+    function closePwaStoreHandoff() {
+      var modal = document.getElementById('pwaHandoffModal');
+      if (modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    function openStandaloneApps() {
+      closePwaStoreHandoff();
+      // Android uses a verified App Link; desktop uses the installed app protocol.
+      window.location.href = /Android/i.test(navigator.userAgent || '')
+        ? 'https://aviocwatch.b-cdn.net/apps-ota.html?open-app=1'
+        : 'aviocapps://open';
+    }
+
+    function installStandaloneApps() {
+      closePwaStoreHandoff();
+      startFileDownload(currentInstallerUrl('apps'));
     }
 
     var downloadHistoryKey = 'avioc_store_download_history_v1';
@@ -1273,6 +1349,15 @@
     detectAndroidCinemaInstall();
     var appsStoreButton = document.getElementById('gridAppsGetBtn');
     if (appsStoreButton) appsStoreButton.href = currentInstallerUrl('apps');
+    document.getElementById('openStandaloneApps')?.addEventListener('click', openStandaloneApps);
+    document.getElementById('installStandaloneApps')?.addEventListener('click', installStandaloneApps);
+    document.getElementById('stayInAppsPwa')?.addEventListener('click', closePwaStoreHandoff);
+    showPwaStoreHandoff();
+    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+      navigator.serviceWorker.register('/sw.js').then(function (registration) {
+        return registration.update();
+      }).catch(function () {});
+    }
   </script>
 </body>
 </html>

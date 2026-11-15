@@ -342,7 +342,7 @@ jobs:
           test -n "$FINGERPRINT" || { echo "Could not read Android signing certificate fingerprint"; exit 1; }
           mkdir -p release-binaries
           cat > release-binaries/assetlinks.json <<EOF
-          [{"relation":["delegate_permission/common.handle_all_urls"],"target":{"namespace":"android_app","package_name":"com.avioc.cinema","sha256_cert_fingerprints":["$FINGERPRINT"]}}]
+          [{"relation":["delegate_permission/common.handle_all_urls"],"target":{"namespace":"android_app","package_name":"com.avioc.cinema","sha256_cert_fingerprints":["$FINGERPRINT"]}},{"relation":["delegate_permission/common.handle_all_urls"],"target":{"namespace":"android_app","package_name":"com.avioc.apps","sha256_cert_fingerprints":["$FINGERPRINT"]}}]
           EOF
         env:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}

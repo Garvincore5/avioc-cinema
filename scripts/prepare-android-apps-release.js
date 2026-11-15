@@ -4,6 +4,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const androidRoot = path.join(root, 'android');
 const gradlePath = path.join(androidRoot, 'app', 'build.gradle');
+const manifestPath = path.join(androidRoot, 'app', 'src', 'main', 'AndroidManifest.xml');
 const configPath = path.join(androidRoot, 'app', 'src', 'main', 'assets', 'capacitor.config.json');
 const stringsPath = path.join(androidRoot, 'app', 'src', 'main', 'res', 'values', 'strings.xml');
 const assetsDir = path.join(root, 'assets', 'icons');
@@ -13,7 +14,7 @@ const versionName = process.env.ANDROID_VERSION_NAME || '1.0.0';
 if (!Number.isInteger(versionCode) || versionCode < 1 || versionCode > 2100000000) {
   throw new Error('ANDROID_VERSION_CODE must be a valid Android version code.');
 }
-for (const file of [gradlePath, configPath, stringsPath]) {
+for (const file of [gradlePath, configPath, stringsPath, manifestPath]) {
   if (!fs.existsSync(file)) throw new Error(`Generated Avioc Apps Android project is missing ${file}`);
 }
 
@@ -61,6 +62,18 @@ fs.mkdirSync(adaptiveDir, { recursive: true });
 const adaptiveIcon = `<?xml version="1.0" encoding="utf-8"?>\n<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android"><background android:drawable="@color/avioc_apps_icon_background"/><foreground android:drawable="@mipmap/ic_launcher_foreground"/></adaptive-icon>\n`;
 fs.writeFileSync(path.join(adaptiveDir, 'ic_launcher.xml'), adaptiveIcon);
 fs.writeFileSync(path.join(adaptiveDir, 'ic_launcher_round.xml'), adaptiveIcon);
+// Allow the Apps PWA to hand off to the installed native Apps application.
+let manifest = fs.readFileSync(manifestPath, 'utf8');
+if (!manifest.includes('avioc-apps-open-scheme')) {
+  const activityStart = manifest.search(/<activity\b(?=[^>]*android:name="[^"]*MainActivity")/);
+  if (activityStart < 0) throw new Error('Could not find the Avioc Apps Android MainActivity for its open link.');
+  const activityOpenEnd = manifest.indexOf('>', activityStart);
+  const activityClose = manifest.indexOf('</activity>', activityOpenEnd);
+  if (activityOpenEnd < 0 || activityClose < 0) throw new Error('Could not locate the Avioc Apps Android MainActivity element.');
+  const appSchemeFilter = `\n            <!-- avioc-apps-open-scheme: verified handoff from the Apps PWA -->\n            <intent-filter android:autoVerify="true">\n                <action android:name="android.intent.action.VIEW" />\n                <category android:name="android.intent.category.DEFAULT" />\n                <category android:name="android.intent.category.BROWSABLE" />\n                <data android:scheme="https" android:host="aviocwatch.b-cdn.net" android:pathPrefix="/apps-ota.html" />\n            </intent-filter>\n        `;
+  manifest = `${manifest.slice(0, activityClose)}${appSchemeFilter}${manifest.slice(activityClose)}`;
+  fs.writeFileSync(manifestPath, manifest);
+}
 const valuesDir = path.dirname(stringsPath);
 const colorsPath = path.join(valuesDir, 'colors.xml');
 let colors = fs.existsSync(colorsPath) ? fs.readFileSync(colorsPath, 'utf8') : '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n</resources>\n';
