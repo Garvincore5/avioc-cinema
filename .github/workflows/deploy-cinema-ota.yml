@@ -1,0 +1,58 @@
+name: Publish Avioc Cinema web updates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - cinema.html
+      - api-config.js
+      - 'new body/catalog-data.json'
+      - scripts/build-hosting.js
+      - scripts/prepare-android-cinema.js
+      - .github/workflows/deploy-cinema-ota.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish OTA pages to BunnyCDN
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Cinema source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Prepare app page and public data
+        run: |
+          node scripts/build-hosting.js
+          node scripts/prepare-android-cinema.js
+
+      - name: Publish web files to BunnyCDN
+        shell: bash
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          upload() {
+            local source="$1" destination="$2" content_type="$3"
+            test -s "$source" || { echo "Missing OTA file: $source"; exit 1; }
+            curl --fail --show-error --silent -X PUT \
+              -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+              -H "Content-Type: $content_type" \
+              -H "Cache-Control: no-cache, no-store, must-revalidate" \
+              --data-binary @"$source" \
+              "https://storage.bunnycdn.com/aviocwatch/$destination"
+          }
+          upload cinema.html cinema.html 'text/html; charset=utf-8'
+          upload firebase-public/index.html cinema-app.html 'text/html; charset=utf-8'
+          upload firebase-public/apps.html apps.html 'text/html; charset=utf-8'
+          upload firebase-public/api-config.js api-config.js 'application/javascript; charset=utf-8'
+          upload firebase-public/catalog-data.json catalog-data.json 'application/json; charset=utf-8'
+          echo "Avioc Cinema web update published."

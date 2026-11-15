@@ -7,6 +7,8 @@ const gradlePath = path.join(appDir, 'build.gradle');
 const manifestPath = path.join(appDir, 'src', 'main', 'AndroidManifest.xml');
 const valuesDir = path.join(appDir, 'src', 'main', 'res', 'values');
 const stringsPath = path.join(valuesDir, 'strings.xml');
+const javaRoot = path.join(appDir, 'src', 'main', 'java');
+const nativeConfigPath = path.join(appDir, 'src', 'main', 'assets', 'capacitor.config.json');
 const versionCode = Number(process.env.ANDROID_VERSION_CODE);
 const versionName = process.env.ANDROID_VERSION_NAME || '1.0.0';
 
@@ -16,6 +18,11 @@ if (!Number.isInteger(versionCode) || versionCode < 1 || versionCode > 210000000
 for (const file of [gradlePath, manifestPath]) {
   if (!fs.existsSync(file)) throw new Error(`Capacitor Android project is missing ${file}`);
 }
+
+if (!fs.existsSync(nativeConfigPath)) throw new Error('Capacitor Android runtime config is missing.');
+const nativeConfig = JSON.parse(fs.readFileSync(nativeConfigPath, 'utf8'));
+nativeConfig.server = { ...(nativeConfig.server || {}), url: 'https://aviocwatch.b-cdn.net/cinema-app.html', errorPath: 'index.html' };
+fs.writeFileSync(nativeConfigPath, `${JSON.stringify(nativeConfig, null, 2)}\n`);
 
 let gradle = fs.readFileSync(gradlePath, 'utf8');
 if (!/versionCode\s+\d+/.test(gradle)) throw new Error('Could not find the generated Android versionCode.');
@@ -27,15 +34,64 @@ if (/versionName\s+["'][^"']+["']/.test(gradle)) {
 }
 fs.writeFileSync(gradlePath, gradle);
 
+// Media3 gives the Android app native container/codec and adaptive-streaming
+// support that the embedded WebView does not provide (notably Matroska/MKV).
+const media3Version = '1.4.1';
+if (!gradle.includes('androidx.media3:media3-exoplayer:')) {
+  const dependenciesClose = gradle.lastIndexOf('}');
+  if (dependenciesClose < 0) throw new Error('Could not find Android Gradle dependencies block.');
+  const media3 = `\n    implementation "androidx.media3:media3-exoplayer:${media3Version}"\n    implementation "androidx.media3:media3-exoplayer-hls:${media3Version}"\n    implementation "androidx.media3:media3-exoplayer-dash:${media3Version}"\n    implementation "androidx.media3:media3-exoplayer-smoothstreaming:${media3Version}"\n    implementation "androidx.media3:media3-ui:${media3Version}"\n`;
+  gradle = `${gradle.slice(0, dependenciesClose)}${media3}${gradle.slice(dependenciesClose)}`;
+  fs.writeFileSync(gradlePath, gradle);
+}
+
+const nativeSource = path.join(root, 'scripts', 'android-media3');
+const nativeFiles = ['Media3PlayerPlugin.java', 'Media3PlayerActivity.java'];
+const mainActivityFiles = [];
+function findJava(dir) {
+  if (!fs.existsSync(dir)) return;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const file = path.join(dir, entry.name);
+    if (entry.isDirectory()) findJava(file);
+    else if (entry.name === 'MainActivity.java') mainActivityFiles.push(file);
+  }
+}
+findJava(javaRoot);
+if (mainActivityFiles.length !== 1) throw new Error(`Expected one generated MainActivity.java; found ${mainActivityFiles.length}.`);
+const generatedPackageDir = path.dirname(mainActivityFiles[0]);
+for (const file of nativeFiles) {
+  const source = path.join(nativeSource, file);
+  if (!fs.existsSync(source)) throw new Error(`Missing native Media3 source: ${source}`);
+  fs.copyFileSync(source, path.join(generatedPackageDir, file));
+}
+let mainActivity = fs.readFileSync(mainActivityFiles[0], 'utf8');
+if (!mainActivity.includes('Media3PlayerPlugin.class')) {
+  mainActivity = mainActivity.replace(/(public\s+class\s+MainActivity\s+extends\s+BridgeActivity\s*\{)/,
+    '$1\n    @Override\n    public void onCreate(android.os.Bundle savedInstanceState) {\n        registerPlugin(Media3PlayerPlugin.class);\n        super.onCreate(savedInstanceState);\n    }');
+  if (!mainActivity.includes('Media3PlayerPlugin.class')) throw new Error('Could not register Media3 player with generated MainActivity.');
+  fs.writeFileSync(mainActivityFiles[0], mainActivity);
+}
+
 let manifest = fs.readFileSync(manifestPath, 'utf8');
+if (!manifest.includes('Media3PlayerActivity')) {
+  const appClose = manifest.indexOf('</application>');
+  if (appClose < 0) throw new Error('Could not find the Android application element.');
+  manifest = `${manifest.slice(0, appClose)}    <activity android:name=".Media3PlayerActivity" android:configChanges="orientation|screenSize|keyboardHidden" android:exported="false" android:screenOrientation="fullSensor" android:theme="@style/Media3PlayerTheme" />\n${manifest.slice(appClose)}`;
+}
 if (!manifest.includes('android:name="asset_statements"')) {
   const applicationClose = manifest.indexOf('</application>');
   if (applicationClose < 0) throw new Error('Could not find the Android application element.');
   manifest = `${manifest.slice(0, applicationClose)}    <meta-data android:name="asset_statements" android:resource="@string/asset_statements" />\n${manifest.slice(applicationClose)}`;
-  fs.writeFileSync(manifestPath, manifest);
 }
+fs.writeFileSync(manifestPath, manifest);
 
 fs.mkdirSync(valuesDir, { recursive: true });
+const playerStylesPath = path.join(valuesDir, 'styles.xml');
+let playerStyles = fs.existsSync(playerStylesPath) ? fs.readFileSync(playerStylesPath, 'utf8') : '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n</resources>\n';
+if (!playerStyles.includes('name="Media3PlayerTheme"')) {
+  playerStyles = playerStyles.replace('</resources>', '  <style name="Media3PlayerTheme" parent="@android:style/Theme.Material.NoActionBar">\n    <item name="android:colorAccent">#F4A535</item>\n    <item name="android:windowBackground">#000000</item>\n  </style>\n</resources>');
+  fs.writeFileSync(playerStylesPath, playerStyles);
+}
 const statement = '[{\\"relation\\":[\\"delegate_permission/common.handle_all_urls\\"],\\"target\\":{\\"namespace\\":\\"web\\",\\"site\\":\\"https://aviocwatch.b-cdn.net\\"}}]';
 if (fs.existsSync(stringsPath)) {
   let strings = fs.readFileSync(stringsPath, 'utf8');
@@ -86,3 +142,4 @@ for (const file of ['ic_launcher.xml', 'ic_launcher_round.xml']) {
 
 console.log(`Configured Avioc Cinema Android version ${versionName} (${versionCode}) and store install detection.`);
 console.log('Applied Avioc Cinema launcher icons for legacy and adaptive Android launchers.');
+console.log('Configured Android to receive Cinema web-content updates from BunnyCDN.');

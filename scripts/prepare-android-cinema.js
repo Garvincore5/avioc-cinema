@@ -6,6 +6,7 @@ const publicDir = path.join(root, 'firebase-public');
 const entryPath = path.join(publicDir, 'index.html');
 const cinemaPath = path.join(publicDir, 'cinema.html');
 const appsPath = path.join(publicDir, 'apps.html');
+const otaPath = path.join(publicDir, 'cinema-app.html');
 
 if (!fs.existsSync(entryPath) || !fs.existsSync(cinemaPath)) {
   throw new Error('Build the hosting files first; firebase-public/index.html and cinema.html are required.');
@@ -22,5 +23,6 @@ cinemaHtml = cinemaHtml
 
 fs.writeFileSync(appsPath, appsStoreHtml, 'utf8');
 fs.writeFileSync(entryPath, cinemaHtml, 'utf8');
+fs.writeFileSync(otaPath, cinemaHtml, 'utf8');
 
-console.log('Prepared separate Android entry points: Avioc Cinema at / and Avioc Apps at /apps.html.');
+console.log('Prepared Cinema app entry points and the OTA web page at /cinema-app.html.');

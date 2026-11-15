@@ -5,6 +5,16 @@ on:
     branches:
       - main
     paths-ignore:
+      - cinema.html
+      - api-config.js
+      - 'new body/catalog-data.json'
+      - scripts/prepare-android-cinema.js
+      - scripts/prepare-android-release.js
+      - scripts/android-media3/**
+      - electron/main.js
+      - capacitor.config.json
+      - .github/workflows/build-and-release.yml
+      - .github/workflows/deploy-cinema-ota.yml
       - index.html
       - manifest.json
       - favicon.svg
@@ -262,6 +272,12 @@ jobs:
       - name: Checkout source for live cinema page
         uses: actions/checkout@v4
 
+      - name: Prepare OTA Cinema web pages
+        run: |
+          npm install
+          node scripts/build-hosting.js
+          node scripts/prepare-android-cinema.js
+
       - name: Download Windows Artifacts
         uses: actions/download-artifact@v4
         with:
@@ -347,6 +363,29 @@ jobs:
             --data-binary @cinema.html \
             "https://storage.bunnycdn.com/aviocwatch/cinema.html"
           echo "Customer cinema page published to BunnyCDN."
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+
+      - name: Publish the OTA Cinema app page and its public data
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          upload() {
+            local source="$1" destination="$2" content_type="$3"
+            test -s "$source" || { echo "Missing OTA file: $source"; exit 1; }
+            curl --fail --show-error --silent -X PUT \
+              -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+              -H "Content-Type: $content_type" \
+              -H "Cache-Control: no-cache, no-store, must-revalidate" \
+              --data-binary @"$source" \
+              "https://storage.bunnycdn.com/aviocwatch/$destination"
+          }
+          upload firebase-public/cinema-app.html cinema-app.html 'text/html; charset=utf-8'
+          upload firebase-public/apps.html apps.html 'text/html; charset=utf-8'
+          upload firebase-public/api-config.js api-config.js 'application/javascript; charset=utf-8'
+          upload firebase-public/catalog-data.json catalog-data.json 'application/json; charset=utf-8'
+          echo "OTA Cinema web page and configuration published."
         env:
           BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
 

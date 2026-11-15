@@ -2765,6 +2765,35 @@ async function accountApi(path,options={}){
   if(!API_BASE_URL)throw new Error("The account API is not connected yet. Once the Render service is created, add its URL to api-config.js.");
   const headers={"Content-Type":"application/json",...(options.headers||{})};
   if(authSession?.token)headers.Authorization=`Bearer ${authSession.token}`;
+  // Native WebViews can reject an otherwise valid API response because of
+  // origin/CORS behavior. Use Capacitor's native HTTP transport for account
+  // calls in native apps; keep fetch for browsers and desktop builds.
+  const nativeHttp=window.Capacitor?.Plugins?.CapacitorHttp;
+  const nativePlatform=window.Capacitor?.getPlatform?.();
+  if((nativePlatform==="android"||nativePlatform==="ios")&&nativeHttp?.request){
+    let body=options.body;
+    if(typeof body==="string"){
+      try{body=JSON.parse(body)}catch{}
+    }
+    let response;
+    try{
+      response=await nativeHttp.request({
+        url:`${API_BASE_URL}${path}`,
+        method:String(options.method||"GET").toUpperCase(),
+        headers,
+        ...(body!==undefined?{data:body}:{}),
+        responseType:"json",
+        connectTimeout:50000,
+        readTimeout:50000
+      });
+    }catch(err){
+      console.warn("Native account API error:",err);
+      throw new Error("Could not reach the Avioc account server. Check your internet connection and try again.");
+    }
+    const data=response?.data&&typeof response.data==="object"?response.data:{};
+    if(response?.status<200||response?.status>=300)throw new Error(data.error||"The request could not be completed.");
+    return data;
+  }
   const fetchOpts={...options,headers};
   const signal=makeApiSignal(50000);
   if(signal)fetchOpts.signal=signal;
@@ -5334,6 +5363,14 @@ const closeLayer=(fromPopState=false)=>{
 /* ===================== player ===================== */
 let P=null;
 const prefs={vol:Math.max(0.2,Number(store.get("vol",.85))||.85),muted:false,rate:1};
+function hasNativeMedia3(){return !!(window.Capacitor&&window.Capacitor.getPlatform?.()==="android"&&window.Capacitor.Plugins?.Media3Player)}
+function openNativeMedia3({url,title,queue=[],position=0,previewSeconds=0,onReturn}){
+  if(!hasNativeMedia3())return false;
+  window.Capacitor.Plugins.Media3Player.play({url,title,queueJson:JSON.stringify(queue),startPosition:Math.max(0,Math.floor(position*1000)),previewSeconds})
+    .then(result=>onReturn?.(result||{}))
+    .catch(error=>{console.error("Native video playback failed",error);toast("Could not open this video on this device")});
+  return true;
+}
 function autoPlayMedia(video,onSync){
   if(!video)return;
   if(!prefs.vol||prefs.vol<=0)prefs.vol=0.85;
@@ -5450,6 +5487,21 @@ function play(id,o={}){
   const resumeAt=same&&previous.t>15&&(!durationEstimate||durationEstimate-previous.t>30)?previous.t:0;
   const label=t.type==="series"?t.title+" • S"+two(s)+"E"+two(e)+" - "+episode.name:(t.parts>1?`${t.partTitles?.[p-1]||t.title} • Part ${p}`:t.title);
   const dock=dockHtml(t,s,e,p);
+  if(hasNativeMedia3()){
+    const nativeQueue=t.type==="series"
+      ?epList(t,s).filter(x=>x.streamUrl).map(x=>({url:x.streamUrl,title:`${t.title} • S${two(s)}E${two(x.n)} - ${x.name}`}))
+      :Array.from({length:t.parts||1},(_,i)=>({url:t.partUrls?.[i]||t.streamUrl,title:t.parts>1?`${t.partTitles?.[i]||t.title} • Part ${i+1}`:t.title})).filter(x=>x.url);
+    const startPosition=resumeAt;
+    if(openNativeMedia3({url:stream,title:label,queue:nativeQueue,position:startPosition,previewSeconds:hasActivePass()?0:PREVIEW_LIMIT_SEC,onReturn:result=>{
+      const index=Math.max(0,Math.min(Number(result.queueIndex)||0,nativeQueue.length-1));
+      const selected=nativeQueue[index];
+      if(selected){
+        const seconds=Math.max(0,Number(result.position)||0)/1000;
+        progress[id]={t:seconds,at:Date.now(),...(t.type==="series"?{s,e:Number((epList(t,s).filter(x=>x.streamUrl)[index]||episode).n)}:{p:index+1})};saveProg();
+      }
+      if(result.previewExpired)openAccount("plans",`Your 10-second preview of “${t.title}” has ended! Pick a VIP pass below to keep watching in Full HD.`);
+    }}))return;
+  }
   const previewBadge=!hasActivePass()
     ? `<span class="pill gold" id="preview-pill">Preview: 10s left · VIP Pass</span>`
     : "";
@@ -5587,6 +5639,13 @@ function tvDockHtml(current){
 }
 function playTv(channel){
   if(!channel)return;
+  if(hasNativeMedia3()&&channel.streamUrl){
+    const channels=LOCAL_TV.filter(c=>c.streamUrl).map(c=>({url:c.streamUrl,title:c.name}));
+    openNativeMedia3({url:channel.streamUrl,title:channel.name,queue:channels,previewSeconds:hasActivePass()?0:PREVIEW_LIMIT_SEC,onReturn:result=>{
+      if(result.previewExpired)openAccount("plans",`Your 10-second preview of “${channel.name}” has ended! Pick a VIP pass below to keep watching.`);
+    }});
+    return;
+  }
   if(P?.tv){
     loadTvChannel(channel);
     return;

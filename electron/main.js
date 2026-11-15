@@ -39,7 +39,20 @@ function createWindow() {
   const publicIndexPath = path.join(__dirname, '..', 'firebase-public', 'index.html');
   const fileToLoad = fs.existsSync(cinemaPath) ? cinemaPath : (fs.existsSync(rootCinema) ? rootCinema : publicIndexPath);
 
-  mainWindow.loadFile(fileToLoad);
+  const otaUrl = 'https://aviocwatch.b-cdn.net/cinema-app.html';
+  let usedLocalFallback = false;
+  mainWindow.webContents.on('did-fail-load', (_event, _code, _description, _validatedURL, isMainFrame) => {
+    if (isMainFrame && !usedLocalFallback) {
+      usedLocalFallback = true;
+      mainWindow.loadFile(fileToLoad);
+    }
+  });
+  mainWindow.loadURL(otaUrl).catch(() => {
+    if (!usedLocalFallback) {
+      usedLocalFallback = true;
+      mainWindow.loadFile(fileToLoad);
+    }
+  });
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
