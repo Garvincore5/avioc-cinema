@@ -29,7 +29,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.11'
+        default: 'v1.0.12'
 
 permissions:
   contents: read
@@ -204,12 +204,26 @@ jobs:
           set -euo pipefail
           mkdir -p release-binaries
           version="$(node -p "require('./package.json').version")"
-          find dist-desktop -maxdepth 1 -name '*.AppImage' -print0 | while IFS= read -r -d '' file; do
-            arch=$(basename "$file" | grep -oE '(x64|arm64)' | tail -n 1)
-            test -n "$arch"
+          find dist-desktop -maxdepth 1 -type f -iname '*.appimage' -print0 | while IFS= read -r -d '' file; do
+            image_name=$(basename "$file")
+            case "$image_name" in
+              *arm64*|*aarch64*|*armv8*) arch=arm64 ;;
+              *x64*|*x86_64*|*amd64*) arch=x64 ;;
+              *)
+                image_info=$(file "$file")
+                case "$image_info" in
+                  *aarch64*|*ARM*) arch=arm64 ;;
+                  *x86-64*|*x86_64*|*Intel\ 80386*) arch=x64 ;;
+                  *) echo "Cannot identify AppImage architecture: $image_info"; exit 1 ;;
+                esac
+                ;;
+            esac
             cp "$file" "release-binaries/Avioc-Apps-Linux-${arch}-v${version}.AppImage"
           done
-          test -n "$(find release-binaries -name '*.AppImage' -print -quit)"
+          find dist-desktop -maxdepth 1 -type f -iname '*.appimage' -print
+          for arch in x64 arm64; do
+            test -s "release-binaries/Avioc-Apps-Linux-${arch}-v${version}.AppImage" || { echo "Missing Linux ${arch} AppImage"; exit 1; }
+          done
       - uses: actions/upload-artifact@v4
         with:
           name: linux-apps-binaries
