@@ -8,6 +8,30 @@ app.commandLine.appendSwitch('enable-zero-copy');
 app.commandLine.appendSwitch('ignore-gpu-blocklist');
 
 let mainWindow = null;
+const protocolScheme = 'aviocapps';
+if (process.defaultApp && process.argv.length >= 2) {
+  app.setAsDefaultProtocolClient(protocolScheme, process.execPath, [path.resolve(process.argv[1])]);
+} else {
+  app.setAsDefaultProtocolClient(protocolScheme);
+}
+const hasSingleInstance = app.requestSingleInstanceLock();
+
+function focusMainWindow() {
+  if (!mainWindow) return;
+  if (mainWindow.isMinimized()) mainWindow.restore();
+  mainWindow.show();
+  mainWindow.focus();
+}
+
+if (!hasSingleInstance) {
+  app.quit();
+} else {
+  app.on('second-instance', focusMainWindow);
+  app.on('open-url', (event) => {
+    event.preventDefault();
+    focusMainWindow();
+  });
+}
 
 function createWindow() {
   const iconPath = path.join(__dirname, '..', 'assets', 'icons', 'Avioc original.jpg');
@@ -25,7 +49,7 @@ function createWindow() {
     autoHideMenuBar: true,
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'apps-preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
       sandbox: true
@@ -63,7 +87,9 @@ function createWindow() {
   });
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  if (hasSingleInstance) createWindow();
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();

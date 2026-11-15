@@ -92,6 +92,15 @@ if (!manifest.includes('android:name="asset_statements"')) {
   if (applicationClose < 0) throw new Error('Could not find the Android application element.');
   manifest = `${manifest.slice(0, applicationClose)}    <meta-data android:name="asset_statements" android:resource="@string/asset_statements" />\n${manifest.slice(applicationClose)}`;
 }
+if (!manifest.includes('avioc-install-app-link')) {
+  const activityStart = manifest.search(/<activity\b(?=[^>]*android:name="[^"]*MainActivity")/);
+  if (activityStart < 0) throw new Error('Could not find the generated Android MainActivity for app links.');
+  const activityOpenEnd = manifest.indexOf('>', activityStart);
+  const activityClose = manifest.indexOf('</activity>', activityOpenEnd);
+  if (activityOpenEnd < 0 || activityClose < 0) throw new Error('Could not locate the Android MainActivity element.');
+  const appLinkFilter = `\n            <!-- avioc-install-app-link: open installed Cinema from its Store install link -->\n            <intent-filter android:autoVerify="true">\n                <action android:name="android.intent.action.VIEW" />\n                <category android:name="android.intent.category.DEFAULT" />\n                <category android:name="android.intent.category.BROWSABLE" />\n                <data android:scheme="https" android:host="aviocwatch.b-cdn.net" android:pathPrefix="/cinema-app.html" />\n            </intent-filter>\n        `;
+  manifest = `${manifest.slice(0, activityClose)}${appLinkFilter}${manifest.slice(activityClose)}`;
+}
 fs.writeFileSync(manifestPath, manifest);
 
 fs.mkdirSync(valuesDir, { recursive: true });

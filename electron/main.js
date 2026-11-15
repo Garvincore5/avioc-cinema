@@ -9,6 +9,30 @@ app.commandLine.appendSwitch('ignore-gpu-blocklist');
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
 let mainWindow = null;
+const protocolScheme = 'avioccinema';
+if (process.defaultApp && process.argv.length >= 2) {
+  app.setAsDefaultProtocolClient(protocolScheme, process.execPath, [path.resolve(process.argv[1])]);
+} else {
+  app.setAsDefaultProtocolClient(protocolScheme);
+}
+const hasSingleInstance = app.requestSingleInstanceLock();
+
+function focusMainWindow() {
+  if (!mainWindow) return;
+  if (mainWindow.isMinimized()) mainWindow.restore();
+  mainWindow.show();
+  mainWindow.focus();
+}
+
+if (!hasSingleInstance) {
+  app.quit();
+} else {
+  app.on('second-instance', focusMainWindow);
+  app.on('open-url', (event) => {
+    event.preventDefault();
+    focusMainWindow();
+  });
+}
 
 function createWindow() {
   const iconPath = path.join(__dirname, '..', 'assets', 'icons', 'app-icon-512.png');
@@ -83,6 +107,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  if (!hasSingleInstance) return;
   createWindow();
 
   app.on('activate', () => {

@@ -15,6 +15,12 @@
     "main": "electron/apps-main.js",
     "description": "Avioc Apps desktop app catalog and launcher"
   },
+  "protocols": [
+    {
+      "name": "Avioc Apps",
+      "schemes": ["aviocapps"]
+    }
+  ],
   "win": {
     "target": [
       {

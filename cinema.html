@@ -2045,52 +2045,6 @@ footer{color:var(--muted);font-size:12px;padding-block:20px 40px;border-top:1px 
 </head>
 <body>
 
-<!-- ===== NATIVE APP SMART BANNER (shown to PWA/browser users, hidden in Electron/Capacitor) ===== -->
-<div id="avioc-native-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:99999;background:linear-gradient(90deg,#1a0a2e 0%,#0d1b3e 60%,#07080c 100%);border-bottom:1px solid rgba(0,240,255,0.25);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-  <div style="display:flex;align-items:center;gap:10px;min-width:0;">
-    <span style="font-size:22px;flex-shrink:0;">&#128640;</span>
-    <div style="min-width:0;">
-      <div style="font-size:13px;font-weight:700;color:#fff;line-height:1.2;">Get the Avioc Cinema App</div>
-      <div style="font-size:11px;color:#8e95aa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Faster &bull; Works Offline &bull; Auto Updates</div>
-    </div>
-  </div>
-  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-    <a id="avioc-banner-dl-btn" href="index.html" style="background:linear-gradient(135deg,#ff2a5f,#a855f7);color:#fff;text-decoration:none;font-size:12px;font-weight:700;padding:7px 14px;border-radius:20px;white-space:nowrap;letter-spacing:0.4px;">Download Free</a>
-    <button onclick="(function(){localStorage.setItem('avioc_banner_dismissed','1');document.getElementById('avioc-native-banner').style.display='none';document.body.style.paddingTop='';})();" style="background:none;border:none;color:#8e95aa;font-size:18px;cursor:pointer;padding:4px 6px;line-height:1;" aria-label="Dismiss">&times;</button>
-  </div>
-</div>
-<script>
-(function() {
-  // Show banner only if: not dismissed, not running inside Electron/Capacitor native
-  var dismissed = localStorage.getItem('avioc_banner_dismissed');
-  var isElectron = window.AviocNative && window.AviocNative.isElectron;
-  var isCapacitor = !!window.Capacitor;
-  if (!dismissed && !isElectron && !isCapacitor) {
-    var banner = document.getElementById('avioc-native-banner');
-    if (banner) {
-      banner.style.display = 'flex';
-      document.body.style.paddingTop = (banner.offsetHeight || 56) + 'px';
-      // Smart: set download link based on OS
-      var dlBtn = document.getElementById('avioc-banner-dl-btn');
-      if (dlBtn) {
-        var ua = navigator.userAgent || '';
-        if (/android/i.test(ua)) {
-          dlBtn.href = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk';
-          dlBtn.textContent = 'Get APK';
-        } else if (/iphone|ipad|ipod/i.test(ua)) {
-          dlBtn.href = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.mobileconfig';
-          dlBtn.textContent = 'Install on iPhone';
-        } else {
-          dlBtn.href = 'index.html';
-          dlBtn.textContent = 'Download Free';
-        }
-      }
-    }
-  }
-})();
-</script>
-<!-- ===== END NATIVE APP BANNER ===== -->
-
 <header class="top pad" id="top">
   <button class="logo" id="home-logo" aria-label="Avioc Cinema home">AVIOC<b>●</b><small>CINEMA</small></button>
   <nav id="nav" aria-label="Sections">
@@ -8280,6 +8234,33 @@ function showTvInstallPrompt() {
     closeTvInstallBanner();
   });
 }
+
+(function offerAndroidNativeInstallWhenAppLinkFallsBack() {
+  const params = new URLSearchParams(window.location.search || '');
+  if (params.get('avioc_install') !== '1') return;
+  if (window.Capacitor || (window.AviocNative && window.AviocNative.isElectron)) return;
+  params.delete('avioc_install');
+  const cleanQuery = params.toString();
+  history.replaceState(null, '', window.location.pathname + (cleanQuery ? '?' + cleanQuery : '') + window.location.hash);
+  window.addEventListener('load', () => {
+    window.setTimeout(() => {
+      const apkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk';
+      if (!window.confirm('Avioc Cinema is not installed yet. Download the signed Android APK now? After it downloads, open it and approve installation.')) return;
+      try {
+        const oldHistory = JSON.parse(localStorage.getItem('avioc_store_download_history_v1') || '[]');
+        const history = Array.isArray(oldHistory) ? oldHistory.filter((item) => item.fileName !== 'Avioc-Cinema.apk') : [];
+        history.unshift({ fileName: 'Avioc-Cinema.apk', title: 'Avioc Cinema for Android', url: apkUrl, requestedAt: Date.now() });
+        localStorage.setItem('avioc_store_download_history_v1', JSON.stringify(history.slice(0, 20)));
+      } catch {}
+      const download = document.createElement('a');
+      download.href = apkUrl;
+      download.download = 'Avioc-Cinema.apk';
+      document.body.appendChild(download);
+      download.click();
+      download.remove();
+    }, 500);
+  }, { once: true });
+})();
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

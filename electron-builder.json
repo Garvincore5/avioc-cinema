@@ -14,6 +14,12 @@
   "extraMetadata": {
     "main": "electron/main.js"
   },
+  "protocols": [
+    {
+      "name": "Avioc Cinema",
+      "schemes": ["avioccinema"]
+    }
+  ],
   "win": {
     "target": [
       {
