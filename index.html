@@ -765,7 +765,7 @@
         <div class="app-card-title">Avioc Apps for all devices</div>
         <div class="app-card-category">Official Store</div>
         <div class="app-card-badge badge-blue">&#128241; ANDROID &bull; WINDOWS &bull; MAC &bull; LINUX</div>
-        <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.15-x64.exe" class="btn-get-app" id="gridAppsGetBtn" data-app-install="apps">INSTALL</a>
+        <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.16-x64.exe" class="btn-get-app" id="gridAppsGetBtn" data-app-install="apps">INSTALL</a>
       </div>
 
     </div>
@@ -845,7 +845,7 @@
       <div class="sheet-sub">Official downloads for Windows, Android, Mac, and iPhone</div>
 
       <!-- Windows Apps Store Desktop App -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.15-x64.exe" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.16-x64.exe" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128421; Avioc Apps Store for Windows (64-bit)</div>
           <div class="platform-detail">Native App Store &bull; Fills & Fits All Screens &bull; Win 10/11</div>
@@ -854,7 +854,7 @@
       </a>
 
       <!-- Windows Apps Store 32-bit -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.15-ia32.exe" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.16-ia32.exe" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128421; Avioc Apps Store for Windows (32-bit)</div>
           <div class="platform-detail">Windows 7 / 8 / 10 &bull; Older PCs & Low RAM</div>
@@ -863,7 +863,7 @@
       </a>
 
       <!-- Avioc Apps for Android, signed by GitHub Actions -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Android-v1.0.15.apk" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Android-v1.0.16.apk" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#129302; Avioc Apps for Android</div>
           <div class="platform-detail">Signed APK &bull; Android phones, tablets, and TV</div>
@@ -872,7 +872,7 @@
       </a>
 
       <!-- Avioc Apps for Mac -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Mac-v1.0.15.dmg" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Mac-v1.0.16.dmg" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128187; Avioc Apps for Mac</div>
           <div class="platform-detail">Universal DMG for Intel and Apple Silicon</div>
@@ -881,14 +881,14 @@
       </a>
 
       <!-- Avioc Apps for Linux -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Linux-x64-v1.0.15.AppImage" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Linux-x64-v1.0.16.AppImage" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128039; Avioc Apps for Linux (x64)</div>
           <div class="platform-detail">AppImage &bull; 64-bit Intel/AMD Linux</div>
         </div>
         <span class="btn-sheet-get">INSTALL</span>
       </a>
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Linux-arm64-v1.0.15.AppImage" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Linux-arm64-v1.0.16.AppImage" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128039; Avioc Apps for Linux (ARM64)</div>
           <div class="platform-detail">AppImage &bull; 64-bit ARM Linux devices</div>
@@ -966,7 +966,7 @@
 
   <script>
     var latestAndroidApkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk';
-    var latestAndroidAppsApkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Android-v1.0.15.apk';
+    var latestAndroidAppsApkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Android-v1.0.16.apk';
     var androidCinemaAppLink = 'https://aviocwatch.b-cdn.net/cinema-app.html?avioc_install=1';
 
     // Smart Device Detection
@@ -1071,7 +1071,7 @@
       closePwaStoreHandoff();
       // Android uses a verified App Link; desktop uses the installed app protocol.
       window.location.href = /Android/i.test(navigator.userAgent || '')
-        ? 'https://aviocwatch.b-cdn.net/apps-ota.html?open-app=1'
+        ? 'https://aviocwatch.b-cdn.net/apps-ota-v1.0.16.html?open-app=1'
         : 'aviocapps://open';
     }
 
@@ -1102,9 +1102,9 @@
         var apps64 = /x86_64|Win64|x64|WOW64/i.test(appsUa);
         if (appsPlatform === 'android') return latestAndroidAppsApkUrl;
         if (appsPlatform === 'ios') return base + 'Avioc-Apps.mobileconfig';
-        if (appsPlatform === 'mac') return base + 'Avioc-Apps-Mac-v1.0.15.dmg';
-        if (/Linux/i.test(appsUa)) return base + (/aarch64|arm64|armv8l/i.test(appsUa) ? 'Avioc-Apps-Linux-arm64-v1.0.15.AppImage' : 'Avioc-Apps-Linux-x64-v1.0.15.AppImage');
-        return base + (apps64 ? 'Avioc-Apps-Setup-v1.0.15-x64.exe' : 'Avioc-Apps-Setup-v1.0.15-ia32.exe');
+        if (appsPlatform === 'mac') return base + 'Avioc-Apps-Mac-v1.0.16.dmg';
+        if (/Linux/i.test(appsUa)) return base + (/aarch64|arm64|armv8l/i.test(appsUa) ? 'Avioc-Apps-Linux-arm64-v1.0.16.AppImage' : 'Avioc-Apps-Linux-x64-v1.0.16.AppImage');
+        return base + (apps64 ? 'Avioc-Apps-Setup-v1.0.16-x64.exe' : 'Avioc-Apps-Setup-v1.0.16-ia32.exe');
       }
       var platform = currentPlatform();
       if (platform === 'android') return latestAndroidApkUrl;
