@@ -60,7 +60,7 @@ function createWindow() {
   const indexPath = path.join(__dirname, '..', 'firebase-public', 'index.html');
   const rootIndex = path.join(__dirname, '..', 'index.html');
   const fileToLoad = fs.existsSync(appsPagePath) ? appsPagePath : (fs.existsSync(indexPath) ? indexPath : rootIndex);
-  const otaUrl = 'https://aviocwatch.b-cdn.net/apps.html?v=1.0.12';
+  const otaUrl = 'https://aviocwatch.b-cdn.net/apps-ota.html';
   let usedLocalFallback = false;
 
   mainWindow.webContents.on('did-fail-load', (_event, _code, _description, _validatedURL, isMainFrame) => {

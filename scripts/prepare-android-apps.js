@@ -8,7 +8,7 @@ config.appId = 'com.avioc.apps';
 config.appName = 'Avioc Apps';
 config.server = {
   ...(config.server || {}),
-  url: 'https://aviocwatch.b-cdn.net/apps.html',
+  url: 'https://aviocwatch.b-cdn.net/apps-ota.html',
   errorPath: 'index.html',
 };
 fs.writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`);

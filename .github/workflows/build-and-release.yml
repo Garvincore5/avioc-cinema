@@ -29,7 +29,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.12'
+        default: 'v1.0.13'
 
 permissions:
   contents: read
@@ -607,6 +607,12 @@ jobs:
             -H "Cache-Control: no-cache, no-store, must-revalidate" \
             --data-binary @index.html \
             "https://storage.bunnycdn.com/aviocwatch/index.html"
+          curl --fail --show-error --silent -X PUT \
+            -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+            -H "Content-Type: text/html; charset=utf-8" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            --data-binary @index.html \
+            "https://storage.bunnycdn.com/aviocwatch/apps-ota.html"
           echo "Avioc Apps store page published to BunnyCDN."
         env:
           BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}

@@ -33,7 +33,7 @@ const capacitorConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 if (capacitorConfig.appId !== 'com.avioc.apps') throw new Error('Generated Capacitor config has the wrong package ID.');
 capacitorConfig.server = {
   ...(capacitorConfig.server || {}),
-  url: 'https://aviocwatch.b-cdn.net/apps.html',
+  url: 'https://aviocwatch.b-cdn.net/apps-ota.html',
   errorPath: 'index.html',
 };
 fs.writeFileSync(configPath, `${JSON.stringify(capacitorConfig, null, 2)}\n`);
