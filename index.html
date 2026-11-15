@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Avioc Apps</title>
-  <meta name="description" content="Avioc Apps - Official App Store. Download standalone native apps for Windows, Android, Mac, and iPhone.">
+  <meta name="description" content="Avioc Apps - Official App Store for Android, Windows, Mac, and an iPhone Home Screen shortcut.">
   <meta name="theme-color" content="#ffffff">
   <link rel="manifest" href="/manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -595,10 +595,13 @@
       color: var(--ios-blue);
       font-size: 13px;
       font-weight: 700;
+      font-family: inherit;
       padding: 6px 16px;
       border-radius: 16px;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
       white-space: nowrap;
+      border: 0;
+      cursor: pointer;
     }
 
     .btn-close-sheet {
@@ -687,7 +690,7 @@
               <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
               <span>691 ratings</span>
             </div>
-            <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-Setup-x64.exe" class="btn-get-hero" id="heroBottomGetBtn">GET</a>
+            <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-Setup-x64.exe" class="btn-get-hero" id="heroBottomGetBtn">INSTALL</a>
           </div>
         </div>
 
@@ -718,7 +721,7 @@
         <div class="app-card-title">Avioc Cinema</div>
         <div class="app-card-category">Trenily</div>
         <div class="app-card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-Setup-x64.exe" class="btn-get-app" id="gridCinemaGetBtn">GET</a>
+        <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema-Setup-x64.exe" class="btn-get-app" id="gridCinemaGetBtn">INSTALL</a>
       </div>
 
       <!-- Card 2: Avioc Apps for Windows (Desktop Store App) -->
@@ -729,7 +732,7 @@
         <div class="app-card-title">Avioc Apps (Windows)</div>
         <div class="app-card-category">Official Store</div>
         <div class="app-card-badge badge-blue">&#128421; WIN 7/8/10/11</div>
-        <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-x64.exe" class="btn-get-app" download>GET</a>
+        <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-x64.exe" class="btn-get-app" id="gridAppsGetBtn" download>INSTALL</a>
       </div>
 
     </div>
@@ -783,9 +786,18 @@
     <div class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="downloadsTitle" onclick="event.stopPropagation()">
       <div class="sheet-handle"></div>
       <div class="sheet-title" id="downloadsTitle">Your downloads</div>
-      <div class="sheet-sub">Downloads you requested from this store on this device. Your browser manages the actual files.</div>
+      <div class="sheet-sub">After a download finishes, open it from your device’s Downloads to complete setup. The store can confirm an installed app only where the device allows it.</div>
       <div class="download-help" id="androidInstallHelp" hidden>
         After Avioc Cinema finishes downloading, tap the download notification or open your Downloads folder. Tap the APK and approve Android’s install or update prompt. Android may ask you to allow installs from this browser.
+      </div>
+      <div class="download-help" id="windowsInstallHelp" hidden>
+        Open the Avioc Cinema setup file from your browser’s Downloads and follow the installer. Windows does not let a website or installed PWA launch an EXE or verify its installation.
+      </div>
+      <div class="download-help" id="macInstallHelp" hidden>
+        Open the downloaded DMG and drag Avioc Cinema into Applications. macOS does not let a website or installed PWA verify that step.
+      </div>
+      <div class="download-help" id="iosInstallHelp" hidden>
+        Open the downloaded configuration profile from Files or Settings and follow the prompts. This adds a Home Screen shortcut; it is not a native iOS app.
       </div>
       <div id="downloadsList"></div>
       <button class="btn-close-sheet" type="button" onclick="closeDownloadsModal()">Done</button>
@@ -805,7 +817,7 @@
           <div class="platform-name">&#128421; Avioc Apps Store for Windows (64-bit)</div>
           <div class="platform-detail">Native App Store &bull; Fills & Fits All Screens &bull; Win 10/11</div>
         </div>
-        <span class="btn-sheet-get">GET</span>
+        <span class="btn-sheet-get">INSTALL</span>
       </a>
 
       <!-- Windows Apps Store 32-bit -->
@@ -814,7 +826,7 @@
           <div class="platform-name">&#128421; Avioc Apps Store for Windows (32-bit)</div>
           <div class="platform-detail">Windows 7 / 8 / 10 &bull; Older PCs & Low RAM</div>
         </div>
-        <span class="btn-sheet-get">GET</span>
+        <span class="btn-sheet-get">INSTALL</span>
       </a>
 
       <!-- Avioc Cinema Windows 64-bit -->
@@ -823,7 +835,7 @@
           <div class="platform-name">&#127916; Avioc Cinema Setup (Windows 64-bit)</div>
           <div class="platform-detail">Hardware-accelerated 4K/1080p Player &bull; Win 10/11</div>
         </div>
-        <span class="btn-sheet-get">GET</span>
+        <span class="btn-sheet-get">INSTALL</span>
       </a>
 
       <!-- Avioc Cinema Windows 32-bit -->
@@ -832,7 +844,7 @@
           <div class="platform-name">&#127916; Avioc Cinema Setup (Windows 32-bit)</div>
           <div class="platform-detail">Windows 7 / 8 / 10 &bull; Older PCs</div>
         </div>
-        <span class="btn-sheet-get">GET</span>
+        <span class="btn-sheet-get">INSTALL</span>
       </a>
 
       <!-- Android -->
@@ -841,7 +853,7 @@
           <div class="platform-name">&#129302; Avioc Cinema Android Universal APK</div>
           <div class="platform-detail">Download the signed APK. Android will install it or update Avioc Cinema while keeping your data.</div>
         </div>
-        <span class="btn-sheet-get" data-android-install-label>INSTALL / UPDATE</span>
+        <span class="btn-sheet-get" data-android-install-label>INSTALL</span>
       </a>
 
       <!-- iPhone 1-Tap Profile -->
@@ -850,7 +862,7 @@
           <div class="platform-name">&#128241; Avioc Cinema iPhone 1-Tap Profile</div>
           <div class="platform-detail">All iOS versions &bull; No computer or jailbreak needed</div>
         </div>
-        <span class="btn-sheet-get">GET</span>
+        <span class="btn-sheet-get">ADD TO HOME SCREEN</span>
       </a>
 
       <!-- Mac DMG -->
@@ -859,7 +871,7 @@
           <div class="platform-name">&#128187; Avioc Cinema macOS Universal DMG</div>
           <div class="platform-detail">macOS 10.13+ &bull; Intel & Apple Silicon (M1-M4)</div>
         </div>
-        <span class="btn-sheet-get">GET</span>
+        <span class="btn-sheet-get">INSTALL</span>
       </a>
 
       <button class="btn-close-sheet" onclick="closePlatformModal()">Done</button>
@@ -903,17 +915,17 @@
           latestAndroidApkUrl,
           'Avioc Cinema for Android',
           'Download the signed APK, then approve Android’s install or update prompt.',
-          'INSTALL / UPDATE'
+          'INSTALL'
         );
         [heroBtm, gridGet].forEach(function (link) {
           if (link) link.dataset.androidInstall = 'true';
         });
-      } else if (/iPhone|iPad|iPod/i.test(ua)) {
+      } else if (/iPhone|iPad|iPod/i.test(ua) || (/MacIntel/i.test(platform) && navigator.maxTouchPoints > 1)) {
         applyLink(
           cdn + '/Avioc-Cinema.mobileconfig',
           'Avioc Cinema for iPhone & iPad',
           'Add Avioc Cinema to your Home Screen.',
-          'INSTALL'
+          'ADD TO HOME SCREEN'
         );
         if (heroBtm) heroBtm.removeAttribute('download');
         if (gridGet) gridGet.removeAttribute('download');
@@ -921,7 +933,8 @@
         applyLink(
           cdn + '/Avioc-Cinema-Mac.dmg',
           'Avioc Cinema for Mac',
-          'Universal DMG for Apple Silicon (M1/M2/M3/M4) & Intel Macs'
+          'Download the DMG, open it, then drag Avioc Cinema into Applications.',
+          'INSTALL'
         );
       } else if (/Win/i.test(platform) || /Windows/i.test(ua)) {
         var is64 = /x86_64|Win64|x64|WOW64/i.test(ua);
@@ -929,7 +942,8 @@
         applyLink(
           cdn + '/' + file,
           'Avioc Cinema for Windows (' + (is64 ? '64-bit' : '32-bit') + ')',
-          'High-performance desktop player with 4K/1080p hardware acceleration'
+          'Download the setup file and open it from Downloads to install the desktop app.',
+          'INSTALL'
         );
       }
     })();
@@ -946,7 +960,50 @@
     }
 
     var downloadHistoryKey = 'avioc_store_download_history_v1';
+    var installStateKey = 'avioc_store_install_state_v1';
     var androidCinemaInstalled = false;
+
+    function getInstallState() {
+      try { return JSON.parse(localStorage.getItem(installStateKey) || '{}') || {}; }
+      catch (_) { return {}; }
+    }
+
+    function appKeyForFile(fileName) {
+      var name = fileName || '';
+      if (/^Avioc-Apps-Setup/i.test(name)) return 'apps-windows';
+      if (/\.apk$/i.test(name)) return 'cinema-android';
+      if (/\.dmg$/i.test(name)) return 'cinema-mac';
+      if (/\.mobileconfig$/i.test(name)) return 'cinema-ios';
+      return 'cinema-windows';
+    }
+
+    function currentCinemaInstallKey() {
+      var ua = navigator.userAgent || '';
+      if (/Android/i.test(ua)) return 'cinema-android';
+      if (/iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1)) return 'cinema-ios';
+      if (/Macintosh|Mac OS X/i.test(ua)) return 'cinema-mac';
+      return 'cinema-windows';
+    }
+
+    function setAppInstalled(appKey) {
+      try {
+        var state = getInstallState();
+        state[appKey] = Date.now();
+        localStorage.setItem(installStateKey, JSON.stringify(state));
+      } catch (_) {}
+      if (appKey === 'cinema-android') androidCinemaInstalled = true;
+      var buttons = appKey === 'apps-windows'
+        ? [document.getElementById('gridAppsGetBtn')]
+        : [document.getElementById('heroBottomGetBtn'), document.getElementById('gridCinemaGetBtn')];
+      if (appKey === currentCinemaInstallKey() || appKey === 'apps-windows') {
+        buttons.forEach(function (link) { if (link) link.textContent = 'UPDATE'; });
+      }
+      renderDownloads();
+    }
+
+    function isAppInstalled(appKey) {
+      return (appKey === 'cinema-android' && androidCinemaInstalled) || !!getInstallState()[appKey];
+    }
 
     async function detectAndroidCinemaInstall() {
       if (!/Android/i.test(navigator.userAgent || '') || !navigator.getInstalledRelatedApps) return;
@@ -963,6 +1020,11 @@
         [document.getElementById('heroBottomGetBtn'), document.getElementById('gridCinemaGetBtn')].forEach(function (link) {
           if (link && link.dataset.androidInstall === 'true') link.textContent = 'UPDATE';
         });
+        try {
+          var state = getInstallState();
+          state['cinema-android'] = Date.now();
+          localStorage.setItem(installStateKey, JSON.stringify(state));
+        } catch (_) {}
         renderDownloads();
       } catch (_) {}
     }
@@ -1012,8 +1074,17 @@
       if (!list) return;
       list.replaceChildren();
       var history = getDownloadHistory();
-      var androidHelp = document.getElementById('androidInstallHelp');
-      if (androidHelp) androidHelp.hidden = !/Android/i.test(navigator.userAgent || '');
+      var ua = navigator.userAgent || '';
+      var platformHelp = {
+        androidInstallHelp: /Android/i.test(ua),
+        windowsInstallHelp: /Windows/i.test(ua),
+        macInstallHelp: /Macintosh|Mac OS X/i.test(ua),
+        iosInstallHelp: /iPhone|iPad|iPod/i.test(ua) || (/MacIntel/i.test(navigator.platform || '') && navigator.maxTouchPoints > 1)
+      };
+      Object.keys(platformHelp).forEach(function (id) {
+        var help = document.getElementById(id);
+        if (help) help.hidden = !platformHelp[id];
+      });
 
       if (!history.length) {
         var empty = document.createElement('div');
@@ -1033,18 +1104,35 @@
         title.textContent = item.title || downloadTitle(item.fileName);
         var detail = document.createElement('div');
         detail.className = 'platform-detail';
-        detail.textContent = 'Download requested · ' + new Date(item.requestedAt).toLocaleString();
+        var appKey = appKeyForFile(item.fileName);
+        var isInstalled = isAppInstalled(appKey);
+        var isApk = /\.apk$/i.test(item.fileName);
+        var isWindowsInstaller = /\.exe$/i.test(item.fileName);
+        var isMacInstaller = /\.dmg$/i.test(item.fileName);
+        var isIosProfile = /\.mobileconfig$/i.test(item.fileName);
+        var installTimestamp = getInstallState()[appKey] || item.requestedAt;
+        detail.textContent = isInstalled
+          ? (isIosProfile ? 'Home Screen shortcut marked added on this device.' : 'Install marked complete on this device · ' + new Date(installTimestamp).toLocaleString())
+          : (isWindowsInstaller ? 'Download requested · Open the setup file from Downloads to install.'
+            : isMacInstaller ? 'Download requested · Open the DMG and move the app to Applications.'
+              : isIosProfile ? 'Download requested · Open the profile from Files or Settings to add the shortcut.'
+                : isApk ? 'Download requested · Open the APK from Downloads and approve the install.'
+                  : 'Download requested · ' + new Date(item.requestedAt).toLocaleString());
         info.append(title, detail);
-        var again = document.createElement('a');
-        again.className = 'btn-sheet-get';
-        var isCinemaApk = /Avioc-Cinema(?:-v[\w.-]+)?\.apk$/i.test(item.fileName);
-        again.href = isCinemaApk ? latestAndroidApkUrl : item.url;
-        again.download = isCinemaApk ? 'Avioc-Cinema.apk' : item.fileName;
-        again.dataset.trackDownload = 'true';
-        again.textContent = /\.apk$/i.test(item.fileName)
-          ? (androidCinemaInstalled ? 'UPDATE' : 'INSTALL / UPDATE')
-          : 'DOWNLOAD AGAIN';
-        row.append(info, again);
+        if (isInstalled) {
+          var installed = document.createElement('span');
+          installed.className = 'btn-sheet-get';
+          installed.textContent = isIosProfile ? 'SHORTCUT ADDED' : 'INSTALLED';
+          row.append(info, installed);
+        } else {
+          var confirm = document.createElement('button');
+          confirm.type = 'button';
+          confirm.className = 'btn-sheet-get';
+          confirm.dataset.confirmAppInstall = 'true';
+          confirm.dataset.appKey = appKey;
+          confirm.textContent = isIosProfile ? 'I ADDED IT' : 'I FINISHED INSTALLING';
+          row.append(info, confirm);
+        }
         list.appendChild(row);
       });
     }
@@ -1061,12 +1149,20 @@
     }
 
     document.addEventListener('click', function (event) {
+      var confirm = event.target.closest('[data-confirm-app-install]');
+      if (confirm) {
+        setAppInstalled(confirm.dataset.appKey || 'cinema-windows');
+        return;
+      }
       var link = event.target.closest('a[download], a[data-track-download]');
       if (link) rememberDownload(link);
     });
 
     updateDownloadsCount();
     detectAndroidCinemaInstall();
+    var savedInstallState = getInstallState();
+    if (savedInstallState[currentCinemaInstallKey()]) [document.getElementById('heroBottomGetBtn'), document.getElementById('gridCinemaGetBtn')].forEach(function (link) { if (link) link.textContent = 'UPDATE'; });
+    if (savedInstallState['apps-windows']) { var appsButton = document.getElementById('gridAppsGetBtn'); if (appsButton) appsButton.textContent = 'UPDATE'; }
   </script>
 </body>
 </html>
