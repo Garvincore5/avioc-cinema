@@ -3,7 +3,9 @@ const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
 const appDir = path.join(root, 'android', 'app');
+const androidRoot = path.join(root, 'android');
 const gradlePath = path.join(appDir, 'build.gradle');
+const variablesPath = path.join(androidRoot, 'variables.gradle');
 const manifestPath = path.join(appDir, 'src', 'main', 'AndroidManifest.xml');
 const valuesDir = path.join(appDir, 'src', 'main', 'res', 'values');
 const stringsPath = path.join(valuesDir, 'strings.xml');
@@ -18,6 +20,12 @@ if (!Number.isInteger(versionCode) || versionCode < 1 || versionCode > 210000000
 for (const file of [gradlePath, manifestPath]) {
   if (!fs.existsSync(file)) throw new Error(`Capacitor Android project is missing ${file}`);
 }
+
+if (!fs.existsSync(variablesPath)) throw new Error('Capacitor Android SDK variables are missing.');
+let androidVariables = fs.readFileSync(variablesPath, 'utf8');
+if (!/compileSdkVersion\s*=\s*\d+/.test(androidVariables)) throw new Error('Could not find Android compileSdkVersion.');
+androidVariables = androidVariables.replace(/(compileSdkVersion\s*=\s*)\d+/, (_match, prefix) => `${prefix}34`);
+fs.writeFileSync(variablesPath, androidVariables);
 
 if (!fs.existsSync(nativeConfigPath)) throw new Error('Capacitor Android runtime config is missing.');
 const nativeConfig = JSON.parse(fs.readFileSync(nativeConfigPath, 'utf8'));
