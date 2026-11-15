@@ -4,7 +4,7 @@ contextBridge.exposeInMainWorld('AviocNative', {
   platform: process.platform,
   isElectron: true,
   appId: 'apps',
-  appVersion: '1.0.0',
+  appVersion: '1.0.10',
   isStandalone: true
 });
 

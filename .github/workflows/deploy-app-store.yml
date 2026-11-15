@@ -37,7 +37,13 @@ jobs:
             -H "Cache-Control: no-cache, no-store, must-revalidate" \
             --data-binary @index.html \
             "https://storage.bunnycdn.com/aviocwatch/index.html"
-          echo "Avioc Apps Store page published to BunnyCDN."
+          curl --fail --show-error --silent -X PUT \
+            -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+            -H "Content-Type: text/html; charset=utf-8" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            --data-binary @index.html \
+            "https://storage.bunnycdn.com/aviocwatch/apps.html"
+          echo "Avioc Apps Store page published to web and standalone OTA addresses."
 
       - name: Upload store icons and manifest
         shell: bash

@@ -56,11 +56,25 @@ function createWindow() {
     }
   });
 
+  const appsPagePath = path.join(__dirname, '..', 'firebase-public', 'apps.html');
   const indexPath = path.join(__dirname, '..', 'firebase-public', 'index.html');
   const rootIndex = path.join(__dirname, '..', 'index.html');
-  const fileToLoad = fs.existsSync(indexPath) ? indexPath : rootIndex;
+  const fileToLoad = fs.existsSync(appsPagePath) ? appsPagePath : (fs.existsSync(indexPath) ? indexPath : rootIndex);
+  const otaUrl = 'https://aviocwatch.b-cdn.net/apps.html';
+  let usedLocalFallback = false;
 
-  mainWindow.loadFile(fileToLoad);
+  mainWindow.webContents.on('did-fail-load', (_event, _code, _description, _validatedURL, isMainFrame) => {
+    if (isMainFrame && !usedLocalFallback) {
+      usedLocalFallback = true;
+      mainWindow.loadFile(fileToLoad);
+    }
+  });
+  mainWindow.loadURL(otaUrl).catch(() => {
+    if (!usedLocalFallback) {
+      usedLocalFallback = true;
+      mainWindow.loadFile(fileToLoad);
+    }
+  });
 
   // Fills and fits the entire screen on launch!
   mainWindow.once('ready-to-show', () => {
