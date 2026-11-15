@@ -38,10 +38,11 @@ fs.writeFileSync(gradlePath, gradle);
 // support that the embedded WebView does not provide (notably Matroska/MKV).
 const media3Version = '1.4.1';
 if (!gradle.includes('androidx.media3:media3-exoplayer:')) {
-  const dependenciesClose = gradle.lastIndexOf('}');
-  if (dependenciesClose < 0) throw new Error('Could not find Android Gradle dependencies block.');
+  const dependenciesBlock = gradle.match(/dependencies\s*\{[\s\S]*?\n\}/);
+  if (!dependenciesBlock) throw new Error('Could not find Android Gradle dependencies block.');
   const media3 = `\n    implementation "androidx.media3:media3-exoplayer:${media3Version}"\n    implementation "androidx.media3:media3-exoplayer-hls:${media3Version}"\n    implementation "androidx.media3:media3-exoplayer-dash:${media3Version}"\n    implementation "androidx.media3:media3-exoplayer-smoothstreaming:${media3Version}"\n    implementation "androidx.media3:media3-ui:${media3Version}"\n`;
-  gradle = `${gradle.slice(0, dependenciesClose)}${media3}${gradle.slice(dependenciesClose)}`;
+  const patchedDependencies = dependenciesBlock[0].replace(/\n\}$/, `${media3}}`);
+  gradle = gradle.replace(dependenciesBlock[0], patchedDependencies);
   fs.writeFileSync(gradlePath, gradle);
 }
 
