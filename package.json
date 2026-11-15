@@ -1,6 +1,6 @@
 {
   "name": "avioc-cinema",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Avioc Cinema streaming app with a desktop player for Windows",
   "main": "electron/main.js",
   "author": "Avioc Cinema <contact@avioc.com>",

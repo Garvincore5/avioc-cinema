@@ -765,7 +765,7 @@
         <div class="app-card-title">Avioc Apps for all devices</div>
         <div class="app-card-category">Official Store</div>
         <div class="app-card-badge badge-blue">&#128241; ANDROID &bull; WINDOWS &bull; MAC &bull; LINUX</div>
-        <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.13-x64.exe" class="btn-get-app" id="gridAppsGetBtn" data-app-install="apps">INSTALL</a>
+        <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.15-x64.exe" class="btn-get-app" id="gridAppsGetBtn" data-app-install="apps">INSTALL</a>
       </div>
 
     </div>
@@ -845,7 +845,7 @@
       <div class="sheet-sub">Official downloads for Windows, Android, Mac, and iPhone</div>
 
       <!-- Windows Apps Store Desktop App -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.13-x64.exe" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.15-x64.exe" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128421; Avioc Apps Store for Windows (64-bit)</div>
           <div class="platform-detail">Native App Store &bull; Fills & Fits All Screens &bull; Win 10/11</div>
@@ -854,7 +854,7 @@
       </a>
 
       <!-- Windows Apps Store 32-bit -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.13-ia32.exe" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Setup-v1.0.15-ia32.exe" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128421; Avioc Apps Store for Windows (32-bit)</div>
           <div class="platform-detail">Windows 7 / 8 / 10 &bull; Older PCs & Low RAM</div>
@@ -863,7 +863,7 @@
       </a>
 
       <!-- Avioc Apps for Android, signed by GitHub Actions -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Android-v1.0.13.apk" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Android-v1.0.15.apk" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#129302; Avioc Apps for Android</div>
           <div class="platform-detail">Signed APK &bull; Android phones, tablets, and TV</div>
@@ -872,7 +872,7 @@
       </a>
 
       <!-- Avioc Apps for Mac -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Mac-v1.0.13.dmg" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Mac-v1.0.15.dmg" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128187; Avioc Apps for Mac</div>
           <div class="platform-detail">Universal DMG for Intel and Apple Silicon</div>
@@ -881,14 +881,14 @@
       </a>
 
       <!-- Avioc Apps for Linux -->
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Linux-x64-v1.0.13.AppImage" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Linux-x64-v1.0.15.AppImage" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128039; Avioc Apps for Linux (x64)</div>
           <div class="platform-detail">AppImage &bull; 64-bit Intel/AMD Linux</div>
         </div>
         <span class="btn-sheet-get">INSTALL</span>
       </a>
-      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Linux-arm64-v1.0.13.AppImage" class="platform-row" data-app-install="apps">
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Linux-arm64-v1.0.15.AppImage" class="platform-row" data-app-install="apps">
         <div class="platform-info">
           <div class="platform-name">&#128039; Avioc Apps for Linux (ARM64)</div>
           <div class="platform-detail">AppImage &bull; 64-bit ARM Linux devices</div>
@@ -966,7 +966,7 @@
 
   <script>
     var latestAndroidApkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Cinema.apk';
-    var latestAndroidAppsApkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Android-v1.0.14.apk';
+    var latestAndroidAppsApkUrl = 'https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/Avioc-Apps-Android-v1.0.15.apk';
     var androidCinemaAppLink = 'https://aviocwatch.b-cdn.net/cinema-app.html?avioc_install=1';
 
     // Smart Device Detection
@@ -1102,9 +1102,9 @@
         var apps64 = /x86_64|Win64|x64|WOW64/i.test(appsUa);
         if (appsPlatform === 'android') return latestAndroidAppsApkUrl;
         if (appsPlatform === 'ios') return base + 'Avioc-Apps.mobileconfig';
-        if (appsPlatform === 'mac') return base + 'Avioc-Apps-Mac-v1.0.13.dmg';
-        if (/Linux/i.test(appsUa)) return base + (/aarch64|arm64|armv8l/i.test(appsUa) ? 'Avioc-Apps-Linux-arm64-v1.0.13.AppImage' : 'Avioc-Apps-Linux-x64-v1.0.13.AppImage');
-        return base + (apps64 ? 'Avioc-Apps-Setup-v1.0.13-x64.exe' : 'Avioc-Apps-Setup-v1.0.13-ia32.exe');
+        if (appsPlatform === 'mac') return base + 'Avioc-Apps-Mac-v1.0.15.dmg';
+        if (/Linux/i.test(appsUa)) return base + (/aarch64|arm64|armv8l/i.test(appsUa) ? 'Avioc-Apps-Linux-arm64-v1.0.15.AppImage' : 'Avioc-Apps-Linux-x64-v1.0.15.AppImage');
+        return base + (apps64 ? 'Avioc-Apps-Setup-v1.0.15-x64.exe' : 'Avioc-Apps-Setup-v1.0.15-ia32.exe');
       }
       var platform = currentPlatform();
       if (platform === 'android') return latestAndroidApkUrl;
@@ -1127,6 +1127,21 @@
 
     function startFileDownload(url) {
       saveDownloadRequest(url);
+      var parsedUrl;
+      try { parsedUrl = new URL(url, location.href); } catch (_) {}
+      var fileName = parsedUrl ? decodeURIComponent(parsedUrl.pathname.split('/').pop() || 'download') : 'download';
+      if (window.AviocNative && window.AviocNative.platform === 'win32' &&
+          typeof window.AviocNative.installWindowsPackage === 'function' && /\.exe$/i.test(fileName)) {
+        updateDownloadStatus(fileName, 'Downloading setup…');
+        openDownloadsModal();
+        window.AviocNative.installWindowsPackage(url).then(function () {
+          updateDownloadStatus(fileName, 'Setup opened. Follow Windows prompts to finish installing or updating.');
+        }).catch(function (error) {
+          updateDownloadStatus(fileName, 'Download or setup launch failed.');
+          window.alert(error && error.message ? error.message : 'The setup could not be downloaded or opened.');
+        });
+        return;
+      }
       var link = document.createElement('a');
       link.href = url;
       link.rel = 'noopener';
@@ -1139,8 +1154,9 @@
 
     function confirmAndDownload(url, title) {
       var ext = (url.match(/\.(exe|apk|dmg|mobileconfig|AppImage)(?:\?|$)/i) || [])[1] || 'installer';
+      var nativeWindowsInstaller = ext.toLowerCase() === 'exe' && window.AviocNative && window.AviocNative.platform === 'win32' && typeof window.AviocNative.installWindowsPackage === 'function';
       var detail = ext.toLowerCase() === 'exe'
-        ? 'This downloads the Windows .exe installer. When it finishes, open it and follow Setup.'
+        ? (nativeWindowsInstaller ? 'The standalone store downloads the official setup and opens it automatically. Approve any Windows security prompt, then finish Setup.' : 'This downloads the Windows .exe installer. When it finishes, open it and follow Setup.')
         : ext.toLowerCase() === 'apk'
           ? 'This downloads the Android APK. Open the completed download and approve the install or update.'
           : ext.toLowerCase() === 'dmg'
@@ -1155,6 +1171,10 @@
     function openInstalledAppOrDownload(appKey, fallbackUrl) {
       var platform = currentPlatform();
       var isAppsStore = appKey === 'apps';
+      if (window.AviocNative && window.AviocNative.appId === 'apps' && platform === 'windows' && typeof window.AviocNative.installWindowsPackage === 'function') {
+        confirmAndDownload(currentInstallerUrl(appKey), isAppsStore ? 'Update Avioc Apps' : 'Install or update Avioc Cinema');
+        return;
+      }
       if (window.AviocNative && window.AviocNative.appId === appKey) {
         window.alert((isAppsStore ? 'Avioc Apps' : 'Avioc Cinema') + ' is already open.');
         return;
@@ -1266,6 +1286,17 @@
       badge.hidden = !count;
     }
 
+    function updateDownloadStatus(fileName, status) {
+      try {
+        var history = getDownloadHistory();
+        var item = history.find(function (entry) { return entry.fileName === fileName; });
+        if (item) item.status = status;
+        localStorage.setItem(downloadHistoryKey, JSON.stringify(history));
+        var list = document.getElementById('downloadsList');
+        if (list && document.getElementById('downloadsModal')?.classList.contains('open')) renderDownloads();
+      } catch (_) {}
+    }
+
     function renderDownloads() {
       var list = document.getElementById('downloadsList');
       if (!list) return;
@@ -1305,18 +1336,19 @@
         var isWindowsInstaller = /\.exe$/i.test(item.fileName);
         var isMacInstaller = /\.dmg$/i.test(item.fileName);
         var isIosProfile = /\.mobileconfig$/i.test(item.fileName);
-        detail.textContent = isWindowsInstaller ? 'Open the setup file from Downloads. Install links open the app first when it is already installed.'
+        var nativeWindowsInstaller = isWindowsInstaller && window.AviocNative && window.AviocNative.platform === 'win32' && typeof window.AviocNative.installWindowsPackage === 'function';
+        detail.textContent = item.status || (isWindowsInstaller ? (nativeWindowsInstaller ? 'The standalone store opens setup automatically after the download finishes.' : 'Open the setup file from Downloads. Install links open the app first when it is already installed.')
           : isMacInstaller ? 'Open the DMG and move the app into Applications. Install links open the app first when available.'
             : isIosProfile ? 'Open the profile from Files or Settings to add the Home Screen shortcut.'
               : isApk ? 'Open the APK from Downloads and approve the install or update.'
-                : 'Download requested · ' + new Date(item.requestedAt).toLocaleString();
+                : 'Download requested · ' + new Date(item.requestedAt).toLocaleString());
         info.append(title, detail);
         var again = document.createElement('button');
         again.type = 'button';
         again.className = 'btn-sheet-get';
         again.dataset.appInstall = /^Avioc-Apps-/i.test(item.fileName) ? 'apps' : 'cinema';
         again.dataset.fallbackUrl = item.url;
-        again.textContent = isIosProfile ? 'ADD TO HOME SCREEN' : (androidCinemaInstalled && isApk ? 'OPEN' : 'OPEN / INSTALL');
+        again.textContent = isIosProfile ? 'ADD TO HOME SCREEN' : (nativeWindowsInstaller ? 'INSTALL / UPDATE' : (androidCinemaInstalled && isApk ? 'OPEN' : 'OPEN / INSTALL'));
         row.append(info, again);
         list.appendChild(row);
       });
@@ -1348,7 +1380,19 @@
     updateDownloadsCount();
     detectAndroidCinemaInstall();
     var appsStoreButton = document.getElementById('gridAppsGetBtn');
-    if (appsStoreButton) appsStoreButton.href = currentInstallerUrl('apps');
+    if (appsStoreButton) {
+      appsStoreButton.href = currentInstallerUrl('apps');
+      if (window.AviocNative && window.AviocNative.appId === 'apps' && window.AviocNative.platform === 'win32') appsStoreButton.textContent = 'UPDATE';
+    }
+    var cinemaStoreButton = document.getElementById('gridCinemaGetBtn');
+    if (cinemaStoreButton && window.AviocNative && window.AviocNative.appId === 'apps' && window.AviocNative.platform === 'win32') cinemaStoreButton.textContent = 'INSTALL / UPDATE';
+    if (window.AviocNative && typeof window.AviocNative.onInstallerProgress === 'function') {
+      window.AviocNative.onInstallerProgress(function (progress) {
+        if (progress && progress.fileName) {
+          updateDownloadStatus(progress.fileName, progress.percent == null ? 'Downloading setup…' : 'Downloading setup · ' + progress.percent + '%');
+        }
+      });
+    }
     document.getElementById('openStandaloneApps')?.addEventListener('click', openStandaloneApps);
     document.getElementById('installStandaloneApps')?.addEventListener('click', installStandaloneApps);
     document.getElementById('stayInAppsPwa')?.addEventListener('click', closePwaStoreHandoff);
