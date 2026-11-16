@@ -1680,7 +1680,7 @@
     document.getElementById('stayInAppsPwa')?.addEventListener('click', closePwaStoreHandoff);
     showPwaStoreHandoff();
     if ('serviceWorker' in navigator && location.protocol === 'https:') {
-      navigator.serviceWorker.register('/sw.js').then(function (registration) {
+      navigator.serviceWorker.register('/sw-v1.0.27.js').then(function (registration) {
         return registration.update();
       }).catch(function () {});
     }

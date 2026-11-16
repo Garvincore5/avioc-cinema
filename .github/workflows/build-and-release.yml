@@ -1477,6 +1477,14 @@ jobs:
             -H "Cache-Control: no-cache, no-store, must-revalidate" \
             --data-binary @manifest.json \
             "https://storage.bunnycdn.com/aviocwatch/manifest.json"
+          APP_VERSION=$(node -p "require('./package.json').version")
+          test -f "sw-v${APP_VERSION}.js"
+          curl --fail --show-error --silent -X PUT \
+            -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+            -H "Content-Type: application/javascript; charset=utf-8" \
+            -H "Cache-Control: public, max-age=31536000, immutable" \
+            --data-binary @"sw-v${APP_VERSION}.js" \
+            "https://storage.bunnycdn.com/aviocwatch/sw-v${APP_VERSION}.js"
           echo "Store manifest published."
         env:
           BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}

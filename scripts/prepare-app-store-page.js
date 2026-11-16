@@ -11,9 +11,12 @@ const update = (file, change) => {
 
 update('index.html', html => html
   .replace(/apps-ota-v\d+\.\d+\.\d+/g, `apps-ota-v${version}`)
-  .replace(/(Avioc-Apps(?:-Setup)?(?:-[A-Za-z0-9-]+)?-v)\d+\.\d+\.\d+/g, `$1${version}`));
+  .replace(/(Avioc-Apps(?:-Setup)?(?:-[A-Za-z0-9-]+)?-v)\d+\.\d+\.\d+/g, `$1${version}`)
+  .replace(/register\('\/sw(?:-v\d+\.\d+\.\d+)?\.js(?:\?v=[^']+)?'\)/g, `register('/sw-v${version}.js')`));
 update('manifest.json', json => json.replace(/apps-ota-v\d+\.\d+\.\d+/g, `apps-ota-v${version}`));
-update('sw.js', worker => worker
+let worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
+worker = worker
   .replace(/apps-ota-v\d+\.\d+\.\d+/g, `apps-ota-v${version}`)
-  .replace(/avioc-apps-v(?:\d+|\d+\.\d+\.\d+)/g, `avioc-apps-v${version}`));
+  .replace(/avioc-apps-v(?:\d+\.\d+\.\d+|\d+)(?![\d.])/g, `avioc-apps-v${version}`);
+fs.writeFileSync(path.join(root, `sw-v${version}.js`), worker);
 console.log(`Prepared Avioc Apps page and PWA metadata for v${version}.`);
