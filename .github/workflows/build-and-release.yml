@@ -23,6 +23,7 @@ on:
       - .github/workflows/deploy-app-store.yml
       - .github/workflows/publish-apk-alias.yml
       - scripts/prepare-app-store-page.js
+      - store-apps/PROJECT-INVENTORY.md
     tags:
       - 'v*'
   workflow_dispatch:
