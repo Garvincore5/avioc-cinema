@@ -8,7 +8,7 @@ app.commandLine.appendSwitch('enable-zero-copy');
 app.commandLine.appendSwitch('ignore-gpu-blocklist');
 
 let mainWindow = null;
-const installerNamePattern = /^(?:Avioc-Cinema-Setup-(?:x64|ia32)|Avioc-Apps-Setup-v\d+\.\d+\.\d+-(?:x64|ia32)|Core-Sorter-Windows-x64-v\d+\.\d+\.\d+|CoreCut-(?:Windows-x64|Setup-Windows-x64)-v\d+\.\d+\.\d+)\.exe$/i;
+const installerNamePattern = /^(?:Avioc-Cinema-Setup-(?:x64|ia32)|Avioc-Apps-Setup-v\d+\.\d+\.\d+-(?:x64|ia32)|Avioc-AI-Companion-Windows-(?:x64|arm64)-v\d+\.\d+\.\d+|Core-Sorter-Windows-x64-v\d+\.\d+\.\d+|CoreCut-(?:Windows-x64|Setup-Windows-x64)-v\d+\.\d+\.\d+)\.exe$/i;
 
 function validateInstallerUrl(rawUrl) {
   let url;

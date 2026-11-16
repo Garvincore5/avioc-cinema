@@ -12,6 +12,7 @@ on:
       - scripts/prepare-android-release.js
       - scripts/android-media3/**
       - electron/main.js
+      - electron/apps-main.js
       - capacitor.config.json
       - .github/workflows/build-and-release.yml
       - .github/workflows/deploy-cinema-ota.yml
