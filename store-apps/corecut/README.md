@@ -2,7 +2,7 @@
 
 ## Avioc Apps Store package
 
-Builds are produced from the bundled source in `src/` by GitHub Actions: Windows x64 portable/setup, macOS Intel/Apple Silicon DMGs, Linux x64/ARM64 AppImages, plus an installable browser/PWA edition. The PWA is hosted at `https://aviocwatch.b-cdn.net/corecut/`; its local file access and export depend on browser support. Link import uses an optional, separately installed `yt-dlp` in the desktop edition.
+Builds are produced from the bundled source in `src/` by GitHub Actions: a signed Android APK, Windows x64 portable/setup, macOS Intel/Apple Silicon DMGs, Linux x64/ARM64 AppImages, plus an installable browser/PWA edition. The Android app opens local videos and shares rendered videos and project files to a save destination. The PWA is hosted at `https://aviocwatch.b-cdn.net/corecut/`; its local file access and export depend on browser support. Link import uses an optional, separately installed `yt-dlp` in the desktop edition.
 
 A lightweight video editor that's as easy as a phone editor, with the core tools of a pro NLE.
 Runs as a Windows desktop app (CoreCut.exe), or in Chrome/Edge during development.

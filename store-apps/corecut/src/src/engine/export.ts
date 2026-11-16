@@ -8,6 +8,7 @@ import { transformAt } from './keyframes';
 import { clipFx, effectiveTransition, nextAdjacent } from './transitions';
 import { sourceOffset, speedAt } from './speed';
 import { ensurePermission } from '../fs';
+import { isAndroidApp, saveAndShareAndroidFile } from '../nativeFiles';
 
 /**
  * Background export: renders every frame of the timeline offline (seek → draw → encode with
@@ -135,12 +136,16 @@ export async function startExport(snapshot: Project, opts: ExportOptions) {
       writable = null;
     } else {
       const buf = (target as ArrayBufferTarget).buffer;
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(new Blob([buf], { type: 'video/mp4' }));
-      a.download = opts.fileName;
-      a.click();
+      const output = new Blob([buf], { type: 'video/mp4' });
+      if (isAndroidApp()) await saveAndShareAndroidFile(opts.fileName, output);
+      else {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(output);
+        a.download = opts.fileName;
+        a.click();
+      }
     }
-    set({ result: { ok: true, message: opts.dir ? `Saved ${opts.fileName} in ${opts.dir.name}` : `Downloaded ${opts.fileName}` } });
+    set({ result: { ok: true, message: opts.dir ? `Saved ${opts.fileName} in ${opts.dir.name}` : (isAndroidApp() ? `Saved ${opts.fileName} in CoreCut Documents` : `Downloaded ${opts.fileName}`) } });
   } catch (e) {
     if (writable) {
       await writable.abort().catch(() => {});

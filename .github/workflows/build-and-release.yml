@@ -29,7 +29,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.22'
+        default: 'v1.0.23'
 
 permissions:
   contents: read
@@ -113,6 +113,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Install shared Capacitor plugins
+        run: npm ci
       - name: Install and build CoreCut
         working-directory: store-apps/corecut/src
         run: |
@@ -141,6 +143,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Install shared Capacitor plugins
+        run: npm ci
       - name: Install and package CoreCut
         working-directory: store-apps/corecut/src
         run: |
@@ -173,6 +177,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Install shared Capacitor plugins
+        run: npm ci
       - name: Install and package CoreCut
         working-directory: store-apps/corecut/src
         run: |
@@ -198,6 +204,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Install shared Capacitor plugins
+        run: npm ci
       - name: Build CoreCut browser edition
         working-directory: store-apps/corecut/src
         run: |
@@ -207,6 +215,84 @@ jobs:
         with:
           name: corecut-web-files
           path: store-apps/corecut/src/dist/**
+          retention-days: 14
+
+  build-corecut-android:
+    name: Signed CoreCut Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install shared Capacitor and Android dependencies
+        run: npm ci
+      - name: Build the CoreCut mobile editor
+        working-directory: store-apps/corecut/src
+        run: |
+          npm ci
+          npm run build
+      - name: Prepare bundled Android editor files
+        run: |
+          mkdir -p store-apps/corecut/android/www
+          cp -R store-apps/corecut/src/dist/. store-apps/corecut/android/www/
+          node scripts/prepare-android-corecut.js
+      - name: Create and sync native Android project
+        run: |
+          npx cap add android
+          npx cap sync android
+      - name: Configure app identity and release version
+        run: node scripts/configure-store-android-release.js
+        env:
+          STORE_ANDROID_APP_ID: com.avioc.corecut
+          STORE_ANDROID_APP_NAME: CoreCut
+          STORE_ANDROID_ICON_FILE: store-apps/corecut/android-res/ic_corecut.xml
+          ANDROID_VERSION_CODE: ${{ github.run_number }}
+          ANDROID_VERSION_NAME: 1.0.0
+      - name: Restore Android signing key from GitHub secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${ANDROID_KEYSTORE_BASE64:?Missing ANDROID_KEYSTORE_BASE64 GitHub secret}"
+          : "${ANDROID_KEYSTORE_PASSWORD:?Missing ANDROID_KEYSTORE_PASSWORD GitHub secret}"
+          : "${ANDROID_KEY_ALIAS:?Missing ANDROID_KEY_ALIAS GitHub secret}"
+          : "${ANDROID_KEY_PASSWORD:?Missing ANDROID_KEY_PASSWORD GitHub secret}"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/avioc-release-key.jks"
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Build and verify signed CoreCut APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/avioc-release-key.jks" \
+            -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD"
+          apk="app/build/outputs/apk/release/app-release.apk"
+          test -s "$apk"
+          apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
+          test -x "$apksigner"
+          "$apksigner" verify --verbose "$apk"
+          mkdir -p ../release-binaries
+          cp "$apk" ../release-binaries/CoreCut-Android-v1.0.0.apk
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: corecut-android-binaries
+          path: release-binaries/*.apk
           retention-days: 14
 
   # Avioc Apps has its own signed Android package and is separate from Cinema.
@@ -827,9 +913,9 @@ jobs:
   # ============================================================================
   publish-release:
     name: 🚀 Publish Universal Compatibility Release
-    needs: [build-windows, build-core-sorter-windows, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
+    needs: [build-windows, build-core-sorter-windows, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-corecut-android, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
     runs-on: ubuntu-latest
-    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
+    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-corecut-android.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
     permissions:
       contents: write
     steps:
@@ -882,6 +968,11 @@ jobs:
         with:
           name: corecut-web-files
           path: corecut-web
+      - name: Download signed CoreCut Android app
+        uses: actions/download-artifact@v4
+        with:
+          name: corecut-android-binaries
+          path: final-release
 
       - name: Download Android Artifacts
         uses: actions/download-artifact@v4
@@ -1196,7 +1287,8 @@ jobs:
             - **Windows x64**: portable video editor or one-click setup installer.
             - **macOS Intel / Apple Silicon**: separate x64 and arm64 DMG packages (unsigned).
             - **Linux x64 / ARM64**: AppImage packages.
-            - **Android, iPhone/iPad, and other browsers**: browser edition at https://aviocwatch.b-cdn.net/corecut/. Its local-file editing/export support depends on the device browser. Link import may require the separately installed yt-dlp tool.
+            - **Android**: signed CoreCut APK with native save/share for rendered videos and projects.
+            - **iPhone/iPad and other browsers**: browser/PWA edition at https://aviocwatch.b-cdn.net/corecut/. Local-file editing/export depends on browser capabilities; link import is desktop-only.
 
             ### 🤖 AGBOT
 

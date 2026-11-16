@@ -4,7 +4,7 @@ contextBridge.exposeInMainWorld('AviocNative', {
   platform: process.platform,
   isElectron: true,
   appId: 'apps',
-  appVersion: '1.0.22',
+  appVersion: '1.0.23',
   isStandalone: true,
   installWindowsPackage: (url) => ipcRenderer.invoke('avioc:install-windows-package', url),
   onInstallerProgress: (callback) => ipcRenderer.on('avioc:installer-progress', (_event, progress) => callback(progress))

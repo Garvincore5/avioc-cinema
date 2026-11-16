@@ -3,6 +3,7 @@ import { useEditor } from './store';
 import type { Project } from './types';
 import { CORE_TYPES, ensurePermission, hasFsAccess, isAbort, mediaHandles, writeFile } from './fs';
 import { probeFile } from './engine/engine';
+import { isAndroidApp, saveAndShareAndroidFile } from './nativeFiles';
 
 /** Where the open project lives on disk, and what was last saved there. */
 interface ProjectFileState {
@@ -39,9 +40,20 @@ export async function saveProject(saveAs = false) {
   const project = useEditor.getState().project;
   const fileState = useProjectFile.getState();
   if (!hasFsAccess()) {
+    const contents = new Blob([serialize(project)], { type: 'application/json' });
+    if (isAndroidApp()) {
+      try {
+        await saveAndShareAndroidFile(`${project.name || 'Untitled'}.core`, contents);
+        useProjectFile.setState({ saved: project });
+        flash('Project saved');
+      } catch (e) {
+        alert(`Couldn't save: ${(e as Error).message}`);
+      }
+      return;
+    }
     // Fallback for browsers without file system access: download a copy.
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([serialize(project)], { type: 'application/json' }));
+    a.href = URL.createObjectURL(contents);
     a.download = `${project.name}.core`;
     a.click();
     useProjectFile.setState({ saved: project });
@@ -71,7 +83,14 @@ export async function openProject(file?: File) {
   try {
     let handle: FileSystemFileHandle | null = null;
     if (!file) {
-      if (!hasFsAccess()) return;
+      if (!hasFsAccess()) {
+        const picker = document.createElement('input');
+        picker.type = 'file';
+        picker.accept = '.core,.json,application/json';
+        picker.onchange = () => { if (picker.files?.[0]) void openProject(picker.files[0]); };
+        picker.click();
+        return;
+      }
       [handle] = await window.showOpenFilePicker!({ types: CORE_TYPES, id: 'cutline-project' });
       file = await handle.getFile();
     }

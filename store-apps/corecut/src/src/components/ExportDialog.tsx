@@ -3,6 +3,7 @@ import { projectDuration, useEditor } from '../store';
 import { canExport, startExport, useExportJob, type Quality } from '../engine/export';
 import { hasFsAccess, isAbort } from '../fs';
 import { formatTime } from '../util';
+import { isAndroidApp } from '../nativeFiles';
 
 // The chosen export folder is remembered while CoreCut is open.
 let lastDir: FileSystemDirectoryHandle | null = null;
@@ -56,7 +57,7 @@ export function ExportDialog({ onClose }: { onClose: () => void }) {
                   <button onClick={chooseFolder}>{dir ? 'Change…' : 'Choose folder…'}</button>
                 </div>
               ) : (
-                <span className="dim">Your browser's Downloads folder (use Chrome or Edge to pick a folder).</span>
+                <span className="dim">{isAndroidApp() ? 'Choose a save or share destination after rendering.' : "Your browser's Downloads folder (use Chrome or Edge to pick a folder)."}</span>
               )}
             </div>
             <label className="field">

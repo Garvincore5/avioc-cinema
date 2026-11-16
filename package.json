@@ -1,6 +1,6 @@
 {
   "name": "avioc-cinema",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Avioc Cinema streaming app with a desktop player for Windows",
   "main": "electron/main.js",
   "author": "Avioc Cinema <contact@avioc.com>",
@@ -29,7 +29,9 @@
   "dependencies": {
     "@capacitor/android": "^5.7.8",
     "@capacitor/core": "^5.7.8",
+    "@capacitor/filesystem": "^5.2.2",
     "@capacitor/ios": "^5.7.8",
+    "@capacitor/share": "^5.0.8",
     "cors": "^2.8.6",
     "express": "^5.2.1"
   },
