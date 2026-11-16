@@ -1,0 +1,1 @@
+{"name":"AGBOT","short_name":"AGBOT","description":"Local AI companion interface. Online AI services and a user supplied key are required for replies.","start_url":"./","scope":"./","display":"standalone","background_color":"#07090e","theme_color":"#07090e","icons":[{"src":"./agbot-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}

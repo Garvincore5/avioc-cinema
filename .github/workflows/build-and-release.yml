@@ -30,7 +30,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.28'
+        default: 'v1.0.29'
 
 permissions:
   contents: read
@@ -459,6 +459,27 @@ jobs:
         with:
           name: quik-android-binaries
           path: release-binaries/*.apk
+          retention-days: 14
+
+  build-store-browser-apps:
+    name: Prepare Family Hub, StoryShape, and AGBOT browser editions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare installable browser editions
+        run: |
+          set -euo pipefail
+          mkdir -p store-pwas/family-hub store-pwas/storyshape store-pwas/agbot
+          cp -R store-apps/family-hub/www/. store-pwas/family-hub/
+          cp -R store-apps/storyshape/www/. store-pwas/storyshape/
+          cp -R store-apps/agbot/www/. store-pwas/agbot/
+          test -s store-pwas/family-hub/index.html
+          test -s store-pwas/storyshape/index.html
+          test -s store-pwas/agbot/index.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: store-browser-apps
+          path: store-pwas/**
           retention-days: 14
 
   # Avioc Apps has its own signed Android package and is separate from Cinema.
@@ -1081,9 +1102,9 @@ jobs:
   # ============================================================================
   publish-release:
     name: 🚀 Publish Universal Compatibility Release
-    needs: [build-windows, build-core-sorter-windows, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-corecut-android, build-simmer-android, build-quik-android, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
+    needs: [build-windows, build-core-sorter-windows, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-corecut-android, build-simmer-android, build-quik-android, build-store-browser-apps, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
     runs-on: ubuntu-latest
-    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-corecut-android.result == 'success' && needs.build-simmer-android.result == 'success' && needs.build-quik-android.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
+    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-corecut-android.result == 'success' && needs.build-simmer-android.result == 'success' && needs.build-quik-android.result == 'success' && needs.build-store-browser-apps.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
     permissions:
       contents: write
     steps:
@@ -1164,6 +1185,11 @@ jobs:
         with:
           name: quik-android-binaries
           path: final-release
+      - name: Download Family Hub, StoryShape, and AGBOT browser editions
+        uses: actions/download-artifact@v4
+        with:
+          name: store-browser-apps
+          path: store-pwas
 
       - name: Download Android Artifacts
         uses: actions/download-artifact@v4
@@ -1354,6 +1380,36 @@ jobs:
               --data-binary "@$file" \
               "https://storage.bunnycdn.com/aviocwatch/quik/$relative"
           done < <(find quik-web -type f -print0)
+
+      - name: Publish the other self-contained browser editions
+        shell: bash
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          for app in family-hub storyshape agbot; do
+            test -s "store-pwas/$app/index.html"
+            while IFS= read -r -d '' file; do
+              relative="${file#store-pwas/$app/}"
+              case "$file" in
+                *.html) content_type='text/html; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+                *.js) content_type='text/javascript; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+                *.css) content_type='text/css; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
+                *.svg) content_type='image/svg+xml'; cache='public, max-age=31536000, immutable' ;;
+                *.json|*.webmanifest) content_type='application/manifest+json; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+                *.png) content_type='image/png'; cache='public, max-age=31536000, immutable' ;;
+                *.jpeg|*.jpg) content_type='image/jpeg'; cache='public, max-age=31536000, immutable' ;;
+                *) content_type='application/octet-stream'; cache='public, max-age=31536000, immutable' ;;
+              esac
+              curl --fail --show-error --silent -X PUT \
+                -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+                -H "Content-Type: $content_type" \
+                -H "Cache-Control: $cache" \
+                --data-binary "@$file" \
+                "https://storage.bunnycdn.com/aviocwatch/$app/$relative"
+            done < <(find "store-pwas/$app" -type f -print0)
+          done
 
       - name: Publish Android store verification file
         shell: bash
@@ -1558,6 +1614,12 @@ jobs:
 
             - **Android**: signed APK; saves rendered clips through Android's share/save screen.
             - **iPhone/iPad and desktop browsers**: installable browser/PWA edition at https://aviocwatch.b-cdn.net/quik/. MP4/WebM export depends on browser recording support.
+
+            ### 📦 Other Avioc Apps browser editions
+
+            - **Our Family Hub**: offline browser/PWA at https://aviocwatch.b-cdn.net/family-hub/. Family data remains local to each device.
+            - **StoryShape**: offline browser/PWA at https://aviocwatch.b-cdn.net/storyshape/.
+            - **AGBOT**: browser/PWA at https://aviocwatch.b-cdn.net/agbot/. AI replies need internet and a configured AI provider.
 
             ### 🤖 AGBOT
 

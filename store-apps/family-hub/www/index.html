@@ -7,6 +7,7 @@
   <meta name="description" content="All-in-one family application featuring real-time chat, family wall, interactive family tree, shared calendar, chores, and recipe book.">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#f97316">
+  <meta name="theme-color" content="#f97316">
   
   <!-- Google Fonts: Plus Jakarta Sans, Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,5 +48,6 @@
 
   <!-- App Main Entry Point (No server required! Works directly via file://) -->
   <script src="js/bundle.js"></script>
+  <script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));</script>
 </body>
 </html>

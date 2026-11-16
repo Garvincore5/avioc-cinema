@@ -8,11 +8,11 @@ Scope checked: top-level projects and the actual runnable applications found ins
 | --- | --- | --- | --- |
 | Avioc Cinema | Existing Android, Windows, macOS, Linux, and iOS web-clip release pipeline | Existing release workflow | Existing product; separate from Avioc Apps Store |
 | Clearview Browser (`browsercore`) | Windows desktop app plus native Android source | Signed Android APK and source/license archive | Signed APK and source archive built and published; CDN APK returned HTTP 200 |
-| Our Family Hub (`family app`) | Self-contained browser app | Signed Android wrapper with bundled web assets | Signed APK built and published; data remains local to each device, with no hosted family sync |
-| StoryShape (`claude/storyshape.html`) | Standalone story arc canvas and static film dataset | Signed Android wrapper with bundled page | Signed APK built and published; it is a recommendation/drawing tool, not a video app |
+| Our Family Hub (`family app`) | Self-contained browser app | Signed Android APK plus offline browser/PWA edition | Android APK published; browser/PWA edition added for v1.0.29. Data remains local to each device, with no hosted family sync |
+| StoryShape (`claude/storyshape.html`) | Standalone story arc canvas and static film dataset | Signed Android APK plus offline browser/PWA edition | Android APK published; browser/PWA edition added for v1.0.29 |
 | Quick Contact Saver (`whtweb`) | Self-contained HTML app | Web/PWA or Android wrapper is feasible | Not added as a native package yet |
 | QU!K (`tiktok`) | Local video clip editor | Browser/PWA plus signed Android APK with MP4/WebM export and Android share/save support | Package being prepared for v1.0.26 |
-| AGBOT (`agbot`) | Web AI companion; user supplies optional Gemini key, with an online fallback | Signed Android wrapper with bundled UI and avatar images | Signed APK built and published; replies require external AI services and internet |
+| AGBOT (`agbot`) | Web AI companion; user supplies optional Gemini key, with an online fallback | Signed Android APK plus browser/PWA edition | Android APK published; browser/PWA edition added for v1.0.29. Replies require internet and an AI provider |
 | Luma (`ai girl`) | Unity project and browser preview | Unity Android build is possible, but current call is a prototype | Not advertised as a finished AI calling app |
 | Kinly (`love`) | Expo mobile app plus local file-backed API | Native Android build is possible | Cannot be a usable family service outside the developer's local network until its API is deployed and configured |
 | Garvin Core Media (`phone`) | PWA build output | Web/PWA | Firebase config contains placeholders and the saved public URL is a temporary tunnel; not releasable yet |
