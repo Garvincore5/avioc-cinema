@@ -29,7 +29,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.19'
+        default: 'v1.0.20'
 
 permissions:
   contents: read
@@ -77,6 +77,31 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows-binaries
+          path: release-binaries/*.exe
+          retention-days: 14
+
+  build-core-sorter-windows:
+    name: Core Sorter portable Windows app
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install package builder and generate app icon
+        run: |
+          python -m pip install --upgrade pip pyinstaller pillow
+          python scripts/generate-core-sorter-icon.py
+      - name: Build portable Core Sorter
+        run: pyinstaller --noconfirm --clean --onefile --windowed --name CoreSorter --icon assets/icons/core-sorter.ico store-apps/core-sorter/src/sorter.py
+      - name: Collect Core Sorter release
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path release-binaries -Force | Out-Null
+          Copy-Item dist/CoreSorter.exe release-binaries/Core-Sorter-Windows-x64-v1.0.0.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: core-sorter-windows-binary
           path: release-binaries/*.exe
           retention-days: 14
 
@@ -698,9 +723,9 @@ jobs:
   # ============================================================================
   publish-release:
     name: 🚀 Publish Universal Compatibility Release
-    needs: [build-windows, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
+    needs: [build-windows, build-core-sorter-windows, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
     runs-on: ubuntu-latest
-    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
+    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
     permissions:
       contents: write
     steps:
@@ -717,6 +742,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: windows-binaries
+          path: final-release
+      - name: Download Core Sorter Windows app
+        uses: actions/download-artifact@v4
+        with:
+          name: core-sorter-windows-binary
           path: final-release
 
       - name: Download Android Artifacts
@@ -916,7 +946,7 @@ jobs:
         run: |
           set -euo pipefail
           : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
-          for file in assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png assets/icons/clearview.svg assets/icons/family-hub.svg assets/icons/storyshape.svg assets/icons/agbot.svg; do
+          for file in assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png assets/icons/clearview.svg assets/icons/family-hub.svg assets/icons/storyshape.svg assets/icons/agbot.svg assets/icons/core-sorter.svg; do
             test -s "$file" || { echo "Missing Avioc Apps icon: $file"; exit 1; }
             content_type="image/png"
             [[ "$file" == *.svg ]] && content_type="image/svg+xml"
@@ -994,6 +1024,10 @@ jobs:
             ### 📈 StoryShape
 
             - **Android**: signed offline story-arc drawing and movie-matching tool. It is not a movie player or streaming app.
+
+            ### 📂 Core Sorter
+
+            - **Windows x64**: portable file organizer; preview its move plan and confirm before sorting. This package is not code-signed.
 
             ### 🤖 AGBOT
 

@@ -7,18 +7,19 @@ Scope checked: top-level projects and the actual runnable applications found ins
 | Project | Current form | Packaging path | Release state |
 | --- | --- | --- | --- |
 | Avioc Cinema | Existing Android, Windows, macOS, Linux, and iOS web-clip release pipeline | Existing release workflow | Existing product; separate from Avioc Apps Store |
-| Clearview Browser (`browsercore`) | Windows desktop app plus native Android source | Signed Android APK and source/license archive | Added to the release workflow and store; release must complete successfully before its links are live |
-| Our Family Hub (`family app`) | Self-contained browser app | Signed Android wrapper with bundled web assets | Android package is being added; data remains local to each device, with no hosted family sync |
-| StoryShape (`claude/storyshape.html`) | Standalone story arc canvas and static film dataset | Signed Android wrapper with bundled page | Android package is being added; it is a recommendation/drawing tool, not a video app |
+| Clearview Browser (`browsercore`) | Windows desktop app plus native Android source | Signed Android APK and source/license archive | Signed APK and source archive built and published; CDN APK returned HTTP 200 |
+| Our Family Hub (`family app`) | Self-contained browser app | Signed Android wrapper with bundled web assets | Signed APK built and published; data remains local to each device, with no hosted family sync |
+| StoryShape (`claude/storyshape.html`) | Standalone story arc canvas and static film dataset | Signed Android wrapper with bundled page | Signed APK built and published; it is a recommendation/drawing tool, not a video app |
 | Quick Contact Saver (`whtweb`) | Self-contained HTML app | Web/PWA or Android wrapper is feasible | Not added as a native package yet |
 | QU!K (`tiktok`) | Browser video editor with local demo media | Web/PWA; Android requires a media/filesystem adaptation | Not added as a native package yet |
-| AGBOT (`agbot`) | Web AI companion; user supplies optional Gemini key, with an online fallback | Signed Android wrapper with bundled UI and avatar images | Android package is being added; replies require external AI services and internet |
+| AGBOT (`agbot`) | Web AI companion; user supplies optional Gemini key, with an online fallback | Signed Android wrapper with bundled UI and avatar images | Signed APK built and published; replies require external AI services and internet |
 | Luma (`ai girl`) | Unity project and browser preview | Unity Android build is possible, but current call is a prototype | Not advertised as a finished AI calling app |
 | Kinly (`love`) | Expo mobile app plus local file-backed API | Native Android build is possible | Cannot be a usable family service outside the developer's local network until its API is deployed and configured |
 | Garvin Core Media (`phone`) | PWA build output | Web/PWA | Firebase config contains placeholders and the saved public URL is a temporary tunnel; not releasable yet |
 | Simmer (`claude/simmer`) | Browser photo editor | Web app; native packaging needs filesystem/API review | Not added as a native package yet |
 | CoreCut (`claude/vidor`) | Browser/Windows video editor | Windows desktop release exists in project; Android is not suitable without adaptation | Separate Windows product, not an Android app |
-| StoryShape (`claude/storyshape.html`) | Standalone HTML app | Web/PWA or Android wrapper is feasible | Not added as a native package yet |
+| Core Sorter (`core/sorter`) | Python Tkinter desktop file organizer plus browser version | Portable Windows x64 package | Windows package is being added; Android folder access is not supported by the current implementation |
+| CineAI Studio (`whtweb/cine-ai`) | Electron editor UI plus a local Node server and media/AI services | Windows desktop package is feasible after dependency and service review | Not released; current project expects its own server and third-party AI endpoints |
 | SmartHub (`NETWORK SMART`) | Local web controller | Desktop/local-network web app | Requires local device credentials and LAN access; no public-hosted app package |
 | Mayundo AI (`photoshop`) | Python desktop retouch studio and Photoshop automation | Windows desktop package | Requires local photo/model paths and bundled AI runtime; not an Android app |
 | Skin Retouch Studio (`skin`) | Photoshop plugin and Python desktop app | Photoshop plugin / Windows desktop | Not a mobile app; install method depends on Photoshop host |
@@ -30,9 +31,12 @@ Scope checked: top-level projects and the actual runnable applications found ins
 ## Other folders and nested outputs
 
 - `free cdn` and `New folder` have no project files at the top level.
-- `simon` contains photo albums and an unfinished smart-ease/photobook project, not a releasable app package.
+- `simon/version zero/photobook-smartalbums` contains Smart Ease, a working Windows photobook designer with large existing installers and bundled photo/layout assets. Its launcher and updater are Windows-specific, so it needs a separate desktop packaging pass and is not an Android target.
 - `bunny/projects` contains generated portfolio/business sites, not separate installable applications. They should remain websites unless a specific site is selected as a product.
+- `bunny/projects` has Apex Visuals, Garvin Core Media, Grvincore Media, Horizon Digital Studio, Lumina Photography Studio, Photography Site, and Tinah's Juice; these are generated website projects, not native apps.
+- `simon/photobook` contains photo albums and the Smart Ease source; existing Windows installers are large, and mobile packaging is not appropriate without a redesign.
 - `claude/avioc-cinema.html` is another Cinema page, not a separate product.
+- `whtweb/cine-ai` is separate from the plain Quick Contact Saver page; it uses an Electron window and a localhost media/AI server.
 
 ## Store/release rule
 

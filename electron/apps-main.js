@@ -8,7 +8,7 @@ app.commandLine.appendSwitch('enable-zero-copy');
 app.commandLine.appendSwitch('ignore-gpu-blocklist');
 
 let mainWindow = null;
-const installerNamePattern = /^(?:Avioc-Cinema-Setup-(?:x64|ia32)|Avioc-Apps-Setup-v\d+\.\d+\.\d+-(?:x64|ia32))\.exe$/i;
+const installerNamePattern = /^(?:Avioc-Cinema-Setup-(?:x64|ia32)|Avioc-Apps-Setup-v\d+\.\d+\.\d+-(?:x64|ia32)|Core-Sorter-Windows-x64-v\d+\.\d+\.\d+)\.exe$/i;
 
 function validateInstallerUrl(rawUrl) {
   let url;
@@ -17,7 +17,7 @@ function validateInstallerUrl(rawUrl) {
   if (url.protocol !== 'https:' || url.hostname !== 'aviocwatch.b-cdn.net' ||
       decodeURIComponent(url.pathname).split('/').slice(1, 3).join('/') !== 'avioc app/avioc cinema' ||
       !installerNamePattern.test(fileName) || url.search || url.hash) {
-    throw new Error('Only official Avioc Windows setup files can be installed from this store.');
+    throw new Error('Only approved Avioc Apps Store Windows packages can be opened from this store.');
   }
   return { url: url.href, fileName };
 }
@@ -143,7 +143,7 @@ function createWindow() {
   const indexPath = path.join(__dirname, '..', 'firebase-public', 'index.html');
   const rootIndex = path.join(__dirname, '..', 'index.html');
   const fileToLoad = fs.existsSync(appsPagePath) ? appsPagePath : (fs.existsSync(indexPath) ? indexPath : rootIndex);
-  const otaUrl = 'https://aviocwatch.b-cdn.net/apps-ota-v1.0.19.html';
+  const otaUrl = 'https://aviocwatch.b-cdn.net/apps-ota-v1.0.20.html';
   let usedLocalFallback = false;
 
   mainWindow.webContents.on('did-fail-load', (_event, _code, _description, _validatedURL, isMainFrame) => {
