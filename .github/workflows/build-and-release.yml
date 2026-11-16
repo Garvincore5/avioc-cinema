@@ -36,7 +36,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.31'
+        default: 'v1.0.32'
 
 permissions:
   contents: read
@@ -134,6 +134,8 @@ jobs:
         run: |
           npm install
           npm run build
+          cd ../../../../
+          node scripts/finalize-store-pwa.js core-sorter "Core Sorter"
       - uses: actions/upload-artifact@v4
         with:
           name: core-sorter-web-files
@@ -213,6 +215,8 @@ jobs:
         run: |
           npm install
           npm run build
+          cd ../../
+          node scripts/finalize-store-pwa.js quick-contact "Quick Contact Saver"
       - uses: actions/upload-artifact@v4
         with:
           name: quick-contact-web-files
@@ -231,7 +235,7 @@ jobs:
           STORE_ANDROID_APP_NAME: Quick Contact Saver
           STORE_ANDROID_ICON_FILE: store-apps/quick-contact/android-res/ic_quick_contact.xml
           ANDROID_VERSION_CODE: ${{ github.run_number }}
-          ANDROID_VERSION_NAME: 1.0.31
+          ANDROID_VERSION_NAME: 1.0.32
       - name: Restore Android signing key from GitHub secrets
         shell: bash
         run: |
@@ -262,7 +266,7 @@ jobs:
           apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
           "$apksigner" verify --verbose "$apk"
           mkdir -p ../release-binaries
-          cp "$apk" ../release-binaries/Quick-Contact-Saver-Android-v1.0.31.apk
+          cp "$apk" ../release-binaries/Quick-Contact-Saver-Android-v1.0.32.apk
         env:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
@@ -270,6 +274,89 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: quick-contact-android-binaries
+          path: release-binaries/*.apk
+          retention-days: 14
+
+  build-ai-companion-android:
+    name: Signed Avioc AI Companion Android and browser editions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install shared Capacitor plugins
+        run: npm ci
+      - name: Install Android speech recognition plugin for Capacitor
+        run: npm install --save @capacitor-community/speech-recognition@5.1.0
+      - name: Build Avioc AI Companion browser edition
+        working-directory: store-apps/ai-companion
+        run: |
+          npm install
+          npm run build
+          cd ../../
+          node scripts/finalize-store-pwa.js ai-companion "Avioc AI Companion"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-companion-web-files
+          path: store-apps/ai-companion/dist/**
+          retention-days: 14
+      - name: Prepare Android app contents and identity
+        run: |
+          mkdir -p store-apps/ai-companion/android/www
+          cp -R store-apps/ai-companion/dist/. store-apps/ai-companion/android/www/
+          node scripts/prepare-android-ai-companion.js
+          npx cap add android
+          npx cap sync android
+          node scripts/configure-store-android-release.js
+        env:
+          STORE_ANDROID_APP_ID: com.avioc.aicompanion
+          STORE_ANDROID_APP_NAME: Avioc AI Companion
+          STORE_ANDROID_ICON_FILE: store-apps/ai-companion/android-res/ic_ai_companion.xml
+          ANDROID_VERSION_CODE: ${{ github.run_number }}
+          ANDROID_VERSION_NAME: 1.0.32
+      - name: Restore Android signing key from GitHub secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${ANDROID_KEYSTORE_BASE64:?Missing ANDROID_KEYSTORE_BASE64 GitHub secret}"
+          : "${ANDROID_KEYSTORE_PASSWORD:?Missing ANDROID_KEYSTORE_PASSWORD GitHub secret}"
+          : "${ANDROID_KEY_ALIAS:?Missing ANDROID_KEY_ALIAS GitHub secret}"
+          : "${ANDROID_KEY_PASSWORD:?Missing ANDROID_KEY_PASSWORD GitHub secret}"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/avioc-release-key.jks"
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Build and verify signed Avioc AI Companion APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/avioc-release-key.jks" \
+            -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD"
+          apk="app/build/outputs/apk/release/app-release.apk"
+          test -s "$apk"
+          apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
+          "$apksigner" verify --verbose "$apk"
+          mkdir -p ../release-binaries
+          cp "$apk" ../release-binaries/Avioc-AI-Companion-Android-v1.0.32.apk
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-companion-android-binaries
           path: release-binaries/*.apk
           retention-days: 14
 
@@ -1266,9 +1353,9 @@ jobs:
   # ============================================================================
   publish-release:
     name: 🚀 Publish Universal Compatibility Release
-    needs: [build-windows, build-core-sorter-windows, build-core-sorter-android, build-quick-contact-android, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-corecut-android, build-simmer-android, build-quik-android, build-store-browser-apps, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
+    needs: [build-windows, build-core-sorter-windows, build-core-sorter-android, build-quick-contact-android, build-ai-companion-android, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-corecut-android, build-simmer-android, build-quik-android, build-store-browser-apps, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
     runs-on: ubuntu-latest
-    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-core-sorter-android.result == 'success' && needs.build-quick-contact-android.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-corecut-android.result == 'success' && needs.build-simmer-android.result == 'success' && needs.build-quik-android.result == 'success' && needs.build-store-browser-apps.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
+    if: always() && (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-core-sorter-android.result == 'success' && needs.build-quick-contact-android.result == 'success' && needs.build-ai-companion-android.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-corecut-android.result == 'success' && needs.build-simmer-android.result == 'success' && needs.build-quik-android.result == 'success' && needs.build-store-browser-apps.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
     permissions:
       contents: write
     steps:
@@ -1314,6 +1401,16 @@ jobs:
         with:
           name: quick-contact-web-files
           path: quick-contact-web
+      - name: Download Avioc AI Companion Android app
+        uses: actions/download-artifact@v4
+        with:
+          name: ai-companion-android-binaries
+          path: final-release
+      - name: Download Avioc AI Companion browser edition
+        uses: actions/download-artifact@v4
+        with:
+          name: ai-companion-web-files
+          path: ai-companion-web
       - name: Download CoreCut Windows packages
         uses: actions/download-artifact@v4
         with:
@@ -1494,6 +1591,7 @@ jobs:
             relative="${file#corecut-web/}"
             case "$file" in
               *.html) content_type='text/html; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              sw.js) content_type='text/javascript; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
               *.js) content_type='text/javascript; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
               *.css) content_type='text/css; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
               *.svg) content_type='image/svg+xml'; cache='public, max-age=31536000, immutable' ;;
@@ -1523,6 +1621,7 @@ jobs:
             relative="${file#simmer-web/}"
             case "$file" in
               *.html) content_type='text/html; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              sw.js) content_type='text/javascript; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
               *.js) content_type='text/javascript; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
               *.css) content_type='text/css; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
               *.svg) content_type='image/svg+xml'; cache='public, max-age=31536000, immutable' ;;
@@ -1607,6 +1706,7 @@ jobs:
             relative="${file#core-sorter-web/}"
             case "$file" in
               *.html) content_type='text/html; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              */sw.js|sw.js) content_type='text/javascript; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
               *.js) content_type='text/javascript; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
               *.css) content_type='text/css; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
               *.svg) content_type='image/svg+xml'; cache='public, max-age=31536000, immutable' ;;
@@ -1633,6 +1733,7 @@ jobs:
             relative="${file#quick-contact-web/}"
             case "$file" in
               *.html) content_type='text/html; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              */sw.js|sw.js) content_type='text/javascript; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
               *.js) content_type='text/javascript; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
               *.css) content_type='text/css; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
               *.svg) content_type='image/svg+xml'; cache='public, max-age=31536000, immutable' ;;
@@ -1646,6 +1747,33 @@ jobs:
               --data-binary "@$file" \
               "https://storage.bunnycdn.com/aviocwatch/quick-contact/$relative"
           done < <(find quick-contact-web -type f -print0)
+
+      - name: Publish Avioc AI Companion browser edition
+        shell: bash
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          test -s ai-companion-web/index.html
+          while IFS= read -r -d '' file; do
+            relative="${file#ai-companion-web/}"
+            case "$file" in
+              *.html) content_type='text/html; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              */sw.js|sw.js) content_type='text/javascript; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              *.js) content_type='text/javascript; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
+              *.css) content_type='text/css; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
+              *.svg) content_type='image/svg+xml'; cache='public, max-age=31536000, immutable' ;;
+              *.webmanifest) content_type='application/manifest+json; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              *) content_type='application/octet-stream'; cache='public, max-age=31536000, immutable' ;;
+            esac
+            curl --fail --show-error --silent -X PUT \
+              -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+              -H "Content-Type: $content_type" \
+              -H "Cache-Control: $cache" \
+              --data-binary "@$file" \
+              "https://storage.bunnycdn.com/aviocwatch/ai-companion/$relative"
+          done < <(find ai-companion-web -type f -print0)
 
       - name: Publish Android store verification file
         shell: bash
@@ -1742,7 +1870,7 @@ jobs:
         run: |
           set -euo pipefail
           : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
-          for file in assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png assets/icons/clearview.svg assets/icons/family-hub.svg assets/icons/storyshape.svg assets/icons/agbot.svg assets/icons/core-sorter.svg assets/icons/quick-contact.svg; do
+          for file in assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png assets/icons/clearview.svg assets/icons/family-hub.svg assets/icons/storyshape.svg assets/icons/agbot.svg assets/icons/core-sorter.svg assets/icons/quick-contact.svg assets/icons/ai-companion.svg; do
             test -s "$file" || { echo "Missing Avioc Apps icon: $file"; exit 1; }
             content_type="image/png"
             [[ "$file" == *.svg ]] && content_type="image/svg+xml"

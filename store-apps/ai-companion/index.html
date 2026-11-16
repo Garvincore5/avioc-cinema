@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avioc AI Companion</title>
+    <meta name="theme-color" content="#080b14">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="stylesheet" href="css/hud.css">
+</head>
+<body>
+
+    <!-- Top HUD Navigation Bar -->
+    <header class="hud-header">
+        <div class="brand-section">
+            <div class="brand-logo"></div>
+            <div>
+                <div class="brand-title" id="companionTitle">NOVA</div>
+                <div class="brand-version">AUTONOMOUS NEURAL COMPANION v3.0</div>
+            </div>
+        </div>
+
+        <div class="hud-status-bar">
+            <div class="status-badge">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">SYSTEM ONLINE</span>
+            </div>
+            <button class="hud-btn" id="audioToggleBtn" title="Toggle Sound FX">🔊 SFX ON</button>
+            <button class="hud-btn" id="openSettingsBtn">⚙️ SETTINGS</button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="hud-workspace">
+        
+        <!-- Center Stage: 3D Hologram Reactor Core -->
+        <section class="center-stage">
+            <div class="orb-container">
+                <canvas id="orbCanvas"></canvas>
+            </div>
+
+            <!-- Audio Waveform Visualizer -->
+            <div class="wave-visualizer" id="waveVisualizer">
+                <!-- 16 Wave Bars -->
+                <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+                <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+                <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+                <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            </div>
+
+            <!-- Spoken Subtitle / Live Transcript Bubble -->
+            <div class="transcript-bubble" id="transcriptBubble">
+                <span>"Click the microphone or type below to talk to me..."</span>
+            </div>
+
+            <!-- Quick Action Suggestion Chips -->
+            <div class="quick-chips">
+                <button class="chip-btn" data-prompt="Hello! How are you doing today?">👋 Say Hello</button>
+                <button class="chip-btn" data-prompt="system status">⚡ System Status</button>
+                <button class="chip-btn" data-prompt="open youtube">🎬 Open YouTube</button>
+                <button class="chip-btn" data-prompt="open spotify">🎵 Open Spotify</button>
+                <button class="chip-btn" data-prompt="what time is it">⏰ What time is it?</button>
+                <button class="chip-btn" data-prompt="tell me a funny joke">😂 Tell a Joke</button>
+                <button class="chip-btn" data-prompt="motivate me to build something legendary">🚀 Motivate Me</button>
+                <button class="chip-btn" data-prompt="flip a coin">🪙 Flip a Coin</button>
+            </div>
+        </section>
+
+        <!-- Right Terminal: Conversation Log & Chat Input -->
+        <section class="terminal-panel">
+            <div class="panel-header">
+                <span>NEURAL STREAM LOG</span>
+                <span id="logCounter">0 MESSAGES</span>
+            </div>
+
+            <div class="chat-log" id="chatLog">
+                <!-- Messages populated dynamically -->
+            </div>
+
+            <div class="input-dock">
+                <!-- Mic Button -->
+                <button class="mic-toggle-btn" id="micBtn" title="Hold or Click to Speak">
+                    🎙️
+                </button>
+
+                <!-- Text Input -->
+                <div class="text-input-wrapper">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Talk with your AI friend..." autocomplete="off">
+                </div>
+
+                <!-- Send Button -->
+                <button class="send-btn" id="sendBtn" title="Send Message">
+                    ➤
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Settings & Customization Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>NEURAL CONFIGURATION</h3>
+                <button class="close-btn" id="closeSettingsBtn">&times;</button>
+            </div>
+
+            <div class="form-group">
+                <label>AI FRIEND NAME</label>
+                <input type="text" id="settingBotName" placeholder="e.g. JARVIS, NOVA, SAMANTHA">
+            </div>
+
+            <div class="form-group">
+                <label>YOUR NAME / HOW IT ADDRESSES YOU</label>
+                <input type="text" id="settingUserName" placeholder="e.g. Boss, Master Wayne, Alex, Bro">
+            </div>
+
+            <div class="form-group">
+                <label>PERSONALITY VIBE</label>
+                <select id="settingPersonality">
+                    <option value="jarvis">Movie J.A.R.V.I.S. (Sophisticated, Polite, Witty Butler)</option>
+                    <option value="bro">Chill Best Friend / Bro (Funny, Supportive, Enthusiastic)</option>
+                    <option value="cyberpunk">Cyberpunk Neural Net (Futuristic, High-Tech, Sharp)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>GOOGLE GEMINI API KEY (FREE)</label>
+                <input type="password" id="settingApiKey" placeholder="Paste AI Studio API Key here...">
+                <small>Your key is stored in this device’s browser storage and sent to Google when you use Gemini. Get a key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:var(--primary);">Google AI Studio</a>.</small>
+            </div>
+
+            <div class="form-group">
+                <label>VOICE SYNTHESIS ACCENT</label>
+                <select id="settingVoiceSelect">
+                    <!-- Populated dynamically -->
+                </select>
+            </div>
+
+            <button class="save-btn" id="saveSettingsBtn">INITIALIZE & SAVE SETTINGS</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/audio-effects.js"></script>
+    <script src="js/orb.js"></script>
+    <script src="js/voice.js"></script>
+    <script src="js/ai-brain.js"></script>
+    <script src="js/commands.js"></script>
+    <script type="module" src="./speech-bridge.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(error => console.warn('Offline support unavailable:', error)));
+        }
+    </script>
+
+    <!-- Main Controller Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Instantiate Core Systems
+            const core = new HolographicCore('orbCanvas');
+            const voice = new VoiceEngine();
+            const brain = new AiBrain();
+            const commands = new CommandEngine();
+
+            window.core = core;
+            window.voice = voice;
+            window.brain = brain;
+            window.commands = commands;
+
+            // DOM Elements
+            const chatLog = document.getElementById('chatLog');
+            const chatInput = document.getElementById('chatInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const micBtn = document.getElementById('micBtn');
+            const transcriptBubble = document.getElementById('transcriptBubble');
+            const statusText = document.getElementById('statusText');
+            const statusDot = document.getElementById('statusDot');
+            const logCounter = document.getElementById('logCounter');
+            const audioToggleBtn = document.getElementById('audioToggleBtn');
+            const companionTitle = document.getElementById('companionTitle');
+
+            // Settings Elements
+            const settingsModal = document.getElementById('settingsModal');
+            const openSettingsBtn = document.getElementById('openSettingsBtn');
+            const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+            const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+            const settingBotName = document.getElementById('settingBotName');
+            const settingUserName = document.getElementById('settingUserName');
+            const settingPersonality = document.getElementById('settingPersonality');
+            const settingApiKey = document.getElementById('settingApiKey');
+            const settingVoiceSelect = document.getElementById('settingVoiceSelect');
+
+            let messageCount = 0;
+
+            // Load saved settings into inputs
+            settingBotName.value = brain.botName;
+            settingUserName.value = brain.userName;
+            settingPersonality.value = brain.personality;
+            settingApiKey.value = brain.apiKey;
+            companionTitle.textContent = brain.botName.toUpperCase();
+
+            // Populate Voices
+            window.populateVoiceList = (voices, currentSelected) => {
+                settingVoiceSelect.innerHTML = '';
+                voices.forEach((v, index) => {
+                    const opt = document.createElement('option');
+                    opt.value = index;
+                    opt.textContent = `${v.name} (${v.lang})`;
+                    if (currentSelected && v.name === currentSelected.name) {
+                        opt.selected = true;
+                    }
+                    settingVoiceSelect.appendChild(opt);
+                });
+            };
+
+            // Audio Waveform Visualizer
+            const waveBars = document.querySelectorAll('.wave-bar');
+            window.visualizer = {
+                pulseWave: (intensity) => {
+                    waveBars.forEach((bar, idx) => {
+                        const h = 4 + Math.sin(Date.now() * 0.01 + idx) * (18 * intensity) + (Math.random() * 8 * intensity);
+                        bar.style.height = `${Math.max(4, Math.min(24, h))}px`;
+                        bar.style.background = intensity > 0.5 ? 'var(--accent-emerald)' : 'var(--primary)';
+                    });
+                },
+                resetWave: () => {
+                    waveBars.forEach(bar => {
+                        bar.style.height = '6px';
+                        bar.style.background = 'var(--primary)';
+                    });
+                }
+            };
+
+            // Global UI Hook functions
+            window.updateStatus = (text, mode = 'online') => {
+                statusText.textContent = text.toUpperCase();
+                if (mode === 'speaking') {
+                    statusDot.style.background = 'var(--accent-emerald)';
+                    statusDot.style.boxShadow = '0 0 10px var(--accent-emerald)';
+                } else if (mode === 'listening') {
+                    statusDot.style.background = '#ff3366';
+                    statusDot.style.boxShadow = '0 0 10px #ff3366';
+                } else if (mode === 'thinking') {
+                    statusDot.style.background = 'var(--secondary)';
+                    statusDot.style.boxShadow = '0 0 10px var(--secondary)';
+                } else {
+                    statusDot.style.background = 'var(--accent-emerald)';
+                    statusDot.style.boxShadow = '0 0 8px var(--accent-emerald)';
+                }
+            };
+
+            window.updateMicButton = (isListening) => {
+                if (isListening) {
+                    micBtn.classList.add('listening');
+                    micBtn.textContent = '⏹️';
+                } else {
+                    micBtn.classList.remove('listening');
+                    micBtn.textContent = '🎙️';
+                }
+            };
+
+            window.setTranscriptPreview = (text) => {
+                transcriptBubble.innerHTML = `<span>"${text}"</span>`;
+            };
+
+            window.clearChatMessages = () => {
+                chatLog.innerHTML = '';
+                messageCount = 0;
+                logCounter.textContent = '0 MESSAGES';
+            };
+
+            // Append message to UI log
+            function appendMessage(sender, text, type = 'ai') {
+                messageCount++;
+                logCounter.textContent = `${messageCount} MESSAGE${messageCount === 1 ? '' : 'S'}`;
+
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `message ${type}`;
+
+                if (type !== 'system') {
+                    const senderLabel = document.createElement('div');
+                    senderLabel.className = 'message-sender';
+                    senderLabel.textContent = sender.toUpperCase();
+                    msgDiv.appendChild(senderLabel);
+                }
+
+                const body = document.createElement('div');
+                body.textContent = text;
+                msgDiv.appendChild(body);
+
+                chatLog.appendChild(msgDiv);
+                chatLog.scrollTop = chatLog.scrollHeight;
+            }
+
+            // Main Message Processing Pipeline
+            async function processInput(inputText) {
+                const text = inputText.trim();
+                if (!text) return;
+
+                // 1. Show user message
+                appendMessage(brain.userName, text, 'user');
+                transcriptBubble.innerHTML = `<span>"${text}"</span>`;
+
+                // 2. Check for PC / System Commands
+                const cmdMatch = commands.match(text);
+                if (cmdMatch.matched) {
+                    core.setState('command');
+                    window.updateStatus('EXECUTING COMMAND', 'thinking');
+                    if (window.soundFX) window.soundFX.playCommandSuccess();
+
+                    const reply = cmdMatch.execute();
+                    setTimeout(() => {
+                        appendMessage(brain.botName, reply, 'ai');
+                        transcriptBubble.innerHTML = `<span>"${reply}"</span>`;
+                        voice.speak(reply);
+                    }, 400);
+                    return;
+                }
+
+                // 3. Otherwise send to AI Brain
+                core.setState('thinking');
+                window.updateStatus('THINKING...', 'thinking');
+                if (window.soundFX) window.soundFX.playProcessing();
+
+                try {
+                    const aiReply = await brain.generateResponse(text);
+                    appendMessage(brain.botName, aiReply, 'ai');
+                    transcriptBubble.innerHTML = `<span>"${aiReply}"</span>`;
+                    
+                    if (window.soundFX) window.soundFX.playResponse();
+                    voice.speak(aiReply);
+                } catch (e) {
+                    const fallback = `I encountered an unexpected issue: ${e.message}`;
+                    appendMessage(brain.botName, fallback, 'ai');
+                    voice.speak(fallback);
+                }
+            }
+
+            window.handleUserSpeechInput = (transcript) => {
+                processInput(transcript);
+            };
+
+            // Event Listeners
+            sendBtn.addEventListener('click', () => {
+                const val = chatInput.value;
+                if (val) {
+                    chatInput.value = '';
+                    processInput(val);
+                }
+            });
+
+            chatInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const val = chatInput.value;
+                    if (val) {
+                        chatInput.value = '';
+                        processInput(val);
+                    }
+                }
+            });
+
+            micBtn.addEventListener('click', () => {
+                voice.toggleListening();
+            });
+
+            // Quick suggestion chips
+            document.querySelectorAll('.chip-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const prompt = btn.getAttribute('data-prompt');
+                    processInput(prompt);
+                });
+            });
+
+            // Settings Modal Open/Close
+            openSettingsBtn.addEventListener('click', () => {
+                settingsModal.style.display = 'flex';
+            });
+
+            closeSettingsBtn.addEventListener('click', () => {
+                settingsModal.style.display = 'none';
+            });
+
+            saveSettingsBtn.addEventListener('click', () => {
+                brain.setBotName(settingBotName.value);
+                brain.setUserName(settingUserName.value);
+                brain.setPersonality(settingPersonality.value);
+                brain.setApiKey(settingApiKey.value);
+
+                companionTitle.textContent = brain.botName.toUpperCase();
+
+                // Update selected voice
+                const voices = speechSynthesis.getVoices();
+                const selectedIdx = settingVoiceSelect.value;
+                if (voices[selectedIdx]) {
+                    voice.selectedVoice = voices[selectedIdx];
+                }
+
+                settingsModal.style.display = 'none';
+                if (window.soundFX) window.soundFX.playCommandSuccess();
+
+                const greet = `Settings updated, ${brain.userName}. I am ${brain.botName}, standing by.`;
+                appendMessage(brain.botName, greet, 'system');
+                voice.speak(greet);
+            });
+
+            // Toggle Sound FX
+            audioToggleBtn.addEventListener('click', () => {
+                soundFX.enabled = !soundFX.enabled;
+                audioToggleBtn.textContent = soundFX.enabled ? '🔊 SFX ON' : '🔇 SFX OFF';
+            });
+
+            // Click on core to speak
+            document.getElementById('orbCanvas').addEventListener('click', () => {
+                voice.toggleListening();
+            });
+
+            // Initial Welcome Sequence
+            setTimeout(() => {
+                if (window.soundFX) window.soundFX.playStartup();
+                const welcomeText = `Systems online. Good day, ${brain.userName}. I am ${brain.botName}, your personal AI companion. How can I assist you today?`;
+                appendMessage(brain.botName, welcomeText, 'ai');
+                transcriptBubble.innerHTML = `<span>"${welcomeText}"</span>`;
+                voice.speak(welcomeText);
+            }, 800);
+        });
+    </script>
+</body>
+</html>

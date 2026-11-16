@@ -1,0 +1,555 @@
+:root {
+    --bg-dark: #070913;
+    --panel-bg: rgba(12, 19, 36, 0.7);
+    --panel-border: rgba(0, 240, 255, 0.2);
+    --panel-glow: 0 0 25px rgba(0, 240, 255, 0.15);
+    
+    --primary: #00f0ff;
+    --primary-glow: rgba(0, 240, 255, 0.5);
+    --secondary: #7928ca;
+    --accent-emerald: #00ffa3;
+    --accent-amber: #ffb800;
+    
+    --text-main: #f0f6fc;
+    --text-muted: #8b949e;
+    --text-dim: #484f58;
+
+    --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    --font-mono: 'Consolas', 'Courier New', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at 50% 30%, #0d162d 0%, #060913 70%, #020307 100%);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+}
+
+/* Subtle Sci-Fi Grid Overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Top App Header / HUD Bar */
+.hud-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+    border-bottom: 1px solid var(--panel-border);
+    background: rgba(7, 12, 24, 0.6);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand-logo {
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 12px var(--primary-glow);
+    position: relative;
+}
+
+.brand-logo::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--primary);
+}
+
+.brand-title {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.brand-version {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.hud-status-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    border-radius: 20px;
+    color: var(--primary);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-emerald);
+    box-shadow: 0 0 8px var(--accent-emerald);
+    animation: blinkDot 2s infinite ease-in-out;
+}
+
+@keyframes blinkDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.hud-btn {
+    background: transparent;
+    border: 1px solid var(--panel-border);
+    color: var(--text-main);
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.hud-btn:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow);
+    color: var(--primary);
+}
+
+/* Main Workspace Grid */
+.hud-workspace {
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    z-index: 2;
+}
+
+/* Center Stage: Holographic Orb & Visualizer */
+.center-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+}
+
+.orb-container {
+    width: 100%;
+    max-width: 550px;
+    height: 480px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#orbCanvas {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* Spoken Transcript Overlay */
+.transcript-bubble {
+    margin-top: 15px;
+    max-width: 600px;
+    min-height: 45px;
+    padding: 10px 20px;
+    background: rgba(12, 19, 36, 0.75);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 24px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--primary);
+    font-family: var(--font-mono);
+    transition: all 0.3s ease;
+}
+
+/* Audio Waveform Bars */
+.wave-visualizer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 24px;
+    margin-top: 15px;
+}
+
+.wave-bar {
+    width: 3px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: height 0.08s ease, background 0.2s ease;
+}
+
+/* Quick Action Suggestion Chips */
+.quick-chips {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 650px;
+}
+
+.chip-btn {
+    background: rgba(12, 22, 45, 0.6);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    padding: 6px 14px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chip-btn:hover {
+    color: #fff;
+    border-color: var(--primary);
+    background: rgba(0, 240, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Right Panel: Holographic Terminal & Chat Log */
+.terminal-panel {
+    background: var(--panel-bg);
+    border-left: 1px solid var(--panel-border);
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.panel-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--panel-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: var(--primary);
+}
+
+.chat-log {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chat-log::-webkit-scrollbar {
+    width: 5px;
+}
+.chat-log::-webkit-scrollbar-thumb {
+    background: rgba(0, 240, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* Message Bubbles */
+.message {
+    max-width: 90%;
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message.user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, rgba(0, 150, 255, 0.25), rgba(121, 40, 202, 0.25));
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    color: #fff;
+    border-bottom-right-radius: 2px;
+}
+
+.message.ai {
+    align-self: flex-start;
+    background: rgba(14, 25, 48, 0.7);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-bottom-left-radius: 2px;
+    color: #e6edf3;
+}
+
+.message.system {
+    align-self: center;
+    background: rgba(255, 184, 0, 0.1);
+    border: 1px solid rgba(255, 184, 0, 0.3);
+    color: var(--accent-amber);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    border-radius: 8px;
+    padding: 6px 12px;
+}
+
+.message-sender {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--primary);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+/* Bottom Chat & Voice Input Controls */
+.input-dock {
+    padding: 15px 20px;
+    border-top: 1px solid var(--panel-border);
+    background: rgba(8, 14, 28, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mic-toggle-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(0, 240, 255, 0.1);
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.mic-toggle-btn:hover {
+    background: var(--primary);
+    color: #000;
+    box-shadow: 0 0 18px var(--primary);
+}
+
+.mic-toggle-btn.listening {
+    background: #ff3366;
+    border-color: #ff3366;
+    color: #fff;
+    box-shadow: 0 0 20px #ff3366;
+    animation: pulseMic 1s infinite alternate;
+}
+
+@keyframes pulseMic {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); box-shadow: 0 0 25px #ff3366; }
+}
+
+.text-input-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.chat-input {
+    width: 100%;
+    padding: 12px 18px;
+    background: rgba(14, 22, 40, 0.7);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    border-radius: 24px;
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.chat-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #000;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.send-btn:hover {
+    box-shadow: 0 0 14px var(--primary);
+    transform: scale(1.05);
+}
+
+/* Modal Popup (Settings) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(4, 7, 15, 0.85);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal-box {
+    background: #0d162a;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 35px rgba(0, 240, 255, 0.25);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 520px;
+    padding: 25px;
+    color: var(--text-main);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.modal-header h3 {
+    font-family: var(--font-mono);
+    color: var(--primary);
+    letter-spacing: 1px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+.close-btn:hover { color: #fff; }
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px 14px;
+    background: rgba(18, 29, 52, 0.8);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 4px;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.save-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #00f0ff, #00ffa3);
+    border: none;
+    border-radius: 8px;
+    color: #000;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    letter-spacing: 1px;
+    margin-top: 10px;
+    transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 163, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .hud-workspace {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+}
