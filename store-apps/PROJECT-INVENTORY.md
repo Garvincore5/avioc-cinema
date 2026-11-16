@@ -17,7 +17,7 @@ Scope checked: top-level projects and the actual runnable applications found ins
 | Kinly (`love`) | Expo mobile app plus local file-backed API | Native Android build is possible | Cannot be a usable family service outside the developer's local network until its API is deployed and configured |
 | Garvin Core Media (`phone`) | PWA build output | Web/PWA | Firebase config contains placeholders and the saved public URL is a temporary tunnel; not releasable yet |
 | Simmer (`claude/simmer`) | Browser photo editor | Web app; native packaging needs filesystem/API review | Not added as a native package yet |
-| CoreCut (`claude/vidor`) | Electron video editor with a local media server | Portable Windows x64 package | Windows packaging is being added; Android needs a full media/filesystem rewrite |
+| CoreCut (`claude/vidor`) | Electron editor plus installable browser/PWA edition | Windows x64, macOS Intel/ARM64, Linux x64/ARM64, and mobile browser/PWA | Cross-platform packaging is being added; PWA file access/export depends on device browser support |
 | Core Sorter (`core/sorter`) | Python Tkinter desktop file organizer plus browser version | Portable Windows x64 package | Published in v1.0.20; Android folder access is not supported by the current implementation |
 | CineAI Studio (`whtweb/cine-ai`) | Electron editor UI plus a local Node server and media/AI services | Windows desktop package is feasible after dependency and service review | Not released; current project expects its own server and third-party AI endpoints |
 | SmartHub (`NETWORK SMART`) | Local web controller | Desktop/local-network web app | Requires local device credentials and LAN access; no public-hosted app package |

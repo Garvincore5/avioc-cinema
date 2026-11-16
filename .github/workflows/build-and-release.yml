@@ -29,7 +29,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.21'
+        default: 'v1.0.22'
 
 permissions:
   contents: read
@@ -128,6 +128,85 @@ jobs:
         with:
           name: corecut-windows-binaries
           path: release-binaries/*.exe
+          retention-days: 14
+
+  build-corecut-macos:
+    name: CoreCut macOS ${{ matrix.arch }}
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install and package CoreCut
+        working-directory: store-apps/corecut/src
+        run: |
+          npm ci
+          npm run build
+          npm run build:electron
+          npx electron-builder --mac dmg --${{ matrix.arch }} --publish never
+      - name: Collect macOS package
+        run: |
+          mkdir -p release-binaries
+          cp store-apps/corecut/src/release/*.dmg release-binaries/CoreCut-Mac-${{ matrix.arch }}-v0.5.0.dmg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: corecut-macos-${{ matrix.arch }}
+          path: release-binaries/*.dmg
+          retention-days: 14
+
+  build-corecut-linux:
+    name: CoreCut Linux ${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        include:
+          - arch: x64
+            runner: ubuntu-latest
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install and package CoreCut
+        working-directory: store-apps/corecut/src
+        run: |
+          npm ci
+          npm run build
+          npm run build:electron
+          npx electron-builder --linux AppImage --${{ matrix.arch }} --publish never
+      - name: Collect Linux package
+        run: |
+          mkdir -p release-binaries
+          cp store-apps/corecut/src/release/*.AppImage release-binaries/CoreCut-Linux-${{ matrix.arch }}-v0.5.0.AppImage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: corecut-linux-${{ matrix.arch }}
+          path: release-binaries/*.AppImage
+          retention-days: 14
+
+  build-corecut-web:
+    name: CoreCut browser edition
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build CoreCut browser edition
+        working-directory: store-apps/corecut/src
+        run: |
+          npm ci
+          npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: corecut-web-files
+          path: store-apps/corecut/src/dist/**
           retention-days: 14
 
   # Avioc Apps has its own signed Android package and is separate from Cinema.
@@ -748,9 +827,9 @@ jobs:
   # ============================================================================
   publish-release:
     name: 🚀 Publish Universal Compatibility Release
-    needs: [build-windows, build-core-sorter-windows, build-corecut-windows, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
+    needs: [build-windows, build-core-sorter-windows, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
     runs-on: ubuntu-latest
-    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
+    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
     permissions:
       contents: write
     steps:
@@ -778,6 +857,31 @@ jobs:
         with:
           name: corecut-windows-binaries
           path: final-release
+      - name: Download CoreCut macOS x64 package
+        uses: actions/download-artifact@v4
+        with:
+          name: corecut-macos-x64
+          path: final-release
+      - name: Download CoreCut macOS arm64 package
+        uses: actions/download-artifact@v4
+        with:
+          name: corecut-macos-arm64
+          path: final-release
+      - name: Download CoreCut Linux x64 package
+        uses: actions/download-artifact@v4
+        with:
+          name: corecut-linux-x64
+          path: final-release
+      - name: Download CoreCut Linux arm64 package
+        uses: actions/download-artifact@v4
+        with:
+          name: corecut-linux-arm64
+          path: final-release
+      - name: Download CoreCut browser edition
+        uses: actions/download-artifact@v4
+        with:
+          name: corecut-web-files
+          path: corecut-web
 
       - name: Download Android Artifacts
         uses: actions/download-artifact@v4
@@ -844,6 +948,8 @@ jobs:
 
       - name: Upload All Built Apps Directly to BunnyCDN
         shell: bash
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
         run: |
           set -euo pipefail
           : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
@@ -883,9 +989,35 @@ jobs:
               fi
             fi
           done
-          echo "All built apps are live on BunnyCDN!"
+
+      - name: Publish CoreCut browser edition
+        shell: bash
         env:
           BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          test -s corecut-web/index.html
+          while IFS= read -r -d '' file; do
+            relative="${file#corecut-web/}"
+            case "$file" in
+              *.html) content_type='text/html; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              *.js) content_type='text/javascript; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
+              *.css) content_type='text/css; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
+              *.svg) content_type='image/svg+xml'; cache='public, max-age=31536000, immutable' ;;
+              *.webmanifest) content_type='application/manifest+json; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              *.wasm) content_type='application/wasm'; cache='public, max-age=31536000, immutable' ;;
+              *.png) content_type='image/png'; cache='public, max-age=31536000, immutable' ;;
+              *) content_type='application/octet-stream'; cache='public, max-age=31536000, immutable' ;;
+            esac
+            curl --fail --show-error --silent -X PUT \
+              -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+              -H "Content-Type: $content_type" \
+              -H "Cache-Control: $cache" \
+              --data-binary "@$file" \
+              "https://storage.bunnycdn.com/aviocwatch/corecut/$relative"
+          done < <(find corecut-web -type f -print0)
+          echo "All built apps are live on BunnyCDN!"
 
       - name: Publish Android store verification file
         shell: bash
@@ -1061,7 +1193,10 @@ jobs:
 
             ### 🎬 CoreCut
 
-            - **Windows x64**: portable video editor or one-click setup installer. Link import may require the separately installed yt-dlp tool; local editing and export run on the PC.
+            - **Windows x64**: portable video editor or one-click setup installer.
+            - **macOS Intel / Apple Silicon**: separate x64 and arm64 DMG packages (unsigned).
+            - **Linux x64 / ARM64**: AppImage packages.
+            - **Android, iPhone/iPad, and other browsers**: browser edition at https://aviocwatch.b-cdn.net/corecut/. Its local-file editing/export support depends on the device browser. Link import may require the separately installed yt-dlp tool.
 
             ### 🤖 AGBOT
 

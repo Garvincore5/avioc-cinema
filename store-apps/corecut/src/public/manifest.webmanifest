@@ -1,0 +1,11 @@
+{
+  "name": "CoreCut Video Editor",
+  "short_name": "CoreCut",
+  "description": "A local-first video editor for your device.",
+  "start_url": "./?source=avioc-store",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0e1013",
+  "theme_color": "#0e1013",
+  "icons": [{ "src": "./corecut-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

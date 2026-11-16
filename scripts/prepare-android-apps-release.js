@@ -34,7 +34,7 @@ const capacitorConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 if (capacitorConfig.appId !== 'com.avioc.apps') throw new Error('Generated Capacitor config has the wrong package ID.');
 capacitorConfig.server = {
   ...(capacitorConfig.server || {}),
-  url: 'https://aviocwatch.b-cdn.net/apps-ota-v1.0.21.html',
+  url: 'https://aviocwatch.b-cdn.net/apps-ota-v1.0.22.html',
   errorPath: 'index.html',
 };
 fs.writeFileSync(configPath, `${JSON.stringify(capacitorConfig, null, 2)}\n`);
@@ -70,7 +70,7 @@ if (!manifest.includes('avioc-apps-open-scheme')) {
   const activityOpenEnd = manifest.indexOf('>', activityStart);
   const activityClose = manifest.indexOf('</activity>', activityOpenEnd);
   if (activityOpenEnd < 0 || activityClose < 0) throw new Error('Could not locate the Avioc Apps Android MainActivity element.');
-  const appSchemeFilter = `\n            <!-- avioc-apps-open-scheme: verified handoff from the Apps PWA -->\n            <intent-filter android:autoVerify="true">\n                <action android:name="android.intent.action.VIEW" />\n                <category android:name="android.intent.category.DEFAULT" />\n                <category android:name="android.intent.category.BROWSABLE" />\n                <data android:scheme="https" android:host="aviocwatch.b-cdn.net" android:pathPrefix="/apps-ota-v1.0.21.html" />\n            </intent-filter>\n        `;
+  const appSchemeFilter = `\n            <!-- avioc-apps-open-scheme: verified handoff from the Apps PWA -->\n            <intent-filter android:autoVerify="true">\n                <action android:name="android.intent.action.VIEW" />\n                <category android:name="android.intent.category.DEFAULT" />\n                <category android:name="android.intent.category.BROWSABLE" />\n                <data android:scheme="https" android:host="aviocwatch.b-cdn.net" android:pathPrefix="/apps-ota-v1.0.22.html" />\n            </intent-filter>\n        `;
   manifest = `${manifest.slice(0, activityClose)}${appSchemeFilter}${manifest.slice(activityClose)}`;
   fs.writeFileSync(manifestPath, manifest);
 }

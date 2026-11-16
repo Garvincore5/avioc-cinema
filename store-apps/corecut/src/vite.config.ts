@@ -4,5 +4,6 @@ import { audioProxy } from './audio-proxy.ts'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [react(), audioProxy()],
 })
