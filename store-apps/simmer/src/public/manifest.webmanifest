@@ -1,0 +1,11 @@
+{
+  "name": "Simmer Photo Studio",
+  "short_name": "Simmer",
+  "description": "Private, local-first portrait retouching and photo editing.",
+  "start_url": "./?source=avioc-store",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#15161b",
+  "theme_color": "#15161b",
+  "icons": [{ "src": "./simmer-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

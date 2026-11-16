@@ -29,7 +29,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.23'
+        default: 'v1.0.24'
 
 permissions:
   contents: read
@@ -292,6 +292,90 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: corecut-android-binaries
+          path: release-binaries/*.apk
+          retention-days: 14
+
+  build-simmer-android:
+    name: Signed Simmer Android Photo Studio
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install shared Capacitor and Android dependencies
+        run: npm ci
+      - name: Build the bundled Simmer photo studio
+        working-directory: store-apps/simmer/src
+        run: |
+          npm ci
+          npm run setup
+          npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: simmer-web-files
+          path: store-apps/simmer/src/dist/**
+          retention-days: 14
+      - name: Prepare bundled Android photo editor
+        run: |
+          mkdir -p store-apps/simmer/android/www
+          cp -R store-apps/simmer/src/dist/. store-apps/simmer/android/www/
+          node scripts/prepare-android-simmer.js
+      - name: Create and sync native Android project
+        run: |
+          npx cap add android
+          npx cap sync android
+      - name: Configure app identity and release version
+        run: node scripts/configure-store-android-release.js
+        env:
+          STORE_ANDROID_APP_ID: com.avioc.simmer
+          STORE_ANDROID_APP_NAME: Simmer Photo Studio
+          STORE_ANDROID_ICON_FILE: store-apps/simmer/android-res/ic_simmer.xml
+          ANDROID_VERSION_CODE: ${{ github.run_number }}
+          ANDROID_VERSION_NAME: 1.0.0
+      - name: Restore Android signing key from GitHub secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${ANDROID_KEYSTORE_BASE64:?Missing ANDROID_KEYSTORE_BASE64 GitHub secret}"
+          : "${ANDROID_KEYSTORE_PASSWORD:?Missing ANDROID_KEYSTORE_PASSWORD GitHub secret}"
+          : "${ANDROID_KEY_ALIAS:?Missing ANDROID_KEY_ALIAS GitHub secret}"
+          : "${ANDROID_KEY_PASSWORD:?Missing ANDROID_KEY_PASSWORD GitHub secret}"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/avioc-release-key.jks"
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Build and verify signed Simmer APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/avioc-release-key.jks" \
+            -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD"
+          apk="app/build/outputs/apk/release/app-release.apk"
+          test -s "$apk"
+          apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
+          test -x "$apksigner"
+          "$apksigner" verify --verbose "$apk"
+          mkdir -p ../release-binaries
+          cp "$apk" ../release-binaries/Simmer-Android-v1.0.0.apk
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: simmer-android-binaries
           path: release-binaries/*.apk
           retention-days: 14
 
@@ -913,9 +997,9 @@ jobs:
   # ============================================================================
   publish-release:
     name: 🚀 Publish Universal Compatibility Release
-    needs: [build-windows, build-core-sorter-windows, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-corecut-android, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
+    needs: [build-windows, build-core-sorter-windows, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-corecut-android, build-simmer-android, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
     runs-on: ubuntu-latest
-    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-corecut-android.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
+    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-corecut-android.result == 'success' && needs.build-simmer-android.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
     permissions:
       contents: write
     steps:
@@ -968,10 +1052,20 @@ jobs:
         with:
           name: corecut-web-files
           path: corecut-web
+      - name: Download Simmer browser edition
+        uses: actions/download-artifact@v4
+        with:
+          name: simmer-web-files
+          path: simmer-web
       - name: Download signed CoreCut Android app
         uses: actions/download-artifact@v4
         with:
           name: corecut-android-binaries
+          path: final-release
+      - name: Download signed Simmer Android app
+        uses: actions/download-artifact@v4
+        with:
+          name: simmer-android-binaries
           path: final-release
 
       - name: Download Android Artifacts
@@ -1109,6 +1203,34 @@ jobs:
               "https://storage.bunnycdn.com/aviocwatch/corecut/$relative"
           done < <(find corecut-web -type f -print0)
           echo "All built apps are live on BunnyCDN!"
+
+      - name: Publish Simmer browser edition
+        shell: bash
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+        run: |
+          set -euo pipefail
+          : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
+          test -s simmer-web/index.html
+          while IFS= read -r -d '' file; do
+            relative="${file#simmer-web/}"
+            case "$file" in
+              *.html) content_type='text/html; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              *.js) content_type='text/javascript; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
+              *.css) content_type='text/css; charset=utf-8'; cache='public, max-age=31536000, immutable' ;;
+              *.svg) content_type='image/svg+xml'; cache='public, max-age=31536000, immutable' ;;
+              *.webmanifest) content_type='application/manifest+json; charset=utf-8'; cache='no-cache, no-store, must-revalidate' ;;
+              *.wasm) content_type='application/wasm'; cache='public, max-age=31536000, immutable' ;;
+              *.tflite|*.task) content_type='application/octet-stream'; cache='public, max-age=31536000, immutable' ;;
+              *) content_type='application/octet-stream'; cache='public, max-age=31536000, immutable' ;;
+            esac
+            curl --fail --show-error --silent -X PUT \
+              -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+              -H "Content-Type: $content_type" \
+              -H "Cache-Control: $cache" \
+              --data-binary "@$file" \
+              "https://storage.bunnycdn.com/aviocwatch/simmer/$relative"
+          done < <(find simmer-web -type f -print0)
 
       - name: Publish Android store verification file
         shell: bash
@@ -1289,6 +1411,11 @@ jobs:
             - **Linux x64 / ARM64**: AppImage packages.
             - **Android**: signed CoreCut APK with native save/share for rendered videos and projects.
             - **iPhone/iPad and other browsers**: browser/PWA edition at https://aviocwatch.b-cdn.net/corecut/. Local-file editing/export depends on browser capabilities; link import is desktop-only.
+
+            ### 📷 Simmer Photo Studio
+
+            - **Android**: signed offline photo editor; exports open the Android save/share screen.
+            - **iPhone/iPad and desktop browsers**: installable browser edition at https://aviocwatch.b-cdn.net/simmer/ with local face models bundled for offline use.
 
             ### 🤖 AGBOT
 
