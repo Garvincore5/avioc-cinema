@@ -18,6 +18,7 @@ on:
       - assets/icons/agbot.svg
       - assets/icons/core-sorter.svg
       - assets/icons/quik.svg
+      - assets/icons/jarvis-desktop.svg
       - .github/workflows/deploy-app-store.yml
   workflow_dispatch:
 
@@ -84,7 +85,7 @@ jobs:
           set -euo pipefail
           : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
           APP_VERSION=$(node -p "require('./package.json').version")
-          for file in manifest.json sw.js "sw-v${APP_VERSION}.js" favicon.svg icon-192.png icon-512.png assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png assets/icons/clearview.svg assets/icons/family-hub.svg assets/icons/storyshape.svg assets/icons/agbot.svg assets/icons/core-sorter.svg assets/icons/corecut.svg assets/icons/simmer.svg assets/icons/quik.svg; do
+          for file in manifest.json sw.js "sw-v${APP_VERSION}.js" favicon.svg icon-192.png icon-512.png assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png assets/icons/clearview.svg assets/icons/family-hub.svg assets/icons/storyshape.svg assets/icons/agbot.svg assets/icons/core-sorter.svg assets/icons/corecut.svg assets/icons/simmer.svg assets/icons/quik.svg assets/icons/jarvis-desktop.svg; do
             test -f "$file" || { echo "$file is missing"; exit 1; }
             case "$file" in
               manifest.json) content_type="application/manifest+json; charset=utf-8" ;;

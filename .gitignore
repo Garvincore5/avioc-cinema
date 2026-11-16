@@ -11,6 +11,8 @@ store-apps/ai-companion/dist/
 store-apps/ai-companion/public/css/
 store-apps/ai-companion/public/js/
 store-apps/ai-companion/release*/
+store-apps/jarvis-desktop/bin/
+store-apps/jarvis-desktop/obj/
 ios/
 .env
 .env.*

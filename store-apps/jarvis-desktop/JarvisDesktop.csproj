@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>JARVIS-Desktop</AssemblyName>
+    <Version>1.0.0</Version>
+    <Product>J.A.R.V.I.S. Desktop Companion</Product>
+    <Description>Local Windows voice and chat companion</Description>
+    <RootNamespace>JarvisDesktop</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="src\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="src\index.html" LogicalName="JarvisDesktop.Web.index.html" />
+    <EmbeddedResource Include="src\css\hud.css" LogicalName="JarvisDesktop.Web.css.hud.css" />
+    <EmbeddedResource Include="src\js\*.js">
+      <LogicalName>JarvisDesktop.Web.js.%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

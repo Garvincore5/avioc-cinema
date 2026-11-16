@@ -11,7 +11,8 @@ const PRECACHE_ASSETS = [
   '/assets/icons/avioc-apps-512.png?v=1',
   '/assets/hls.min.js',
   '/assets/cinema-preview.png',
-  '/assets/icons/Avioc%20original.jpg'
+  '/assets/icons/Avioc%20original.jpg',
+  '/assets/icons/jarvis-desktop.svg'
 ];
 
 self.addEventListener('install', (event) => {

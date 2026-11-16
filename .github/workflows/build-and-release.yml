@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths-ignore:
+      - .gitignore
       - cinema.html
       - api-config.js
       - 'new body/catalog-data.json'
@@ -22,7 +23,9 @@ on:
       - icon-192.png
       - icon-512.png
       - assets/icons/quick-contact.svg
+      - assets/icons/jarvis-desktop.svg
       - .github/workflows/deploy-app-store.yml
+      - .github/workflows/build-jarvis-desktop.yml
       - .github/workflows/publish-apk-alias.yml
       - scripts/prepare-app-store-page.js
       - scripts/prepare-android-quick-contact.js
@@ -37,7 +40,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.36'
+        default: 'v1.0.37'
 
 permissions:
   contents: read
@@ -307,6 +310,11 @@ jobs:
           name: ai-companion-web-files
           path: store-apps/ai-companion/dist/**
           retention-days: 14
+      - name: Set AI Companion release version
+        shell: bash
+        run: |
+          version=$(node -p "require('./package.json').version")
+          echo "ANDROID_VERSION_NAME=$version" >> "$GITHUB_ENV"
       - name: Prepare Android app contents and identity
         run: |
           mkdir -p store-apps/ai-companion/android/www
@@ -320,7 +328,7 @@ jobs:
           STORE_ANDROID_APP_NAME: Avioc AI Companion
           STORE_ANDROID_ICON_FILE: store-apps/ai-companion/android-res/ic_ai_companion.xml
           ANDROID_VERSION_CODE: ${{ github.run_number }}
-          ANDROID_VERSION_NAME: 1.0.36
+          ANDROID_VERSION_NAME: ${{ env.ANDROID_VERSION_NAME }}
       - name: Restore Android signing key from GitHub secrets
         shell: bash
         run: |
@@ -351,7 +359,8 @@ jobs:
           apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
           "$apksigner" verify --verbose "$apk"
           mkdir -p ../release-binaries
-          cp "$apk" ../release-binaries/Avioc-AI-Companion-Android-v1.0.36.apk
+          version=$(node -p "require('../package.json').version")
+          cp "$apk" "../release-binaries/Avioc-AI-Companion-Android-v${version}.apk"
         env:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}

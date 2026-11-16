@@ -15,6 +15,10 @@ update('index.html', html => html
   .replace(/register\('\/sw(?:-v\d+\.\d+\.\d+)?\.js(?:\?v=[^']+)?'\)/g, `register('/sw-v${version}.js')`));
 update('manifest.json', json => json.replace(/apps-ota-v\d+\.\d+\.\d+/g, `apps-ota-v${version}`));
 update('index.html', html => html.replace(/(Avioc-AI-Companion-(?:Android|Windows-(?:x64|arm64)|Mac-(?:x64|arm64)|Linux-(?:x64|x86_64|arm64))-v)\d+\.\d+\.\d+/g, `$1${version}`));
+const jarvisProject = fs.readFileSync(path.join(root, 'store-apps/jarvis-desktop/JarvisDesktop.csproj'), 'utf8');
+const jarvisVersion = (jarvisProject.match(/<Version>(\d+\.\d+\.\d+)<\/Version>/) || [])[1];
+if (!jarvisVersion) throw new Error('J.A.R.V.I.S. Desktop project has no valid version.');
+update('index.html', html => html.replace(/(JARVIS-Desktop-Windows-x64-v)\d+\.\d+\.\d+/g, `$1${jarvisVersion}`));
 let worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
 worker = worker
   .replace(/apps-ota-v\d+\.\d+\.\d+/g, `apps-ota-v${version}`)

@@ -1,0 +1,43 @@
+name: Build J.A.R.V.I.S. Desktop Companion
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'store-apps/jarvis-desktop/**'
+      - '.github/workflows/build-jarvis-desktop.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows-x64:
+    name: Windows x64 self-contained app
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish self-contained executable
+        shell: pwsh
+        run: |
+          $version = (Select-String -Path 'store-apps/jarvis-desktop/JarvisDesktop.csproj' -Pattern '<Version>([^<]+)</Version>').Matches[0].Groups[1].Value
+          dotnet publish 'store-apps/jarvis-desktop/JarvisDesktop.csproj' --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true --output "$env:RUNNER_TEMP\jarvis-publish"
+          Copy-Item "$env:RUNNER_TEMP\jarvis-publish\JARVIS-Desktop.exe" "$env:RUNNER_TEMP\JARVIS-Desktop-Windows-x64-v$version.exe"
+
+      - name: Upload portable package to Bunny Storage
+        shell: pwsh
+        env:
+          BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:BUNNY_STORAGE_ZONE_KEY)) { throw 'BUNNY_STORAGE_ZONE_KEY is required.' }
+          $version = (Select-String -Path 'store-apps/jarvis-desktop/JarvisDesktop.csproj' -Pattern '<Version>([^<]+)</Version>').Matches[0].Groups[1].Value
+          $file = "$env:RUNNER_TEMP\JARVIS-Desktop-Windows-x64-v$version.exe"
+          $uri = "https://storage.bunnycdn.com/aviocwatch/avioc%20app/avioc%20cinema/JARVIS-Desktop-Windows-x64-v$version.exe"
+          Invoke-WebRequest -Uri $uri -Method Put -Headers @{ AccessKey = $env:BUNNY_STORAGE_ZONE_KEY; 'Content-Type' = 'application/vnd.microsoft.portable-executable' } -InFile $file | Out-Null
