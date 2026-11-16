@@ -1,0 +1,1 @@
+{"name":"Core Sorter","short_name":"Core Sorter","description":"Sort selected files into type folders in a ZIP archive. Originals stay untouched.","start_url":"./","scope":"./","display":"standalone","background_color":"#0b1220","theme_color":"#0b1220","icons":[{"src":"./core-sorter.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b1220"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./core-sorter.svg" type="image/svg+xml">
+  <title>Core Sorter — File organizer</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1220;--panel:#111b2c;--line:#25344b;--ink:#edf3ff;--muted:#9baac1;--accent:#8bb7ff;--green:#77e0b5}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#152745,var(--bg) 55%);color:var(--ink);font:16px/1.5 system-ui,sans-serif;min-height:100vh}.wrap{width:min(940px,100%);margin:auto;padding:28px 18px calc(36px + env(safe-area-inset-bottom))}.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.08em}.brand img{width:42px;height:42px}.eyebrow{margin:34px 0 4px;color:var(--green);font-size:12px;letter-spacing:.15em;font-weight:800}.title{font-size:clamp(34px,7vw,56px);line-height:1.03;letter-spacing:-.045em;margin:0}.lede{color:var(--muted);max-width:620px;margin:14px 0 24px}.panel{background:#111b2ce8;border:1px solid var(--line);border-radius:20px;padding:20px;margin:16px 0;box-shadow:0 16px 48px #0003}.pickers{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.pick{display:flex;flex-direction:column;gap:6px}.pick label{font-weight:750}.pick small,.note{color:var(--muted);font-size:13px}.pick input{width:100%;border:1px dashed #536987;border-radius:12px;padding:13px;background:#0c1524;color:var(--ink)}.btn{border:0;border-radius:11px;background:var(--accent);color:#0a1220;font-weight:850;padding:13px 18px;font-size:15px;min-height:48px}.btn:disabled{opacity:.45}.btn.secondary{background:#223149;color:var(--ink);border:1px solid var(--line)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 5px}.stats{font-size:13px;color:var(--muted);margin:14px 0}.list{display:grid;gap:8px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;background:#0c1524;border:1px solid #1c2b40;border-radius:10px;font-size:13px}.row strong{overflow-wrap:anywhere}.tag{flex:none;color:#07111f;background:var(--green);font-weight:850;font-size:11px;padding:3px 8px;border-radius:99px}.hidden{display:none!important}.callout{font-size:13px;color:#d2def0;background:#0c1524;border-left:3px solid var(--green);padding:12px 14px;border-radius:8px}.status{min-height:24px;color:var(--green);font-size:13px}.privacy{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:15px;margin-top:18px}@media(max-width:560px){.wrap{padding:20px 14px calc(26px + env(safe-area-inset-bottom))}.panel{padding:15px;border-radius:16px}.actions .btn{width:100%}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header><div class="brand"><img src="./core-sorter.svg" alt=""><span>CORE SORTER</span></div><p class="eyebrow">A LITTLE ORDER GOES A LONG WAY</p><h1 class="title">Every file<br>owns a folder.</h1><p class="lede">Choose files or a folder, review where everything will go, then download one organized ZIP. Your originals are never moved or deleted.</p></header>
+    <section class="panel" aria-label="Choose files">
+      <div class="pickers">
+        <div class="pick"><label for="files">Choose files</label><input id="files" type="file" multiple><small>Select several files from your device.</small></div>
+        <div class="pick"><label for="folder">Choose a folder</label><input id="folder" type="file" multiple webkitdirectory directory><small>Where supported, select a whole folder.</small></div>
+      </div>
+      <div class="actions"><button id="build" class="btn" disabled>Review sorting plan</button><button id="clear" class="btn secondary" type="button">Clear selection</button></div>
+      <p class="status" id="status" role="status"></p>
+    </section>
+    <section id="preview" class="panel hidden"><h2>Sorting plan</h2><p class="note" id="summary"></p><div class="list" id="list"></div><div class="actions"><button id="save" class="btn">Create sorted ZIP</button></div><p class="callout">Core Sorter makes a copy in a ZIP with category folders. It does not change your original files.</p></section>
+    <p class="privacy">Files are processed on this device. No file contents are uploaded. On Android, the finished ZIP opens in the system save/share sheet.</p>
+  </main>
+  <script type="module" src="./app.js"></script>
+  <script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));</script>
+</body>
+</html>
