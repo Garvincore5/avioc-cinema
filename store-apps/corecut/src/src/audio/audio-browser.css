@@ -1,0 +1,45 @@
+/* In-app audio browser. Scoped with the ab- prefix so it can't clash with editor styles. */
+.ab-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); display: grid; place-items: center; z-index: 1000; padding: 16px; }
+.ab-panel { position: relative; width: min(720px, 100%); height: min(640px, 100%); display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); overflow: hidden; }
+.ab-head { display: flex; align-items: center; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.ab-head strong { font-size: 14px; }
+.ab-tabs { display: flex; gap: 4px; padding: 8px 12px 0; flex-wrap: wrap; }
+.ab-tabs button { background: none; border-color: transparent; }
+.ab-tabs button.on { background: var(--panel-2); border-color: var(--line); }
+.ab-settings { margin: 8px 12px 0; padding: 10px; background: var(--panel-2); border-radius: 8px; display: grid; gap: 8px; }
+.ab-settings p { margin: 0; }
+.ab-settings label { display: grid; gap: 4px; }
+.ab-settings a, .ab-lic { color: var(--accent); }
+.ab-settings input, .ab-search input { background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; font: inherit; min-width: 0; }
+.ab-search { display: flex; gap: 6px; padding: 10px 12px 6px; }
+.ab-search input { flex: 1; }
+.ab-filters { display: flex; align-items: center; gap: 12px; padding: 0 12px 8px; flex-wrap: wrap; }
+.ab-filters label { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.ab-panel .warn { margin: 0 12px 8px; }
+.ab-results { list-style: none; margin: 0; padding: 0 12px; overflow-y: auto; flex: 1; display: grid; gap: 4px; align-content: start; }
+.ab-results li { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 8px; background: var(--panel-2); }
+.ab-play { width: 32px; height: 32px; padding: 0; border-radius: 50%; flex: none; }
+.ab-meta { flex: 1; min-width: 0; }
+.ab-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.ab-lic { text-decoration: none; padding: 0 5px; border-radius: 4px; background: rgba(47, 158, 110, 0.18); color: #6fd3a3; }
+.ab-lic.nc { background: rgba(243, 196, 107, 0.15); color: #f3c46b; }
+.ab-actions { display: flex; gap: 4px; flex: none; }
+.ab-done { color: #6fd3a3; flex: none; padding: 0 6px; }
+.ab-msg { padding: 16px 12px; text-align: center; }
+.ab-more { margin: 8px auto; display: block; }
+.ab-drop { flex: 1; margin: 12px; border: 1px dashed var(--line); border-radius: 10px; display: grid; place-content: center; justify-items: center; gap: 10px; text-align: center; padding: 16px; }
+.ab-drop p { margin: 0; }
+.ab-foot { padding: 8px 12px; border-top: 1px solid var(--line); }
+.ab-toast { position: absolute; left: 50%; bottom: 44px; transform: translateX(-50%); background: #2a2c35; border: 1px solid var(--line); padding: 8px 12px; border-radius: 8px; max-width: calc(100% - 32px); }
+.small { font-size: 11px; }
+@media (max-width: 560px) {
+  .ab-results li { flex-wrap: wrap; }
+  .ab-actions { width: 100%; justify-content: flex-end; }
+}
+.ab-link { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow-y: auto; }
+.ab-copyright { margin: 4px 12px 8px; padding: 10px 12px; border-radius: 8px; background: #3a2a10; color: #f3c46b; display: grid; gap: 6px; }
+.ab-copyright p { margin: 0; color: #e9d3a6; }
+.ab-copyright label { display: flex; align-items: center; gap: 6px; color: var(--text); }
+.ab-ok { margin: 4px 12px 8px; color: #6fd3a3; }
+.ab-ytdlp { margin: 4px 12px; padding: 10px 12px; border-radius: 8px; background: var(--panel-2); line-height: 1.6; }
+.ab-ytdlp code { background: var(--bg); padding: 1px 5px; border-radius: 4px; }

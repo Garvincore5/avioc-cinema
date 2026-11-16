@@ -1,0 +1,21 @@
+/* Auto-sync panel. Scoped with the sy- prefix so it can't clash with editor styles. */
+.sy-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); display: grid; place-items: center; z-index: 1000; padding: 16px; }
+.sy-panel { width: min(520px, 100%); max-height: 100%; display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); overflow: hidden; }
+.sy-head, .sy-foot { display: flex; align-items: center; gap: 6px; padding: 10px 12px; }
+.sy-head { border-bottom: 1px solid var(--line); }
+.sy-head strong { font-size: 14px; }
+.sy-foot { border-top: 1px solid var(--line); }
+.sy-body { padding: 12px; overflow-y: auto; display: grid; gap: 12px; }
+.sy-body p { margin: 0; line-height: 1.45; }
+.sy-body fieldset { border: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.sy-body label { display: flex; align-items: center; gap: 8px; }
+.sy-progress { display: grid; gap: 6px; }
+.sy-bar { height: 6px; border-radius: 3px; background: var(--panel-2); overflow: hidden; }
+.sy-bar span { display: block; height: 100%; background: var(--accent); transition: width 0.2s; }
+.sy-results { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.sy-results li { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 8px; background: var(--panel-2); }
+.sy-icon { width: 16px; text-align: center; color: #6fd3a3; }
+.sy-results li.failed .sy-icon { color: #ff7a7a; }
+.sy-results li.reference .sy-icon { color: #f3c46b; }
+.sy-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sy-panel .small { font-size: 11px; }
