@@ -813,6 +813,14 @@
         <a href="https://aviocwatch.b-cdn.net/simmer/" class="btn-get-app" id="gridSimmerGetBtn" data-app-install="simmer">OPEN</a>
       </div>
 
+      <div class="app-card">
+        <img src="assets/icons/quik.svg" alt="QU!K Video Clips" class="app-icon">
+        <div class="app-card-title">QU!K Video Clips</div>
+        <div class="app-card-category">Short video editor</div>
+        <div class="app-card-badge badge-blue">ANDROID · WEB/PWA</div>
+        <a href="https://aviocwatch.b-cdn.net/quik/" class="btn-get-app" id="gridQuikGetBtn" data-app-install="quik">OPEN</a>
+      </div>
+
       <!-- Card 2: Avioc Apps for Windows (Desktop Store App) -->
       <div class="app-card">
         <div class="app-icon" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a1538,#102256);">
@@ -1003,6 +1011,12 @@
       </a>
       <a href="https://aviocwatch.b-cdn.net/simmer/" class="platform-row" data-app-install="simmer-web">
         <div class="platform-info"><div class="platform-name">📷 Simmer browser/PWA edition</div><div class="platform-detail">iPhone/iPad and desktop browsers · install from your browser menu</div></div><span class="btn-sheet-get">OPEN</span>
+      </a>
+      <a href="https://aviocwatch.b-cdn.net/avioc%20app/avioc%20cinema/QUiK-Android-v1.0.0.apk" class="platform-row" data-app-install="quik-android">
+        <div class="platform-info"><div class="platform-name">✂️ QU!K Video Clips for Android</div><div class="platform-detail">Signed APK · local video editing · exports through Android's save/share screen</div></div><span class="btn-sheet-get">INSTALL</span>
+      </a>
+      <a href="https://aviocwatch.b-cdn.net/quik/" class="platform-row" data-app-install="quik-web">
+        <div class="platform-info"><div class="platform-name">✂️ QU!K browser/PWA edition</div><div class="platform-detail">iPhone/iPad and desktop browsers · install from your browser menu</div></div><span class="btn-sheet-get">OPEN</span>
       </a>
 
       <!-- Avioc Apps for Mac -->
@@ -1252,6 +1266,9 @@
       if (appKey === 'simmer') return currentPlatform() === 'android' ? base + 'Simmer-Android-v1.0.0.apk' : 'https://aviocwatch.b-cdn.net/simmer/';
       if (appKey === 'simmer-android') return base + 'Simmer-Android-v1.0.0.apk';
       if (appKey === 'simmer-web') return 'https://aviocwatch.b-cdn.net/simmer/';
+      if (appKey === 'quik') return currentPlatform() === 'android' ? base + 'QUiK-Android-v1.0.0.apk' : 'https://aviocwatch.b-cdn.net/quik/';
+      if (appKey === 'quik-android') return base + 'QUiK-Android-v1.0.0.apk';
+      if (appKey === 'quik-web') return 'https://aviocwatch.b-cdn.net/quik/';
       if (appKey === 'apps') {
         var appsPlatform = currentPlatform();
         var appsUa = navigator.userAgent || '';
@@ -1410,6 +1427,19 @@
       }
       if (appKey === 'simmer-web') {
         window.location.href = currentInstallerUrl('simmer-web');
+        return;
+      }
+      if (appKey === 'quik') {
+        if (currentPlatform() === 'android') confirmAndDownload(currentInstallerUrl('quik'), 'QU!K Video Clips for Android', 'This downloads the signed video editor. Exported clips open in Android’s save/share screen.');
+        else window.location.href = currentInstallerUrl('quik-web');
+        return;
+      }
+      if (appKey === 'quik-android') {
+        confirmAndDownload(currentInstallerUrl('quik-android'), 'QU!K Video Clips for Android', 'Open the downloaded APK to install or update.');
+        return;
+      }
+      if (appKey === 'quik-web') {
+        window.location.href = currentInstallerUrl('quik-web');
         return;
       }
       if (window.AviocNative && window.AviocNative.appId === 'apps' && platform === 'windows' && typeof window.AviocNative.installWindowsPackage === 'function') {

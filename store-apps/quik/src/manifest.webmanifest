@@ -1,0 +1,11 @@
+{
+  "name": "QU!K Video Clips",
+  "short_name": "QU!K",
+  "description": "Turn long videos into short, captioned moments.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#101010",
+  "theme_color": "#101010",
+  "icons": [{ "src": "./quik-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

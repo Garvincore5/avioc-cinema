@@ -17,6 +17,7 @@ on:
       - assets/icons/storyshape.svg
       - assets/icons/agbot.svg
       - assets/icons/core-sorter.svg
+      - assets/icons/quik.svg
       - .github/workflows/deploy-app-store.yml
   workflow_dispatch:
 
