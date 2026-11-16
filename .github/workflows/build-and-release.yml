@@ -36,7 +36,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.32'
+        default: 'v1.0.33'
 
 permissions:
   contents: read
@@ -235,7 +235,7 @@ jobs:
           STORE_ANDROID_APP_NAME: Quick Contact Saver
           STORE_ANDROID_ICON_FILE: store-apps/quick-contact/android-res/ic_quick_contact.xml
           ANDROID_VERSION_CODE: ${{ github.run_number }}
-          ANDROID_VERSION_NAME: 1.0.32
+          ANDROID_VERSION_NAME: 1.0.33
       - name: Restore Android signing key from GitHub secrets
         shell: bash
         run: |
@@ -266,7 +266,7 @@ jobs:
           apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
           "$apksigner" verify --verbose "$apk"
           mkdir -p ../release-binaries
-          cp "$apk" ../release-binaries/Quick-Contact-Saver-Android-v1.0.32.apk
+          cp "$apk" ../release-binaries/Quick-Contact-Saver-Android-v1.0.33.apk
         env:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
@@ -318,7 +318,7 @@ jobs:
           STORE_ANDROID_APP_NAME: Avioc AI Companion
           STORE_ANDROID_ICON_FILE: store-apps/ai-companion/android-res/ic_ai_companion.xml
           ANDROID_VERSION_CODE: ${{ github.run_number }}
-          ANDROID_VERSION_NAME: 1.0.32
+          ANDROID_VERSION_NAME: 1.0.33
       - name: Restore Android signing key from GitHub secrets
         shell: bash
         run: |
@@ -349,7 +349,7 @@ jobs:
           apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
           "$apksigner" verify --verbose "$apk"
           mkdir -p ../release-binaries
-          cp "$apk" ../release-binaries/Avioc-AI-Companion-Android-v1.0.32.apk
+          cp "$apk" ../release-binaries/Avioc-AI-Companion-Android-v1.0.33.apk
         env:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
@@ -1080,7 +1080,7 @@ jobs:
 
   build-macos-apps:
     name: 🍎 Avioc Apps for macOS
-    runs-on: macos-latest
+    runs-on: macos-15-intel
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
