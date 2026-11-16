@@ -36,7 +36,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.34'
+        default: 'v1.0.35'
 
 permissions:
   contents: read
@@ -296,7 +296,8 @@ jobs:
       - name: Build Avioc AI Companion browser edition
         working-directory: store-apps/ai-companion
         run: |
-          npm install
+          node ../../scripts/prepare-ai-companion-version.js
+          npm install --omit=dev
           npm run build
           cd ../../
           node scripts/finalize-store-pwa.js ai-companion "Avioc AI Companion"
@@ -318,7 +319,7 @@ jobs:
           STORE_ANDROID_APP_NAME: Avioc AI Companion
           STORE_ANDROID_ICON_FILE: store-apps/ai-companion/android-res/ic_ai_companion.xml
           ANDROID_VERSION_CODE: ${{ github.run_number }}
-          ANDROID_VERSION_NAME: 1.0.34
+          ANDROID_VERSION_NAME: 1.0.35
       - name: Restore Android signing key from GitHub secrets
         shell: bash
         run: |
@@ -349,7 +350,7 @@ jobs:
           apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
           "$apksigner" verify --verbose "$apk"
           mkdir -p ../release-binaries
-          cp "$apk" ../release-binaries/Avioc-AI-Companion-Android-v1.0.34.apk
+          cp "$apk" ../release-binaries/Avioc-AI-Companion-Android-v1.0.35.apk
         env:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
@@ -358,6 +359,82 @@ jobs:
         with:
           name: ai-companion-android-binaries
           path: release-binaries/*.apk
+          retention-days: 14
+
+  build-ai-companion-windows:
+    name: Avioc AI Companion Windows ${{ matrix.arch }} installer
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build the real AI Companion interface
+        working-directory: store-apps/ai-companion
+        run: |
+          node ../../scripts/prepare-ai-companion-version.js
+          npm install
+          npm run build
+          npx electron-builder --config electron-builder.json --win nsis --${{ matrix.arch }} --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-companion-windows-${{ matrix.arch }}
+          path: store-apps/ai-companion/release/*.exe
+          retention-days: 14
+
+  build-ai-companion-macos:
+    name: Avioc AI Companion macOS ${{ matrix.arch }}
+    runs-on: macos-15-intel
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build the real AI Companion interface
+        working-directory: store-apps/ai-companion
+        run: |
+          node ../../scripts/prepare-ai-companion-version.js
+          npm install
+          npm run build
+          npx electron-builder --config electron-builder.json --mac dmg --${{ matrix.arch }} --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-companion-macos-${{ matrix.arch }}
+          path: store-apps/ai-companion/release/*.dmg
+          retention-days: 14
+
+  build-ai-companion-linux:
+    name: Avioc AI Companion Linux ${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        include:
+          - arch: x64
+            runner: ubuntu-latest
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build the real AI Companion interface
+        working-directory: store-apps/ai-companion
+        run: |
+          node ../../scripts/prepare-ai-companion-version.js
+          npm install
+          npm run build
+          npx electron-builder --config electron-builder.json --linux AppImage --${{ matrix.arch }} --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-companion-linux-${{ matrix.arch }}
+          path: store-apps/ai-companion/release/*.AppImage
           retention-days: 14
 
   build-corecut-windows:
@@ -1353,9 +1430,9 @@ jobs:
   # ============================================================================
   publish-release:
     name: 🚀 Publish Universal Compatibility Release
-    needs: [build-windows, build-core-sorter-windows, build-core-sorter-android, build-quick-contact-android, build-ai-companion-android, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-corecut-android, build-simmer-android, build-quik-android, build-store-browser-apps, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
+    needs: [build-windows, build-core-sorter-windows, build-core-sorter-android, build-quick-contact-android, build-ai-companion-android, build-ai-companion-windows, build-ai-companion-macos, build-ai-companion-linux, build-corecut-windows, build-corecut-macos, build-corecut-linux, build-corecut-web, build-corecut-android, build-simmer-android, build-quik-android, build-store-browser-apps, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
     runs-on: ubuntu-latest
-    if: always() && (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-core-sorter-android.result == 'success' && needs.build-quick-contact-android.result == 'success' && needs.build-ai-companion-android.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-corecut-android.result == 'success' && needs.build-simmer-android.result == 'success' && needs.build-quik-android.result == 'success' && needs.build-store-browser-apps.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
+    if: always() && (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-core-sorter-windows.result == 'success' && needs.build-core-sorter-android.result == 'success' && needs.build-quick-contact-android.result == 'success' && needs.build-ai-companion-android.result == 'success' && needs.build-ai-companion-windows.result == 'success' && needs.build-ai-companion-macos.result == 'success' && needs.build-ai-companion-linux.result == 'success' && needs.build-corecut-windows.result == 'success' && needs.build-corecut-macos.result == 'success' && needs.build-corecut-linux.result == 'success' && needs.build-corecut-web.result == 'success' && needs.build-corecut-android.result == 'success' && needs.build-simmer-android.result == 'success' && needs.build-quik-android.result == 'success' && needs.build-store-browser-apps.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
     permissions:
       contents: write
     steps:
@@ -1406,6 +1483,28 @@ jobs:
         with:
           name: ai-companion-android-binaries
           path: final-release
+      - name: Download AI Companion Windows x64 installer
+        uses: actions/download-artifact@v4
+        with:
+          name: ai-companion-windows-x64
+          path: final-release
+      - name: Download AI Companion Windows ARM64 installer
+        uses: actions/download-artifact@v4
+        with:
+          name: ai-companion-windows-arm64
+          path: final-release
+      - name: Download AI Companion Mac installers
+        uses: actions/download-artifact@v4
+        with:
+          pattern: ai-companion-macos-*
+          path: final-release
+          merge-multiple: true
+      - name: Download AI Companion Linux installers
+        uses: actions/download-artifact@v4
+        with:
+          pattern: ai-companion-linux-*
+          path: final-release
+          merge-multiple: true
       - name: Download Avioc AI Companion browser edition
         uses: actions/download-artifact@v4
         with:
@@ -1968,6 +2067,14 @@ jobs:
             - **Android**: signed APK for preparing and exporting VCF contacts locally.
             - **iPhone/iPad and desktop browsers**: installable browser/PWA at https://aviocwatch.b-cdn.net/quick-contact/.
             - **Privacy**: contacts stay on the device; this edition does not send messages or run WhatsApp page scripts.
+
+            ### 🤖 Avioc AI Companion
+
+            - **Windows**: x64 and ARM64 installers (unsigned).
+            - **macOS**: Intel and Apple Silicon DMGs (unsigned).
+            - **Linux**: x64 and ARM64 AppImages.
+            - **Android**: signed APK. Gemini replies need an internet connection and a key added in Settings.
+            - **iPhone/iPad**: installable browser/PWA edition; a native IPA is not included.
 
             ### 🎬 CoreCut
 

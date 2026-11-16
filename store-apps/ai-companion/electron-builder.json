@@ -1,0 +1,50 @@
+{
+  "appId": "com.avioc.aicompanion",
+  "productName": "Avioc AI Companion",
+  "directories": {
+    "output": "release",
+    "buildResources": "../../assets/icons"
+  },
+  "files": [
+    "dist/**/*",
+    "desktop-main.cjs",
+    "package.json"
+  ],
+  "extraMetadata": {
+    "main": "desktop-main.cjs"
+  },
+  "win": {
+    "target": ["nsis"],
+    "icon": "../../assets/icons/ai-companion.svg",
+    "artifactName": "Avioc-AI-Companion-Windows-${arch}-v${version}.${ext}"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "Avioc AI Companion"
+  },
+  "mac": {
+    "target": [{ "target": "dmg", "arch": ["x64", "arm64"] }],
+    "icon": "../../assets/icons/ai-companion.svg",
+    "category": "public.app-category.productivity",
+    "identity": null,
+    "hardenedRuntime": false,
+    "gatekeeperAssess": false,
+    "artifactName": "Avioc-AI-Companion-Mac-${arch}-v${version}.${ext}"
+  },
+  "dmg": {
+    "title": "Avioc AI Companion",
+    "contents": [
+      { "x": 130, "y": 220 },
+      { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+    ]
+  },
+  "linux": {
+    "target": [{ "target": "AppImage", "arch": ["x64", "arm64"] }],
+    "icon": "../../assets/icons/ai-companion.svg",
+    "category": "Utility",
+    "artifactName": "Avioc-AI-Companion-Linux-${arch}-v${version}.${ext}"
+  }
+}
