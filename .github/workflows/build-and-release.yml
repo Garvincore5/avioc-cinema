@@ -36,7 +36,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.35'
+        default: 'v1.0.36'
 
 permissions:
   contents: read
@@ -319,7 +319,7 @@ jobs:
           STORE_ANDROID_APP_NAME: Avioc AI Companion
           STORE_ANDROID_ICON_FILE: store-apps/ai-companion/android-res/ic_ai_companion.xml
           ANDROID_VERSION_CODE: ${{ github.run_number }}
-          ANDROID_VERSION_NAME: 1.0.35
+          ANDROID_VERSION_NAME: 1.0.36
       - name: Restore Android signing key from GitHub secrets
         shell: bash
         run: |
@@ -350,7 +350,7 @@ jobs:
           apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
           "$apksigner" verify --verbose "$apk"
           mkdir -p ../release-binaries
-          cp "$apk" ../release-binaries/Avioc-AI-Companion-Android-v1.0.35.apk
+          cp "$apk" ../release-binaries/Avioc-AI-Companion-Android-v1.0.36.apk
         env:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
@@ -365,6 +365,7 @@ jobs:
     name: Avioc AI Companion Windows ${{ matrix.arch }} installer
     runs-on: windows-latest
     strategy:
+      fail-fast: false
       matrix:
         arch: [x64, arm64]
     steps:
@@ -377,18 +378,20 @@ jobs:
         run: |
           node ../../scripts/prepare-ai-companion-version.js
           npm install
+          node generate-desktop-icon.js
           npm run build
           npx electron-builder --config electron-builder.json --win nsis --${{ matrix.arch }} --publish never
       - uses: actions/upload-artifact@v4
         with:
           name: ai-companion-windows-${{ matrix.arch }}
-          path: store-apps/ai-companion/release/*.exe
+          path: store-apps/ai-companion/release-desktop-v1/*.exe
           retention-days: 14
 
   build-ai-companion-macos:
     name: Avioc AI Companion macOS ${{ matrix.arch }}
     runs-on: macos-15-intel
     strategy:
+      fail-fast: false
       matrix:
         arch: [x64, arm64]
     steps:
@@ -401,18 +404,20 @@ jobs:
         run: |
           node ../../scripts/prepare-ai-companion-version.js
           npm install
+          node generate-desktop-icon.js
           npm run build
           npx electron-builder --config electron-builder.json --mac dmg --${{ matrix.arch }} --publish never
       - uses: actions/upload-artifact@v4
         with:
           name: ai-companion-macos-${{ matrix.arch }}
-          path: store-apps/ai-companion/release/*.dmg
+          path: store-apps/ai-companion/release-desktop-v1/*.dmg
           retention-days: 14
 
   build-ai-companion-linux:
     name: Avioc AI Companion Linux ${{ matrix.arch }}
     runs-on: ${{ matrix.runner }}
     strategy:
+      fail-fast: false
       matrix:
         include:
           - arch: x64
@@ -429,12 +434,13 @@ jobs:
         run: |
           node ../../scripts/prepare-ai-companion-version.js
           npm install
+          node generate-desktop-icon.js
           npm run build
           npx electron-builder --config electron-builder.json --linux AppImage --${{ matrix.arch }} --publish never
       - uses: actions/upload-artifact@v4
         with:
           name: ai-companion-linux-${{ matrix.arch }}
-          path: store-apps/ai-companion/release/*.AppImage
+          path: store-apps/ai-companion/release-desktop-v1/*.AppImage
           retention-days: 14
 
   build-corecut-windows:

@@ -1,1 +1,25 @@
-{"name":"avioc-ai-companion","version":"1.0.0","private":true,"type":"module","main":"desktop-main.cjs","scripts":{"build":"node prepare-build.js && vite build"},"dependencies":{"@capacitor-community/speech-recognition":"5.1.0","@capacitor/core":"5.7.8","@capacitor/filesystem":"5.2.2","@capacitor/share":"5.0.8","vite":"5.4.2"},"devDependencies":{"electron":"22.3.27","electron-builder":"^24.13.3"}}
+{
+  "name": "avioc-ai-companion",
+  "version": "1.0.36",
+  "private": true,
+  "type": "module",
+  "main": "desktop-main.cjs",
+  "description": "Avioc AI Companion desktop app",
+  "author": "Avioc",
+  "scripts": {
+    "build": "node prepare-build.js && vite build",
+    "build:desktop": "node generate-desktop-icon.js && npm run build && electron-builder --config electron-builder.json"
+  },
+  "dependencies": {
+    "@capacitor-community/speech-recognition": "5.1.0",
+    "@capacitor/core": "5.7.8",
+    "@capacitor/filesystem": "5.2.2",
+    "@capacitor/share": "5.0.8",
+    "vite": "5.4.2"
+  },
+  "devDependencies": {
+    "electron": "45.3.3",
+    "electron-builder": "^26.16.1",
+    "sharp": "^0.34.5"
+  }
+}

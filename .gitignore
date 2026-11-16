@@ -6,6 +6,11 @@ build/
 android/
 !store-apps/clearview/android/
 !store-apps/clearview/android/**
+store-apps/ai-companion/build-resources/
+store-apps/ai-companion/dist/
+store-apps/ai-companion/public/css/
+store-apps/ai-companion/public/js/
+store-apps/ai-companion/release*/
 ios/
 .env
 .env.*

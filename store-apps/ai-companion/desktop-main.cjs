@@ -13,6 +13,7 @@ function createWindow() {
     show: false,
     backgroundColor: '#080b14',
     title: 'Avioc AI Companion',
+    icon: path.join(__dirname, 'build-resources', 'ai-companion.png'),
     autoHideMenuBar: true,
     webPreferences: {
       contextIsolation: true,

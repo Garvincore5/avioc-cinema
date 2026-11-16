@@ -26,7 +26,7 @@ Scope checked: top-level projects and the actual runnable applications found ins
 | Bunny (`bunny`) | Local LLM and desktop/web interface | Windows/local desktop package | Depends on large local model/runtime and PC resources; not suitable as a small phone APK |
 | Sovereign Core (`core`) | Python/PyTorch AI runtime and datasets | Local PC/server | Model/runtime and dataset dependencies prevent a practical signed Android APK as-is |
 | Media Downloader (`downloader`) | Local Python/Flask/yt-dlp server | Desktop/local web app | Needs a reachable local server and downloader dependencies; not a standalone mobile app as-is |
-| AI Companion (`ai-companion`) | Cross-device browser interface with Electron desktop wrappers | Signed Android APK, Windows x64 installer, macOS Intel/Apple Silicon DMGs, Linux x64/ARM64 AppImages, plus browser/PWA | Native desktop builds added to v1.0.35 release workflow; publication is pending CI. Browser/PWA and Android were published in v1.0.33. Gemini requires the user's key stored on that device and internet access. PC-only actions are excluded |
+| AI Companion (`ai-companion`) | Cross-device browser interface with Electron desktop wrappers | Signed Android APK, Windows x64/ARM64 installers, macOS Intel/Apple Silicon DMGs, Linux x64/ARM64 AppImages, plus browser/PWA | v1.0.36 retries desktop builds with a generated PNG app icon and current Electron runtime after v1.0.35 icon conversion failed; CI publication is pending. Browser/PWA and Android were published in v1.0.33. Gemini requires the user's key stored on that device and internet access. PC-only actions are excluded |
 
 ## Other folders and nested outputs
 

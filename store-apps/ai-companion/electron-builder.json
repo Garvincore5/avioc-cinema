@@ -2,11 +2,12 @@
   "appId": "com.avioc.aicompanion",
   "productName": "Avioc AI Companion",
   "directories": {
-    "output": "release",
-    "buildResources": "../../assets/icons"
+    "output": "release-desktop-v1",
+    "buildResources": "build-resources"
   },
   "files": [
     "dist/**/*",
+    "build-resources/**/*",
     "desktop-main.cjs",
     "package.json"
   ],
@@ -15,7 +16,7 @@
   },
   "win": {
     "target": ["nsis"],
-    "icon": "../../assets/icons/ai-companion.svg",
+    "icon": "build-resources/ai-companion.png",
     "artifactName": "Avioc-AI-Companion-Windows-${arch}-v${version}.${ext}"
   },
   "nsis": {
@@ -27,7 +28,7 @@
   },
   "mac": {
     "target": [{ "target": "dmg", "arch": ["x64", "arm64"] }],
-    "icon": "../../assets/icons/ai-companion.svg",
+    "icon": "build-resources/ai-companion.png",
     "category": "public.app-category.productivity",
     "identity": null,
     "hardenedRuntime": false,
@@ -43,7 +44,7 @@
   },
   "linux": {
     "target": [{ "target": "AppImage", "arch": ["x64", "arm64"] }],
-    "icon": "../../assets/icons/ai-companion.svg",
+    "icon": "build-resources/ai-companion.png",
     "category": "Utility",
     "artifactName": "Avioc-AI-Companion-Linux-${arch}-v${version}.${ext}"
   }
