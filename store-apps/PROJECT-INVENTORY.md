@@ -8,10 +8,11 @@ Scope checked: top-level projects and the actual runnable applications found ins
 | --- | --- | --- | --- |
 | Avioc Cinema | Existing Android, Windows, macOS, Linux, and iOS web-clip release pipeline | Existing release workflow | Existing product; separate from Avioc Apps Store |
 | Clearview Browser (`browsercore`) | Windows desktop app plus native Android source | Signed Android APK and source/license archive | Added to the release workflow and store; release must complete successfully before its links are live |
-| Our Family Hub (`family app`) | Self-contained browser app | Web/PWA or Android wrapper is feasible | Not added as a native package yet; verify offline persistence and mobile install behavior first |
+| Our Family Hub (`family app`) | Self-contained browser app | Signed Android wrapper with bundled web assets | Android package is being added; data remains local to each device, with no hosted family sync |
+| StoryShape (`claude/storyshape.html`) | Standalone story arc canvas and static film dataset | Signed Android wrapper with bundled page | Android package is being added; it is a recommendation/drawing tool, not a video app |
 | Quick Contact Saver (`whtweb`) | Self-contained HTML app | Web/PWA or Android wrapper is feasible | Not added as a native package yet |
 | QU!K (`tiktok`) | Browser video editor with local demo media | Web/PWA; Android requires a media/filesystem adaptation | Not added as a native package yet |
-| AGBOT (`agbot`) | Web companion with 3D model assets | Web/PWA; native packaging is feasible after checking its API-key handling and local assets | Not added as a native package yet |
+| AGBOT (`agbot`) | Web AI companion; user supplies optional Gemini key, with an online fallback | Signed Android wrapper with bundled UI and avatar images | Android package is being added; replies require external AI services and internet |
 | Luma (`ai girl`) | Unity project and browser preview | Unity Android build is possible, but current call is a prototype | Not advertised as a finished AI calling app |
 | Kinly (`love`) | Expo mobile app plus local file-backed API | Native Android build is possible | Cannot be a usable family service outside the developer's local network until its API is deployed and configured |
 | Garvin Core Media (`phone`) | PWA build output | Web/PWA | Firebase config contains placeholders and the saved public URL is a temporary tunnel; not releasable yet |

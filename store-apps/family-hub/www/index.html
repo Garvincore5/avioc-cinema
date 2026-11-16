@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Our Family Hub 🏡</title>
+  <meta name="description" content="All-in-one family application featuring real-time chat, family wall, interactive family tree, shared calendar, chores, and recipe book.">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f97316">
+  
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Favicon Emoji -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏡</text></svg>">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Desktop Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Populated by NavbarComponent -->
+    </aside>
+
+    <!-- Main Content Layout -->
+    <div class="main-wrapper">
+      <!-- Top Navigation Header -->
+      <header class="top-nav" id="top-nav">
+        <!-- Populated by NavbarComponent -->
+      </header>
+
+      <!-- Main Dynamic Content Views Area -->
+      <main class="page-container" id="main-view-container">
+        <!-- Sub-views (feed, chat, tree, calendar, chores, recipes, vault) rendered here -->
+      </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="bottom-nav" id="bottom-nav">
+      <!-- Populated by NavbarComponent -->
+    </nav>
+  </div>
+
+  <!-- App Main Entry Point (No server required! Works directly via file://) -->
+  <script src="js/bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#07090e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>AGBOT // Autonomous AI Clone Companion</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="hud-background"></div>
+
+  <!-- DRAWER BACKDROP (Mobile touch-outside dismiss) -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <div class="app-layout">
+    
+    <!-- COMPANION SIDEBAR / OFF-CANVAS MOBILE DRAWER -->
+    <aside class="sidebar" id="sidebar" role="dialog" aria-label="Agbot Profile Dossier">
+      
+      <!-- Drawer Header with Close Button (mobile) -->
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <span class="drawer-badge">DOSSIER</span>
+          <h3 class="drawer-heading">AGBOT // CORE</h3>
+        </div>
+        <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Profile">✕</button>
+      </div>
+
+      <!-- High-Res Avatar Card -->
+      <div class="avatar-card">
+        <div class="avatar-frame" id="avatarFrame" title="Tap to view full-screen high-res artwork">
+          <img id="avatarImage" src="agbot_avatar_portrait.png" alt="Agbot Character" class="avatar-image">
+          <div class="avatar-glow-ring"></div>
+          <div class="avatar-zoom-badge">🔍 Tap for 4K View</div>
+        </div>
+        <div class="avatar-meta">
+          <h3 class="avatar-title">AGBOT</h3>
+          <p class="avatar-subtitle">Cybernetic Gynoid Companion</p>
+          <div class="avatar-tags">
+            <span class="cyber-tag">NEURAL LINK</span>
+            <span class="cyber-tag highlight">v2.5 CLONE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chassis Look Selector -->
+      <div class="view-selector" id="viewSelector">
+        <div class="selector-label">CHASSIS LOOK:</div>
+        <div class="view-buttons">
+          <button class="view-pill active" data-img="agbot_avatar_portrait.png" data-name="Portrait">
+            <span class="pill-dot"></span> Portrait
+          </button>
+          <button class="view-pill" data-img="Gemini_Generated_Image_jc0l86jc0l86jc0l.jpeg" data-name="Civilian">
+            <span class="pill-dot"></span> Civilian
+          </button>
+          <button class="view-pill" data-img="Gemini_Generated_Image_or8jdkor8jdkor8j.jpeg" data-name="Chassis">
+            <span class="pill-dot"></span> Chassis
+          </button>
+        </div>
+      </div>
+
+      <!-- System Diagnostics & Audio Visualizer -->
+      <div class="diagnostics-card">
+        <div class="diag-header">
+          <span>TELEMETRY</span>
+          <span class="diag-live-pulse">LIVE</span>
+        </div>
+        <div class="diag-item">
+          <span>AI ENGINE:</span>
+          <strong id="diagAiEngine" class="cyan-highlight">FREE CLOUD AI</strong>
+        </div>
+        <div class="diag-item">
+          <span>VOICE ENGINE:</span>
+          <strong id="diagVoiceStatus" class="cyan-highlight">READY</strong>
+        </div>
+        <div class="diag-item">
+          <span>NEURAL CORE:</span>
+          <strong class="pink-highlight">SYNCHRONIZED</strong>
+        </div>
+        <div class="diag-item">
+          <span>LATENCY:</span>
+          <strong id="diagLatency" class="cyan-highlight">&lt; 14ms</strong>
+        </div>
+
+        <!-- Animated Audio Waveform -->
+        <div class="waveform-box" id="waveformBox">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <span>AGBOT NEURAL PROTOCOL</span>
+        <span class="dim">SEC-9</span>
+      </div>
+    </aside>
+
+    <!-- MAIN CHAT & CONVERSATION AREA -->
+    <main class="chat-area" id="chatArea">
+      
+      <!-- UNIFIED TOP APP BAR -->
+      <header class="chat-topbar" id="chatTopbar">
+        
+        <!-- Left: Companion Avatar & Status -->
+        <div class="topbar-identity">
+          <button class="topbar-avatar-btn" id="topbarAvatarBtn" title="Open Agbot Profile Dossier" aria-label="Open Profile">
+            <div class="avatar-ring-container" id="avatarRingContainer">
+              <img src="agbot_avatar_portrait.png" alt="Agbot Avatar" id="thumbImg">
+              <span class="topbar-pulse-dot" id="topbarPulseDot"></span>
+            </div>
+          </button>
+          
+          <div class="topbar-info" id="topbarInfoBtn">
+            <div class="topbar-title-row">
+              <h2 class="topbar-title">AGBOT</h2>
+              <span class="topbar-badge">AI CLONE</span>
+            </div>
+            <span class="topbar-status-text" id="topbarStatusText">
+              <span class="status-pip"></span> Online & Synchronized
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: Action Controls -->
+        <div class="topbar-controls">
+          <!-- Quick Look Switcher Button (Direct cycle / quick switch) -->
+          <button id="quickChassisBtn" class="control-btn" title="Cycle Chassis Look" aria-label="Cycle Chassis Look">
+            <span class="icon">🎨</span>
+            <span class="btn-text" id="activeLookBadge">Portrait</span>
+          </button>
+
+          <!-- Voice Synthesizer Toggle -->
+          <button id="voiceToggleBtn" class="control-btn active" title="Toggle Spoken Voice Audio" aria-label="Toggle Voice">
+            <span class="icon" id="voiceBtnIcon">🔊</span>
+            <span class="btn-text">Voice: <b id="voiceStatus">ON</b></span>
+          </button>
+
+          <!-- Settings Drawer Toggle -->
+          <button id="settingsToggleBtn" class="control-btn" title="AI Settings & Voice Config" aria-label="Settings">
+            <span class="icon">⚙️</span>
+            <span class="btn-text">Config</span>
+          </button>
+
+          <!-- Mobile Profile Dossier Button -->
+          <button id="mobileProfileToggle" class="control-btn mobile-profile-btn" title="Open Full Profile & Diagnostics" aria-label="Open Profile">
+            <span class="icon">👤</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Settings Dropdown Drawer -->
+      <div class="settings-drawer hidden" id="settingsDrawer">
+        <div class="settings-drawer-inner">
+          <div class="settings-title-row">
+            <h4>NEURAL CONFIGURATION</h4>
+            <button class="settings-close-btn" id="settingsCloseBtn">✕</button>
+          </div>
+          <div class="settings-fields">
+            <div class="field-group full-width">
+              <label>Active AI Engine:</label>
+              <div class="engine-badge-box">
+                <span class="engine-status-dot"></span>
+                <span class="engine-name" id="engineStatusName">Free Unlimited Cloud AI (Online)</span>
+              </div>
+              <small>Equipped with a free, keyless cloud AI engine that can answer any questions, write code, solve problems, and chat naturally.</small>
+            </div>
+            <div class="field-group">
+              <label for="apiKeyInput">Gemini API Key (Optional):</label>
+              <input type="password" id="apiKeyInput" placeholder="Optional: paste key to override with Gemini..." autocomplete="off">
+              <small>Leave empty to use the built-in free cloud AI.</small>
+            </div>
+            <div class="field-group">
+              <label for="voiceSelect">Vocal Synthesis Profile:</label>
+              <select id="voiceSelect"></select>
+            </div>
+          </div>
+          <button id="saveSettingsBtn" class="accent-btn">Save Configuration</button>
+        </div>
+      </div>
+
+      <!-- Messages Stream -->
+      <div class="messages-stream" id="messagesStream" role="log" aria-live="polite">
+        <div class="msg-bubble agbot-bubble">
+          <div class="bubble-avatar">🤖</div>
+          <div class="bubble-body">
+            <div class="bubble-info">
+              <span class="author-name">AGBOT</span>
+              <span class="time-label">ONLINE</span>
+            </div>
+            <div class="bubble-text">
+              <p>Greetings! I am Agbot, your cybernetic AI clone companion. I am powered by a <strong>free unlimited cloud AI engine</strong> and can answer anything you ask—from coding and technical queries to creative ideas, facts, or casual conversation! Speak with me via voice or chat below.</p>
+            </div>
+            <div class="bubble-actions">
+              <button class="action-btn copy-btn" title="Copy message to clipboard" aria-label="Copy message">
+                📋
+              </button>
+              <button class="action-btn speak-btn" title="Listen again" aria-label="Listen to message">
+                🔊
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Prompt Suggestion Chips -->
+      <div class="prompt-chips-wrapper">
+        <div class="prompt-chips" id="promptChips">
+          <button class="prompt-chip" data-prompt="Who are you and what are your capabilities?">
+            🤖 Who are you?
+          </button>
+          <button class="prompt-chip" data-prompt="Can you switch your chassis look?">
+            🎨 Switch Chassis
+          </button>
+          <button class="prompt-chip" data-prompt="Run system diagnostics and check neural core.">
+            ⚡ Diagnostics
+          </button>
+          <button class="prompt-chip" data-prompt="Give me a creative futuristic coding idea.">
+            💡 Creative Idea
+          </button>
+          <button class="prompt-chip" data-prompt="Tell me about your cybernetic design.">
+            ✨ Cyber Design
+          </button>
+        </div>
+      </div>
+
+      <!-- Pinned Adaptive Input Bar -->
+      <footer class="chat-input-bar" id="chatInputBar">
+        <button id="micBtn" class="mic-toggle-btn" title="Speak via Microphone" aria-label="Voice Input">
+          <span class="mic-icon">🎙️</span>
+        </button>
+        
+        <div class="input-wrapper">
+          <textarea id="userInput" placeholder="Message Agbot..." rows="1" maxlength="2000"></textarea>
+        </div>
+
+        <button id="sendBtn" class="send-action-btn" title="Send Message" aria-label="Send Message">
+          <span class="send-label">SEND</span>
+          <span class="arrow">➔</span>
+        </button>
+      </footer>
+    </main>
+
+  </div>
+
+  <!-- FULLSCREEN HIGH-RES LIGHTBOX MODAL -->
+  <div class="lightbox-modal hidden" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Artwork Preview">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-dialog">
+      <button class="lightbox-close-btn" id="lightboxCloseBtn" title="Close Preview" aria-label="Close Fullscreen">✕</button>
+      <div class="lightbox-img-wrapper">
+        <img id="lightboxImg" src="agbot_avatar_portrait.png" alt="Agbot Full Artwork">
+      </div>
+      <div class="lightbox-footer">
+        <span id="lightboxCaption">AGBOT // HIGH-RES CHASSIS VIEW</span>
+        <span class="lightbox-hint">Tap anywhere to return</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST NOTIFICATION -->
+  <div class="toast-notification hidden" id="toastNotification" role="status">
+    <span class="toast-icon" id="toastIcon">✓</span>
+    <span class="toast-text" id="toastText">Message copied!</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

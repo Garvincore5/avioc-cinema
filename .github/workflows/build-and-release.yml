@@ -29,7 +29,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.18'
+        default: 'v1.0.19'
 
 permissions:
   contents: read
@@ -167,20 +167,6 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - name: Install Android SDK components
-        shell: bash
-        run: |
-          set -euo pipefail
-          sdk_root="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
-          sdkmanager_path="$(find "$sdk_root/cmdline-tools" -type f -name sdkmanager | sort -V | tail -n 1)"
-          test -x "$sdkmanager_path" || { echo "Android SDK manager not found under $sdk_root"; exit 1; }
-          echo "ANDROID_HOME=$sdk_root" >> "$GITHUB_ENV"
-          echo "$sdk_root/platform-tools" >> "$GITHUB_PATH"
-          echo "$(dirname "$sdkmanager_path")" >> "$GITHUB_PATH"
-          set +o pipefail
-          yes | "$sdkmanager_path" --licenses >/dev/null
-          set -o pipefail
-          "$sdkmanager_path" "platforms;android-36" "build-tools;36.0.0"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.13
@@ -214,7 +200,9 @@ jobs:
           set -euo pipefail
           apk="store-apps/clearview/android/app/build/outputs/apk/release/app-release.apk"
           test -s "$apk"
-          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose "$apk"
+          apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
+          test -x "$apksigner"
+          "$apksigner" verify --verbose "$apk"
           mkdir -p release-binaries
           cp "$apk" release-binaries/Clearview-Android-v1.1.1.apk
           zip -qr release-binaries/Clearview-Android-source-v1.1.1.zip store-apps/clearview
@@ -222,6 +210,219 @@ jobs:
         with:
           name: clearview-android-binaries
           path: release-binaries/*
+          retention-days: 14
+
+  build-family-hub-android:
+    name: Signed Our Family Hub Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies and configure the offline app
+        run: |
+          npm install
+          node scripts/prepare-android-family-hub.js
+      - name: Create and sync native Android project
+        run: |
+          npx cap add android
+          npx cap sync android
+      - name: Configure app identity and release version
+        run: node scripts/configure-store-android-release.js
+        env:
+          STORE_ANDROID_APP_ID: com.avioc.familyhub
+          STORE_ANDROID_APP_NAME: Our Family Hub
+          STORE_ANDROID_ICON_FILE: store-apps/family-hub/android-res/ic_familyhub.xml
+          ANDROID_VERSION_CODE: ${{ github.run_number }}
+          ANDROID_VERSION_NAME: 1.0.0
+      - name: Restore Android signing key from GitHub secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${ANDROID_KEYSTORE_BASE64:?Missing ANDROID_KEYSTORE_BASE64 GitHub secret}"
+          : "${ANDROID_KEYSTORE_PASSWORD:?Missing ANDROID_KEYSTORE_PASSWORD GitHub secret}"
+          : "${ANDROID_KEY_ALIAS:?Missing ANDROID_KEY_ALIAS GitHub secret}"
+          : "${ANDROID_KEY_PASSWORD:?Missing ANDROID_KEY_PASSWORD GitHub secret}"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/avioc-release-key.jks"
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Build and verify signed APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/avioc-release-key.jks" \
+            -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD"
+          apk="app/build/outputs/apk/release/app-release.apk"
+          test -s "$apk"
+          apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
+          test -x "$apksigner"
+          "$apksigner" verify --verbose "$apk"
+          mkdir -p ../release-binaries
+          cp "$apk" ../release-binaries/Our-Family-Hub-Android-v1.0.0.apk
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: family-hub-android-binaries
+          path: release-binaries/*.apk
+          retention-days: 14
+
+  build-storyshape-android:
+    name: Signed StoryShape Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies and configure StoryShape
+        run: |
+          npm install
+          node scripts/prepare-android-storyshape.js
+      - name: Create and sync native Android project
+        run: |
+          npx cap add android
+          npx cap sync android
+      - name: Configure app identity and release version
+        run: node scripts/configure-store-android-release.js
+        env:
+          STORE_ANDROID_APP_ID: com.avioc.storyshape
+          STORE_ANDROID_APP_NAME: StoryShape
+          STORE_ANDROID_ICON_FILE: store-apps/storyshape/android-res/ic_storyshape.xml
+          ANDROID_VERSION_CODE: ${{ github.run_number }}
+          ANDROID_VERSION_NAME: 1.0.0
+      - name: Restore Android signing key from GitHub secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${ANDROID_KEYSTORE_BASE64:?Missing ANDROID_KEYSTORE_BASE64 GitHub secret}"
+          : "${ANDROID_KEYSTORE_PASSWORD:?Missing ANDROID_KEYSTORE_PASSWORD GitHub secret}"
+          : "${ANDROID_KEY_ALIAS:?Missing ANDROID_KEY_ALIAS GitHub secret}"
+          : "${ANDROID_KEY_PASSWORD:?Missing ANDROID_KEY_PASSWORD GitHub secret}"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/avioc-release-key.jks"
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Build and verify signed APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/avioc-release-key.jks" \
+            -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD"
+          apk="app/build/outputs/apk/release/app-release.apk"
+          test -s "$apk"
+          apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
+          test -x "$apksigner"
+          "$apksigner" verify --verbose "$apk"
+          mkdir -p ../release-binaries
+          cp "$apk" ../release-binaries/StoryShape-Android-v1.0.0.apk
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storyshape-android-binaries
+          path: release-binaries/*.apk
+          retention-days: 14
+
+  build-agbot-android:
+    name: Signed AGBOT Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies and configure AGBOT
+        run: |
+          npm install
+          node scripts/prepare-android-agbot.js
+      - name: Create and sync native Android project
+        run: |
+          npx cap add android
+          npx cap sync android
+      - name: Configure app identity and release version
+        run: node scripts/configure-store-android-release.js
+        env:
+          STORE_ANDROID_APP_ID: com.avioc.agbot
+          STORE_ANDROID_APP_NAME: AGBOT
+          STORE_ANDROID_ICON_FILE: store-apps/agbot/android-res/ic_agbot.xml
+          ANDROID_VERSION_CODE: ${{ github.run_number }}
+          ANDROID_VERSION_NAME: 1.0.0
+      - name: Restore Android signing key from GitHub secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${ANDROID_KEYSTORE_BASE64:?Missing ANDROID_KEYSTORE_BASE64 GitHub secret}"
+          : "${ANDROID_KEYSTORE_PASSWORD:?Missing ANDROID_KEYSTORE_PASSWORD GitHub secret}"
+          : "${ANDROID_KEY_ALIAS:?Missing ANDROID_KEY_ALIAS GitHub secret}"
+          : "${ANDROID_KEY_PASSWORD:?Missing ANDROID_KEY_PASSWORD GitHub secret}"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/avioc-release-key.jks"
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Build and verify signed APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/avioc-release-key.jks" \
+            -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD"
+          apk="app/build/outputs/apk/release/app-release.apk"
+          test -s "$apk"
+          apksigner="$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
+          test -x "$apksigner"
+          "$apksigner" verify --verbose "$apk"
+          mkdir -p ../release-binaries
+          cp "$apk" ../release-binaries/AGBOT-Android-v1.0.0.apk
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agbot-android-binaries
+          path: release-binaries/*.apk
           retention-days: 14
 
   build-macos-apps:
@@ -497,9 +698,9 @@ jobs:
   # ============================================================================
   publish-release:
     name: 🚀 Publish Universal Compatibility Release
-    needs: [build-windows, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
+    needs: [build-windows, build-android, build-macos, build-ios-webclip, build-android-apps, build-clearview-android, build-family-hub-android, build-storyshape-android, build-agbot-android, build-macos-apps, build-linux-apps, build-ios-apps-profile]
     runs-on: ubuntu-latest
-    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
+    if: (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && needs.build-windows.result == 'success' && needs.build-android.result == 'success' && needs.build-macos.result == 'success' && needs.build-ios-webclip.result == 'success' && needs.build-android-apps.result == 'success' && needs.build-clearview-android.result == 'success' && needs.build-family-hub-android.result == 'success' && needs.build-storyshape-android.result == 'success' && needs.build-agbot-android.result == 'success' && needs.build-macos-apps.result == 'success' && needs.build-linux-apps.result == 'success' && needs.build-ios-apps-profile.result == 'success'
     permissions:
       contents: write
     steps:
@@ -544,6 +745,21 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: clearview-android-binaries
+          path: final-release
+      - name: Download Our Family Hub Android APK
+        uses: actions/download-artifact@v4
+        with:
+          name: family-hub-android-binaries
+          path: final-release
+      - name: Download StoryShape Android APK
+        uses: actions/download-artifact@v4
+        with:
+          name: storyshape-android-binaries
+          path: final-release
+      - name: Download AGBOT Android APK
+        uses: actions/download-artifact@v4
+        with:
+          name: agbot-android-binaries
           path: final-release
       - name: Download Avioc Apps Mac DMG
         uses: actions/download-artifact@v4
@@ -700,11 +916,13 @@ jobs:
         run: |
           set -euo pipefail
           : "${BUNNY_STORAGE_ZONE_KEY:?Set the BUNNY_STORAGE_ZONE_KEY GitHub Actions secret}"
-          for file in assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png; do
+          for file in assets/icons/avioc-apps-192.png assets/icons/avioc-apps-512.png assets/icons/clearview.svg assets/icons/family-hub.svg assets/icons/storyshape.svg assets/icons/agbot.svg; do
             test -s "$file" || { echo "Missing Avioc Apps icon: $file"; exit 1; }
+            content_type="image/png"
+            [[ "$file" == *.svg ]] && content_type="image/svg+xml"
             curl --fail --show-error --silent -X PUT \
               -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
-              -H "Content-Type: image/png" \
+              -H "Content-Type: $content_type" \
               -H "Cache-Control: public, max-age=31536000, immutable" \
               --data-binary @"$file" \
               "https://storage.bunnycdn.com/aviocwatch/$file"
@@ -768,6 +986,18 @@ jobs:
 
             - **Android**: signed Clearview Browser APK for Android 7+ on arm64 and x86_64.
             - **Source and license notices**: [`Clearview-Android-source-v1.1.1.zip`](Clearview-Android-source-v1.1.1.zip).
+
+            ### 🏡 Our Family Hub
+
+            - **Android**: signed offline family organizer APK. Data is stored locally on the device; family sharing across devices needs a hosted sync service.
+
+            ### 📈 StoryShape
+
+            - **Android**: signed offline story-arc drawing and movie-matching tool. It is not a movie player or streaming app.
+
+            ### 🤖 AGBOT
+
+            - **Android**: signed AI companion app. AI replies require internet access; a personal Gemini API key can be added in the app.
 
             ---
             *Avioc Cinema's Android APK uses its persistent signing key. Windows installers and the Mac DMG are unsigned.*

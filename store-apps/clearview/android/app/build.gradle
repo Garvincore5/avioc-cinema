@@ -5,8 +5,7 @@ def clearviewVersionName = System.getenv('CLEARVIEW_VERSION_NAME') ?: '1.1.1'
 
 android {
     namespace 'com.clearview.browser'
-    compileSdk 36
-    buildToolsVersion '36.0.0'
+    compileSdk 35
 
     signingConfigs {
         release {

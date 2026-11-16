@@ -4,7 +4,7 @@ const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/apps-ota.html',
-  '/apps-ota-v1.0.18.html',
+  '/apps-ota-v1.0.19.html',
   '/cinema.html',
   '/manifest.json',
   '/assets/icons/avioc-apps-192.png?v=1',
