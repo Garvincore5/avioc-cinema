@@ -32,6 +32,9 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - name: Point store install links and PWA at this release
+        run: node scripts/prepare-app-store-page.js
+
       - name: Upload store page
         shell: bash
         env:
@@ -65,6 +68,12 @@ jobs:
             -H "Cache-Control: public, max-age=31536000, immutable" \
             --data-binary @index.html \
             "https://storage.bunnycdn.com/aviocwatch/apps-ota-v${APP_VERSION}.html"
+          curl --fail --show-error --silent -X PUT \
+            -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+            -H "Content-Type: text/html; charset=utf-8" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            --data-binary @index.html \
+            "https://storage.bunnycdn.com/aviocwatch/apps-ota-v1.0.24.html"
           echo "Avioc Apps Store page published to web and standalone OTA addresses."
 
       - name: Upload store icons and manifest

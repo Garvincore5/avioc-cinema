@@ -29,7 +29,7 @@ on:
       release_version:
         description: 'Release version tag (e.g. v1.0.0)'
         required: false
-        default: 'v1.0.26'
+        default: 'v1.0.27'
 
 permissions:
   contents: read
@@ -56,6 +56,9 @@ jobs:
 
       - name: Generate Avioc Apps icons
         run: node scripts/generate-apps-icon.js
+
+      - name: Set store links to this release
+        run: node scripts/prepare-app-store-page.js
 
       - name: Build Local Standalone Web Package
         run: node scripts/build-hosting.js
@@ -813,6 +816,7 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: node scripts/generate-apps-icon.js
+      - run: node scripts/prepare-app-store-page.js
       - run: node scripts/build-hosting.js
       - name: Build universal Avioc Apps DMG
         run: |
@@ -840,6 +844,7 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: node scripts/generate-apps-icon.js
+      - run: node scripts/prepare-app-store-page.js
       - run: node scripts/build-hosting.js
       - name: Build x64 and ARM64 AppImage packages
         run: npx electron-builder --config electron-builder-apps.json --linux AppImage --x64 --arm64 --publish never
@@ -1083,6 +1088,9 @@ jobs:
     steps:
       - name: Checkout source for live cinema page
         uses: actions/checkout@v4
+
+      - name: Prepare versioned Avioc Apps install page
+        run: node scripts/prepare-app-store-page.js
 
       - name: Prepare OTA Cinema web pages
         run: |
@@ -1426,6 +1434,12 @@ jobs:
             -H "Cache-Control: public, max-age=31536000, immutable" \
             --data-binary @index.html \
             "https://storage.bunnycdn.com/aviocwatch/apps-ota-v${APP_VERSION}.html"
+          curl --fail --show-error --silent -X PUT \
+            -H "AccessKey: $BUNNY_STORAGE_ZONE_KEY" \
+            -H "Content-Type: text/html; charset=utf-8" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            --data-binary @index.html \
+            "https://storage.bunnycdn.com/aviocwatch/apps-ota-v1.0.24.html"
           echo "Avioc Apps store page published to BunnyCDN."
         env:
           BUNNY_STORAGE_ZONE_KEY: ${{ secrets.BUNNY_STORAGE_ZONE_KEY }}

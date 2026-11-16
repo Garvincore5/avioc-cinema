@@ -10,6 +10,7 @@ const stringsPath = path.join(androidRoot, 'app', 'src', 'main', 'res', 'values'
 const assetsDir = path.join(root, 'assets', 'icons');
 const versionCode = Number(process.env.ANDROID_VERSION_CODE);
 const versionName = process.env.ANDROID_VERSION_NAME || '1.0.0';
+const storeVersion = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).version;
 
 if (!Number.isInteger(versionCode) || versionCode < 1 || versionCode > 2100000000) {
   throw new Error('ANDROID_VERSION_CODE must be a valid Android version code.');
@@ -34,7 +35,7 @@ const capacitorConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 if (capacitorConfig.appId !== 'com.avioc.apps') throw new Error('Generated Capacitor config has the wrong package ID.');
 capacitorConfig.server = {
   ...(capacitorConfig.server || {}),
-  url: 'https://aviocwatch.b-cdn.net/apps-ota-v1.0.24.html',
+  url: `https://aviocwatch.b-cdn.net/apps-ota-v${storeVersion}.html`,
   errorPath: 'index.html',
 };
 fs.writeFileSync(configPath, `${JSON.stringify(capacitorConfig, null, 2)}\n`);
@@ -70,7 +71,7 @@ if (!manifest.includes('avioc-apps-open-scheme')) {
   const activityOpenEnd = manifest.indexOf('>', activityStart);
   const activityClose = manifest.indexOf('</activity>', activityOpenEnd);
   if (activityOpenEnd < 0 || activityClose < 0) throw new Error('Could not locate the Avioc Apps Android MainActivity element.');
-  const appSchemeFilter = `\n            <!-- avioc-apps-open-scheme: verified handoff from the Apps PWA -->\n            <intent-filter android:autoVerify="true">\n                <action android:name="android.intent.action.VIEW" />\n                <category android:name="android.intent.category.DEFAULT" />\n                <category android:name="android.intent.category.BROWSABLE" />\n                <data android:scheme="https" android:host="aviocwatch.b-cdn.net" android:pathPrefix="/apps-ota-v1.0.24.html" />\n            </intent-filter>\n        `;
+  const appSchemeFilter = `\n            <!-- avioc-apps-open-scheme: verified handoff from the Apps PWA -->\n            <intent-filter android:autoVerify="true">\n                <action android:name="android.intent.action.VIEW" />\n                <category android:name="android.intent.category.DEFAULT" />\n                <category android:name="android.intent.category.BROWSABLE" />\n                <data android:scheme="https" android:host="aviocwatch.b-cdn.net" android:pathPrefix="/apps-ota-v${storeVersion}.html" />\n            </intent-filter>\n        `;
   manifest = `${manifest.slice(0, activityClose)}${appSchemeFilter}${manifest.slice(activityClose)}`;
   fs.writeFileSync(manifestPath, manifest);
 }
