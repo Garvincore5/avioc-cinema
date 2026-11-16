@@ -100,3 +100,26 @@ jobs:
               "https://storage.bunnycdn.com/aviocwatch/$file"
           done
           echo "Avioc Apps Store icons and manifest published."
+
+      - name: Purge cached Avioc Apps pages
+        shell: bash
+        env:
+          BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${BUNNY_API_KEY:-}" ]]; then
+            echo "BUNNY_API_KEY is not configured; uploaded pages are live at direct paths, but cached root pages may remain stale."
+            exit 0
+          fi
+          for url in \
+            "https://aviocwatch.b-cdn.net/" \
+            "https://aviocwatch.b-cdn.net/index.html" \
+            "https://aviocwatch.b-cdn.net/apps.html" \
+            "https://aviocwatch.b-cdn.net/apps-ota.html"; do
+            echo "Purging CDN cache for ${url}"
+            curl --fail --show-error --silent --request POST \
+              --get --data-urlencode "url=${url}" \
+              --header "AccessKey: ${BUNNY_API_KEY}" \
+              "https://api.bunny.net/purge"
+          done
+          echo "Cached Avioc Apps pages purged."

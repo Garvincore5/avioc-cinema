@@ -31,7 +31,7 @@ Scope checked: top-level projects and the actual runnable applications found ins
 ## Other folders and nested outputs
 
 - `free cdn` and `New folder` have no project files at the top level.
-- `simon/version zero/photobook-smartalbums` contains Smart Ease, a working Windows photobook designer with large existing installers and bundled photo/layout assets. Its launcher and updater are Windows-specific, so it needs a separate desktop packaging pass and is not an Android target.
+- `simon/version zero/photobook-smartalbums` contains Smart Ease, a Windows photobook designer with large existing installers and bundled photo/layout assets. The project is outside this repository, so it cannot enter the store release workflow until its source and required assets are copied into a tracked packaging project. Its launcher and updater are Windows-specific; it is not an Android target.
 - `bunny/projects` contains generated portfolio/business sites, not separate installable applications. They should remain websites unless a specific site is selected as a product.
 - `bunny/projects` has Apex Visuals, Garvin Core Media, Grvincore Media, Horizon Digital Studio, Lumina Photography Studio, Photography Site, and Tinah's Juice; these are generated website projects, not native apps.
 - `simon/photobook` contains photo albums and the Smart Ease source; existing Windows installers are large, and mobile packaging is not appropriate without a redesign.
